@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import actions from '../../services/index'
 import { Container } from 'react-bootstrap';
+import Footer from '../Footer';
 
 
 class Home extends Component {
@@ -22,6 +23,7 @@ class Home extends Component {
           </ul>
           </div>
         </Container>
+        
       </div>
     );
   }

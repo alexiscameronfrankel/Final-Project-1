@@ -34,7 +34,7 @@ class App extends Component {
   render(){
 
     return (
-    <BrowserRouter>
+    <Fragment>
       {this.state.email}
       {/* <Nav>
         <NavLink to="/">Home |</NavLink>
@@ -94,7 +94,7 @@ class App extends Component {
       </Switch>
       <Footer/>
      
-    </BrowserRouter>
+      </Fragment>
   );
   }
 }

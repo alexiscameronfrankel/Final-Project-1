@@ -166,8 +166,9 @@ li {
 }
 
 /* FOOTER STYLES */
-
-/* footer.page-footer.indigo.font-small.pt-0{
-  background: linear-gradient(#e66465, #efefef);
-
-} */
+footer.page-footer.cyan.font-small.darken-3.pt-0 {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}

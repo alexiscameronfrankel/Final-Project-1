@@ -8,6 +8,8 @@ import Profile from './components/profile/Profile'
 import actions from './services/index'
 import { Button, Navbar, NavDropdown, Form, FormControl, Container } from 'react-bootstrap'
 import Nav from 'react-bootstrap/Nav'
+import Footer from './components/Footer.jsx'
+
 
 
 class App extends Component {
@@ -75,6 +77,7 @@ class App extends Component {
         </Navbar.Collapse>
       </Navbar>
       
+      
       <Switch>
         <Route exact path="/" render={(props) => <Home {...props} />} />
         <Route exact path="/sign-up" render={(props)=><SignUp {...props} setUser={this.setUser} />} />
@@ -83,6 +86,8 @@ class App extends Component {
         
         <Route component={NotFound} />
       </Switch>
+      <Footer/>
+     
     </BrowserRouter>
   );
   }

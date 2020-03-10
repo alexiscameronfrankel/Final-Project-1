@@ -137,3 +137,11 @@ code {
   4.3% {opacity: 1; transform: scaleY(4);}
   43% {opacity: 1; transform: scaleX(10) rotate(60deg);}
 }
+
+
+/* FOOTER STYLES */
+
+/* footer.page-footer.indigo.font-small.pt-0{
+  background: linear-gradient(#e66465, #efefef);
+
+} */

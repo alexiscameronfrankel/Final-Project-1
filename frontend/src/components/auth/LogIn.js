@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import actions from '../../services/index'
+import actions from '../../services/index';
 
 class LogIn extends Component {
 
@@ -16,6 +16,8 @@ class LogIn extends Component {
     }
     render() {
         return (
+
+            
             <Fragment>
                 <h2>LogIn</h2>
                 <form onSubmit={this.handleSubmit}>
@@ -24,6 +26,7 @@ class LogIn extends Component {
                     <input type="submit" value="Log In"/>
                 </form>
             </Fragment>
+           
         );
     }
 }

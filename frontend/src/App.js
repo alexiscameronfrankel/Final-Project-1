@@ -6,6 +6,9 @@ import SignUp from './components/auth/SignUp';
 import LogIn from './components/auth/LogIn';
 import Profile from './components/profile/Profile'
 import actions from './services/index'
+import { Button, Navbar, NavDropdown, Form, FormControl, Container } from 'react-bootstrap'
+import Nav from 'react-bootstrap/Nav'
+
 
 class App extends Component {
   
@@ -30,7 +33,7 @@ class App extends Component {
     return (
     <BrowserRouter>
       {this.state.email}
-      <nav>
+      {/* <Nav>
         <NavLink to="/">Home |</NavLink>
   
         {this.state.email ? 
@@ -45,7 +48,33 @@ class App extends Component {
            </Fragment>
           }
         
-      </nav>
+      </Nav> */}
+
+      
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar.Brand href="/">Food-Saver</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="mr-auto">
+            <Nav.Link href="/account">Random Recipe</Nav.Link>
+            {/* <Nav.Link href="/random">Random Recipe</Nav.Link> */}
+            <NavDropdown title="My Account" id="collasible-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">Favorites</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Settings</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">Premium</NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+          <Nav>
+            <Nav.Link href="#deets">Vegan Recipes</Nav.Link>
+            <Nav.Link eventKey={2} href="#memes">
+              Vegetarian Recipes
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+      
       <Switch>
         <Route exact path="/" render={(props) => <Home {...props} />} />
         <Route exact path="/sign-up" render={(props)=><SignUp {...props} setUser={this.setUser} />} />

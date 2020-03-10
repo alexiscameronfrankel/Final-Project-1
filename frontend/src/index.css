@@ -1,17 +1,17 @@
-body {
+/* body {
   margin: 0;
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
+} */
 
-code {
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
+} */
 
-@import url(https://fonts.googleapis.com/css?family=Gilda+Display);
+/* @import url(https://fonts.googleapis.com/css?family=Gilda+Display); */
 
 /* html {
   background: radial-gradient(#000, #111);
@@ -136,4 +136,31 @@ code {
   0%,3%,5%,42%,44%,100% {opacity: 1; transform: scaleY(1);}
   4.3% {opacity: 1; transform: scaleY(4);}
   43% {opacity: 1; transform: scaleX(10) rotate(60deg);}
+}
+
+.home-recipe {
+  display: flex;
+  padding: 40px;
+}
+
+.hero-img {
+  box-shadow: 20px 20px 8px 0px black;
+}
+
+.recipe-title {
+  text-align: center;
+}
+
+.hero-recipe {
+  
+  border: 30px solid lightgoldenrodyellow;
+  box-shadow: 20px 20px 8px 0px black;
+}
+
+ul {
+  padding-top: 40px;
+}
+li {
+  font-size: 1.3rem;
+  list-style-type: none;
 }

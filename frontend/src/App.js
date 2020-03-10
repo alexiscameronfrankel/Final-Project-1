@@ -8,6 +8,7 @@ import Profile from './components/profile/Profile'
 import actions from './services/index'
 import { Button, Navbar, NavDropdown, Form, FormControl, Container } from 'react-bootstrap'
 import Nav from 'react-bootstrap/Nav'
+import Searchbar from './components/home/Searchbar'
 
 
 class App extends Component {
@@ -57,7 +58,7 @@ class App extends Component {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="/account">Random Recipe</Nav.Link>
-            {/* <Nav.Link href="/random">Random Recipe</Nav.Link> */}
+            
             <NavDropdown title="My Account" id="collasible-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Favorites</NavDropdown.Item>
@@ -66,14 +67,19 @@ class App extends Component {
               <NavDropdown.Item href="#action/3.4">Premium</NavDropdown.Item>
             </NavDropdown>
           </Nav>
+
+          <Searchbar />
+
           <Nav>
-            <Nav.Link href="#deets">Vegan Recipes</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              Vegetarian Recipes
+            <Nav.Link href="/log-in">Log In</Nav.Link>
+            <Nav.Link eventKey={2} href="/sign-up">
+              Sign Up
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+
+      
       
       <Switch>
         <Route exact path="/" render={(props) => <Home {...props} />} />

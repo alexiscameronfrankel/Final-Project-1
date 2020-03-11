@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
+import {  Switch, Route, NavLink } from 'react-router-dom';
 import Home from './components/home/Home';
 import NotFound from './components/404/NotFound.js';
 import SignUp from './components/auth/SignUp';
@@ -8,7 +8,7 @@ import Profile from './components/profile/Profile'
 import actions from './services/index'
 import { Button, Navbar, NavDropdown, Form, FormControl, Container } from 'react-bootstrap'
 import Nav from 'react-bootstrap/Nav'
-import Searchbar from './components/home/Searchbar'
+
 import Footer from './components/Footer.jsx'
 import Random from './components/home/Random'
 
@@ -36,7 +36,7 @@ class App extends Component {
   render(){
 
     return (
-    <Fragment>
+    <div id="App">
     <Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} />
     <div id="page-wrap">
       {this.state.email}
@@ -93,13 +93,14 @@ class App extends Component {
         <Route exact path="/random" render={(props) => <Random {...props} />} />
         <Route exact path="/sign-up" render={(props)=><SignUp {...props} setUser={this.setUser} />} />
         <Route exact path="/log-in" render={(props) => <LogIn {...props} setUser={this.setUser}/>} />
+        <Route exact path="/log-out" render={(props) => <LogIn {...props} setUser={this.setUser}/>} />
         <Route exact path="/profile" render={(props) => <Profile {...props} user={this.state}/>} />
         
         <Route component={NotFound} />
       </Switch>
       {/* <Footer id="footer"/> */}
       </div>
-      </Fragment>
+      </div>
   );
   }
 }

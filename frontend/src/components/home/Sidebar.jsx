@@ -15,7 +15,7 @@ export default props => {
         Random
       </a>
       
-      {props.email ?
+      {props.emailid ?
         <Fragment>
       <a className="bm-item menu-item" href="/profile">
         My Profile

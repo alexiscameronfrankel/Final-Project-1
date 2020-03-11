@@ -37,7 +37,7 @@ class App extends Component {
 
     return (
     <div id="App">
-    <Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} />
+    <Sidebar emailid={this.state.email} pageWrapId={"page-wrap"} outerContainerId={"App"} />
     <div id="page-wrap">
       {this.state.email}
       {/* <Nav>
@@ -98,7 +98,8 @@ class App extends Component {
         
         <Route component={NotFound} />
       </Switch>
-      {/* <Footer id="footer"/> */}
+
+      <Footer/>
       </div>
       </div>
   );

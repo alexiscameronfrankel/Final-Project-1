@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import actions from '../../services/index';
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn,MDBAnimation } from 'mdbreact';
+import Footer from '../Footer';
 
 class LogIn extends Component {
 
@@ -18,15 +19,16 @@ class LogIn extends Component {
     render() {
         return (
 
-     
+            
 
-            <div className="login_bg">
+            
             <Fragment>
+            <div className="login_bg">
             <MDBAnimation type="bounce">
                 <MDBContainer>
                     <MDBRow>
                     <MDBCol md="12">
-                        <form>
+                        <form className="auth-styles">
                         
                         <p className="h2 text-center mb-4">Login</p>
                         
@@ -49,10 +51,15 @@ class LogIn extends Component {
                     <input name="password" type="password" onChange={this.handleChange} />
                     <input type="submit" value="Log In"/>
                 </form> */}
+                </div>
+                <Footer/>
             </Fragment>
-            </div>
-    
+          
            
+            
+           
+    
+            
         );
     }
 }

@@ -23,7 +23,7 @@ class SignUp extends Component {
                     <MDBContainer>
                         <MDBRow>
                         <MDBCol md="12">
-                            <form>
+                            <form className="auth-styles">
                             
                             <p className="h2 text-center mb-4">Sign Up</p>
                             

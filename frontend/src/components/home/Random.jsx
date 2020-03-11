@@ -6,7 +6,7 @@ import Footer from '../Footer';
 import Searchbar from './Searchbar';
 
 
-class Home extends Component {
+class Random extends Component {
   async componentDidMount() {
     //actions.test()
   }
@@ -78,5 +78,5 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default Random;
  

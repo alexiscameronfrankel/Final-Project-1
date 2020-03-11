@@ -1,4 +1,8 @@
+
 body {
+  /* background-image: url('/images/otherbg.jpeg') !important;
+  background-size: cover; */
+  height: 100%;
   margin: 0;
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
@@ -141,7 +145,41 @@ code {
 
 /* FOOTER STYLES */
 
-/* footer.page-footer.indigo.font-small.pt-0{
-  background: linear-gradient(#e66465, #efefef);
+footer.page-footer.indigo.font-small.darken-3.pt-0 {
+  
+}
 
+/*FORM STYLE */
+
+form{
+  margin-top:25vh;
+  background-color: #f8f8ff;
+  padding:60px;
+  box-shadow: 9px 11px 20px #191970fc;
+  border: .5px solid #191970fc;
+}
+
+/*BACKGROUND IMAGE FOR LOGIN????DOCUMENTATION SAYS THIS SHOULD WORK BUT DOESNT D<*/
+
+/* .bg {
+  background-image: url("/images/loginbg.jpeg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 } */
+
+.login_bg{
+  background-image: url('/images/otherbg.jpeg') !important;
+  height:100vh;
+}
+
+.signup_bg{
+  background-image: url('/images/signupbggood.jpg') !important;
+  height:100vh;
+  background-size: cover;
+}
+
+button.btn-default.btn.Ripple-parent.peach-gradient {
+  width: 30%;
+}

@@ -52,7 +52,7 @@ class LogIn extends Component {
                     <input type="submit" value="Log In"/>
                 </form> */}
                 </div>
-                <Footer/>
+                
             </Fragment>
           
            

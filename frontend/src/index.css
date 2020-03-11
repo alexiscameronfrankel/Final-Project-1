@@ -1,7 +1,7 @@
 
-body {
-  /* background-image: url('/images/otherbg.jpeg') !important;
-  background-size: cover; */
+/* body {
+  background-image: url('/images/otherbg.jpeg') !important;
+  background-size: cover;
   height: 100%;
   margin: 0;
   text-align: center;
@@ -9,7 +9,11 @@ body {
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-} 
+}  */
+
+body {
+  background-color: #F8F8FF;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
@@ -17,13 +21,13 @@ code {
 
  @import url(https://fonts.googleapis.com/css?family=Gilda+Display); 
 
- html {
+ /* html {
   background: radial-gradient(#000, #111);
   color: white;
   overflow: hidden;
   height: 100%;
   user-select: none;
-} 
+}  */
 
 .static {
   width: 100%;
@@ -173,12 +177,12 @@ li {
 }
 
 /* FOOTER STYLES */
-footer.page-footer.cyan.font-small.darken-3.pt-0 {
+/* footer.page-footer.cyan.font-small.darken-3.pt-0 {
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-}
+} */
 
 .btn-group {
   display: flex;
@@ -192,7 +196,7 @@ footer.page-footer.cyan.font-small.darken-3.pt-0 {
 }
 
 #page-wrap {
-  text-align: center;
+  /* text-align: center; */
 
   /* Prevent sidebar from showing a scrollbar on page */
   overflow: auto;
@@ -236,10 +240,6 @@ footer.page-footer.cyan.font-small.darken-3.pt-0 {
   height: 24px;
   width: 24px;
 } 
-
-footer.page-footer.indigo.font-small.darken-3.pt-0 {
-  
-}
 
 /*FORM STYLE */
 
@@ -315,4 +315,13 @@ button.btn-default.btn.Ripple-parent.peach-gradient {
 
 .btn-secondary {
   background-color: #202A76 !important;
+}
+
+#main-card {
+  box-shadow: 9px 11px 20px #191970fc;
+  border: .5px solid #191970fc;
+}
+
+#prep-time {
+  margin-right: 2px;
 }

@@ -28,13 +28,9 @@ export default props => {
       <Fragment>
 
       <a className="bm-item  menu-item" href="/sign-up">
-       Sign Up
-       
-      </a>
+       Sign Up</a>
 
-      <a className="bm-item menu-item" href="/log-in">
-        Log In
-      </a>
+      <a className="bm-item menu-item" href="/log-in">Log In</a>
       </Fragment>
       }
       

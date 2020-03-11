@@ -173,12 +173,12 @@ li {
 }
 
 /* FOOTER STYLES */
-footer.page-footer.cyan.font-small.darken-3.pt-0 {
+/* footer.page-footer.cyan.font-small.darken-3.pt-0 {
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
-}
+} */
 
 .btn-group {
   display: flex;
@@ -237,9 +237,9 @@ footer.page-footer.cyan.font-small.darken-3.pt-0 {
   width: 24px;
 } 
 
-footer.page-footer.indigo.font-small.darken-3.pt-0 {
-  
-}
+/* footer.page-footer.indigo.font-small.darken-3.pt-0 {
+  margin-top:-230px;
+} */
 
 /*FORM STYLE */
 

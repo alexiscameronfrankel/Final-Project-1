@@ -10,7 +10,9 @@ import { Button, Navbar, NavDropdown, Form, FormControl, Container } from 'react
 import Nav from 'react-bootstrap/Nav'
 import Searchbar from './components/home/Searchbar'
 import Footer from './components/Footer.jsx'
+import Random from './components/home/Random'
 
+import Sidebar from './components/home/Sidebar.jsx'
 
 
 class App extends Component {
@@ -35,6 +37,8 @@ class App extends Component {
 
     return (
     <Fragment>
+    <Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} />
+    <div id="page-wrap">
       {this.state.email}
       {/* <Nav>
         <NavLink to="/">Home |</NavLink>
@@ -54,7 +58,7 @@ class App extends Component {
       </Nav> */}
 
       
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      {/* <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand href="/">Food-Saver</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -79,21 +83,22 @@ class App extends Component {
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar> */}
 
       
       
-      
+    
       <Switch>
         <Route exact path="/" render={(props) => <Home {...props} />} />
+        <Route exact path="/random" render={(props) => <Random {...props} />} />
         <Route exact path="/sign-up" render={(props)=><SignUp {...props} setUser={this.setUser} />} />
         <Route exact path="/log-in" render={(props) => <LogIn {...props} setUser={this.setUser}/>} />
         <Route exact path="/profile" render={(props) => <Profile {...props} user={this.state}/>} />
         
         <Route component={NotFound} />
       </Switch>
-      <Footer/>
-     
+      {/* <Footer id="footer"/> */}
+      </div>
       </Fragment>
   );
   }

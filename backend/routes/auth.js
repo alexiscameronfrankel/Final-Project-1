@@ -3,7 +3,22 @@ const router = express.Router();
 const User = require('../models/User');
 const passport = require('../config/passport');
 
+
+// router.get('/example', (req, res, next) => {
+//   console.log(req.body)
+//     // .then((user) => { 
+//     //     req.login(user, function(err,result){
+//     //       res.status(201).json(user)
+//     //     })
+//     // })
+//     // .catch((err) => { 
+//     //   console.log(err)
+//     //   res.status(500).json({ err })
+//     // });
+// });
+
 router.post('/signup', (req, res, next) => {
+  console.log(req.body)
   User.register(req.body, req.body.password)
     .then((user) => { 
         req.login(user, function(err,result){
@@ -38,6 +53,7 @@ router.get('/profile', isAuth, (req, res, next) => {
     .then((user) => res.status(200).json({ user }))
     .catch((err) => res.status(500).json({ err }));
 });
+
 
 function isAuth(req, res, next) {
   req.isAuthenticated() ? next() : res.status(401).json({ msg: 'Log in first' });

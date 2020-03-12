@@ -8,17 +8,29 @@ import Profile from './components/profile/Profile'
 import actions from './services/index'
 import { Button, Navbar, NavDropdown, Form, FormControl, Container } from 'react-bootstrap'
 import Nav from 'react-bootstrap/Nav'
+import Axios from 'axios';
 
 
 class App extends Component {
   
-  state = { }
+  state = { 
+    // info: []
+  }
   
   async componentDidMount() {
-    let user = await actions.isLoggedIn()
-    this.setState({...user.data})
-    console.log('coolest ')
-
+    // let user = await actions.isLoggedIn()
+    // this.setState({...user.data})
+    // console.log('coolest ')
+    
+    // Axios.get('https://www.themealdb.com/api/json/v1/1/random.php').then(res=>{
+    //   // console.log('frenchy working api',res)
+    //   let x= res.data.meals[0]
+    //   let mealsArray=[...this.state.info]
+    //   mealsArray.push(x)
+    //   this.setState({
+    //     info: mealsArray
+    //   })
+    // })
   }
 
   setUser = (user) => this.setState(user)
@@ -28,10 +40,33 @@ class App extends Component {
     this.setUser({email:null, createdAt: null, updatedAt: null, _id: null }) //FIX 
   }
 
-  render(){
 
+
+  handleChange = e => {
+    console.log(this.state)
+    this.setState({[e.target.name]: e.target.value})
+  }
+
+  handleSubmit = e => {
+      e.preventDefault()
+          actions.newRecipe(this.state)
+          .then(recipe=> {
+              console.log(recipe) 
+          }).catch(({ response }) => console.error(response));
+  }
+
+  render(){
+    console.log('inrender frenchy',this.state.info)
     return (
     <BrowserRouter>
+
+      <form onSubmit={this.handleSubmit}>
+        <input type="text" name="title" onChange={this.handleChange}/>
+        <input type="submit"/>
+      </form>
+
+
+
       {this.state.email}
       {/* <Nav>
         <NavLink to="/">Home |</NavLink>
@@ -58,12 +93,12 @@ class App extends Component {
           <Nav className="mr-auto">
             <Nav.Link href="/account">Random Recipe</Nav.Link>
             {/* <Nav.Link href="/random">Random Recipe</Nav.Link> */}
-            <NavDropdown title="My Account" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Favorites</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Settings</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Premium</NavDropdown.Item>
+              <NavDropdown title="My Account" id="collasible-nav-dropdown">
+                <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">Favorites</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">Settings</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href="#action/3.4">Premium</NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Nav>

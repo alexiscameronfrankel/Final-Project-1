@@ -20,6 +20,9 @@ const actions = {
   },
   logOut: async () => {
     return await service.get('/logout')
+  },
+  newRecipe: async (recipe) => {
+    return await service.post('/recipe/new', recipe)
   }
 };
 

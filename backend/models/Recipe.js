@@ -2,11 +2,16 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const recipeSchema = new Schema({
+    
     title: { type: String, required: true},
-    // category: { type: array, enum: ['Vegetarian', 'Vegan', 'Gluten Free', 'Diary-Free','Pregnancy Friendly','Pork','Chicken','Beef','Seafood','Other'], required: true },
-    // dishType: { type: String, enum: ['Breakfast', 'Dish', 'Snack', 'Drink', 'Dessert', 'Other']},
+    // category: { type: String, enum: ['Vegetarian', 'Vegan','Pork','Chicken','Beef','Seafood','Other'], required: true },
+    // dishtype: { type: String, enum: ['Breakfast', 'Dish', 'Snack', 'Drink', 'Dessert', 'Other']},
     // cuisine: { type: String},
     // area: {type: String},
+    // instructions: {type: String, required: true},
+    // image: {type: String, default:' https://images.media-allrecipes.com/images/75131.jpg'},
+    // tags: {type: Array},
+    // video: {type: String},
     // ingredient1: {type: String, required: true},
     // ingredient2: {type: String},
     // ingredient3: {type: String},
@@ -27,7 +32,7 @@ const recipeSchema = new Schema({
     // ingredient18: {type: String},
     // ingredient19: {type: String},
     // ingredient20: {type: String},
-    // measurement1: {type: String, required: true},
+    // measurement1: {type: String},
     // measurement2: {type: String},
     // measurement3: {type: String},
     // measurement4: {type: String},
@@ -47,12 +52,8 @@ const recipeSchema = new Schema({
     // measurement18: {type: String},
     // measurement19: {type: String},
     // measurement20: {type: String},
-    // instructions: {type: String, required: true},
-    // image: {type: String, default:' https://images.media-allrecipes.com/images/75131.jpg'},
-    // video: {type: string},
-    // tags: {type: Array},
     // source: {type: String},
-    // ProfileID: {type: String},
+    // profileID: {type: String},
     // created: {type:Date, default: Date.now},
     // comments: {type: Array}
   

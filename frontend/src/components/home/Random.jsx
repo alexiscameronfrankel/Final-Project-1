@@ -13,9 +13,6 @@ class Random extends Component {
   render() {
     return (
       <div>
-        <div className="head-div">
-        <Searchbar />
-        </div>
         <Container className="home-recipe">
           {/* <img className="hero-img" src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F5446883.jpg&w=596&h=596&c=sc&poi=face&q=85"></img>
           <div className="hero-recipe">

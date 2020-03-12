@@ -149,6 +149,7 @@ code {
 .home-recipe {
   display: flex;
   padding: 40px;
+  flex-direction: column;
 }
 
 .hero-img {
@@ -330,3 +331,44 @@ button.btn-default.btn.Ripple-parent.peach-gradient {
 #prep-time {
   margin-right: 2px;
 }
+
+.prof-title {
+  text-align: right;
+  padding: 8px;
+  font-size: 1.2em;
+  padding-right: 30px;
+}
+
+.sm-card {
+  padding: 10px;
+  margin: 10px 0px;
+
+
+}
+
+.settings {
+  display: flex;
+}
+
+.past-recipes {
+  display: flex;
+  padding: 5px;
+}
+
+.settings-links {
+  display: flex;
+  flex-direction: row;
+}
+
+
+.settings-button {
+  width: 120px;
+  background-color: #191970fc !important;
+}
+
+.past-recipe-card {
+  padding: 10px;
+  margin: 10px;
+}
+
+

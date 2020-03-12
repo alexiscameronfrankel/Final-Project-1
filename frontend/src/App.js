@@ -8,6 +8,7 @@ import Profile from './components/profile/Profile'
 import actions from './services/index'
 import { Button, Navbar, NavDropdown, Form, FormControl, Container } from 'react-bootstrap'
 import Nav from 'react-bootstrap/Nav'
+import Likes from './components/profile/Likes'
 import Axios from 'axios';
 
 import Footer from './components/Footer.jsx'
@@ -133,12 +134,15 @@ class App extends Component {
     
       <Switch>
         <Route exact path="/" render={(props) => <Home {...props} />} />
+        <Route exact path="/profile" render={(props) => <Profile {...props} user={this.state}/>} />
         <Route exact path="/random" render={(props) => <Random {...props} />} />
         <Route exact path="/sign-up" render={(props)=><SignUp {...props} setUser={this.setUser} />} />
         <Route exact path="/log-in" render={(props) => <LogIn {...props} setUser={this.setUser}/>} />
-        <Route exact path="/log-out" render={(props) => <LogIn {...props} setUser={this.setUser}/>} />
         <Route exact path="/profile" render={(props) => <Profile {...props} user={this.state}/>} />
         <Route exact path="/new-recipe" render={(props) => <Newrecipe {...props} user={this.state}/>} />
+        <Route exact path="/log-out" action= "this.logOut()" />
+        <Route exact path="/likes" render={(props) => <Likes {...props} setUser={this.setUser}/>} />
+        
         
         <Route component={NotFound} />
       </Switch>

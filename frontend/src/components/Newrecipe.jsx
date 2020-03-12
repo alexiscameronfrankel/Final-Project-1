@@ -45,7 +45,7 @@ class Newrecipe extends Component {
         
      }
 
-    //  'Vegetarian', 'Vegan', 'Gluten Free', 'Diary-Free','Pregnancy Friendly','Pork','Chicken','Beef','Seafood','Other'
+    //  Vegetarian', 'Vegan','Pork','Chicken','Beef','Seafood','Other
 
 
     render() {
@@ -98,6 +98,11 @@ class Newrecipe extends Component {
                     <Form.Label>Category</Form.Label>
                         <Form.Check type="checkbox" label="Vegetarian" />
                         <Form.Check type="checkbox" label="Vegan" />
+                        <Form.Check type="checkbox" label="Pork" />
+                        <Form.Check type="checkbox" label="Chicken" />
+                        <Form.Check type="checkbox" label="Beef" />
+                        <Form.Check type="checkbox" label="Seafood" />
+                        <Form.Check type="checkbox" label="Other" />
                     </Form.Group>
 
                     <Button variant="primary" type="submit">

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Card, ListGroup, ListGroupItem,
     Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 
-const Profile = (props) => {
+const Likes = (props) => {
     
     // if(!props.user.email){ 
     //     props.history.push('/log-in') 
@@ -26,11 +26,7 @@ const Profile = (props) => {
           <Card id="main-card" 
           style={{ width: '100%' }}>
           
-          <Card.Title className="text-center">
-            <Card.Header>
-                <h1 className="prof-title">Let's Get Cooking, Michael!</h1>
-            </Card.Header> 
-          </Card.Title>
+          <Card.Title className="text-center"><h1 className="prof-title">Hello, User!</h1> </Card.Title>
           <Card.Img variant="top" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2F736x%2F97%2F31%2Fcf%2F9731cf1aea0498272270f68e74eb2f42--background-images-linkedin-background.jpg&f=1&nofb=1" />
           
         </Card>
@@ -38,13 +34,13 @@ const Profile = (props) => {
         <Card className="sm-card" id="main-card" style={{ width: '18rem' }}>
             <Card.Header>Settings</Card.Header>
             <ListGroup variant="flush">
-                <ListGroup.Item className="settings-links"><Button className="settings-button" >Likes</Button></ListGroup.Item>
-                <ListGroup.Item className="settings-links"><Button className="settings-button" >Dislikes</Button></ListGroup.Item>
-                <ListGroup.Item className="settings-links"><Button className="settings-button" >Profile</Button></ListGroup.Item>
+                <ListGroup.Item className="settings-links"><Button action="/likes" className="settings-button">Likes</Button></ListGroup.Item>
+                <ListGroup.Item className="settings-links"><Button className="settings-button">Dislikes</Button></ListGroup.Item>
+                <ListGroup.Item className="settings-links"><Button className="settings-button">Profile</Button></ListGroup.Item>
             </ListGroup>
         </Card>
         <Card className="sm-card" id="main-card" style={{ width: '100%' }}>
-            <Card.Header>Past Recipes</Card.Header>
+            <Card.Header>Previous Likes</Card.Header>
             <div className="past-recipes">
             <Card className="past-recipe-card" style={{ width: '33%' }}>
             <Card.Img variant="top" src="https://i.ytimg.com/vi/ZJPpMSx3eSw/hqdefault.jpg" />
@@ -89,4 +85,4 @@ const Profile = (props) => {
     );
 }
 
-export default Profile;
+export default Likes;

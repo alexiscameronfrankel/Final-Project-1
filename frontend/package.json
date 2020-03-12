@@ -5,14 +5,17 @@
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "favicon": "0.0.2",
+    "font-awesome": "^4.7.0",
     "mdbreact": "^4.25.3",
     "react": "^16.13.0",
     "react-bootstrap": "^1.0.0-beta.17",
     "react-burger-menu": "^2.6.13",
     "react-dom": "^16.13.0",
+    "react-favicon": "0.0.17",
+    "react-hamburger-menu": "^1.1.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
-    "react-favicon": "0.0.17",
     "reactstrap": "^8.4.1",
     "webfontloader": "^1.6.28"
   },

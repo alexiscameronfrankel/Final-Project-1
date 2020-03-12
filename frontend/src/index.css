@@ -1,25 +1,33 @@
-body {
+
+/* body {
+  background-image: url('/images/otherbg.jpeg') !important;
+  background-size: cover;
+  height: 100%;
   margin: 0;
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}  */
+
+body {
+  background-color: #F8F8FF;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
+} 
 
-@import url(https://fonts.googleapis.com/css?family=Gilda+Display);
+ @import url(https://fonts.googleapis.com/css?family=Gilda+Display); 
 
-/* html {
+ /* html {
   background: radial-gradient(#000, #111);
   color: white;
   overflow: hidden;
   height: 100%;
   user-select: none;
-} */
+}  */
 
 .static {
   width: 100%;
@@ -136,4 +144,184 @@ code {
   0%,3%,5%,42%,44%,100% {opacity: 1; transform: scaleY(1);}
   4.3% {opacity: 1; transform: scaleY(4);}
   43% {opacity: 1; transform: scaleX(10) rotate(60deg);}
+}
+
+.home-recipe {
+  display: flex;
+  padding: 40px;
+}
+
+.hero-img {
+  border-left: 30px solid #343a40;
+  border-top: 30px solid #343a40;
+  border-bottom: 30px solid #343a40;
+  box-shadow: 20px 20px 8px 0px #01828f;
+}
+
+.recipe-title {
+  text-align: center;
+}
+
+.hero-recipe {
+  
+  border: 30px solid #343a40;
+  box-shadow: 20px 20px 8px 0px #01828f;
+}
+
+ul {
+  padding-top: 40px;
+}
+li {
+  font-size: 1.3rem;
+  list-style-type: none;
+}
+
+/* FOOTER STYLES */
+/* footer.page-footer.cyan.font-small.darken-3.pt-0 {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+} */
+
+.btn-group {
+  display: flex;
+}
+
+#App {
+  font-family: sans-serif;
+
+  /* Give app full page to work with */
+  height: 100vh;
+}
+
+#page-wrap {
+  /* text-align: center; */
+
+  /* Prevent sidebar from showing a scrollbar on page */
+  overflow: auto;
+}
+
+/* Individual item */
+.bm-item {
+  display: inline-block;
+
+  /* Our sidebar item styling */
+  text-decoration: none;
+  margin-bottom: 10px;
+  color: #d1d1d1;
+  transition: color 0.2s;
+}
+
+/* Change color on hover */
+.bm-item:hover {
+  color: white;
+}
+
+/* The rest copied directly from react-burger-menu docs */
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 36px;
+  height: 30px;
+  left: 36px;
+  top: 36px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background:  #202A76;
+  ;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 24px;
+  width: 24px;
+} 
+
+/*FORM STYLE */
+
+.auth-styles{
+  margin-top:25vh;
+  background-color: #f8f8ff;
+  padding:60px;
+  box-shadow: 9px 11px 20px #191970fc;
+  border: .5px solid #191970fc;
+}
+
+/*BACKGROUND IMAGE FOR LOGIN????DOCUMENTATION SAYS THIS SHOULD WORK BUT DOESNT D<*/
+
+/* .bg {
+  background-image: url("/images/loginbg.jpeg");
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
+
+.login_bg{
+  background-image: url('/images/otherbg.jpeg') !important;
+  height:100vh;
+}
+
+.signup_bg{
+  background-image: url('/images/signupbggood.jpg') !important;
+  height:100vh;
+  background-size: cover;
+}
+
+button.btn-default.btn.Ripple-parent.peach-gradient {
+  width: 30%; 
+}
+/* Color/shape of close button cross */
+.bm-cross {
+  background: #bdc3c7;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: #D93810;
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: #D93810;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  color: #b8b7ad;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+
+/* Styling for Big Search Bar */
+
+.head-div {
+  background-color: #D93810;
+  padding: 30px;
+  display: flex;
+  flex-direction: row-reverse;
+  
+}
+
+.btn-secondary {
+  background-color: #202A76 !important;
+}
+
+#main-card {
+  box-shadow: 9px 11px 20px #191970fc;
+  border: .5px solid #191970fc;
+}
+
+#prep-time {
+  margin-right: 2px;
 }

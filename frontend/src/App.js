@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
+import {  Switch, Route, NavLink } from 'react-router-dom';
 import Home from './components/home/Home';
 import NotFound from './components/404/NotFound.js';
 import SignUp from './components/auth/SignUp';
@@ -10,6 +10,11 @@ import { Button, Navbar, NavDropdown, Form, FormControl, Container } from 'react
 import Nav from 'react-bootstrap/Nav'
 import Axios from 'axios';
 
+import Footer from './components/Footer.jsx'
+import Random from './components/home/Random'
+
+import Sidebar from './components/home/Sidebar.jsx'
+
 
 class App extends Component {
   
@@ -17,10 +22,12 @@ class App extends Component {
     // info: []
   }
   
+
+  //*checks if user is logged in and gets a user object response or null from backend auth.js
   async componentDidMount() {
-    // let user = await actions.isLoggedIn()
-    // this.setState({...user.data})
-    // console.log('coolest ')
+    let user = await actions.isLoggedIn()
+    this.setState({...user.data})
+    console.log('coolest ')
     
     // Axios.get('https://www.themealdb.com/api/json/v1/1/random.php').then(res=>{
     //   // console.log('frenchy working api',res)
@@ -33,40 +40,47 @@ class App extends Component {
     // })
   }
 
+  //*Receives event from prop passed to component Login/SignUp
   setUser = (user) => this.setState(user)
   
+  //*method logout on backend in auth.js used to logout user and null object sent to method setUser to logout frontend
   logOut = async () => {
     let res = await actions.logOut()
-    this.setUser({email:null, createdAt: null, updatedAt: null, _id: null }) //FIX 
+    this.setUser({
+      email:null, 
+      createdAt: null, 
+      updatedAt: null, 
+      _id: null }) //FIX 
   }
 
 
 
-  handleChange = e => {
-    console.log(this.state)
-    this.setState({[e.target.name]: e.target.value})
-  }
+  // handleChange = e => {
+  //   console.log(this.state)
+  //   this.setState({[e.target.name]: e.target.value})
+  // }
 
-  handleSubmit = e => {
-      e.preventDefault()
-          actions.newRecipe(this.state)
-          .then(recipe=> {
-              console.log(recipe) 
-          }).catch(({ response }) => console.error(response));
-  }
+  // handleSubmit = e => {
+  //     e.preventDefault()
+  //         actions.newRecipe(this.state)
+  //         .then(recipe=> {
+  //             console.log(recipe) 
+  //         }).catch(({ response }) => console.error(response));
+  // }
 
   render(){
-    console.log('inrender frenchy',this.state.info)
+    
     return (
-    <BrowserRouter>
-
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" name="title" onChange={this.handleChange}/>
-        <input type="submit"/>
-      </form>
+      // <form onSubmit={this.handleSubmit}>
+      //   <input type="text" name="title" onChange={this.handleChange}/>
+      //   <input type="submit"/>
+      // </form>
 
 
 
+    <div id="App">
+    <Sidebar emailid={this.state.email} pageWrapId={"page-wrap"} outerContainerId={"App"} />
+    <div id="page-wrap">
       {this.state.email}
       {/* <Nav>
         <NavLink to="/">Home |</NavLink>
@@ -86,39 +100,49 @@ class App extends Component {
       </Nav> */}
 
       
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      {/* <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand href="/">Food-Saver</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link href="/account">Random Recipe</Nav.Link>
-            {/* <Nav.Link href="/random">Random Recipe</Nav.Link> */}
-              <NavDropdown title="My Account" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Favorites</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Settings</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Premium</NavDropdown.Item>
+            
+            <NavDropdown title="My Account" id="collasible-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">Favorites</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Settings</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">Premium</NavDropdown.Item>
             </NavDropdown>
           </Nav>
+
+          <Searchbar />
+
           <Nav>
-            <Nav.Link href="#deets">Vegan Recipes</Nav.Link>
-            <Nav.Link eventKey={2} href="#memes">
-              Vegetarian Recipes
+            <Nav.Link href="/log-in">Log In</Nav.Link>
+            <Nav.Link eventKey={2} href="/sign-up">
+              Sign Up
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar> */}
+
       
+      
+    
       <Switch>
         <Route exact path="/" render={(props) => <Home {...props} />} />
+        <Route exact path="/random" render={(props) => <Random {...props} />} />
         <Route exact path="/sign-up" render={(props)=><SignUp {...props} setUser={this.setUser} />} />
         <Route exact path="/log-in" render={(props) => <LogIn {...props} setUser={this.setUser}/>} />
+        <Route exact path="/log-out" render={(props) => <LogIn {...props} setUser={this.setUser}/>} />
         <Route exact path="/profile" render={(props) => <Profile {...props} user={this.state}/>} />
         
         <Route component={NotFound} />
       </Switch>
-    </BrowserRouter>
+      <Footer />
+      </div>
+      </div>
   );
   }
 }

@@ -8,13 +8,16 @@ class LogIn extends Component {
     state = {
 
     } 
-    handleChange = e => this.setState({[e.target.name]: e.target.value})
+    handleChange = e => {
+        console.log(e.target.name,e.targe.value, '?????')
+        this.setState({[e.target.name]: e.target.value})
+    }
 
     handleSubmit = e => {
         e.preventDefault()
          actions.logIn(this.state).then(user => {
             this.props.setUser({...user.data})  
-        }).catch(({ response }) => console.error(response.data));
+        }).catch(({ response }) => console.error('error',response.data));
     }
     render() {
         return (
@@ -33,12 +36,14 @@ class LogIn extends Component {
                         <p className="h2 text-center mb-4">Login</p>
                         
                         <div className="grey-text">
-                            <MDBInput label="Type your email" icon="envelope" group type="email" validate error="wrong"
-                            success="right" />
-                            <MDBInput label="Type your password" icon="lock" group type="password" validate />
+                        <form>
+                            <MDBInput name="email" label="Type your email" icon="envelope" group type="email" validate error="wrong"
+                            success="right" onChange={this.handleChange} />
+                            <MDBInput name="password" label="Type your password" icon="lock" group type="password" validate onChange={this.handleChange}/>
+                        </form>
                         </div>
                     <div className="text-center">
-                    <MDBBtn gradient="peach">Login</MDBBtn>
+                    <MDBBtn gradient="peach" onClick={this.handleSubmit}>Login</MDBBtn>
                     </div>
                     </form>
                 </MDBCol>

@@ -23,7 +23,16 @@ const actions = {
   },
   newRecipe: async (recipe) => {
     return await service.post('/recipe/new', recipe)
-  }
+  },
+  updateRecipe: async (recipe) => {
+    return await service.post('/recipe/update', recipe)
+  },
+  findRecipe: async (recipe) => {
+    return await service.post('/recipe/findOne', recipe)
+  },
+  deleteRecipe: async (recipe) => {
+    return await service.post('/recipe/delete', recipe)
+  },
 };
 
 export default actions;

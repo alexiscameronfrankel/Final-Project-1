@@ -11,7 +11,10 @@ router.get('/recipe', (req, res, next) => {
 });
 
 router.get('/recipe/findOne', (req, res, next) => {
-    Recipe.findOne(req.body)
+    //Recipe.findById('245245234hgryh35635')
+    //Recipe.findOne({name:'linguine', _id:'2452', date:'yesterday', likes:10})
+    
+    Recipe.findOne({name:req.body.name})
     .then(recipeFound => {
         res.send(recipeFound)
     })

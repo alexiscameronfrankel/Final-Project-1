@@ -14,6 +14,10 @@ export default props => {
       <a className="menu-item" href="/random">
         Random
       </a>
+
+      <a className="menu-item" href="/new-recipe">
+        New Recipe
+      </a>
       
       {props.emailid ?
         <Fragment>

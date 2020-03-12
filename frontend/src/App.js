@@ -14,6 +14,7 @@ import Footer from './components/Footer.jsx'
 import Random from './components/home/Random'
 
 import Sidebar from './components/home/Sidebar.jsx'
+import Newrecipe from './components/Newrecipe';
 
 
 class App extends Component {
@@ -137,6 +138,7 @@ class App extends Component {
         <Route exact path="/log-in" render={(props) => <LogIn {...props} setUser={this.setUser}/>} />
         <Route exact path="/log-out" render={(props) => <LogIn {...props} setUser={this.setUser}/>} />
         <Route exact path="/profile" render={(props) => <Profile {...props} user={this.state}/>} />
+        <Route exact path="/new-recipe" render={(props) => <Newrecipe {...props} user={this.state}/>} />
         
         <Route component={NotFound} />
       </Switch>

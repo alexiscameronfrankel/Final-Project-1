@@ -1,16 +1,19 @@
-/* 
-body { */
-  /* background-image: url('/images/otherbg.jpeg') !important;
-  background-size: cover; */
-  /* height: 100%; */
-  /* margin: 0;
-  min-height: 200vh;
+
+/* body {
+  background-image: url('/images/otherbg.jpeg') !important;
+  background-size: cover;
+  height: 100%;
+  margin: 0;
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }  */
+
+body {
+  background-color: #F8F8FF;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
@@ -193,6 +196,7 @@ li {
 }
 
 #page-wrap {
+  /* text-align: center; */
 
   /* Prevent sidebar from showing a scrollbar on page */
   overflow: auto;
@@ -318,3 +322,11 @@ button.btn-default.btn.Ripple-parent.peach-gradient {
   background-color: #202A76 !important;
 }
 
+#main-card {
+  box-shadow: 9px 11px 20px #191970fc;
+  border: .5px solid #191970fc;
+}
+
+#prep-time {
+  margin-right: 2px;
+}

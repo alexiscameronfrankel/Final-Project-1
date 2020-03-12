@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import actions from '../../services/index';
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn,MDBAnimation } from 'mdbreact';
-import Footer from '../Footer';
+
 
 class LogIn extends Component {
 

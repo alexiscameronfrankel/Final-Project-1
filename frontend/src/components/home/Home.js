@@ -28,10 +28,10 @@ class Home extends Component {
           </ul>
           </div> */}
           
-          <Card style={{ width: '100%' }}>
+          <Card id="main-card" style={{ width: '100%' }}>
           
           <Card.Title className="text-center"><h1>Old Fashioned Creamy Rice Pudding</h1> </Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">by: UserName</Card.Subtitle>
+          <Card.Subtitle className="mb-2 text-muted text-center">by: UserName</Card.Subtitle>
               <Card.Img variant="top" src="https://images.media-allrecipes.com/userphotos/720x405/7715085.jpg" />
               <Card.Body>
                 
@@ -52,10 +52,12 @@ class Home extends Component {
                 </ListGroup>
                 </Card.Text>
               </Card.Body>
-              <ListGroup className="list-group-flush text-center">
-                <ListGroupItem>Prep Time - 10 Minutes |
+              <ListGroup className="list-group-flush text-center"  id="prep-time">
+                <ListGroupItem>
+                Prep Time - 10 Minutes |
                 Cook Time - 20 Minutes |
-                Ready In - 30 Mintues</ListGroupItem>
+                Ready In - 30 Mintues
+                </ListGroupItem>
               </ListGroup>
               <Card.Body>
                 <Card.Link href="#">
@@ -72,6 +74,7 @@ class Home extends Component {
               </Card.Body>
             </Card>
         </Container>
+        
         
       </div>
     );

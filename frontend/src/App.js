@@ -8,6 +8,7 @@ import Profile from './components/profile/Profile'
 import actions from './services/index'
 import { Button, Navbar, NavDropdown, Form, FormControl, Container } from 'react-bootstrap'
 import Nav from 'react-bootstrap/Nav'
+import Axios from 'axios';
 
 import Footer from './components/Footer.jsx'
 import Random from './components/home/Random'
@@ -17,25 +18,66 @@ import Sidebar from './components/home/Sidebar.jsx'
 
 class App extends Component {
   
-  state = { }
+  state = { 
+    // info: []
+  }
   
+
+  //*checks if user is logged in and gets a user object response or null from backend auth.js
   async componentDidMount() {
     let user = await actions.isLoggedIn()
     this.setState({...user.data})
     console.log('coolest ')
-
+    
+    // Axios.get('https://www.themealdb.com/api/json/v1/1/random.php').then(res=>{
+    //   // console.log('frenchy working api',res)
+    //   let x= res.data.meals[0]
+    //   let mealsArray=[...this.state.info]
+    //   mealsArray.push(x)
+    //   this.setState({
+    //     info: mealsArray
+    //   })
+    // })
   }
 
+  //*Receives event from prop passed to component Login/SignUp
   setUser = (user) => this.setState(user)
   
+  //*method logout on backend in auth.js used to logout user and null object sent to method setUser to logout frontend
   logOut = async () => {
     let res = await actions.logOut()
-    this.setUser({email:null, createdAt: null, updatedAt: null, _id: null }) //FIX 
+    this.setUser({
+      email:null, 
+      createdAt: null, 
+      updatedAt: null, 
+      _id: null }) //FIX 
   }
 
-  render(){
 
+
+  // handleChange = e => {
+  //   console.log(this.state)
+  //   this.setState({[e.target.name]: e.target.value})
+  // }
+
+  // handleSubmit = e => {
+  //     e.preventDefault()
+  //         actions.newRecipe(this.state)
+  //         .then(recipe=> {
+  //             console.log(recipe) 
+  //         }).catch(({ response }) => console.error(response));
+  // }
+
+  render(){
+    
     return (
+      // <form onSubmit={this.handleSubmit}>
+      //   <input type="text" name="title" onChange={this.handleChange}/>
+      //   <input type="submit"/>
+      // </form>
+
+
+
     <div id="App">
     <Sidebar emailid={this.state.email} pageWrapId={"page-wrap"} outerContainerId={"App"} />
     <div id="page-wrap">
@@ -98,8 +140,7 @@ class App extends Component {
         
         <Route component={NotFound} />
       </Switch>
-
-      <Footer/>
+      <Footer />
       </div>
       </div>
   );

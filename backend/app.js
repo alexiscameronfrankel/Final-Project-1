@@ -11,6 +11,7 @@ const session = require('express-session');
 const passport = require('./config/passport');
 
 
+//Connect to MongoDB
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/ironplate'
 console.log('Connecting DB to ', MONGODB_URI)
 
@@ -19,12 +20,17 @@ mongoose
   .then((x) => console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`))
   .catch((err) => console.error('Error connecting to mongo', err));
 
+//What it this doing?? No use
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
+//new instance of express
 const app = express();
 
+//middleware
 app.use(
+  //CORs (Cross Origin Request) helps with authentication; package downloaded and imported
+  //CORS is used for authencation of an app making rquest to other APIs/backends
   cors({
     credentials: true,
     origin: ["http://localhost:3000", "https://affectionate-ride-ceaacb.netlify.com"] //Swap this with the client url 
@@ -40,6 +46,8 @@ app.use(
 //   credentials: true
 // }));
 
+
+//More middleware; session was downloaded & imported 
 app.use(
   session({
     resave: false,
@@ -49,6 +57,7 @@ app.use(
   })
 );
 
+//More middleware; passport used for user authentication 
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -61,10 +70,13 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(logger('dev'));
 
+// routes
 const index = require('./routes/index');
 const auth = require('./routes/auth');
+const recipe = require('./routes/recipe');
 app.use('/', index);
 app.use('/', auth);
+app.use('/', recipe);
 
 // Uncomment this line for production
 let client = path.join(__dirname + '../public/index.html')

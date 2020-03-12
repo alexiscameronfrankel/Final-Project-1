@@ -37,6 +37,13 @@ class Sidebar extends Component {
         </Fragment>
       
         }
+      <a className="menu-item" href="/random">
+        Random
+      </a>
+
+      <a className="menu-item" href="/new-recipe">
+        New Recipe
+      </a>
       
       
       <br></br>

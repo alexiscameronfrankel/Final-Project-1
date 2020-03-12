@@ -13,6 +13,8 @@ import Footer from './components/Footer.jsx'
 import Random from './components/home/Random'
 import Sidebar from './components/home/Sidebar.jsx'
 import ImageUpload from './components/ImageUpload.js'
+import Newrecipe from './components/Newrecipe';
+
 
 class App extends Component {
   
@@ -138,6 +140,7 @@ class App extends Component {
         <Route exact path="/sign-up" render={(props)=><SignUp {...props} setUser={this.setUser} />} />
         <Route exact path="/log-in" render={(props) => <LogIn {...props} setUser={this.setUser}/>} />
         <Route exact path="/log-out" render={(props) => <Home {...props} actionLogout= {this.logOut()}  />} />
+        <Route exact path="/new-recipe" render={(props) => <Newrecipe {...props} user={this.state}/>} />
         <Route exact path="/likes" render={(props) => <Likes {...props} setUser={this.setUser}/>} />
         <Route component={NotFound} />
       </Switch>

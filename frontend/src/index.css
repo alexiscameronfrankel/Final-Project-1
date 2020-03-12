@@ -241,6 +241,10 @@ li {
   width: 24px;
 } 
 
+/* footer.page-footer.indigo.font-small.darken-3.pt-0 {
+  margin-top:-230px;
+} */
+
 /*FORM STYLE */
 
 .auth-styles{
@@ -264,6 +268,7 @@ li {
 .login_bg{
   background-image: url('/images/otherbg.jpeg') !important;
   height:100vh;
+  background-size: cover;
 }
 
 .signup_bg{

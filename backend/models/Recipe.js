@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const recipeSchema = new Schema({
-    title: {type: String}
-    // title: { type: String, required: true},
+    title: { type: String, required: true},
     // category: { type: array, enum: ['Vegetarian', 'Vegan', 'Gluten Free', 'Diary-Free','Pregnancy Friendly','Pork','Chicken','Beef','Seafood','Other'], required: true },
     // dishType: { type: String, enum: ['Breakfast', 'Dish', 'Snack', 'Drink', 'Dessert', 'Other']},
     // cuisine: { type: String},

@@ -13,7 +13,7 @@ class Newrecipe extends Component {
     state = {
         title: "",
         category: [],
-        dishtype:"",
+        dishtype:"Breakfast",
         cuisine:"",
         area:"",
         ingredient1:"",
@@ -30,7 +30,7 @@ class Newrecipe extends Component {
 
     
           
-      handlePersonTyping = (e) => {
+    handlePersonTyping = (e) => {
         console.log(e.target.name, e.target.value);
         this.setState({
             
@@ -39,13 +39,44 @@ class Newrecipe extends Component {
             [e.target.name]:e.target.value,
         
         
-        }) 
-
-    
-        
+        })
+       
      }
 
-    //  Vegetarian', 'Vegan','Pork','Chicken','Beef','Seafood','Other
+    putCategoryInState = (e) => {
+        console.log('putCategoryInState is being called')
+        let categoryArr = this.state.category;
+        categoryArr.push(e.target.value)
+        console.log(categoryArr)
+        this.setState({
+            
+            category:categoryArr
+        
+        }) 
+    }
+
+    putDishTypeInState = (e) => {
+        console.log('putDishTypeInState is being called')
+        console.log(e.target.value)
+        this.setState({
+            
+            dishtype: e.target.value
+        
+        }) 
+    }
+
+    // putCuisineInState = (e) => {
+    //     console.log('putCuisineInState is being called')
+    //     console.log(this.state.title)
+    //     this.setState({
+            
+    //         title: e.target.value
+        
+    //     }) 
+    // }
+
+
+    // 'Breakfast', 'Dish', 'Snack', 'Drink', 'Dessert', 'Other'
 
 
     render() {
@@ -58,51 +89,64 @@ class Newrecipe extends Component {
                         <Form.Control name="title" type="text" placeholder="Enter title" onChange={this.handlePersonTyping} />
                         </Form.Group>
 
-                        <Form.Group as={Col} controlId="formGridPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
+                        <Form.Group as={Col} controlId="Area">
+                        <Form.Label>Area</Form.Label>
+                        <Form.Control name="cuisine" type="text" placeholder="Area???How is this different from cuisine" onChange={this.handlePersonTyping}/>
                         </Form.Group>
                     </Form.Row>
 
-                    <Form.Group controlId="formGridAddress1">
-                        <Form.Label>Address</Form.Label>
-                        <Form.Control placeholder="1234 Main St" />
+                    <Form.Group controlId="Ingredients">
+                        <Form.Label>Ingredients</Form.Label>
+                        <Form.Control name="ingredient1"  type="text" placeholder="Add your ingredients" onChange={this.handlePersonTyping}/>
                     </Form.Group>
 
-                    <Form.Group controlId="formGridAddress2">
-                        <Form.Label>Address 2</Form.Label>
-                        <Form.Control placeholder="Apartment, studio, or floor" />
+                    <Form.Group controlId="Measurments">
+                        <Form.Label>Measurments</Form.Label>
+                        <Form.Control name="measurement1" type="text" placeholder="Add your measurments" onChange={this.handlePersonTyping}/>
+                    </Form.Group>
+
+                    <Form.Group controlId="Video">
+                        <Form.Label>Video</Form.Label>
+                        <Form.Control name="video" type="text" placeholder="Add your video URL" onChange={this.handlePersonTyping}/>
                     </Form.Group>
 
                     <Form.Row>
-                        <Form.Group as={Col} controlId="formGridCity">
-                        <Form.Label>City</Form.Label>
-                        <Form.Control />
+                        <Form.Group as={Col} controlId="Instructions">
+                        <Form.Label>Instructions</Form.Label>
+                        <Form.Control name="instructions" type="text" placeholder="Add your instructions" onChange={this.handlePersonTyping}/>
+                        </Form.Group>
+
+                        <Form.Group as={Col} controlId="Instructions">
+                        <Form.Label>Image</Form.Label>
+                        <Form.Control name="image" type="text" placeholder="Add your image URL" onChange={this.handlePersonTyping}/>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridState">
-                        <Form.Label>State</Form.Label>
-                        <Form.Control as="select" value="Choose...">
-                            <option>Choose...</option>
-                            <option>...</option>
+                        <Form.Label>Dish Type</Form.Label>
+                        <Form.Control as="select" onChange={this.putDishTypeInState}>
+                            <option>Breakfast</option>
+                            <option>Dish</option>
+                            <option>Snack</option>
+                            <option>Dessert</option>
+                            <option>Other</option>
                         </Form.Control>
                         </Form.Group>
 
-                        <Form.Group as={Col} controlId="formGridZip">
-                        <Form.Label>Zip</Form.Label>
-                        <Form.Control />
+                        <Form.Group as={Col} controlId="formGridCuisine">
+                        <Form.Label>Cuisine</Form.Label>
+                        <Form.Control placeholder="ex: American, French, Jamaican"/>
                         </Form.Group>
                     </Form.Row>
 
-                    <Form.Group id="formGridCheckbox">
+                    <Form.Group id="categoryGridCheckbox">
                     <Form.Label>Category</Form.Label>
-                        <Form.Check type="checkbox" label="Vegetarian" />
-                        <Form.Check type="checkbox" label="Vegan" />
-                        <Form.Check type="checkbox" label="Pork" />
-                        <Form.Check type="checkbox" label="Chicken" />
-                        <Form.Check type="checkbox" label="Beef" />
-                        <Form.Check type="checkbox" label="Seafood" />
-                        <Form.Check type="checkbox" label="Other" />
+                        <Form.Check type="checkbox" label="Vegetarian" value="Vegetarian" name="category" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Vegan" value="Vegan" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Pork" value="Pork" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Chicken" value="Chicken" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Beef" value="Beef" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Seafood" value="Seafood" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Other" value="Other" onChange={this.putCategoryInState}/>
                     </Form.Group>
 
                     <Button variant="primary" type="submit">

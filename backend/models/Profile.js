@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const ProfileSchema = new Schema({
     UserID: {type:String},
+    username: {type: String, required: true},
     firstName: { type: String, required: true}, 
     lastName: { type: String, required: true },
     image: { type: String, default:'/images/defaultAvatar.png'},

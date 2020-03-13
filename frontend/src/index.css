@@ -380,7 +380,8 @@ button.btn-default.btn.Ripple-parent.peach-gradient {
 }
 
 .prof-cover {
-  padding: 8px
+  padding: 8px;
+  width: 100%;
 
 }
 
@@ -402,7 +403,7 @@ button.btn-default.btn.Ripple-parent.peach-gradient {
 }
 
 .my-avatar-header {
-  margin-left: 100px;
+  margin-left: 25px;
 }
 
 .prof-list-item {
@@ -463,16 +464,16 @@ button.btn-default.btn.Ripple-parent.peach-gradient {
   font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
 }
 /* checked mark aspect changes */
-[type="checkbox"]:not(:checked) + label:after {
+ [type="checkbox"]:not(:checked) + label:after {
   opacity: 0;
   transform: scale(0);
-}
+} 
 [type="checkbox"]:checked + label:after {
   opacity: 1;
   transform: scale(1);
-}
+} 
 /* disabled checkbox */
-[type="checkbox"]:disabled:not(:checked) + label:before,
+ [type="checkbox"]:disabled:not(:checked) + label:before,
 [type="checkbox"]:disabled:checked + label:before {
   box-shadow: none;
   border-color: #bbb;
@@ -483,7 +484,7 @@ button.btn-default.btn.Ripple-parent.peach-gradient {
 }
 [type="checkbox"]:disabled + label {
   color: #aaa;
-}
+} 
 /* accessibility */
 [type="checkbox"]:checked:focus + label:before,
 [type="checkbox"]:not(:checked):focus + label:before {
@@ -494,6 +495,36 @@ button.btn-default.btn.Ripple-parent.peach-gradient {
 label:hover:before {
   border: 2px solid #4778d9!important;
 }
+
+
+/* Paralax Settings */
+
+.para-div {
+  color: #191970fc;
+  font-size: 1.2rem;
+  margin: 30px;
+}
+
+.para-title {
+  font-size: 3rem;
+  color: #191970fc;
+  margin: 30px;
+}
+
+.recent-views {
+  margin: 20px 20px;
+}
+
+.account-info {
+  color: white;
+}
+
+div.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 
 
 

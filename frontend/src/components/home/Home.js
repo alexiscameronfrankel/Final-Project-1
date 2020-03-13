@@ -4,7 +4,29 @@ import { Container, Card, ListGroup, ListGroupItem,
 Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import Footer from '../Footer';
 import Searchbar from './Searchbar';
+import { Parallax } from "react-parallax";
 
+
+const styles = {
+  fontFamily: "sans-serif",
+  textAlign: "center"
+};
+const insideStyles = {
+  background: "white",
+  padding: 20,
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%,-50%)"
+};
+const image1 =
+  "http://blog.hdwallsource.com/wp-content/uploads/2015/01/italian-food-wallpaper-hd-44478-45604-hd-wallpapers.jpg";
+const image2 =
+  "https://blog.hdwallsource.com/wp-content/uploads/2016/03/pasta-dish-wallpaper-50268-51956-hd-wallpapers.jpg";
+const image3 =
+  "https://s-media-cache-ak0.pinimg.com/originals/6d/0e/e0/6d0ee03a21b8eac01290eabc55b0de33.jpg";
+const image4 =
+  "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages2.alphacoders.com%2F201%2Fthumb-1920-201292.jpg&f=1&nofb=1";
 
 class Home extends Component {
   async componentDidMount() {
@@ -13,67 +35,42 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Container className="home-recipe">
-          {/* <img className="hero-img" src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F5446883.jpg&w=596&h=596&c=sc&poi=face&q=85"></img>
-          <div className="hero-recipe">
-          <h1 className="recipe-title">My Recipe Name</h1>
-          <ul>
-            <li>Step 1 - Boil Water at High Heat</li>
-            <li>Step 2 - Boil Meat for 30 minutes</li>
-            <li>Step 3 - Dice Vegetables into a Juliene Cut</li>
-            <li>Step 4 - Prep Appetizers and Grab a Beer</li>
-          </ul>
-          </div> */}
-          
-          <Card id="main-card" style={{ width: '100%' }}>
-          
-          <Card.Title className="text-center"><h1>Old Fashioned Creamy Rice Pudding</h1> </Card.Title>
-          <Card.Subtitle className="mb-2 text-muted text-center">by: UserName</Card.Subtitle>
-              <Card.Img variant="top" src="https://images.media-allrecipes.com/userphotos/720x405/7715085.jpg" />
-              <Card.Body>
-                
-                <Card.Text>
-                <ListGroup>
-                <ListGroupItem>
-                Combine cooked rice, 1 1/2 cups milk, and salt in a saucepan over medium heat;cook and stir until thick and creamy, 15 to 20 minutes.
-                </ListGroupItem>
-                <ListGroupItem>
-                Stir remaining 1/2 cup milk, golden raisins, beaten egg, and white sugar into the rice mixture; stirring continually.
-                </ListGroupItem>
-                <ListGroupItem>
-                Continue cooking until egg is set, 2 to 3 minutes.
-                </ListGroupItem>
-                <ListGroupItem>
-                Remove saucepan from heat; stir butter and vanilla extract into the pudding.
-                </ListGroupItem>
-                </ListGroup>
-                </Card.Text>
-              </Card.Body>
-              <ListGroup className="list-group-flush text-center"  id="prep-time">
-                <ListGroupItem>
-                Prep Time - 10 Minutes |
-                Cook Time - 20 Minutes |
-                Ready In - 30 Mintues
-                </ListGroupItem>
-              </ListGroup>
-              <Card.Body>
-                <Card.Link href="#">
-                  <ButtonGroup aria-label="Basic example">
-                    <Button variant="secondary">Like</Button>
-                    <Button variant="secondary">Change</Button>
-                    <Button variant="secondary">Dislike</Button>
-                    <Button variant="secondary">
-                 Modify Recipe
-                </Button>
-                  </ButtonGroup>
-                
-                </Card.Link>
-              </Card.Body>
-            </Card>
-        </Container>
-        
+        <div style={styles}>
+        <p className="para-title">Recipe Box</p>
+    <Parallax bgImage={image1} strength={500} blur={{ min: -1, max: 3 }}>
+      <div style={{ height: 500 }}>
         
       </div>
+    </Parallax>
+    <blockquote className="para-div">“You have to be a romantic to invest yourself, your money, and your time in cheese.”
+Medium Raw: A Bloody Valentine to the World of Food and the People Who Cook <br></br><br></br>
+― Anthony Bourdain</blockquote>
+    <Parallax bgImage={image2}  strength={500} blur={{ min: -1, max: 3 }}>
+      <div style={{ height: 500 }}>
+        {/* <div style={insideStyles}>Dynamic Blur</div> */}
+      </div>
+    </Parallax>
+    <blockquote className="para-div">
+   " I cook, I create, I'm incredibly excited by what I do, I've still got a lot to achieve." <br></br><br></br>
+
+    ― Gordon Ramsay
+    </blockquote>
+    <Parallax bgImage={image3}  strength={500} blur={{ min: -1, max: 3 }}>
+      <div style={{ height: 500 }}>
+        {/* <div style={insideStyles}>Reverse direction</div> */}
+      </div>
+    </Parallax>
+    <blockquote className="para-div">"A chef is a mixture maybe of artistry and craft. You have to learn the craft really to get there."<br></br><br></br>
+
+    ― Wolfgang Puck</blockquote>
+    <Parallax bgImage={image4}  strength={500} blur={{ min: -1, max: 3 }}>
+      <div style={{ height: 500 }}>
+      <Button className="btn-secondary" style={insideStyles}>Start Cooking</Button>
+        {/* <div style={insideStyles}>renderProp</div> */}
+      </div>
+    </Parallax>
+    </div>
+    </div>
     );
   }
 }

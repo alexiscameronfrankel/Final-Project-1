@@ -4,7 +4,7 @@ import { Container, Card, ListGroup, ListGroupItem,
 import {Link} from 'react-router-dom';
 import InfiniteCarousel from 'react-leaf-carousel';
 
-const MyRecipes= (props) => {
+const Recent = (props) => {
     
     // if(!props.user.email){ 
     //     props.history.push('/log-in') 
@@ -30,26 +30,36 @@ const MyRecipes= (props) => {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title">Let's Get Cooking, Michael!</h1>
+                <h1 className="prof-title">Account Activity | CoolGuy84{props.username}</h1>
+                
             </Card.Header> 
           </Card.Title>
           <Card.Header>
-          <Card.Img className="prof-cover" variant="top" src="http://www.ironchefamerica.tv/us/images/lets-get-cooking.jpg" />
+          <Card.Img className="prof-cover" variant="top" src="http://www.ironchefamerica.tv/us/images/lets-get-cooking.jpg "/>
           </Card.Header>
         </Card>
         <div className="settings">
         <Card className="sm-card" id="main-card" style={{ width: '18rem' }}>
             <Card.Header>Settings</Card.Header>
             <ListGroup variant="flush">
-                <ListGroup.Item className="settings-links"><Link to="/account"><Button className="settings-button" >Account</Button></Link></ListGroup.Item>
+                <ListGroup.Item className="settings-links"><Link to="/profile"><Button className="settings-button" >Profile</Button></Link></ListGroup.Item>
                 <ListGroup.Item className="settings-links"><Link to="/myrecipes"><Button className="settings-button" >Recipes</Button></Link></ListGroup.Item>
                 <ListGroup.Item className="settings-links"><Link to="/myactivity"><Button className="settings-button" >Activity</Button></Link></ListGroup.Item>
             </ListGroup>
         </Card>
         <Card className="sm-card" id="main-card" style={{ width: '100%' }}>
-            <Card.Header>Featured Recipes</Card.Header>
-            <div >
-            <InfiniteCarousel
+            <Card.Header>Account Activity
+            <ButtonGroup>
+                <Link to="/recent"> <Button variant="secondary" className="settings-button">Recent</Button></Link>
+                <Link to="/liked"> <Button variant="secondary" className="settings-button">Liked</Button></Link>
+                <Link to="/commented">  <Button variant="secondary" className="settings-button">Commented</Button></Link>
+                    <Link to="/uploaded"> <Button variant="secondary" className="settings-button">Uploaded</Button> </Link>
+
+                </ButtonGroup>
+            </Card.Header>
+            <Card>
+            <Card.Header className="recent-views">Recently Viewed Recipes</Card.Header>
+            <InfiniteCarousel style={{ width: '100%' }}
     breakpoints={[
       {
         breakpoint: 500,
@@ -141,34 +151,15 @@ const MyRecipes= (props) => {
             </Card>
     </div>
   </InfiniteCarousel>
-            {/* <Card className="past-recipe-card" style={{ width: '33%' }}>
-            <Card.Img variant="top" src="https://i.ytimg.com/vi/LIubvcunMBc/hqdefault.jpg" />
-                <Card.Body>
-                    <Card.Title>Brooklyn Style Pizza</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card> */}
-            {/* <Card className="past-recipe-card" style={{ width: '33%' }}>
-            <Card.Img variant="top" src="https://i.ytimg.com/vi/CcwQeQ4VY7I/hqdefault.jpg" />
-                <Card.Body>
-                    <Card.Title>Kitchen Sink Nachos</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card> */}
-            </div>
-        </Card>
-        
-        </div>
+           
+            </Card>
 
-        
+            
+            
+           
+            
+        </Card>
+        </div>
         
         
         </Container>
@@ -176,4 +167,4 @@ const MyRecipes= (props) => {
     );
 }
 
-export default MyRecipes;
+export default Recent;

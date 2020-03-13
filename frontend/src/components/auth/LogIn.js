@@ -16,9 +16,15 @@ class LogIn extends Component {
     handleSubmit = e => {
         e.preventDefault()
          actions.logIn(this.state).then(user => {
-            this.props.setUser({...user.data})  
-        }).catch(({ response }) => console.error('error',response.data));
-    }
+            this.props.setUser({...user.data}) 
+            window.location.href = "http://localhost:3000/myRecipes" 
+        }).catch(({ response }) => {
+            if (response.data==="Unauthorized"){
+                console.log('error loading')
+            }
+        })
+    
+}
     render() {
         return (
 
@@ -31,7 +37,7 @@ class LogIn extends Component {
                 <MDBContainer>
                     <MDBRow>
                     <MDBCol md="12">
-                        <form className="auth-styles">
+                        <form className="auth-styles" onSubmit={this.handleSubmit}>
                         
                         <p className="h2 text-center mb-4">Login</p>
                         
@@ -43,7 +49,9 @@ class LogIn extends Component {
                         </form>
                         </div>
                     <div className="text-center">
-                    <MDBBtn gradient="peach" onClick={this.handleSubmit}>Login</MDBBtn>
+                    
+                    <MDBBtn gradient="peach" type="submit">Login</MDBBtn>
+                  
                     </div>
                     </form>
                 </MDBCol>

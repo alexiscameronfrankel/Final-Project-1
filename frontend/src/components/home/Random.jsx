@@ -6,6 +6,7 @@ import Footer from '../Footer';
 import Searchbar from './Searchbar';
 
 
+
 class Random extends Component {
   async componentDidMount() {
     //actions.test()
@@ -25,7 +26,7 @@ class Random extends Component {
           </ul>
           </div> */}
           
-          <Card style={{ width: '100%' }}>
+          <Card id="main-card" style={{ width: '100%' }}>
           
           <Card.Title className="text-center"><h1>Old Fashioned Creamy Rice Pudding</h1> </Card.Title>
           <Card.Subtitle className="mb-2 text-muted">by: UserName</Card.Subtitle>
@@ -68,6 +69,7 @@ class Random extends Component {
                 </Card.Link>
               </Card.Body>
             </Card>
+            
         </Container>
         
       </div>

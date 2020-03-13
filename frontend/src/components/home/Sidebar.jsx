@@ -3,29 +3,31 @@ import {Fragment} from 'react';
 import { scaleRotate as Menu } from "react-burger-menu";
 import Searchbar from './Searchbar'
 
-// export default props => {
-class Sidebar extends Component {
-  state={
-    info: Sidebar
-  }
+export default props => {
+// class Sidebar extends Component {
+//   state={
+//     info: Sidebar
+//   }
 
-  render(){
+console.log(props)
+
   return (
     // Pass on our props
     <Fragment>
         <div className="head-div">
-        {/* <Searchbar /> */}
+        <Searchbar />
         </div>
-    <Menu>
+    
+    <Menu {...props} >
 
       <a className="menu-item" href="/">Home</a>
 
-      <a className="menu-item" href="/random">Random</a>
       
-        {this.props.emailID === null ?
+        {props.emailID === null ?
              
         <Fragment>
             <a className="bm-item  menu-item" href="/sign-up">Sign Up</a>
+            <br></br>
             <a className="bm-item menu-item" href="/log-in">Log In</a>
         </Fragment>
         
@@ -33,7 +35,8 @@ class Sidebar extends Component {
        
         <Fragment>
             <a className="bm-item menu-item" href="/profile">My Profile</a>
-            <a className="bm-item menu-item" href="/log-out" onClick={this.props.actionLogout}>Log Out</a>
+            <br></br>
+            <a className="bm-item menu-item" href="/log-out" onClick={props.actionLogout}>Log Out</a>
         </Fragment>
       
         }
@@ -53,5 +56,4 @@ class Sidebar extends Component {
     </Menu>
     </Fragment>
   )};
-}
-export default Sidebar;
+    

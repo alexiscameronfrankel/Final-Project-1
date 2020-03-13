@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react';
+import ReactDom from 'react-dom';
 import {  Switch, Route, NavLink } from 'react-router-dom';
 import Home from './components/home/Home';
 import NotFound from './components/404/NotFound.js';
@@ -24,10 +25,10 @@ import Newrecipe from './components/Newrecipe';
 class App extends Component {
   
   state = { 
-      // email:null, 
-      // createdAt: null, 
-      // updatedAt: null, 
-      // _id: null 
+      email:null, 
+      createdAt: null, 
+      updatedAt: null, 
+      _id: null 
   }
   
 
@@ -87,7 +88,7 @@ class App extends Component {
 
 
     <div id="App">
-      <Sidebar emailID={this.state.email} pageWrapId={"page-wrap"} outerContainerId={"App"} />
+      <Sidebar props={(this.state)} emailID={this.state.email} pageWrapId={"page-wrap"} outerContainerId={"App"} />
     <div id="page-wrap">
     
       {/* <Nav>
@@ -140,6 +141,7 @@ class App extends Component {
     
       <Switch>
         <Route exact path="/" render={(props) => <Home {...props} />} />
+        <Route exact path="/" render={(props) => <Sidebar {...props} />} />
         <Route exact path="/profile" render={(props) => <Profile {...props} user={this.state}/>} />
         <Route exact path="/random" render={(props) => <Random {...props} />} />
         <Route exact path="/sign-up" render={(props)=><SignUp {...props} setUser={this.setUser} />} />

@@ -8,7 +8,7 @@ class SignUp extends Component {
 
     } 
     handleChange = e => {
-        console.log(this.state)
+        console.log(this.state, e.target.name)
         this.setState({[e.target.name]: e.target.value})
     }
 
@@ -31,12 +31,12 @@ class SignUp extends Component {
                             <p className="h2 text-center mb-4">Sign Up</p>
                             
                             <div className="grey-text">
-                                <MDBInput label="Type your email" icon="envelope" group type="email" validate error="wrong"
-                                success="right" />
-                                <MDBInput label="Type your password" icon="lock" group type="password" validate />
+                                <MDBInput name="email" label="Type your email" icon="envelope" group type="email" validate error="wrong"
+                                success="right" onChange={this.handleChange}/>
+                                <MDBInput name="password" label="Type your password" icon="lock" group type="password" validate onChange={this.handleChange}/>
                             </div>
                         <div className="text-center">
-                        <MDBBtn gradient="peach">Sign Up</MDBBtn>
+                        <MDBBtn gradient="peach" onClick={this.handleSubmit}>Sign Up</MDBBtn>
                         </div>
                         </form>
                     </MDBCol>

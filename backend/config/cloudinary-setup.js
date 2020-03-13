@@ -1,19 +1,22 @@
-const express = require('express');
-const router  = express.Router();
+const cloudinary = require('cloudinary');
+const cloudinaryStorage = require('multer-storage-cloudinary');
+const multer = require('multer');
 
-// include CLOUDINARY:
-const uploader = require('../configs/cloudinary-setup');
+cloudinary.config({
+  cloud_name: process.env.cloudName,
+  api_key: process.env.cloudKey,
+  api_secret: process.env.cloudSecret
+});
 
-router.post('/upload', uploader.single("imageUrl"), (req, res, next) => {
-    // console.log('file is: ', req.file)
+var storage = cloudinaryStorage({
+  cloudinary,
+  folder: 'thing-gallery', // The name of the folder in cloudinary
+  allowedFormats: ['jpg', 'png'],
+  // params: { resource_type: 'raw' }, => this is in case you want to upload other type of files, not just images
+  filename: function (req, res, cb) {
+    cb(null, res.originalname); // The file on cloudinary would have the same name as the original file name
+  }
+});
 
-    if (!req.file) {
-      next(new Error('No file uploaded!'));
-      return;
-    }
-    // get secure_url from the file object and save it in the 
-    // variable 'secure_url', but this can be any name, just make sure you remember to use the same in frontend
-    res.json({ secure_url: req.file.secure_url });
-})
-
-module.exports = router;
+const uploader = multer({ storage });
+module.exports = uploader;

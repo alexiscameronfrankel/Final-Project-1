@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { Button, Navbar, NavDropdown, Form, FormControl, Container, Col } from 'react-bootstrap'
 
 //below gets current milliseconds elapsed and then converts it to actual date...date is value in created property//
@@ -28,8 +29,18 @@ class Newrecipe extends Component {
         created: date
       }
 
-    
-          
+    // handleChange = e => {
+    //   console.log(this.state)
+    //   this.setState({[e.target.name]: e.target.value})
+    // }
+
+    // handleSubmit = e => {
+    //     e.preventDefault()
+    //         actions.newRecipe(this.state)
+    //         .then(recipe=> {
+    //             console.log(recipe) 
+    //         }).catch(({ response }) => console.error(response));
+    // }
     handlePersonTyping = (e) => {
         console.log(e.target.name, e.target.value);
         this.setState({
@@ -89,6 +100,8 @@ class Newrecipe extends Component {
         
     //     }) 
     // }
+  
+  
 
 
     // 'Breakfast', 'Dish', 'Snack', 'Drink', 'Dessert', 'Other'

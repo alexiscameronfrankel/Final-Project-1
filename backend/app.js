@@ -77,6 +77,7 @@ const recipe = require('./routes/recipe');
 app.use('/', index);
 app.use('/', auth);
 app.use('/', recipe);
+app.use('/api', require('./routes/file-upload-route')); //route to image upload js
 
 // Uncomment this line for production
 let client = path.join(__dirname + '../public/index.html')

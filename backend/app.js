@@ -1,3 +1,8 @@
+//This file gets ran at all times in backend
+//consist of dependencies installed for backend functionality
+//has middleware accessible from dependencies
+//Runs files in route folder vs having routes all in here (*order matters as it will look for first instance of match)
+
 require('dotenv').config();
 
 const bodyParser = require('body-parser');
@@ -20,14 +25,14 @@ mongoose
   .then((x) => console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`))
   .catch((err) => console.error('Error connecting to mongo', err));
 
-//What it this doing?? No use
+//No use
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 //new instance of express
-const app = express();
-
 //middleware
+const app = express();
+//
 app.use(
   //CORs (Cross Origin Request) helps with authentication; package downloaded and imported
   //CORS is used for authencation of an app making rquest to other APIs/backends
@@ -62,21 +67,25 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //app.use(express.static(path.join(__dirname, 'public')));
-
+//Joins frontend directory to backend allowing communication
 app.use(express.static(path.join(__dirname, '../frontend/build')))
-
+//installed dependencies middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(logger('dev'));
 
-// routes
+// all routes organized into smaller files
 const index = require('./routes/index');
 const auth = require('./routes/auth');
 const recipe = require('./routes/recipe');
+const profile = require('./routes/profile');
+const comment = require('./routes/comment');
 app.use('/', index);
-app.use('/', auth);
-app.use('/', recipe);
+app.use('/auth', auth);
+app.use('/recipe', recipe);
+app.use('/profileInfo', profile);
+app.use('/comment', comment);
 app.use('/api', require('./routes/file-upload-route')); //route to image upload js
 
 // Uncomment this line for production

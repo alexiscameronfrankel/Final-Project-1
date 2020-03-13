@@ -18,7 +18,7 @@ import Activity from './components/profile/Activity'
 import MyRecipes from './components/profile/MyRecipes.jsx'
 
 import Sidebar from './components/home/Sidebar.jsx'
-import ImageUpload from './components/ImageUpload.js'
+// import ImageUpload from './components/ImageUpload.js'
 import Newrecipe from './components/Newrecipe';
 import Uploaded from './components/profile/Uploaded';
 import Liked from './components/profile/Liked';

@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ProfileSchema = new Schema({
-    UserID: {type:String},
-    username: {type: String, required: true},
-    firstName: { type: String, required: true}, 
-    lastName: { type: String, required: true },
+    UserID: {type:String, required: true},
+    username: {type: String},
+    firstName: { type: String}, 
+    lastName: { type: String},
     image: { type: String, default:'/images/defaultAvatar.png'},
-    dietPreference: {type: Array, enum: ['Vegetarian', 'Vegan', 'Gluten Free', 'Dairy-Free','Pregnancy Friendly']},
+    dietPreference: {type: String, enum: ['Vegetarian', 'Vegan', 'Gluten Free', 'Dairy Free','Pregnancy Friendly']},
     allergies: {type: Array},//or String
     recipes: {type: Array},
     activity: {type: Array}, //will include past reviews on recipes

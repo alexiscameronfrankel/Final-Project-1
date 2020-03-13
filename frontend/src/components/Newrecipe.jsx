@@ -16,14 +16,14 @@ class Newrecipe extends Component {
         category: [],
         dishtype:"Breakfast",
         cuisine:"",
-        area:"",
         ingredient1:"",
+        ingredients: [""],
         measurement1: "",
+        measurements: [""],
         instructions: "",
         image: "", 
         video: "",
         tags: [],
-        source:"",
         comments: [], 
         ProfileID: "",
         created: date
@@ -76,6 +76,21 @@ class Newrecipe extends Component {
         }) 
     }
 
+    // addIngredientColumn = (e) => {
+    //     <Form.Group controlId="Measurments">
+    //     <Form.Label>Measurments</Form.Label>
+    //     <Form.Control name="measurement1" type="text" placeholder="Add your measurments" onChange={this.handlePersonTyping}/>
+    //     </Form.Group>
+    // }
+
+    addIngredient = (e) => {
+        this.setState({
+            
+            dishtype: e.target.value
+        
+        }) 
+    }
+
     // putCuisineInState = (e) => {
     //     console.log('putCuisineInState is being called')
     //     console.log(this.state.title)
@@ -91,6 +106,42 @@ class Newrecipe extends Component {
 
     // 'Breakfast', 'Dish', 'Snack', 'Drink', 'Dessert', 'Other'
 
+    handleIngredientsTyping = (e) => {
+        console.log(e.target.name, e.target.value);
+        let ingredientsCopy = [...this.state.ingredients]
+        ingredientsCopy[e.target.name] = e.target.value
+        this.setState({
+            ingredients: ingredientsCopy,
+        })
+     }
+
+     handleMeasurementTyping = (e) => {
+        console.log(e.target.name, e.target.value);
+        let measurementsCopy = [...this.state.measurements]
+        measurementsCopy[e.target.name] = e.target.value
+        this.setState({
+            ingredients: measurementsCopy,
+        })
+     }
+
+     addIngredientRow = () => {
+         console.log("inside add this ingredient")
+         let ingredientsCopy = [...this.state.ingredients]
+         ingredientsCopy.push("")
+         this.setState({
+             ingredients: ingredientsCopy
+         })
+     }
+
+     addMeasurementRow = () => {
+        console.log("inside add this measurement")
+        let measurementsCopy = [...this.state.measurements]
+        measurementsCopy.push("")
+        this.setState({
+            measurements: measurementsCopy
+        })
+    }
+
 
     render() {
         return (
@@ -101,21 +152,28 @@ class Newrecipe extends Component {
                         <Form.Label>Title</Form.Label>
                         <Form.Control name="title" type="text" placeholder="Enter title" onChange={this.handlePersonTyping} />
                         </Form.Group>
-
-                        <Form.Group as={Col} controlId="Area">
-                        <Form.Label>Area</Form.Label>
-                        <Form.Control name="cuisine" type="text" placeholder="Area???How is this different from cuisine" onChange={this.handlePersonTyping}/>
-                        </Form.Group>
                     </Form.Row>
 
                     <Form.Group controlId="Ingredients">
                         <Form.Label>Ingredients</Form.Label>
-                        <Form.Control name="ingredient1"  type="text" placeholder="Add your ingredients" onChange={this.handlePersonTyping}/>
+                        {/* <Form.Control name="ingredient1"  type="text" placeholder="Add your ingredients" onChange={this.handlePersonTyping}/> */}
+                        {this.state.ingredients.map((eachIngredient, index) => {
+                            return(
+                            <Form.Control name={index} type="text" placeholder="Add your ingredients" onChange={this.handleIngredientsTyping}/>)
+                        })}
+                        <Button variant="secondary" size="sm" onClick={this.addIngredientRow}>
+                            ADD INEGREDIENT
+                        </Button>
                     </Form.Group>
-
-                    <Form.Group controlId="Measurments">
-                        <Form.Label>Measurments</Form.Label>
-                        <Form.Control name="measurement1" type="text" placeholder="Add your measurments" onChange={this.handlePersonTyping}/>
+                    <Form.Group controlId="Measurements">
+                        <Form.Label>Measurements</Form.Label>
+                        {this.state.measurements.map((eachMeasurement, index) => {
+                            return(
+                            <Form.Control name={index} type="text" placeholder="Add your measurements" onChange={this.handleMeasurementTyping}/>)
+                        })}
+                        <Button variant="secondary" size="sm">
+                           ADD MEASUREMENT
+                        </Button>
                     </Form.Group>
 
                     <Form.Group controlId="Video">
@@ -127,11 +185,6 @@ class Newrecipe extends Component {
                         <Form.Group as={Col} controlId="Instructions">
                         <Form.Label>Instructions</Form.Label>
                         <Form.Control name="instructions" type="text" placeholder="Add your instructions" onChange={this.handlePersonTyping}/>
-                        </Form.Group>
-
-                        <Form.Group as={Col} controlId="Instructions">
-                        <Form.Label>Image</Form.Label>
-                        <Form.Control name="image" type="text" placeholder="Add your image URL" onChange={this.handlePersonTyping}/>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridState">
@@ -150,6 +203,18 @@ class Newrecipe extends Component {
                         <Form.Control placeholder="ex: American, French, Jamaican"/>
                         </Form.Group>
                     </Form.Row>
+
+                    <Form.Row>
+                        <Form.Group as={Col} controlId="Instructions">
+                        <Form.Label>Display Name</Form.Label>
+                        <Form.Control name="ProfileID" type="text" placeholder="Add your display name " onChange={this.handlePersonTyping}/>
+                        </Form.Group>
+
+                        <Form.Group as={Col} controlId="Instructions">
+                        <Form.Label>Image</Form.Label>
+                        <Form.Control name="image" type="text" placeholder="Add your image URL" onChange={this.handlePersonTyping}/>
+                        </Form.Group>
+                    </Form.Row>.
 
                     <Form.Group id="categoryGridCheckbox">
                     <Form.Label>Category</Form.Label>

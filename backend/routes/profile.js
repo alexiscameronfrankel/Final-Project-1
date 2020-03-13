@@ -67,6 +67,7 @@ router.get('/myRecipes',isAuth, (req, res, next) => {
     .catch(err => console.log(err))
     //   res.status(200).json({ msg: 'Working' });
 });
+});
 
 //add recipes to profile. State passed needs to include recipesArray associated with user and recipeID
 router.get('/myRecipes/addRecipe',isAuth, (req, res, next) => {
@@ -89,6 +90,7 @@ router.get('/myRecipes/addRecipe',isAuth, (req, res, next) => {
     .catch(console.log("An error has occurred."))
 
 });
+
 function isAuth(req, res, next) {
     req.isAuthenticated() ? next() : res.status(401).json({ msg: 'Log in first' });
 }

@@ -51,7 +51,7 @@ class SearchBar extends Component {
     }
    
     render() {
-        console.log(this.props)
+        // console.log(this.props)
       return (
         <>
         <form action={`recipe-details/${this.state.filteredResults}`}>

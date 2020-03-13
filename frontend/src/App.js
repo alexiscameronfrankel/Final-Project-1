@@ -17,12 +17,17 @@ import Activity from './components/profile/Activity'
 import MyRecipes from './components/profile/MyRecipes.jsx'
 
 import Sidebar from './components/home/Sidebar.jsx'
+import ImageUpload from './components/ImageUpload.js'
+import Newrecipe from './components/Newrecipe';
 
 
 class App extends Component {
   
   state = { 
-    // info: []
+      // email:null, 
+      // createdAt: null, 
+      // updatedAt: null, 
+      // _id: null 
   }
   
 
@@ -70,9 +75,9 @@ class App extends Component {
   //             console.log(recipe) 
   //         }).catch(({ response }) => console.error(response));
   // }
-
+  
   render(){
-    
+    // console.log(this.state)
     return (
       // <form onSubmit={this.handleSubmit}>
       //   <input type="text" name="title" onChange={this.handleChange}/>
@@ -82,9 +87,9 @@ class App extends Component {
 
 
     <div id="App">
-    <Sidebar emailid={this.state.email} pageWrapId={"page-wrap"} outerContainerId={"App"} />
+      <Sidebar emailID={this.state.email} pageWrapId={"page-wrap"} outerContainerId={"App"} />
     <div id="page-wrap">
-      {this.state.email}
+    
       {/* <Nav>
         <NavLink to="/">Home |</NavLink>
   
@@ -139,14 +144,16 @@ class App extends Component {
         <Route exact path="/random" render={(props) => <Random {...props} />} />
         <Route exact path="/sign-up" render={(props)=><SignUp {...props} setUser={this.setUser} />} />
         <Route exact path="/log-in" render={(props) => <LogIn {...props} setUser={this.setUser}/>} />
-        <Route exact path="/log-out" action= "this.logOut()" />
+        <Route exact path="/log-out" render={(props) => <Home {...props} actionLogout= {this.logOut()}  />} />
         <Route exact path="/account" render={(props) => <Account {...props} setUser={this.setUser}/>} />
         <Route exact path="/myrecipes" render={(props) => <MyRecipes {...props} setUser={this.setUser}/>} />
         <Route exact path="/myactivity" render={(props) => <Activity {...props} setUser={this.setUser}/>} />
+        <Route exact path="/new-recipe" render={(props) => <Newrecipe {...props} user={this.state}/>} />
         
         
         <Route component={NotFound} />
       </Switch>
+      {/* <ImageUpload/> */}
       <Footer />
       </div>
       </div>

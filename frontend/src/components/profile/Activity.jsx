@@ -3,7 +3,7 @@ import { Container, Card, ListGroup, ListGroupItem,
     Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
-const Profile = (props) => {
+const Activity = (props) => {
     
     // if(!props.user.email){ 
     //     props.history.push('/log-in') 
@@ -29,7 +29,7 @@ const Profile = (props) => {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title"> CoolGuy84 | Dashboard {props.username}</h1>
+                <h1 className="prof-title">Account Activity | CoolGuy84{props.username}</h1>
             </Card.Header> 
           </Card.Title>
           <Card.Img className="prof-cover" variant="top" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2F736x%2F97%2F31%2Fcf%2F9731cf1aea0498272270f68e74eb2f42--background-images-linkedin-background.jpg&f=1&nofb=1" />
@@ -38,35 +38,20 @@ const Profile = (props) => {
         <div className="settings">
         <Card className="sm-card" id="main-card" style={{ width: '18rem' }}>
             <Card.Header>Settings</Card.Header>
-            <Card.Header>
             <ListGroup variant="flush">
-                <ListGroup.Item className="settings-links"><Link to="/account"><Button className="settings-button" >Account</Button></Link></ListGroup.Item>
+                <ListGroup.Item className="settings-links"><Link to="/profile"><Button className="settings-button" >Profile</Button></Link></ListGroup.Item>
                 <ListGroup.Item className="settings-links"><Link to="/myrecipes"><Button className="settings-button" >Recipes</Button></Link></ListGroup.Item>
                 <ListGroup.Item className="settings-links"><Link to="/myactivity"><Button className="settings-button" >Activity</Button></Link></ListGroup.Item>
             </ListGroup>
-            </Card.Header>
         </Card>
         <Card className="sm-card" id="main-card" style={{ width: '100%' }}>
-            <Card.Header>Profile Settings</Card.Header>
-            <Card.Header>
-            <div className="prof-avatar">
-                <img className="my-avatar" src="https://www.w3schools.com/w3images/avatar2.png"></img>
-                <Card.Header className="my-avatar-header">
-                <ListGroup>
-                    <ListGroup.Item className="prof-list-item">Username: CoolGuy84</ListGroup.Item>
-                    <ListGroup.Item className="prof-list-item">First Name: Michael</ListGroup.Item>
-                    <ListGroup.Item className="prof-list-item">Last Name: Cooper</ListGroup.Item>
-                </ListGroup>
-                <ListGroup>
-                    <ListGroup.Item className="prof-list-item">Dietary Preferences: Vegan, Gluten Free</ListGroup.Item>
-                    <ListGroup.Item className="prof-list-item">Allergies: Peanut</ListGroup.Item>
-                </ListGroup>
-                </Card.Header>
-            </div>
-            </Card.Header>
+            <Card.Header>Account Activity</Card.Header>
+            <Card>
+           
             </Card>
+           
             
-        
+        </Card>
         </div>
         
         
@@ -75,4 +60,4 @@ const Profile = (props) => {
     );
 }
 
-export default Profile;
+export default Activity;

@@ -12,7 +12,7 @@ import Likes from './components/profile/Likes';
 import Footer from './components/Footer.jsx'
 import Random from './components/home/Random'
 import Sidebar from './components/home/Sidebar.jsx'
-import ImageUpload from './components/ImageUpload.js'
+// import ImageUpload from './components/ImageUpload.js'
 import Newrecipe from './components/Newrecipe';
 
 
@@ -144,7 +144,7 @@ class App extends Component {
         <Route exact path="/likes" render={(props) => <Likes {...props} setUser={this.setUser}/>} />
         <Route component={NotFound} />
       </Switch>
-      <ImageUpload/>
+      {/* <ImageUpload/> */}
       <Footer />
       </div>
       </div>

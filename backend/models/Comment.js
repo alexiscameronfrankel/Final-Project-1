@@ -7,7 +7,7 @@ const CommentSchema = new Schema({
     title: { type: String},
     rating: { type: String, required: true },
     description: {type: String, required: true},
-    image: {type:string}
+    image: {type: String}
   });
   
   

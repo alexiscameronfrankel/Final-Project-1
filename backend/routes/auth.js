@@ -41,8 +41,7 @@ router.get('/is-logged-in', (req, res, next) => {
 router.post('/login', passport.authenticate('local'), (req, res, next) => {
   const { user } = req;
   res.status(200).json(user);
-  res.send(
-    "Please enter both, username and password to sign up."
+  res.status(500).json({msg: "Please enter both, username and password to sign up."}
   );
 });
 

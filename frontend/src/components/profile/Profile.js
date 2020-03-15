@@ -32,8 +32,9 @@ const Profile = (props) => {
                 <h1 className="prof-title"> CoolGuy84 | Dashboard {props.username}</h1>
             </Card.Header> 
           </Card.Title>
-          <Card.Img className="prof-cover" variant="top" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2F736x%2F97%2F31%2Fcf%2F9731cf1aea0498272270f68e74eb2f42--background-images-linkedin-background.jpg&f=1&nofb=1" />
-          
+          <Card.Header>
+          <Card.Img className="prof-cover" variant="top" src="http://www.ironchefamerica.tv/us/images/lets-get-cooking.jpg" />
+          </Card.Header>
         </Card>
         <div className="settings">
         <Card className="sm-card" id="main-card" style={{ width: '18rem' }}>
@@ -47,23 +48,26 @@ const Profile = (props) => {
             </Card.Header>
         </Card>
         <Card className="sm-card" id="main-card" style={{ width: '100%' }}>
-            <Card.Header>Profile Settings</Card.Header>
+            <Card.Header>Current Profile</Card.Header>
             <Card.Header>
             <div className="prof-avatar">
+            <Card.Header>
                 <img className="my-avatar" src="https://www.w3schools.com/w3images/avatar2.png"></img>
+                </Card.Header>
                 <Card.Header className="my-avatar-header">
                 <ListGroup>
-                    <ListGroup.Item className="prof-list-item">Username: CoolGuy84</ListGroup.Item>
-                    <ListGroup.Item className="prof-list-item">First Name: Michael</ListGroup.Item>
-                    <ListGroup.Item className="prof-list-item">Last Name: Cooper</ListGroup.Item>
+                    <ListGroup.Item className="prof-list-item">Username: <span className="account-info"> CoolGuy84</span></ListGroup.Item>
+                    <ListGroup.Item className="prof-list-item">First Name: <span className="account-info"> Michael</span></ListGroup.Item>
+                    <ListGroup.Item className="prof-list-item">Last Name: <span className="account-info"> Cooper</span></ListGroup.Item>
                 </ListGroup>
                 <ListGroup>
-                    <ListGroup.Item className="prof-list-item">Dietary Preferences: Vegan, Gluten Free</ListGroup.Item>
-                    <ListGroup.Item className="prof-list-item">Allergies: Peanut</ListGroup.Item>
+                    <ListGroup.Item className="prof-list-item">Dietary Preferences: <span className="account-info">Vegan, Gluten Free</span></ListGroup.Item>
+                    <ListGroup.Item className="prof-list-item">Allergies: <span className="account-info">Peanut</span></ListGroup.Item>
                 </ListGroup>
                 </Card.Header>
             </div>
             </Card.Header>
+            <Button type="submit" size="lg" className="btn btn-primary account-button" block>Edit Profile</Button>
             </Card>
             
         

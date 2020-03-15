@@ -32,8 +32,9 @@ const Account = (props) => {
                 <h1 className="prof-title">Account Preferences | CoolGuy84{props.username}</h1>
             </Card.Header> 
           </Card.Title>
-          <Card.Img className="prof-cover" variant="top" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2F736x%2F97%2F31%2Fcf%2F9731cf1aea0498272270f68e74eb2f42--background-images-linkedin-background.jpg&f=1&nofb=1" />
-          
+          <Card.Header>
+          <Card.Img className="prof-cover" variant="top" src="http://www.ironchefamerica.tv/us/images/lets-get-cooking.jpg "/>
+          </Card.Header>
         </Card>
         <div className="settings">
         <Card className="sm-card" id="main-card" style={{ width: '18rem' }}>
@@ -66,25 +67,7 @@ const Account = (props) => {
 
                 </div>
                 
-                <p className="diet-checkboxes">
-                    <h5>Select Any Dietary Restrictions</h5>
-                    <input type="checkbox" id="test1" />
-                    <label className="diet-check" for="test1">Vegetarian</label>
                 
-                    <input type="checkbox" id="test2"  />
-                    <label className="diet-check" for="test2">Vegan</label>
-                
-                    <input type="checkbox" id="test3"   />
-                    <label className="diet-check" for="test3">Gluten Free</label>
-
-                    <input type="checkbox" id="test4"  />
-                    <label className="diet-check" for="test4">Pregancy Friendly</label>
-
-                    <input type="allergies" className="form-control" id="allergies" aria-describedby="LastNameHelp" placeholder="Enter Allergies" />
-                    <small id="emailHelp" className="form-text text-muted">Seperate Multiple Allergies With A Comma</small>
-
-                    
-                </p>
 
                 <Button type="submit" size="lg" className="btn btn-primary account-button" block>Submit</Button>
                 

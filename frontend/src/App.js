@@ -20,6 +20,10 @@ import MyRecipes from './components/profile/MyRecipes.jsx'
 import Sidebar from './components/home/Sidebar.jsx'
 // import ImageUpload from './components/ImageUpload.js'
 import Newrecipe from './components/Newrecipe';
+import Uploaded from './components/profile/Uploaded';
+import Liked from './components/profile/Liked';
+import Commented from './components/profile/Commented';
+import Recent from './components/profile/Recent';
 
 
 class App extends Component {
@@ -148,6 +152,10 @@ class App extends Component {
         <Route exact path="/log-in" render={(props) => <LogIn {...props} setUser={this.setUser}/>} />
         <Route exact path="/log-out" render={(props) => <Home {...props} actionLogout= {this.logOut()}  />} />
         <Route exact path="/account" render={(props) => <Account {...props} setUser={this.setUser}/>} />
+        <Route exact path="/uploaded" render={(props) => <Uploaded {...props} setUser={this.setUser}/>} />
+        <Route exact path="/liked" render={(props) => <Liked {...props} setUser={this.setUser}/>} />
+        <Route exact path="/recent" render={(props) => <Recent {...props} setUser={this.setUser}/>} />
+        <Route exact path="/commented" render={(props) => <Commented {...props} setUser={this.setUser}/>} />
         <Route exact path="/myrecipes" render={(props) => <MyRecipes {...props} setUser={this.setUser}/>} />
         <Route exact path="/myactivity" render={(props) => <Activity {...props} setUser={this.setUser}/>} />
         <Route exact path="/new-recipe" render={(props) => <Newrecipe {...props} user={this.state}/>} />

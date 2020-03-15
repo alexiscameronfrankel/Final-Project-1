@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Card, ListGroup, ListGroupItem,
     Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import InfiniteCarousel from 'react-leaf-carousel';
 
 const MyRecipes= (props) => {
     
@@ -32,8 +33,9 @@ const MyRecipes= (props) => {
                 <h1 className="prof-title">Let's Get Cooking, Michael!</h1>
             </Card.Header> 
           </Card.Title>
-          <Card.Img className="prof-cover" variant="top" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2F736x%2F97%2F31%2Fcf%2F9731cf1aea0498272270f68e74eb2f42--background-images-linkedin-background.jpg&f=1&nofb=1" />
-          
+          <Card.Header>
+          <Card.Img className="prof-cover" variant="top" src="http://www.ironchefamerica.tv/us/images/lets-get-cooking.jpg" />
+          </Card.Header>
         </Card>
         <div className="settings">
         <Card className="sm-card" id="main-card" style={{ width: '18rem' }}>
@@ -45,31 +47,35 @@ const MyRecipes= (props) => {
             </ListGroup>
         </Card>
         <Card className="sm-card" id="main-card" style={{ width: '100%' }}>
-            <Card.Header>Past Recipes</Card.Header>
-            <div className="past-recipes">
-            <Card className="past-recipe-card" style={{ width: '33%' }}>
-            <Card.Img variant="top" src="https://i.ytimg.com/vi/ZJPpMSx3eSw/hqdefault.jpg" />
-                <Card.Body>
-                    <Card.Title> Tiquana Street Tacos</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-            <Card className="past-recipe-card" style={{ width: '33%' }}>
-            <Card.Img variant="top" src="https://i.ytimg.com/vi/LIubvcunMBc/hqdefault.jpg" />
-                <Card.Body>
-                    <Card.Title>Brooklyn Style Pizza</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-            <Card className="past-recipe-card" style={{ width: '33%' }}>
+            <Card.Header>Featured Recipes</Card.Header>
+            <div >
+            <InfiniteCarousel
+    breakpoints={[
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+    ]}
+    dots={false}
+    showSides={true}
+    sidesOpacity={.5}
+    sideSize={.1}
+    slidesToScroll={1}
+    slidesToShow={2}
+    scrollOnDevice={true}
+  >
+    <div>
+    <Card className="past-recipe-card" style={{ width: '100%' }}>
             <Card.Img variant="top" src="https://i.ytimg.com/vi/CcwQeQ4VY7I/hqdefault.jpg" />
                 <Card.Body>
                     <Card.Title>Kitchen Sink Nachos</Card.Title>
@@ -80,10 +86,89 @@ const MyRecipes= (props) => {
                     <Button variant="secondary" className="settings-button">View Recipe</Button>
                 </Card.Body>
             </Card>
+      
+    </div>
+    <div>
+    <Card className="past-recipe-card" style={{ width: '100%' }}>
+            <Card.Img variant="top" src="https://i.ytimg.com/vi/LIubvcunMBc/hqdefault.jpg" />
+                <Card.Body>
+                    <Card.Title>Brooklyn Style Pizza</Card.Title>
+                    <Card.Text>
+                    Some quick example text to build on the card title and make up the bulk of
+                    the card's content.
+                    </Card.Text>
+                    <Button variant="secondary" className="settings-button">View Recipe</Button>
+                </Card.Body>
+            </Card>
+    </div>
+    <div>
+    <Card className="past-recipe-card" style={{ width: '100%' }}>
+            <Card.Img variant="top" src="https://i.ytimg.com/vi/ZJPpMSx3eSw/hqdefault.jpg" />
+                <Card.Body>
+                    <Card.Title> Tiquana Street Tacos</Card.Title>
+                    <Card.Text>
+                    Some quick example text to build on the card title and make up the bulk of
+                    the card's content.
+                    </Card.Text>
+                    <Button variant="secondary" className="settings-button">View Recipe</Button>
+                </Card.Body>
+            </Card>
+    </div>
+    <div>
+    <Card className="past-recipe-card" style={{ width: '100%' }}>
+            <Card.Img variant="top" src="https://i.ytimg.com/vi/ZJPpMSx3eSw/hqdefault.jpg" />
+                <Card.Body>
+                    <Card.Title> Tiquana Street Tacos</Card.Title>
+                    <Card.Text>
+                    Some quick example text to build on the card title and make up the bulk of
+                    the card's content.
+                    </Card.Text>
+                    <Button variant="secondary" className="settings-button">View Recipe</Button>
+                </Card.Body>
+            </Card>
+    </div>
+    <div>
+    <Card className="past-recipe-card" style={{ width: '100%' }}>
+            <Card.Img variant="top" src="https://i.ytimg.com/vi/ZJPpMSx3eSw/hqdefault.jpg" />
+                <Card.Body>
+                    <Card.Title> Tiquana Street Tacos</Card.Title>
+                    <Card.Text>
+                    Some quick example text to build on the card title and make up the bulk of
+                    the card's content.
+                    </Card.Text>
+                    <Button variant="secondary" className="settings-button">View Recipe</Button>
+                </Card.Body>
+            </Card>
+    </div>
+  </InfiniteCarousel>
+            {/* <Card className="past-recipe-card" style={{ width: '33%' }}>
+            <Card.Img variant="top" src="https://i.ytimg.com/vi/LIubvcunMBc/hqdefault.jpg" />
+                <Card.Body>
+                    <Card.Title>Brooklyn Style Pizza</Card.Title>
+                    <Card.Text>
+                    Some quick example text to build on the card title and make up the bulk of
+                    the card's content.
+                    </Card.Text>
+                    <Button variant="secondary" className="settings-button">View Recipe</Button>
+                </Card.Body>
+            </Card> */}
+            {/* <Card className="past-recipe-card" style={{ width: '33%' }}>
+            <Card.Img variant="top" src="https://i.ytimg.com/vi/CcwQeQ4VY7I/hqdefault.jpg" />
+                <Card.Body>
+                    <Card.Title>Kitchen Sink Nachos</Card.Title>
+                    <Card.Text>
+                    Some quick example text to build on the card title and make up the bulk of
+                    the card's content.
+                    </Card.Text>
+                    <Button variant="secondary" className="settings-button">View Recipe</Button>
+                </Card.Body>
+            </Card> */}
             </div>
         </Card>
         
         </div>
+
+        
         
         
         </Container>

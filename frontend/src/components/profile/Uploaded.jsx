@@ -4,7 +4,7 @@ import { Container, Card, ListGroup, ListGroupItem,
 import {Link} from 'react-router-dom';
 import InfiniteCarousel from 'react-leaf-carousel';
 
-const Activity = (props) => {
+const Uploaded = (props) => {
     
     // if(!props.user.email){ 
     //     props.history.push('/log-in') 
@@ -43,13 +43,13 @@ const Activity = (props) => {
             <Card.Header>Settings</Card.Header>
             <ListGroup variant="flush">
                 <ListGroup.Item className="settings-links"><Link to="/profile"><Button className="settings-button" >Profile</Button></Link></ListGroup.Item>
-                <ListGroup.Item className="settings-links"><Link to="/myrecipes"><Button className="settings-button" >MyRecipes</Button></Link></ListGroup.Item>
+                <ListGroup.Item className="settings-links"><Link to="/myrecipes"><Button className="settings-button" >Recipes</Button></Link></ListGroup.Item>
                 <ListGroup.Item className="settings-links"><Link to="/myactivity"><Button className="settings-button" >Activity</Button></Link></ListGroup.Item>
             </ListGroup>
         </Card>
         <Card className="sm-card" id="main-card" style={{ width: '100%' }}>
             <Card.Header>Account Activity
-                <ButtonGroup>
+            <ButtonGroup>
                 <Link to="/recent"> <Button variant="secondary" className="settings-button">Recent</Button></Link>
                 <Link to="/liked"> <Button variant="secondary" className="settings-button">Liked</Button></Link>
                 <Link to="/commented">  <Button variant="secondary" className="settings-button">Commented</Button></Link>
@@ -58,8 +58,8 @@ const Activity = (props) => {
                 </ButtonGroup>
             </Card.Header>
             <Card>
-            <Card.Header className="recent-views">Recently Viewed Recipes</Card.Header>
-            <InfiniteCarousel
+            <Card.Header className="recent-views">Recently Uploaded Recipes</Card.Header>
+            <InfiniteCarousel style={{ width: '100%' }}
     breakpoints={[
       {
         breakpoint: 500,
@@ -167,4 +167,4 @@ const Activity = (props) => {
     );
 }
 
-export default Activity;
+export default Uploaded;

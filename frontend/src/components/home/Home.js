@@ -51,7 +51,7 @@ Medium Raw: A Bloody Valentine to the World of Food and the People Who Cook <br>
       </div>
     </Parallax>
     <blockquote className="para-div">
-   " I cook, I create, I'm incredibly excited by what I do, I've still got a lot to achieve." <br></br><br></br>
+   "I cook, I create, I'm incredibly excited by what I do, I've still got a lot to achieve." <br></br><br></br>
 
     ― Gordon Ramsay
     </blockquote>

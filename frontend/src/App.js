@@ -2,6 +2,7 @@ import React, {Component, Fragment} from 'react';
 import ReactDom from 'react-dom';
 import {  Switch, Route, NavLink } from 'react-router-dom';
 import Home from './components/home/Home';
+import AllRecipes from './components/home/AllRecipes';
 import NotFound from './components/404/NotFound.js';
 import SignUp from './components/auth/SignUp';
 import LogIn from './components/auth/LogIn';
@@ -41,16 +42,6 @@ class App extends Component {
     let user = await actions.isLoggedIn()
     this.setState({...user.data})
     console.log('coolest ')
-    
-    // Axios.get('https://www.themealdb.com/api/json/v1/1/random.php').then(res=>{
-    //   // console.log('frenchy working api',res)
-    //   let x= res.data.meals[0]
-    //   let mealsArray=[...this.state.info]
-    //   mealsArray.push(x)
-    //   this.setState({
-    //     info: mealsArray
-    //   })
-    // })
   }
 
   //*Receives event from prop passed to component Login/SignUp
@@ -147,6 +138,7 @@ class App extends Component {
         <Route exact path="/" render={(props) => <Home {...props} />} />
         <Route exact path="/" render={(props) => <Sidebar {...props} />} />
         <Route exact path="/profile" render={(props) => <Profile {...props} user={this.state}/>} />
+        <Route exact path="/allrecipes" render={(props) => <AllRecipes {...props} user={this.state}/>} />
         <Route exact path="/random" render={(props) => <Random {...props} />} />
         <Route exact path="/sign-up" render={(props)=><SignUp {...props} setUser={this.setUser} />} />
         <Route exact path="/log-in" render={(props) => <LogIn {...props} setUser={this.setUser}/>} />

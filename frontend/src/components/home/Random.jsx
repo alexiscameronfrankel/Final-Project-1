@@ -1,17 +1,33 @@
+//Can attempt to extract info from object received and if saved send info to create recipe
+
 import React, { Component } from 'react';
 import actions from '../../services/index'
 import { Container, Card, ListGroup, ListGroupItem,
 Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import Footer from '../Footer';
 import Searchbar from './Searchbar';
+import Axios from 'axios'
 
 
 
 class Random extends Component {
-  async componentDidMount() {
-    //actions.test()
+  state={
+    info:[]
   }
+  async componentDidMount() {
+    Axios.get('https://www.themealdb.com/api/json/v1/1/random.php').then(res=>{
+      // console.log('frenchy working api',res)
+      let x= res.data.meals[0]
+      let mealsArray=[...this.state.info]
+      mealsArray.push(x)
+      this.setState({
+        info: mealsArray
+      })
+    })
+  }
+  
   render() {
+    console.log(this.state.info)
     return (
       <div>
         <Container className="home-recipe">
@@ -62,8 +78,8 @@ class Random extends Component {
                     <Button variant="secondary">Change</Button>
                     <Button variant="secondary">Dislike</Button>
                     <Button variant="secondary">
-                 Modify Recipe
-                </Button>
+                    Modify Recipe
+                    </Button>
                   </ButtonGroup>
                 
                 </Card.Link>

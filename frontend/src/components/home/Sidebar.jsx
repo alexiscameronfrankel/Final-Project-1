@@ -48,6 +48,9 @@ console.log(props)
         New Recipe
       </a>
       
+      <a className="menu-item" href="/allrecipes">
+        All Recipes
+      </a>
       
       <br></br>
       

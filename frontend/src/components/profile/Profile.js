@@ -1,3 +1,10 @@
+//Need to make this page a class
+//add axios call for profile routes
+//button onclick method to save profile changes
+//onClick of myrecipes > axios route needed for myrecipes in profile model array
+
+
+
 import React, { Component } from 'react';
 import { Container, Card, ListGroup, ListGroupItem,
     Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
@@ -29,7 +36,7 @@ const Profile = (props) => {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title"> CoolGuy84 | Dashboard {props.username}</h1>
+                <h1 className="prof-title"> CoolGuy84 | Dashboard {props.user.email}</h1>
             </Card.Header> 
           </Card.Title>
           <Card.Header>

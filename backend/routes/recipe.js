@@ -14,7 +14,7 @@ const Recipe = require('../models/Recipe');
 
 
 // 1) Get all recipes from database
-router.get('/',isAuth, (req, res, next) => {
+router.get('/allrecipes', (req, res, next) => {   
     Recipe.find()
     .then(allRecipesFoundInDb => {
         res.send(allRecipesFoundInDb)

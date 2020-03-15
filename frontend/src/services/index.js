@@ -40,7 +40,7 @@ const actions = {
   //recipe actions
   //get all recipes
   allRecipes: async () => {
-    return await service.get('/recipe')
+    return await service.get('/recipe/allrecipes')
   },
   //create new recipe
   newRecipe: async (recipe) => {

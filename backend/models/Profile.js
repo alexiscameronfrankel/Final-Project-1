@@ -1,3 +1,5 @@
+//Profile Model which is template for Profiles created in mongoDB database
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 

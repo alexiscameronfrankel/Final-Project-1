@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
-
+import service from '../services/service';
+import ImageUpload from './ImageUpload.js'
 import { Button, Navbar, NavDropdown, Form, FormControl, Container, Col } from 'react-bootstrap'
 
 //below gets current milliseconds elapsed and then converts it to actual date...date is value in created property//
@@ -24,7 +25,8 @@ class Newrecipe extends Component {
         tags: [],
         comments: [], 
         ProfileID: "",
-        created: date
+        created: date,
+        imageUrl: ""
       }
 
     // handleChange = e => {
@@ -200,7 +202,46 @@ class Newrecipe extends Component {
         })
     }
 
+//IMAGE AND VIDEO UPLOAD FUNCTIONALITY 
 
+    handleChange = e => {  
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+    }
+
+    // this method handles just the file upload
+    handleFileUpload = e => {
+        console.log("The file to be uploaded is: ", e.target.files[0]);
+
+        const uploadData = new FormData();
+        // imageUrl => this name has to be the same as in the model since we pass
+        // req.body to .create() method when creating a new thing in '/api/things/create' POST route
+        uploadData.append("imageUrl", e.target.files[0]);
+        
+        service.handleUpload(uploadData)
+        .then(response => {
+            // console.log('response is: ', response);
+            // after the console.log we can see that response carries 'secure_url' which we can use to update the state 
+            this.setState({ imageUrl: response.secure_url });
+        })
+        .catch(err => {
+            console.log("Error while uploading the file: ", err);
+        });
+    }
+
+// this method submits the form
+handleSubmit = e => {
+    e.preventDefault();
+    
+    service.saveNewThing(this.state)
+    .then(res => {
+        console.log('added: ', res);
+        // here you would redirect to some other page 
+    })
+    .catch(err => {
+        console.log("Error while adding the thing: ", err);
+    });
+}  
     
     render() {
         return (
@@ -208,7 +249,7 @@ class Newrecipe extends Component {
                 <Form>
                     <Form.Row>
                         <Form.Group as={Col} controlId="Title">
-                        <Form.Label>Title</Form.Label>
+                        <Form.Label>Recipe Name</Form.Label>
                         <Form.Control name="title" type="text" placeholder="Enter title" onChange={this.handlePersonTyping} />
                         </Form.Group>
                         
@@ -306,19 +347,23 @@ class Newrecipe extends Component {
 
                         <Form.Group as={Col} controlId="formGridCuisine">
                         <Form.Label>Cuisine</Form.Label>
-                        <Form.Control placeholder="ex: American, French, Jamaican"/>
+                        <Form.Control name="cuisine" placeholder="ex: American, French, Jamaican" onChange={this.handlePersonTyping}/>
                         </Form.Group>
                     </Form.Row>
 
                     <Form.Row>
-                        <Form.Group as={Col} controlId="Instructions">
+                        <Form.Group as={Col} controlId="ProfileID">
                         <Form.Label>Display Name</Form.Label>
                         <Form.Control name="ProfileID" type="text" placeholder="Add your display name " onChange={this.handlePersonTyping}/>
                         </Form.Group>
 
-                        <Form.Group as={Col} controlId="Instructions">
+                        <Form.Group as={Col} controlId="Image">
                         <Form.Label>Image</Form.Label>
-                        <Form.Control name="image" type="text" placeholder="Add your image URL" onChange={this.handlePersonTyping}/>
+                        <Form.Control name="image" type="text" placeholder="Add your image URL" type="file" 
+                    onChange={(e) => this.handleFileUpload(e)}/>
+                          {/* <Button variant="secondary"  onSubmit={e => this.handleSubmit(e)} size="sm" type="submit">
+                           ADD MEASUREMENT
+                        </Button> */}
                         </Form.Group>
                     </Form.Row>
 
@@ -336,7 +381,7 @@ class Newrecipe extends Component {
                         Submit
                     </Button>
                 </Form>
-                
+                <ImageUpload/>
             </div>
         );
     }

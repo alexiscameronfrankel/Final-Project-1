@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Container, Card, ListGroup, ListGroupItem,
-    Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import { Container, Card, ListGroup, Button, ButtonGroup,  } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import InfiniteCarousel from 'react-leaf-carousel';
 
-const Uploaded = (props) => {
+class Uploaded extends Component {
     
     // if(!props.user.email){ 
     //     props.history.push('/log-in') 
-    // }   
+    // } 
+    render(...props){  
     return (
         <div>
             {/* Profile
@@ -30,7 +30,7 @@ const Uploaded = (props) => {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title">Account Activity | CoolGuy84{props.username}</h1>
+                <h1 className="prof-title">Account Activity | CoolGuy84{this.props.email}</h1>
                 
             </Card.Header> 
           </Card.Title>
@@ -165,6 +165,7 @@ const Uploaded = (props) => {
         </Container>
         </div>
     );
+}
 }
 
 export default Uploaded;

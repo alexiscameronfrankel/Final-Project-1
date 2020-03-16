@@ -1,18 +1,14 @@
-import React, {Component, Fragment} from 'react';
-import ReactDom from 'react-dom';
-import {  Switch, Route, NavLink } from 'react-router-dom';
+import React, {Component} from 'react';
+import {  Switch, Route,} from 'react-router-dom';
 import Home from './components/home/Home';
 import AllRecipes from './components/home/AllRecipes';
 import NotFound from './components/404/NotFound.js';
 import SignUp from './components/auth/SignUp';
 import LogIn from './components/auth/LogIn';
-import Profile from './components/profile/Profile'
-import actions from './services/index'
-import { Button, Navbar, NavDropdown, Form, FormControl, Container } from 'react-bootstrap'
-import Nav from 'react-bootstrap/Nav'
-import Axios from 'axios';
+import Profile from './components/profile/Profile';
+import actions from './services/index';
 
-import Footer from './components/Footer.jsx'
+import Footer from './components/Footer.jsx';
 import Random from './components/home/Random'
 import Account from './components/profile/Account'
 import Activity from './components/profile/Activity'

@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { Container, Card, ListGroup, ListGroupItem,
-    Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import { Container, Card, ListGroup, Button, } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import InfiniteCarousel from 'react-leaf-carousel';
 
-const MyRecipes= (props) => {
+class MyRecipes extends Component {
     
     // if(!props.user.email){ 
     //     props.history.push('/log-in') 
     // }   
-    return (
+    render() {
+        return (
         <div>
             {/* Profile
             Welcome {props.user.email} !!!  */}
@@ -173,7 +173,8 @@ const MyRecipes= (props) => {
         
         </Container>
         </div>
-    );
+        );
+    }
 }
 
 export default MyRecipes;

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import actions from '../../services/index'
-import { Container, Card, ListGroup, ListGroupItem,
-Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
-import Footer from '../Footer';
-import Searchbar from './Searchbar';
 import { Parallax } from "react-parallax";
+import { Button } from 'react-bootstrap';
+// import Footer from '../Footer';
+// import Searchbar from './Searchbar';
+// import actions from '../../services/index'
+
 
 
 const styles = {
@@ -51,7 +51,7 @@ Medium Raw: A Bloody Valentine to the World of Food and the People Who Cook <br>
       </div>
     </Parallax>
     <blockquote className="para-div">
-   " I cook, I create, I'm incredibly excited by what I do, I've still got a lot to achieve." <br></br><br></br>
+   "I cook, I create, I'm incredibly excited by what I do, I've still got a lot to achieve." <br></br><br></br>
 
     ― Gordon Ramsay
     </blockquote>
@@ -65,7 +65,7 @@ Medium Raw: A Bloody Valentine to the World of Food and the People Who Cook <br>
     ― Wolfgang Puck</blockquote>
     <Parallax bgImage={image4}  strength={500} blur={{ min: -1, max: 3 }}>
       <div style={{ height: 500 }}>
-      <Button className="btn-secondary" style={insideStyles}>Start Cooking</Button>
+      <Button href="/myrecipes" className="btn-secondary" style={insideStyles}>Start Cooking</Button>
         {/* <div style={insideStyles}>renderProp</div> */}
       </div>
     </Parallax>

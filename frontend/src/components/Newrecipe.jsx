@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import service from '../services/service';
 import ImageUpload from './ImageUpload.js'
-import { Button, Navbar, NavDropdown, Form, FormControl, Container, Col } from 'react-bootstrap'
+import { Button, Form, Col } from 'react-bootstrap'
 
 //below gets current milliseconds elapsed and then converts it to actual date...date is value in created property//
 
@@ -26,7 +26,8 @@ class Newrecipe extends Component {
         comments: [], 
         ProfileID: "",
         created: date,
-        imageUrl: ""
+        imageUrl: "",
+        checkBoxState: true
       }
 
     // handleChange = e => {
@@ -54,17 +55,58 @@ class Newrecipe extends Component {
        
      }
 
-    putCategoryInState = (e) => {
-        console.log('putCategoryInState is being called')
-        let categoryArr = this.state.category;
-        categoryArr.push(e.target.value)
-        console.log(categoryArr)
-        this.setState({
+
+     //handle checkbox functionality 
+
+     putCategoryInState = (e) => { 
+        console.log(e.target.value, e.target.checked)
+        let categoryArr = [...this.state.category];
+        if(e.target.checked){
+            categoryArr.push(e.target.value)
+            this.setState({
+            
+                        category:categoryArr
+                    
+                }) 
+            }
+        else {
+           categoryArr =  categoryArr.filter(cat => {
+               return cat != e.target.value
+               
+           })
+           this.setState({
             
             category:categoryArr
         
-        }) 
-    }
+            }) 
+        }
+     }
+
+    // putCategoryInState = (e) => {
+    //     if(this.state.checkBoxState == true){
+    //     console.log('putCategoryInState is being called')
+    //     let categoryArr = this.state.category;
+    //     categoryArr.push(e.target.value)
+    //     console.log(categoryArr)
+    //     this.setState({
+            
+    //         checkBoxState:false,
+    //         category:categoryArr
+        
+    //     }) 
+    //  }
+
+    //  if(this.state.checkBoxState == false) {
+    //     this.setState({
+            
+    //         checkBoxState:true,
+        
+    //     }) 
+    //    }
+      
+    // }
+
+    /////////////////////////
 
     putDishTypeInState = (e) => {
         console.log('putDishTypeInState is being called')
@@ -244,6 +286,7 @@ handleSubmit = e => {
 }  
     
     render() {
+        console.log(this.state.category)
         return (
             <div>
                 <Form>
@@ -261,7 +304,7 @@ handleSubmit = e => {
 
                         <Form.Group id="categoryGridCheckbox">
                     <Form.Label>Category</Form.Label>
-                        <Form.Check type="checkbox" label="Vegetarian" value="Vegetarian" name="category" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Vegetarian" value="Vegetarian" name="category"  onChange={this.putCategoryInState}/>
                         <Form.Check type="checkbox" label="Vegan" value="Vegan" onChange={this.putCategoryInState}/>
                         <Form.Check type="checkbox" label="Pork" value="Pork" onChange={this.putCategoryInState}/>
                         <Form.Check type="checkbox" label="Chicken" value="Chicken" onChange={this.putCategoryInState}/>
@@ -359,7 +402,7 @@ handleSubmit = e => {
 
                         <Form.Group as={Col} controlId="Image">
                         <Form.Label>Image</Form.Label>
-                        <Form.Control name="image" type="text" placeholder="Add your image URL" type="file" 
+                        <Form.Control name="image" placeholder="Add your image URL" type="file" 
                     onChange={(e) => this.handleFileUpload(e)}/>
                           {/* <Button variant="secondary"  onSubmit={e => this.handleSubmit(e)} size="sm" type="submit">
                            ADD MEASUREMENT

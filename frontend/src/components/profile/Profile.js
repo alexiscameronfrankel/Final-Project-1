@@ -1,4 +1,4 @@
-//Need to make this page a class
+//Need to make this page a class (done)
 //add axios call for profile routes
 //button onclick method to save profile changes
 //onClick of myrecipes > axios route needed for myrecipes in profile model array
@@ -8,12 +8,13 @@ import actions from '../../services/index'
 import { Container, Card, ListGroup, ListGroupItem,
     Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+// import axios from 'axios';
 
-const Profile = (props) => {
+class Profile extends Component {
     
-    function findMyRecipes(){
-        console.log(props)
-        actions.findProfileRecipes(props.user._id).then(myRecipes => 
+    findMyRecipes(){
+        console.log(this.props)
+        actions.findProfileRecipes(this.props.user._id).then(myRecipes => 
             console.log('myRecipesReceived', myRecipes)
         ).catch(({ response }) => 
             
@@ -23,8 +24,12 @@ const Profile = (props) => {
     }
     // if(!props.user.email){ 
     //     props.history.push('/log-in') 
+
+    componentDidMount= async () =>{
+    }
     // }   
-    return (
+    render (...props){
+        return (
         <div>
             {/* Profile
             Welcome {props.user.email} !!!  */}
@@ -45,7 +50,7 @@ const Profile = (props) => {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title"> CoolGuy84 | Dashboard {props.user.email}</h1>
+                <h1 className="prof-title"> {this.props.user.email} | Dashboard </h1>
             </Card.Header> 
           </Card.Title>
           <Card.Header>
@@ -58,7 +63,7 @@ const Profile = (props) => {
             <Card.Header>
             <ListGroup variant="flush">
                 <ListGroup.Item className="settings-links"><Link to="/account"><Button className="settings-button" >Account</Button></Link></ListGroup.Item>
-                <ListGroup.Item className="settings-links"><Link to="/myrecipes"><Button onClick={findMyRecipes()} className="settings-button" >MyRecipes</Button></Link></ListGroup.Item>
+                <ListGroup.Item className="settings-links"><Link to="/myrecipes"><Button onClick={this.findMyRecipes()} className="settings-button" >MyRecipes</Button></Link></ListGroup.Item>
                 <ListGroup.Item className="settings-links"><Link to="/myactivity"><Button className="settings-button" >Activity</Button></Link></ListGroup.Item>
             </ListGroup>
             </Card.Header>
@@ -68,7 +73,7 @@ const Profile = (props) => {
             <Card.Header>
             <div className="prof-avatar">
             <Card.Header>
-                <img className="my-avatar" src="https://www.w3schools.com/w3images/avatar2.png"></img>
+                <Card.Img className="my-avatar" src="https://www.w3schools.com/w3images/avatar2.png"></Card.Img>
                 </Card.Header>
                 <Card.Header className="my-avatar-header">
                 <ListGroup>
@@ -92,7 +97,8 @@ const Profile = (props) => {
         
         </Container>
         </div>
-    );
+        )
+}
 }
 
 export default Profile;

@@ -13,6 +13,9 @@
 
 body {
   background-color: #F8F8FF;
+  font-family: 'Roboto Slab', serif;
+  font-family: 'Fjalla One', sans-serif;
+  
 }
 
 code {
@@ -190,7 +193,8 @@ li {
 }
 
 #App {
-  font-family: sans-serif;
+  font-family: 'Roboto Slab', serif;
+  /* font-family: 'Fjalla One', sans-serif ; */
 
   /* Give app full page to work with */
   height: 100vh;
@@ -512,12 +516,15 @@ label:hover:before {
   color: #191970fc;
   font-size: 1.2rem;
   margin: 30px;
+  font-family: 'Roboto Slab', serif;
+  font-family: 'Fjalla One', sans-serif;
 }
 
 .para-title {
   font-size: 3rem;
   color: #191970fc;
   margin: 30px;
+  font-family: 'Fjalla One', sans-serif;
 }
 
 .recent-views {
@@ -533,6 +540,48 @@ div.card-body {
   flex-direction: column;
   align-items: center;
 }
+/* 
+Adding Random Page Styles */
+
+
+.main-card-title {
+  padding-top: 20px;
+  font-size: 3rem;
+}
+
+.main-card-subtitle {
+  padding: 30px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  border: 16px solid #191970fc;
+  border-radius: 100%;
+}
+
+.main-card-image {
+  padding: 30px;
+}
+
+.main-card-instructions {
+  font-size: 1.2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 12px;
+}
+
+.main-card-source {
+  text-decoration: none !important;
+  color: white;
+}
+
+.prep-time {
+  padding: 0px 12px;
+  padding-left: 12px;
+}
+
+.btn-group {
+  width: 50%;
+}
+
+
 
 
 

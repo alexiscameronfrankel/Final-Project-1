@@ -18,8 +18,8 @@ const Profile = require('../models/Profile');
 const Recipe = require('../models/Recipe');
 
 // 1) Find user profile
-router.get('/',isAuth, (req, res, next) => {   
-    Profile.find({userID:`${req.user._id}`})
+router.get('/profile/:profileID',isAuth, (req, res, next) => {   
+    Profile.find({_id: req.params.profileID})
     .then(profileFound => {
         res.send(profileFound)
     })
@@ -39,44 +39,40 @@ router.post('/new',isAuth, (req, res, next) => {
 
 // 3) Update profile if authorized 
 router.post('/update',isAuth, (req, res, next) => {
-    let profileUserID=req.body.userID
-    if(profileUserID===req.user._id){
-        Profile.updateOne(req.body)
-            .then(profileUpdated => res.send('profile updated',profileUpdated))
-            .catch(console.log('An error occured'));
-    } else {
-        res.json({errorMessage: "Only creator of comment can delete"})
-    }
+    console.log('inside profile update route',req.body)
+    Profile.updateOne({UserID:req.user._id},req.body)
+        .then(profileUpdated => res.send('profile updated',profileUpdated))
+        .catch(console.log('An error occured'));
+    
 });
 
 // 4) Delete profile if authorized 
 router.post('/delete',isAuth, (req, res, next) => {
-    let profileUserID=req.body.userID
-    if(profileUserID===req.user._id){
-        Profile.deleteOne(req.body)
+    
+        Profile.deleteOne({UserID: req.user._id})
             .then(profileDeleted => res.send('Successfully deleted',profileDeleted))
             .catch(console.log('An error occured'));
-    } else {
-        res.json({errorMessage: "Only creator of comment can delete"})
-    }
+
 });
 
 // 5) Get all recipes saved by user from database
 router.get('/myRecipes',isAuth, (req, res, next) => {
-    let myProfileUserID=req.body
-    let recipesFound=[]
-    Profile.find({UseerID:myProfileUserID})
+    let myProfileUserID= req.user._id
+    console.log('reqbody', req.user)
+
+    Profile.find({UserID:myProfileUserID})
     .then(profile => {
-        let profileRecipes=profile.recipes
-        res.send(profileRecipes)
+        console.log(profile)
+        let profileRecipes=[...profile[0].recipes]
         // profileRecipes.forEach(recipeID => {
-        // Recipe.find(recipeID)
-        // .then(recipeFoundInDb => {
-        //     recipesFound.push(recipeFoundInDb)
-        // })
-        // });
-        // res.send(recipesFound)
-        // .catch(err => console.log(err))
+            Recipe.find( { _id: { $in: profileRecipes } } )
+            .then(recipesFoundInDb => {
+                // res.send(console.log(recipeFoundInDb))   
+                // recipesFound.push(recipeFoundInDb)
+                console.log(recipesFoundInDb)
+                res.json(recipesFoundInDb)
+            })
+            .catch(err => console.log(err))
     })
     .catch(error=>console.log(error))
 //   res.status(200).json({ msg: 'Working' });
@@ -84,34 +80,32 @@ router.get('/myRecipes',isAuth, (req, res, next) => {
 
 // 6) add recipes to profile. State passed needs to include recipesArray associated with user and recipeID
 router.get('/myRecipes/addRecipe',isAuth, (req, res, next) => {
-    // let recipeAdded = [...req.body.recipesArray]
-    // recipeAdded.push(req.body.saveRecipe)
-    let profile=req.body
-    let userFound=false
-    console.log('req.user.id in myrecipes', profile.UserID)
-    Profile.find({UserID: profile.UserID})
-    .then(user=> {
-        userFound=true
-        console.log('user found',user)
-        res.send('Successfully found',user)})
+    let myProfileUserID= req.user._id
+    let addRecipe=req.body
+    console.log('req.user.id in myrecipes', myProfileUserID)
+    Profile.find({UserID: myProfileUserID})
+    .then(profile => {
+        console.log(profile)
+        let profileRecipes=[...profile[0].recipes]
+        profileRecipes.push(addRecipe)
+        res.send(console.log("successfully added", addRecipe))
+    })
     .catch(console.log("An error has occurred."))
-    // if (userFound){
-     profile.recipes
-    // Profile.update({UserID:`${req.user._id}`},{recipes: `${recipeAdded}` })
-    // .then(user=> res.send('Successfully added',user))
-    // .catch(console.log("An error has occurred."))}
 });
 
 // 7) delete recipes in profile. State passed needs to include recipesArray associated with user and recipeID
-router.get('/myRecipes/addRecipe',isAuth, (req, res, next) => {
-    let recipeAdded = [...req.body.recipesArray]
-    recipeAdded.filter(eachRecipe=>{
-        return !(eachRecipe===req.body.deleteRecipeID)
+router.get('/myRecipes/deleteRecipe',isAuth, (req, res, next) => {
+    let myProfileUserID= req.user._id
+    let deleteRecipeID=req.body
+    console.log('req.user.id in myrecipes', myProfileUserID)
+    Profile.find({UserID: myProfileUserID})
+    .then(profile => {
+        console.log(profile)
+        let profileRecipes=[...profile[0].recipes]
+        profileRecipes.splice(indexOf(deleteRecipeID),1)
+        res.send(console.log("successfully deleted", deleteRecipeID))
     })
-    Profile.update({UserID:`${req.user._id}`},{recipes: `${recipeAdded}` })
-    .then(user=> res.send('Successfully added',user))
     .catch(console.log("An error has occurred."))
-
 });
 
 function isAuth(req, res, next) {

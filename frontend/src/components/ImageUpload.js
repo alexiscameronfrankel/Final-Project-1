@@ -7,8 +7,8 @@ class AddThing extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          name: "",
-          description: "",
+        //   name: "",
+        //   description: "",
           imageUrl: ""
         };
     }
@@ -55,9 +55,8 @@ class AddThing extends Component {
     render() {
         return (
           <div>
-            <h2>New Thing</h2>
             <form onSubmit={e => this.handleSubmit(e)}>
-                <label>Name</label>
+                {/* <label>Name</label>
                 <input 
                     type="text" 
                     name="name" 
@@ -68,7 +67,7 @@ class AddThing extends Component {
                     type="text" 
                     name="description" 
                     value={ this.state.description } 
-                    onChange={ e => this.handleChange(e)} />
+                    onChange={ e => this.handleChange(e)} /> */}
                 <input 
                     type="file" 
                     onChange={(e) => this.handleFileUpload(e)} /> 

@@ -22,12 +22,11 @@ class Newrecipe extends Component {
         instructions: [""],
         image: "", 
         video: "",
-        tags: [],
+        tags: [""],
         comments: [], 
         ProfileID: "",
         created: date,
         imageUrl: "",
-        checkBoxState: true
       }
 
     // handleChange = e => {
@@ -71,7 +70,7 @@ class Newrecipe extends Component {
             }
         else {
            categoryArr =  categoryArr.filter(cat => {
-               return cat != e.target.value
+               return cat !== e.target.value
                
            })
            this.setState({
@@ -81,30 +80,6 @@ class Newrecipe extends Component {
             }) 
         }
      }
-
-    // putCategoryInState = (e) => {
-    //     if(this.state.checkBoxState == true){
-    //     console.log('putCategoryInState is being called')
-    //     let categoryArr = this.state.category;
-    //     categoryArr.push(e.target.value)
-    //     console.log(categoryArr)
-    //     this.setState({
-            
-    //         checkBoxState:false,
-    //         category:categoryArr
-        
-    //     }) 
-    //  }
-
-    //  if(this.state.checkBoxState == false) {
-    //     this.setState({
-            
-    //         checkBoxState:true,
-        
-    //     }) 
-    //    }
-      
-    // }
 
     /////////////////////////
 
@@ -177,6 +152,17 @@ class Newrecipe extends Component {
         })
      }
 
+     handleTagTyping = (e) => {
+        console.log(e.target.name, e.target.value);
+        let tagsCopy = [...this.state.tags]
+        tagsCopy[e.target.name] = e.target.value
+        console.log(this.state.tags)
+        this.setState({
+            tags: tagsCopy
+        })
+     }
+
+
 ///ADDING ROW FUNCTIONALITY 
 
      addIngredientRow = () => {
@@ -208,12 +194,22 @@ class Newrecipe extends Component {
         })
     }
 
+    addTagRow = () => {
+        console.log("inside add this tags")
+        let tagsCopy = [...this.state.tags]
+        tagsCopy.push("")
+        console.log(tagsCopy)
+        this.setState({
+            tags: tagsCopy
+        })
+    }
+
 // DELETING ROW FUNCTIONALITY 
 
     deleteInstruction = () => {
         console.log("inside delete instruction")
         let instructionsCopy = [...this.state.instructions]
-        instructionsCopy.pop()
+        instructionsCopy.pop() //NOTE THAT THIS ONE POPS LAST VALUE OFF THE ARRAY 
         console.log(instructionsCopy)
         this.setState({
             instructions: instructionsCopy
@@ -244,49 +240,25 @@ class Newrecipe extends Component {
         })
     }
 
+    deleteTag = (e,index) => {
+        e.preventDefault()
+        console.log("inside delete tag")
+        let tagsCopy = [...this.state.tags]
+        tagsCopy.splice(index, 1);
+        console.log(tagsCopy)
+        this.setState({
+            tags: tagsCopy
+        })
+    }
+
+
 //IMAGE AND VIDEO UPLOAD FUNCTIONALITY 
 
-    handleChange = e => {  
-        const { name, value } = e.target;
-        this.setState({ [name]: value });
-    }
 
-    // this method handles just the file upload
-    handleFileUpload = e => {
-        console.log("The file to be uploaded is: ", e.target.files[0]);
 
-        const uploadData = new FormData();
-        // imageUrl => this name has to be the same as in the model since we pass
-        // req.body to .create() method when creating a new thing in '/api/things/create' POST route
-        uploadData.append("imageUrl", e.target.files[0]);
-        
-        service.handleUpload(uploadData)
-        .then(response => {
-            // console.log('response is: ', response);
-            // after the console.log we can see that response carries 'secure_url' which we can use to update the state 
-            this.setState({ imageUrl: response.secure_url });
-        })
-        .catch(err => {
-            console.log("Error while uploading the file: ", err);
-        });
-    }
-
-// this method submits the form
-handleSubmit = e => {
-    e.preventDefault();
-    
-    service.saveNewThing(this.state)
-    .then(res => {
-        console.log('added: ', res);
-        // here you would redirect to some other page 
-    })
-    .catch(err => {
-        console.log("Error while adding the thing: ", err);
-    });
-}  
     
     render() {
-        console.log(this.state.category)
+        // console.log(this.state.category)
         return (
             <div>
                 <Form>
@@ -295,14 +267,8 @@ handleSubmit = e => {
                         <Form.Label>Recipe Name</Form.Label>
                         <Form.Control name="title" type="text" placeholder="Enter title" onChange={this.handlePersonTyping} />
                         </Form.Group>
-                        
-                        <Form.Group controlId="formBasicCheckbox">
-                        <Form.Label>Category</Form.Label>
-                        <Form.Check type="checkbox" label="Vegetarian" value="Vegetarian" name="category" onChange={this.putCategoryInState}/>
-                        <Form.Check type="checkbox" label="Vegan" value="Vegan" name="category" onChange={this.putCategoryInState}/>
-                        </Form.Group>
 
-                        <Form.Group id="categoryGridCheckbox">
+                    <Form.Group id="categoryGridCheckbox">
                     <Form.Label>Category</Form.Label>
                         <Form.Check type="checkbox" label="Vegetarian" value="Vegetarian" name="category"  onChange={this.putCategoryInState}/>
                         <Form.Check type="checkbox" label="Vegan" value="Vegan" onChange={this.putCategoryInState}/>
@@ -316,7 +282,6 @@ handleSubmit = e => {
 
                     <Form.Group controlId="Ingredients">
                         <Form.Label>Ingredients</Form.Label>
-                        {/* <Form.Control name="ingredient1"  type="text" placeholder="Add your ingredients" onChange={this.handlePersonTyping}/> */}
                         {this.state.ingredients.map((eachIngredient, index) => {
                             return(
                             <Fragment>
@@ -365,9 +330,6 @@ handleSubmit = e => {
                     <Button variant="secondary" size="sm" onClick={this.addInstructionsRow}>
                            ADD INSTRUCTION
                     </Button>
-                    {/* <Button variant="secondary" size="sm" onClick={this.deleteInstruction}>
-                           DELETE INSTRUCTION
-                    </Button> */}
                     </Form.Group>
 
                     <Form.Group controlId="Video">
@@ -393,6 +355,7 @@ handleSubmit = e => {
                         <Form.Control name="cuisine" placeholder="ex: American, French, Jamaican" onChange={this.handlePersonTyping}/>
                         </Form.Group>
                     </Form.Row>
+                    
 
                     <Form.Row>
                         <Form.Group as={Col} controlId="ProfileID">
@@ -402,29 +365,31 @@ handleSubmit = e => {
 
                         <Form.Group as={Col} controlId="Image">
                         <Form.Label>Image</Form.Label>
-                        <Form.Control name="image" placeholder="Add your image URL" type="file" 
-                    onChange={(e) => this.handleFileUpload(e)}/>
-                          {/* <Button variant="secondary"  onSubmit={e => this.handleSubmit(e)} size="sm" type="submit">
-                           ADD MEASUREMENT
-                        </Button> */}
+                        <ImageUpload/>
                         </Form.Group>
                     </Form.Row>
-
-                    {/* <Form.Group id="categoryGridCheckbox">
-                    <Form.Label>Category</Form.Label>
-                        <Form.Check type="checkbox" label="Vegetarian" value="Vegetarian" name="category" onChange={this.putCategoryInState}/>
-                        <Form.Check type="checkbox" label="Vegan" value="Vegan" onChange={this.putCategoryInState}/>
-                        <Form.Check type="checkbox" label="Pork" value="Pork" onChange={this.putCategoryInState}/>
-                        <Form.Check type="checkbox" label="Chicken" value="Chicken" onChange={this.putCategoryInState}/>
-                        <Form.Check type="checkbox" label="Beef" value="Beef" onChange={this.putCategoryInState}/>
-                        <Form.Check type="checkbox" label="Seafood" value="Seafood" onChange={this.putCategoryInState}/>
-                        <Form.Check type="checkbox" label="Other" value="Other" onChange={this.putCategoryInState}/>
-                    </Form.Group> */}
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
+        {/* BELOW WHERE TAGS INPUT IS */}
+        <Form.Group controlId="Tags">
+                        <Form.Label>Tags</Form.Label>
+                        {this.state.tags.map((eachTag, index) => 
+                             {
+                            return(
+                            <Fragment>
+                            <Form.Control name={index} type="text" placeholder="Add your tags" value={eachTag} onChange={this.handleTagTyping}/>
+                            <Button variant="secondary" size="sm" onClick={(e) => this.deleteTag(e,index)}>
+                           DELETE TAG
+                            </Button>
+                            </Fragment>)
+                            
+                        })}
+                        <Button variant="secondary" size="sm" onClick={this.addTagRow}>
+                           ADD TAG
+                        </Button>
+                    </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
                 </Form>
-                <ImageUpload/>
             </div>
         );
     }

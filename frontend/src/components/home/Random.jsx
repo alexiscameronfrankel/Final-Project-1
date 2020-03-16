@@ -2,16 +2,11 @@
 
 import React, { Component } from 'react';
 import actions from '../../services/index'
-import { Container, Card, ListGroup, ListGroupItem,
-Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import { Container, Card, ListGroup, ListGroupItem,Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import Footer from '../Footer';
 // import Searchbar from './Searchbar';
 import Axios from 'axios'
-import { Container, Card, ListGroup, ListGroupItem,
-Button, ButtonGroup, } from 'react-bootstrap';
-// import Footer from '../Footer';
-// import Searchbar from './Searchbar';
-// import actions from '../../services/index'
+
 
 
 
@@ -182,8 +177,8 @@ class Random extends Component {
                     <Button variant="secondary" name="save-btn" size="lg"><i className="far fa-heart"></i></Button>
                     <Button variant="secondary" name="like-btn" size="lg"><i className="far fa-thumbs-up"></i></Button>
                     <Button variant="secondary" name="dislike-btn" size="lg"><i className="far fa-thumbs-down"></i></Button>
-                    <Button variant="secondary" name="youtube-btn" size="lg"><a  href={this.state.youtube} className="main-card-source"><i class="fab fa-youtube-square"></i></a></Button>
-                    <Button variant="secondary" name="source-btn" size="lg"><a  href={this.state.source} className="main-card-source"><i  class="fas fa-external-link-alt"></i></a></Button>
+                    <Button variant="secondary" name="youtube-btn" size="lg"><a  href={this.state.info.video} className="main-card-source"><i class="fab fa-youtube-square"></i></a></Button>
+                    <Button variant="secondary" name="source-btn" size="lg"><a  href={this.state.info.source} className="main-card-source"><i  class="fas fa-external-link-alt"></i></a></Button>
                     <Button variant="secondary" name="edit-recipe" size="lg">Edit Recipe</Button>
                   </ButtonGroup>
                   </Card.Header>

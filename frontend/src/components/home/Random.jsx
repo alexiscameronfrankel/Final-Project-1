@@ -2,9 +2,6 @@
 
 import React, { Component } from 'react';
 import actions from '../../services/index'
-import { Container, Card, ListGroup, ListGroupItem,
-Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
-import Footer from '../Footer';
 // import Searchbar from './Searchbar';
 import Axios from 'axios'
 import { Container, Card, ListGroup, ListGroupItem,

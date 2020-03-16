@@ -1,7 +1,7 @@
 import actions from '../../services/index';
-import React, { Component } from 'react';
-import { Container, Card, ListGroup, Button, } from 'react-bootstrap';
-var ReactDOM = require('react-dom');
+import React, { Fragment, Component } from 'react';
+import { Container, Card, } from 'react-bootstrap';
+
 
 
 var Coverflow = require('react-coverflow');
@@ -11,12 +11,16 @@ class AllRecipes extends Component {
     //still looking into more ideas
     //need state sent to be sent
    state = {
-      allrecipes:[]
+      allrecipes:[],
+      title: String
    }
 
     async componentDidMount() {
         let recipes = await actions.allRecipes()
-        this.setState({allrecipes: recipes.data})
+        this.setState({
+            allrecipes: recipes.data,
+            title: recipes.data[0].title
+        })
         console.log(recipes)
     }
 
@@ -28,18 +32,11 @@ class AllRecipes extends Component {
         
         return (
             <Container className="home-recipe">
-            <Card id="main-card" 
-          style={{ width: '100%' }}>
-            <Card.Title className="text-center">
-            <Card.Header>
-                <h1 className="prof-title">All Recipes</h1>
-            </Card.Header> 
-          </Card.Title>
-                <ul>
-                    {this.state.allrecipes.map(eachRecipe => {
-                        return <li>{eachRecipe.title}</li>
-                    })}
-                </ul>
+            <Card>
+                <Card.Title>
+                <Card.Header>Allrecipes</Card.Header>
+                </Card.Title>
+                <div>
                 <Coverflow
                     width={960}
                     height={480}
@@ -47,25 +44,30 @@ class AllRecipes extends Component {
                     navigation={false}
                     enableHeading={false}
                 >
-                    <div
-                    // onClick={() => fn()}
-                    // onKeyDown={() => fn()}
+                    
+                    {this.state.allrecipes.map(eachRecipe => {
+                    return (<Fragment>
+                        <Card key={eachRecipe._id}
+                    // {/* // onClick={() => fn()}
+                    // // onKeyDown={() => fn()} */}
                     role="menuitem"
                     tabIndex="0"
                     >
-                    <img
-                        src="https://www.themealdb.com/images/media/meals/sqrtwu1511721265.jpg"
-                        alt='title or description'
-                        style={{ display: 'block', width: '100%' }}
-                    />
-                    </div>
-                    <img src='https://www.themealdb.com/images/media/meals/1550441882.jpg' alt='title or description' data-action="http://andyyou.github.io/react-coverflow/"/>
-                    <img src='https://www.themealdb.com/images/media/meals/1549542994.jpg' alt='title or description' data-action="http://andyyou.github.io/react-coverflow/"/>
-                    <img src='https://www.themealdb.com/images/media/meals/1550441882.jpg' alt='title or description' data-action="http://andyyou.github.io/react-coverflow/"/>
-                    <img src='https://www.themealdb.com/images/media/meals/1549542994.jpg' alt='title or description' data-action="http://andyyou.github.io/react-coverflow/"/>
+                        <Card.Title className="text-center">{eachRecipe.title}</Card.Title>
+                        <Card.Img
+                            src={eachRecipe.image}
+                            alt={eachRecipe.title}
+                            style={{ display: 'block', width: '100%' }}
+                        />
+                        </Card>
+                        </Fragment>)
+                        })}
+                        
+                    
+                    
                 </Coverflow>
                 
-                
+                </div>
             </Card>
             </Container>
         );

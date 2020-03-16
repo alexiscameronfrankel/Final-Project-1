@@ -3,15 +3,24 @@
 //button onclick method to save profile changes
 //onClick of myrecipes > axios route needed for myrecipes in profile model array
 
-
-
 import React, { Component } from 'react';
+import actions from '../../services/index'
 import { Container, Card, ListGroup, ListGroupItem,
     Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
 const Profile = (props) => {
     
+    function findMyRecipes(){
+        console.log(props)
+        actions.findProfileRecipes(props.user._id).then(myRecipes => 
+            console.log('myRecipesReceived', myRecipes)
+        ).catch(({ response }) => 
+            
+                console.log('error loading',response)
+            
+        )
+    }
     // if(!props.user.email){ 
     //     props.history.push('/log-in') 
     // }   
@@ -49,7 +58,7 @@ const Profile = (props) => {
             <Card.Header>
             <ListGroup variant="flush">
                 <ListGroup.Item className="settings-links"><Link to="/account"><Button className="settings-button" >Account</Button></Link></ListGroup.Item>
-                <ListGroup.Item className="settings-links"><Link to="/myrecipes"><Button className="settings-button" >MyRecipes</Button></Link></ListGroup.Item>
+                <ListGroup.Item className="settings-links"><Link to="/myrecipes"><Button onClick={findMyRecipes()} className="settings-button" >MyRecipes</Button></Link></ListGroup.Item>
                 <ListGroup.Item className="settings-links"><Link to="/myactivity"><Button className="settings-button" >Activity</Button></Link></ListGroup.Item>
             </ListGroup>
             </Card.Header>

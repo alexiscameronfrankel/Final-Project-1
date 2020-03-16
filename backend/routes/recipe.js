@@ -64,12 +64,33 @@ router.post('/delete',isAuth, (req, res, next) => {
 
 // 5) Create new Recipe
 router.post('/new',isAuth, (req, res, next) => {
-    console.log(req.body)
-    let newRecipe=req.body
-    newRecipe.profileID=req.user._id
-    Recipe.create(newRecipe)
-    .then(recipeCreated => res.send(recipeCreated))
+    console.log('inside create new recipe',req.body)
+    let duplicateRecipe=false
+    Recipe.find({title:req.body.title})
+    .then(RecipeFound=> {
+        duplicateRecipe=true
+        res.send(RecipeFound)})
+    .catch(error => {
+        console.log('recipe already exist',error)})
+        
+    if (!duplicateRecipe){
+        Recipe.create(req.body)
+        .then(recipeCreated => res.send(console.log('recipe created',recipeCreated)))
+        .catch(err => console.log(err))
+    }
+});
+
+// 6) find recipe by name
+router.get('/findRecipe', (req, res, next) => {
+    //Example: Recipe.findById('245245234hgryh35635')
+    //Example: Recipe.findOne({name:'linguine', _id:'2452', date:'yesterday', likes:10})
+    req.query
+    Recipe.findOne({name:req.params.recipeID})
+    .then(recipeFound => {
+        res.send(recipeFound)
+    })
     .catch(err => console.log(err))
+//   res.status(200).json({ msg: 'Working' });
 });
 
 function isAuth(req, res, next) {

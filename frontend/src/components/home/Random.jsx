@@ -5,26 +5,124 @@ import actions from '../../services/index'
 import { Container, Card, ListGroup, ListGroupItem,
 Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import Footer from '../Footer';
-import Searchbar from './Searchbar';
+// import Searchbar from './Searchbar';
 import Axios from 'axios'
 
 
 
 class Random extends Component {
   state={
-    info:[]
+    info: {}
   }
   async componentDidMount() {
     Axios.get('https://www.themealdb.com/api/json/v1/1/random.php').then(res=>{
       // console.log('frenchy working api',res)
       let x= res.data.meals[0]
-      let mealsArray=[...this.state.info]
-      mealsArray.push(x)
-      this.setState({
-        info: mealsArray
-      })
+      console.log('x',x)
+      
+      let mDish='Other'
+      if (x.strCategory=== 'Breakfast'){ mDish='Breakfast'};
+      if (x.strCategory=== 'Dessert') { mDish='Dessert'};
+      if (x.strCategory=== 'Pork') { mDish='Dish'};
+      if (x.strCategory=== 'Chicken') { mDish='Dish'};
+      if (x.strCategory=== 'Beef') { mDish='Dish'};
+      if (x.strCategory=== 'Seafood') { mDish='Dish'};
+  
+      let mCategory='Other'
+      if (x.strCategory=== 'Vegetarian') { mCategory='Vegetarian'};
+      if (x.strCategory=== 'Vegan') { mCategory='Vegan'};
+      if (x.strCategory=== 'Pork') { mCategory='Pork'};
+      if (x.strCategory=== 'Chicken') { mCategory='Chicken'};
+      if (x.strCategory=== 'Beef') { mCategory='Beef'};
+      if (x.strCategory=== 'Seafood') { mCategory='Seafood'};
+  
+      let mIngredients = [
+        x.strIngredient1,
+        x.strIngredient2,
+        x.strIngredient3,
+        x.strIngredient4,
+        x.strIngredient5,
+        x.strIngredient6,
+        x.strIngredient7,
+        x.strIngredient8,
+        x.strIngredient9,
+        x.strIngredient10,
+        x.strIngredient11,
+        x.strIngredient12,
+        x.strIngredient13,
+        x.strIngredient14,
+        x.strIngredient15,
+        x.strIngredient16,
+        x.strIngredient17,
+        x.strIngredient18,
+        x.strIngredient19,
+        x.strIngredient20
+      ]
+      let mMeasurements=[
+        x.strMeasure1,
+        x.strMeasure2,
+        x.strMeasure3,
+        x.strMeasure4,
+        x.strMeasure5,
+        x.strMeasure6,
+        x.strMeasure7,
+        x.strMeasure8,
+        x.strMeasure9,
+        x.strMeasure10,
+        x.strMeasure11,
+        x.strMeasure12,
+        x.strMeasure13,
+        x.strMeasure14,
+        x.strMeasure15,
+        x.strMeasure16,
+        x.strMeasure17,
+        x.strMeasure18,
+        x.strMeasure19,
+        x.strMeasure20
+      ]
+      
+      let mealTags
+      if (x.strTags===null){
+        mealTags=[]
+      }else if (x.strTags.includes(",")){
+        mealTags=x.strTags.split(",")
+      }else{
+        mealTags=x.strTags
+      }
+
+
+      let newMeal={
+      title: x.strMeal,
+      category: mCategory,
+      dishtype: mDish,
+      area: "",
+      cuisine: x.strArea,
+      instructions: x.strInstructions,
+      image: x.strMealThumb,
+      tags: mealTags,
+      video: x.strYoutube,
+      ingredients: mIngredients,
+      measurements: mMeasurements,
+      source: x.strSource,
+      profileID: "",
+      created: "",
+      comments: []
+      }
+      
+     
+      let createRecipe = actions.newRecipe(newMeal)
+      this.setState({info: newMeal})
+      console.log('finished creating newMeal',createRecipe )
+      
     })
+
   }
+
+  // handleSave=()=>{
+  //     let newRecipe = actions.newRecipe(this.state )
+  //       this.setState({info: newRecipe})
+  //       console.log('finished creating newMeal',newRecipe )
+  // }
   
   render() {
     console.log(this.state.info)
@@ -44,7 +142,7 @@ class Random extends Component {
           
           <Card id="main-card" style={{ width: '100%' }}>
           
-          <Card.Title className="text-center"><h1>Old Fashioned Creamy Rice Pudding</h1> </Card.Title>
+          <Card.Title className="text-center"><h1>{this.state.info.title}</h1> </Card.Title>
           <Card.Subtitle className="mb-2 text-muted">by: UserName</Card.Subtitle>
               <Card.Img variant="top" src="https://images.media-allrecipes.com/userphotos/720x405/7715085.jpg" />
               <Card.Body>
@@ -52,7 +150,8 @@ class Random extends Component {
                 <Card.Text>
                 <ListGroup>
                 <ListGroupItem>
-                Combine cooked rice, 1 1/2 cups milk, and salt in a saucepan over medium heat;cook and stir until thick and creamy, 15 to 20 minutes.
+                {/* Combine cooked rice, 1 1/2 cups milk, and salt in a saucepan over medium heat;cook and stir until thick and creamy, 15 to 20 minutes. */}
+                {this.state.info.instructions}
                 </ListGroupItem>
                 <ListGroupItem>
                 Stir remaining 1/2 cup milk, golden raisins, beaten egg, and white sugar into the rice mixture; stirring continually.

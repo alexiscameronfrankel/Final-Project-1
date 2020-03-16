@@ -19,7 +19,7 @@ export default {
 
   async handleUpload (theFile) {
     // console.log('file in service: ', theFile)
-    return service.post('/upload', theFile)
+    return service.post('/api/upload', theFile)
       .then(res => res.data)
       .catch(errorHandler);
   },

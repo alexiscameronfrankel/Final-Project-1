@@ -1,12 +1,13 @@
 //Can attempt to extract info from object received and if saved send info to create recipe
 
 import React, { Component } from 'react';
-import actions from '../../services/index'
-import { Container, Card, ListGroup, ListGroupItem,
-Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
-import Footer from '../Footer';
-import Searchbar from './Searchbar';
 import Axios from 'axios'
+import { Container, Card, ListGroup, ListGroupItem,
+Button, ButtonGroup, } from 'react-bootstrap';
+// import Footer from '../Footer';
+// import Searchbar from './Searchbar';
+// import actions from '../../services/index'
+
 
 
 
@@ -39,6 +40,7 @@ class Random extends Component {
         source: mealsArray[0].strSource,
         ingredients: mealsArray[0].strIngredient1,
         measure: mealsArray[0].strMeasure1,
+        tags: mealsArray[0].strTags
       })
     })
   }
@@ -61,46 +63,46 @@ class Random extends Component {
           </div> */}
           
           <Card id="main-card" style={{ width: '100%' }}>
-          
-          <Card.Title className="text-center"><h1>{this.state.title}</h1> </Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">Category: {this.state.category}  | Area: {this.state.area}</Card.Subtitle>
-              <Card.Img variant="top" src="https://images.media-allrecipes.com/userphotos/720x405/7715085.jpg" />
+          <Card.Header>
+          <Card.Title className="text-center main-card-title" >{this.state.title}</Card.Title>
+          </Card.Header>
+          <Card.Subtitle className="mb-2 text-muted main-card-subtitle text-center">Dish Type: {this.state.category}  | Area: {this.state.area}   |   Tags: {this.state.tags}</Card.Subtitle>
+          <Card.Header>
+              <Card.Img className= "main-card-image" variant="top" src={this.state.thumbnail} />
+          </Card.Header>
               <Card.Body>
-                
+                <Card.Header>
                 <Card.Text>
                 <ListGroup>
                 <ListGroupItem>
-                Combine cooked rice, 1 1/2 cups milk, and salt in a saucepan over medium heat;cook and stir until thick and creamy, 15 to 20 minutes.
                 </ListGroupItem>
-                <ListGroupItem>
-                Stir remaining 1/2 cup milk, golden raisins, beaten egg, and white sugar into the rice mixture; stirring continually.
-                </ListGroupItem>
-                <ListGroupItem>
-                Continue cooking until egg is set, 2 to 3 minutes.
-                </ListGroupItem>
-                <ListGroupItem>
-                Remove saucepan from heat; stir butter and vanilla extract into the pudding.
+                <ListGroupItem className="main-card-instructions">
+                {this.state.instructions}
                 </ListGroupItem>
                 </ListGroup>
                 </Card.Text>
+              </Card.Header>
               </Card.Body>
+              <Card.Header>
               <ListGroup className="list-group-flush text-center">
                 <ListGroupItem>Prep Time - 10 Minutes |
                 Cook Time - 20 Minutes |
                 Ready In - 30 Mintues</ListGroupItem>
               </ListGroup>
+              </Card.Header>
               <Card.Body>
-                <Card.Link href="#">
+                <Card>
+                <Card.Header>
                   <ButtonGroup aria-label="Basic example">
-                    <Button variant="secondary">Like</Button>
-                    <Button variant="secondary">Change</Button>
-                    <Button variant="secondary">Dislike</Button>
-                    <Button variant="secondary">
-                    Modify Recipe
-                    </Button>
+                    <Button variant="secondary" name="save-btn"><i class="far fa-heart"></i></Button>
+                    <Button variant="secondary" name="like-btn"><i class="far fa-thumbs-up"></i></Button>
+                    <Button variant="secondary" name="dislike-btn"><i class="far fa-thumbs-down"></i></Button>
+                    <Button variant="secondary" name="source-btn"><a  href={this.state.source} className="main-card-source"><i  class="fas fa-external-link-alt"></i></a></Button>
+                    <Button variant="secondary" name="edit-recipe">Edit Recipe</Button>
                   </ButtonGroup>
+                  </Card.Header>
                 
-                </Card.Link>
+                </Card>
               </Card.Body>
             </Card>
             

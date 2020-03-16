@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import service from '../../services/service';
-import { Container, Card, ListGroup, ListGroupItem,
-    Button, ButtonGroup, ButtonToolbar, Form } from 'react-bootstrap';
+import { Container, Card, ListGroup, Button, Form } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
 class Account extends Component {
@@ -105,6 +104,7 @@ class Account extends Component {
                 <ListGroup.Item className="settings-links"><Link to="/profile"><Button className="settings-button" >Profile</Button></Link></ListGroup.Item>
                 <ListGroup.Item className="settings-links"><Link to="/myrecipes"><Button className="settings-button" >MyRecipes</Button></Link></ListGroup.Item>
                 <ListGroup.Item className="settings-links"><Link to="/myactivity"><Button className="settings-button" >Activity</Button></Link></ListGroup.Item>
+                <ListGroup.Item className="settings-links"><Link to="/log-out"><Button className="settings-button" >Logout</Button></Link></ListGroup.Item>
             </ListGroup>
             </Card.Header>
         </Card>
@@ -123,7 +123,7 @@ class Account extends Component {
                 
                 <Form.Group>
                     <Form.Control type="hidden" name="MAX_FILE_SIZE" value="4194304" />
-                    <Form.Control name="avatar" type="text" placeholder="Upload Avatar Image" type="file" 
+                    <Form.Control name="avatar" placeholder="Upload Avatar Image" type="file" 
                     onChange={(e) => this.handleFileUpload(e)}/>
                     <small id="emailHelp" className="form-text text-muted">Avatar Upload. 4MB Maximum.</small>
 

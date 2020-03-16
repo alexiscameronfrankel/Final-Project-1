@@ -4,10 +4,9 @@
 //onClick of myrecipes > axios route needed for myrecipes in profile model array
 
 import React, { Component } from 'react';
-import { Container, Card, ListGroup, ListGroupItem,
-    Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import { Container, Card, ListGroup,Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 
 class Profile extends Component {
     
@@ -62,7 +61,7 @@ class Profile extends Component {
             <Card.Header>
             <div className="prof-avatar">
             <Card.Header>
-                <img className="my-avatar" src="https://www.w3schools.com/w3images/avatar2.png"></img>
+                <Card.Img className="my-avatar" src="https://www.w3schools.com/w3images/avatar2.png"></Card.Img>
                 </Card.Header>
                 <Card.Header className="my-avatar-header">
                 <ListGroup>

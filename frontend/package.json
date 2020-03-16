@@ -11,6 +11,7 @@
     "react": "^16.13.0",
     "react-bootstrap": "^1.0.0-beta.17",
     "react-burger-menu": "^2.6.13",
+    "react-coverflow": "^0.2.20",
     "react-dom": "^16.13.0",
     "react-favicon": "0.0.17",
     "react-hamburger-menu": "^1.1.1",

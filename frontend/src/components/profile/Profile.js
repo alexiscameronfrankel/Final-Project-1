@@ -4,12 +4,24 @@
 //onClick of myrecipes > axios route needed for myrecipes in profile model array
 
 import React, { Component } from 'react';
-import { Container, Card, ListGroup,Button} from 'react-bootstrap';
+import actions from '../../services/index'
+import { Container, Card, ListGroup, ListGroupItem,
+    Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 // import axios from 'axios';
 
 class Profile extends Component {
     
+    findMyRecipes(){
+        console.log(this.props)
+        actions.findProfileRecipes(this.props.user._id).then(myRecipes => 
+            console.log('myRecipesReceived', myRecipes)
+        ).catch(({ response }) => 
+            
+                console.log('error loading',response)
+            
+        )
+    }
     // if(!props.user.email){ 
     //     props.history.push('/log-in') 
 
@@ -51,7 +63,7 @@ class Profile extends Component {
             <Card.Header>
             <ListGroup variant="flush">
                 <ListGroup.Item className="settings-links"><Link to="/account"><Button className="settings-button" ><i class="fas fa-user-cog"></i> Account</Button></Link></ListGroup.Item>
-                <ListGroup.Item className="settings-links"><Link to="/myrecipes"><Button className="settings-button" ><i class="fas fa-list"></i> MyRecipes</Button></Link></ListGroup.Item>
+                <ListGroup.Item className="settings-links"><Link to="/myrecipes"><Button onClick={this.findMyRecipes()} className="settings-button" ><i class="fas fa-list"></i> MyRecipes</Button></Link></ListGroup.Item>
                 <ListGroup.Item className="settings-links"><Link to="/myactivity"><Button className="settings-button" ><i class="fas fa-chart-line"></i> Activity</Button></Link></ListGroup.Item>
                 <ListGroup.Item className="settings-links"><Link to="/log-out"><Button className="settings-button" ><i class="fas fa-sign-out-alt"></i> Logout</Button></Link></ListGroup.Item>
             </ListGroup>

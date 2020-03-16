@@ -1,6 +1,11 @@
 //Can attempt to extract info from object received and if saved send info to create recipe
 
 import React, { Component } from 'react';
+import actions from '../../services/index'
+import { Container, Card, ListGroup, ListGroupItem,
+Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import Footer from '../Footer';
+// import Searchbar from './Searchbar';
 import Axios from 'axios'
 import { Container, Card, ListGroup, ListGroupItem,
 Button, ButtonGroup, } from 'react-bootstrap';
@@ -13,37 +18,117 @@ Button, ButtonGroup, } from 'react-bootstrap';
 
 class Random extends Component {
   state={
-    info:[],
-    title: String,
-    category: String,
-    instructions: String,
-    thumbnail: String,
-    youtube: String,
-    source: String,
-    ingredients: [],
-    measure: []
+    info: {}
   }
   async componentDidMount() {
     Axios.get('https://www.themealdb.com/api/json/v1/1/random.php').then(res=>{
       // console.log('frenchy working api',res)
       let x= res.data.meals[0]
-      let mealsArray=[...this.state.info]
-      mealsArray.push(x)
-      this.setState({
-        info: mealsArray,
-        title: mealsArray[0].strMeal,
-        category: mealsArray[0].strCategory,
-        area: mealsArray[0].strArea,
-        instructions: mealsArray[0].strInstructions,
-        thumbnail: mealsArray[0].strMealThumb,
-        youtube: mealsArray[0].strYoutube,
-        source: mealsArray[0].strSource,
-        ingredients: mealsArray[0].strIngredient1,
-        measure: mealsArray[0].strMeasure1,
-        tags: mealsArray[0].strTags
-      })
+      console.log('x',x)
+      
+      let mDish='Other'
+      if (x.strCategory=== 'Breakfast'){ mDish='Breakfast'};
+      if (x.strCategory=== 'Dessert') { mDish='Dessert'};
+      if (x.strCategory=== 'Pork') { mDish='Dish'};
+      if (x.strCategory=== 'Chicken') { mDish='Dish'};
+      if (x.strCategory=== 'Beef') { mDish='Dish'};
+      if (x.strCategory=== 'Seafood') { mDish='Dish'};
+  
+      let mCategory='Other'
+      if (x.strCategory=== 'Vegetarian') { mCategory='Vegetarian'};
+      if (x.strCategory=== 'Vegan') { mCategory='Vegan'};
+      if (x.strCategory=== 'Pork') { mCategory='Pork'};
+      if (x.strCategory=== 'Chicken') { mCategory='Chicken'};
+      if (x.strCategory=== 'Beef') { mCategory='Beef'};
+      if (x.strCategory=== 'Seafood') { mCategory='Seafood'};
+  
+      let mIngredients = [
+        x.strIngredient1,
+        x.strIngredient2,
+        x.strIngredient3,
+        x.strIngredient4,
+        x.strIngredient5,
+        x.strIngredient6,
+        x.strIngredient7,
+        x.strIngredient8,
+        x.strIngredient9,
+        x.strIngredient10,
+        x.strIngredient11,
+        x.strIngredient12,
+        x.strIngredient13,
+        x.strIngredient14,
+        x.strIngredient15,
+        x.strIngredient16,
+        x.strIngredient17,
+        x.strIngredient18,
+        x.strIngredient19,
+        x.strIngredient20
+      ]
+      let mMeasurements=[
+        x.strMeasure1,
+        x.strMeasure2,
+        x.strMeasure3,
+        x.strMeasure4,
+        x.strMeasure5,
+        x.strMeasure6,
+        x.strMeasure7,
+        x.strMeasure8,
+        x.strMeasure9,
+        x.strMeasure10,
+        x.strMeasure11,
+        x.strMeasure12,
+        x.strMeasure13,
+        x.strMeasure14,
+        x.strMeasure15,
+        x.strMeasure16,
+        x.strMeasure17,
+        x.strMeasure18,
+        x.strMeasure19,
+        x.strMeasure20
+      ]
+      
+      let mealTags
+      if (x.strTags===null){
+        mealTags=[]
+      }else if (x.strTags.includes(",")){
+        mealTags=x.strTags.split(",")
+      }else{
+        mealTags=x.strTags
+      }
+
+
+      let newMeal={
+      title: x.strMeal,
+      category: mCategory,
+      dishtype: mDish,
+      area: "",
+      cuisine: x.strArea,
+      instructions: x.strInstructions,
+      image: x.strMealThumb,
+      tags: mealTags,
+      video: x.strYoutube,
+      ingredients: mIngredients,
+      measurements: mMeasurements,
+      source: x.strSource,
+      profileID: "",
+      created: "",
+      comments: []
+      }
+      
+     
+      let createRecipe = actions.newRecipe(newMeal)
+      this.setState({info: newMeal})
+      console.log('finished creating newMeal',createRecipe )
+      
     })
+
   }
+
+  // handleSave=()=>{
+  //     let newRecipe = actions.newRecipe(this.state )
+  //       this.setState({info: newRecipe})
+  //       console.log('finished creating newMeal',newRecipe )
+  // }
   
   render() {
     console.log(this.state.info)
@@ -64,11 +149,11 @@ class Random extends Component {
           
           <Card id="main-card" style={{ width: '100%' }}>
           <Card.Header>
-          <Card.Title className="text-center main-card-title" >{this.state.title}</Card.Title>
+          <Card.Title className="text-center main-card-title" >{this.state.info.title}</Card.Title>
           </Card.Header>
-          <Card.Subtitle className="mb-2 text-muted main-card-subtitle text-center">Dish Type: {this.state.category}  | Area: {this.state.area}   |   Tags: {this.state.tags}</Card.Subtitle>
+          <Card.Subtitle className="mb-2 text-muted main-card-subtitle text-center">Dish Type: {this.state.info.category}  | Area: {this.state.info.area}   |   Tags: {this.state.info.tags}</Card.Subtitle>
           <Card.Header>
-              <Card.Img className= "main-card-image" variant="top" src={this.state.thumbnail} />
+              <Card.Img className= "main-card-image" variant="top" src={this.state.info.image} />
           </Card.Header>
               <Card.Body>
                 <Card.Header>
@@ -77,7 +162,7 @@ class Random extends Component {
                 <ListGroupItem>
                 </ListGroupItem>
                 <ListGroupItem className="main-card-instructions">
-                {this.state.instructions}
+                {this.state.info.instructions}
                 </ListGroupItem>
                 </ListGroup>
                 </Card.Text>

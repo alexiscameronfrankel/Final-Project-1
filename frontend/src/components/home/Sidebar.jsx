@@ -20,36 +20,34 @@ console.log(props)
     
     <Menu {...props} >
 
-      <a className="menu-item" href="/">Home</a>
+      <a className="menu-item" href="/"><i class="fas fa-home"></i> Home</a>
 
       
         {props.emailID === null ?
              
         <Fragment>
-            <a className="bm-item  menu-item" href="/sign-up">Sign Up</a>
+            <a className="bm-item  menu-item" href="/sign-up"><i class="fas fa-user-plus"></i> Sign Up</a>
             <br></br>
-            <a className="bm-item menu-item" href="/log-in">Log In</a>
+            <a className="bm-item menu-item" href="/log-in"><i class="fas fa-sign-in-alt"></i> Log In</a>
         </Fragment>
         
         :
        
         <Fragment>
-            <a className="bm-item menu-item" href="/profile">My Profile</a>
+            <a className="bm-item menu-item" href="/profile"><i class="fas fa-user-circle"></i> My Profile</a>
             <br></br>
-            <a className="bm-item menu-item" href="/log-out" onClick={props.actionLogout}>Log Out</a>
+            <a className="bm-item menu-item" href="/log-out" onClick={props.actionLogout}><i class="fas fa-sign-out-alt"></i> Log Out</a>
         </Fragment>
       
         }
       <a className="menu-item" href="/random">
-        Random
+      <i class="fas fa-random"></i> Random
       </a>
 
-      <a className="menu-item" href="/new-recipe">
-        New Recipe
+      <a className="menu-item" href="/new-recipe"> <i class="fas fa-plus-square"></i> New Recipe
       </a>
       
-      <a className="menu-item" href="/allrecipes">
-        All Recipes
+      <a className="menu-item" href="/allrecipes"><i class="fas fa-globe-americas"></i> All Recipes
       </a>
       
       <br></br>

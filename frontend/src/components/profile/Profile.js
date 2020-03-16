@@ -50,9 +50,10 @@ class Profile extends Component {
             <Card.Header>Settings</Card.Header>
             <Card.Header>
             <ListGroup variant="flush">
-                <ListGroup.Item className="settings-links"><Link to="/account"><Button className="settings-button" >Account</Button></Link></ListGroup.Item>
-                <ListGroup.Item className="settings-links"><Link to="/myrecipes"><Button className="settings-button" >MyRecipes</Button></Link></ListGroup.Item>
-                <ListGroup.Item className="settings-links"><Link to="/myactivity"><Button className="settings-button" >Activity</Button></Link></ListGroup.Item>
+                <ListGroup.Item className="settings-links"><Link to="/account"><Button className="settings-button" ><i class="fas fa-user-cog"></i> Account</Button></Link></ListGroup.Item>
+                <ListGroup.Item className="settings-links"><Link to="/myrecipes"><Button className="settings-button" ><i class="fas fa-list"></i> MyRecipes</Button></Link></ListGroup.Item>
+                <ListGroup.Item className="settings-links"><Link to="/myactivity"><Button className="settings-button" ><i class="fas fa-chart-line"></i> Activity</Button></Link></ListGroup.Item>
+                <ListGroup.Item className="settings-links"><Link to="/log-out"><Button className="settings-button" ><i class="fas fa-sign-out-alt"></i> Logout</Button></Link></ListGroup.Item>
             </ListGroup>
             </Card.Header>
         </Card>
@@ -76,7 +77,7 @@ class Profile extends Component {
                 </Card.Header>
             </div>
             </Card.Header>
-            <Button type="submit" size="lg" className="btn btn-primary account-button" block>Edit Profile</Button>
+            <Button type="submit" size="lg" className="btn btn-primary account-button" block><i class="fas fa-user-cog"></i> Account </Button>
             </Card>
             
         

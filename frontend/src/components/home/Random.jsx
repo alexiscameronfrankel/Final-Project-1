@@ -85,7 +85,7 @@ class Random extends Component {
               </Card.Body>
               <Card.Header>
               <ListGroup className="list-group-flush text-center">
-                <ListGroupItem>Prep Time - 10 Minutes |
+                <ListGroupItem className="main-card-subtitle prep-time">Prep Time - 10 Minutes |
                 Cook Time - 20 Minutes |
                 Ready In - 30 Mintues</ListGroupItem>
               </ListGroup>
@@ -93,12 +93,13 @@ class Random extends Component {
               <Card.Body>
                 <Card>
                 <Card.Header>
-                  <ButtonGroup aria-label="Basic example">
-                    <Button variant="secondary" name="save-btn"><i class="far fa-heart"></i></Button>
-                    <Button variant="secondary" name="like-btn"><i class="far fa-thumbs-up"></i></Button>
-                    <Button variant="secondary" name="dislike-btn"><i class="far fa-thumbs-down"></i></Button>
-                    <Button variant="secondary" name="source-btn"><a  href={this.state.source} className="main-card-source"><i  class="fas fa-external-link-alt"></i></a></Button>
-                    <Button variant="secondary" name="edit-recipe">Edit Recipe</Button>
+                  <ButtonGroup className="btn-group" aria-label="Basic example">
+                    <Button variant="secondary" name="save-btn" size="lg"><i className="far fa-heart"></i></Button>
+                    <Button variant="secondary" name="like-btn" size="lg"><i className="far fa-thumbs-up"></i></Button>
+                    <Button variant="secondary" name="dislike-btn" size="lg"><i className="far fa-thumbs-down"></i></Button>
+                    <Button variant="secondary" name="youtube-btn" size="lg"><a  href={this.state.youtube} className="main-card-source"><i class="fab fa-youtube-square"></i></a></Button>
+                    <Button variant="secondary" name="source-btn" size="lg"><a  href={this.state.source} className="main-card-source"><i  class="fas fa-external-link-alt"></i></a></Button>
+                    <Button variant="secondary" name="edit-recipe" size="lg">Edit Recipe</Button>
                   </ButtonGroup>
                   </Card.Header>
                 

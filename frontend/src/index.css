@@ -194,7 +194,7 @@ li {
 
 #App {
   font-family: 'Roboto Slab', serif;
-  font-family: 'Fjalla One', sans-serif ;
+  /* font-family: 'Fjalla One', sans-serif ; */
 
   /* Give app full page to work with */
   height: 100vh;
@@ -571,6 +571,17 @@ Adding Random Page Styles */
   text-decoration: none !important;
   color: white;
 }
+
+.prep-time {
+  padding: 0px 12px;
+  padding-left: 12px;
+}
+
+.btn-group {
+  width: 50%;
+}
+
+
 
 
 

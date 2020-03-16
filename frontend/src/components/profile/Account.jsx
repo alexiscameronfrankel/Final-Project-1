@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import service from '../../services/service';
 import { Container, Card, ListGroup, ListGroupItem,
     Button, ButtonGroup, ButtonToolbar, Form } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
@@ -20,6 +21,48 @@ class Account extends Component {
         created: "",
         imageUrl: ""
       }
+
+      putCategoryInState = (e) => {
+        console.log('putCategoryInState is being called')
+        let categoryArr = this.state.category;
+        categoryArr.push(e.target.value)
+        console.log(categoryArr)
+        this.setState({
+            
+            category:categoryArr
+        
+        }) 
+    }
+    handleFileUpload = e => {
+        console.log("The file to be uploaded is: ", e.target.files[0]);
+
+        const uploadData = new FormData();
+        // imageUrl => this name has to be the same as in the model since we pass
+        // req.body to .create() method when creating a new thing in '/api/things/create' POST route
+        uploadData.append("imageUrl", e.target.files[0]);
+        
+        service.handleUpload(uploadData)
+        .then(response => {
+            // console.log('response is: ', response);
+            // after the console.log we can see that response carries 'secure_url' which we can use to update the state 
+            this.setState({ imageUrl: response.secure_url });
+        })
+        .catch(err => {
+            console.log("Error while uploading the file: ", err);
+        });
+    }
+    handleSubmit = e => {
+        e.preventDefault();
+        
+        service.saveNewThing(this.state)
+        .then(res => {
+            console.log('added: ', res);
+            // here you would redirect to some other page 
+        })
+        .catch(err => {
+            console.log("Error while adding the thing: ", err);
+        });
+    }  
     
     // if(!props.user.email){ 
     //     props.history.push('/log-in') 
@@ -80,7 +123,8 @@ class Account extends Component {
                 
                 <Form.Group>
                     <Form.Control type="hidden" name="MAX_FILE_SIZE" value="4194304" />
-                    <Form.Control type="file" name="avatar" />
+                    <Form.Control name="avatar" type="text" placeholder="Upload Avatar Image" type="file" 
+                    onChange={(e) => this.handleFileUpload(e)}/>
                     <small id="emailHelp" className="form-text text-muted">Avatar Upload. 4MB Maximum.</small>
 
                 </Form.Group>
@@ -88,9 +132,9 @@ class Account extends Component {
                 <Form.Label>Please Select Any Dietary Restrictions Below</Form.Label>
                     <Form.Check type="checkbox" label="Vegetarian" value="Vegetarian" name="category" onChange={this.putCategoryInState}/>
                     <Form.Check type="checkbox" label="Vegan" value="Vegan" onChange={this.putCategoryInState}/>
-                    <Form.Check type="checkbox" label="Gluten Free" value="Pork" onChange={this.putCategoryInState}/>
-                    <Form.Check type="checkbox" label="Diary Free" value="Chicken" onChange={this.putCategoryInState}/>
-                    <Form.Check type="checkbox" label="Preganancy Friendly" value="Beef" onChange={this.putCategoryInState}/>
+                    <Form.Check type="checkbox" label="Gluten Free" value="Gluten Free" onChange={this.putCategoryInState}/>
+                    <Form.Check type="checkbox" label="Diary Free" value="Diary Free" onChange={this.putCategoryInState}/>
+                    <Form.Check type="checkbox" label="Preganancy Friendly" value="Pregnancy Friendly" onChange={this.putCategoryInState}/>
                     
                 </Form.Group>
                 

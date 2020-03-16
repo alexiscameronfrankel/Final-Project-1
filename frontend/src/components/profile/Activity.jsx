@@ -4,11 +4,12 @@ import { Container, Card, ListGroup, ListGroupItem,
 import {Link} from 'react-router-dom';
 import InfiniteCarousel from 'react-leaf-carousel';
 
-const Activity = (props) => {
+class Activity extends Component {
     
     // if(!props.user.email){ 
     //     props.history.push('/log-in') 
-    // }   
+    // }
+    render(...props){   
     return (
         <div>
             {/* Profile
@@ -30,7 +31,7 @@ const Activity = (props) => {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title">Account Activity | CoolGuy84{props.username}</h1>
+                <h1 className="prof-title">Account Activity | CoolGuy84{this.props.email}</h1>
                 
             </Card.Header> 
           </Card.Title>
@@ -165,6 +166,7 @@ const Activity = (props) => {
         </Container>
         </div>
     );
+}
 }
 
 export default Activity;

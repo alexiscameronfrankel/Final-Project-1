@@ -39,7 +39,7 @@ class Profile extends Component {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title"> CoolGuy84 | Dashboard {this.props.user.email}</h1>
+                <h1 className="prof-title"> {this.props.user.email} | Dashboard </h1>
             </Card.Header> 
           </Card.Title>
           <Card.Header>

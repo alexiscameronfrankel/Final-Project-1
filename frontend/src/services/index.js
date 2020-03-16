@@ -51,9 +51,17 @@ const actions = {
     return await service.post('/recipe/update', recipe)
   },
   //find a recipe and show details
-  findRecipe: async (recipe) => {
+  findRecipeID: async (recipe) => {
     return await service.get(`/recipe/recipe/${recipe}`)
   },
+  // //find a recipe and show details
+  // findRecipeName: async (recipe) => {
+  //   console.log(recipe)
+  //   await service.get('/recipe/findRecipe',recipe)
+    
+  //   return await service.post('/recipe/new',recipe)
+
+  // },
   //delete a recipe
   deleteRecipe: async (recipe) => {
     return await service.post('/recipe/delete', recipe)
@@ -105,6 +113,11 @@ const actions = {
   updateProfile: async (profile) => {
     return await service.post('/profile/update', profile)
   },
+  //find a comment and show details
+  findProfileRecipes: async (userID) => {
+    return await service.get('/profile/myRecipes', userID)
+  },
+  
 };
 
 export default actions;

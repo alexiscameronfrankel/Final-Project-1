@@ -1,34 +1,75 @@
-import React, { Component } from 'react';
 import actions from '../../services/index';
+import React, { Fragment, Component } from 'react';
+import { Container, Card, } from 'react-bootstrap';
+
+
+
+var Coverflow = require('react-coverflow');
+
 
 class AllRecipes extends Component {
     //still looking into more ideas
     //need state sent to be sent
    state = {
-      allrecipes:[]
+      allrecipes:[],
+      title: String
    }
 
     async componentDidMount() {
         let recipes = await actions.allRecipes()
-        this.setState({allrecipes: recipes.data})
+        this.setState({
+            allrecipes: recipes.data,
+            title: recipes.data[0].title
+        })
         console.log(recipes)
     }
+
+  
 
 
 
     render() {
         
         return (
-            <div>
-                Allrecipes
+            <Container className="home-recipe">
+            <Card>
+                <Card.Title>
+                <Card.Header>Allrecipes</Card.Header>
+                </Card.Title>
                 <div>
-                <ul>
+                <Coverflow
+                    width={960}
+                    height={480}
+                    displayQuantityOfSide={2}
+                    navigation={false}
+                    enableHeading={false}
+                >
+                    
                     {this.state.allrecipes.map(eachRecipe => {
-                        return <li>{eachRecipe.title}</li>
-                    })}
-                </ul>
+                    return (<Fragment>
+                        <Card key={eachRecipe._id}
+                    // {/* // onClick={() => fn()}
+                    // // onKeyDown={() => fn()} */}
+                    role="menuitem"
+                    tabIndex="0"
+                    >
+                        <Card.Title className="text-center">{eachRecipe.title}</Card.Title>
+                        <Card.Img
+                            src={eachRecipe.image}
+                            alt={eachRecipe.title}
+                            style={{ display: 'block', width: '100%' }}
+                        />
+                        </Card>
+                        </Fragment>)
+                        })}
+                        
+                    
+                    
+                </Coverflow>
+                
                 </div>
-            </div>
+            </Card>
+            </Container>
         );
     }
 }

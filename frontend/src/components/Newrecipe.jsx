@@ -70,7 +70,7 @@ class Newrecipe extends Component {
             }
         else {
            categoryArr =  categoryArr.filter(cat => {
-               return cat != e.target.value
+               return cat !== e.target.value
                
            })
            this.setState({

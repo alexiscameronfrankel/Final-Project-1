@@ -63,26 +63,43 @@ router.post('/delete',isAuth, (req, res, next) => {
 
 // 5) Get all recipes saved by user from database
 router.get('/myRecipes',isAuth, (req, res, next) => {
-    let myRecipes=req.body 
+    let myProfileUserID=req.body
     let recipesFound=[]
-    myRecipes.forEach(recipeID => {
-    Recipe.find(recipeID)
-    .then(recipeFoundInDb => {
-        recipesFound.push(recipeFoundInDb)
+    Profile.find({UseerID:myProfileUserID})
+    .then(profile => {
+        let profileRecipes=profile.recipes
+        res.send(profileRecipes)
+        // profileRecipes.forEach(recipeID => {
+        // Recipe.find(recipeID)
+        // .then(recipeFoundInDb => {
+        //     recipesFound.push(recipeFoundInDb)
+        // })
+        // });
+        // res.send(recipesFound)
+        // .catch(err => console.log(err))
     })
-    });
-    res.send(recipesFound)
-    .catch(err => console.log(err))
+    .catch(error=>console.log(error))
 //   res.status(200).json({ msg: 'Working' });
 });
 
 // 6) add recipes to profile. State passed needs to include recipesArray associated with user and recipeID
 router.get('/myRecipes/addRecipe',isAuth, (req, res, next) => {
-    let recipeAdded = [...req.body.recipesArray]
-    recipeAdded.push(req.body.saveRecipe)
-    Profile.update({UserID:`${req.user._id}`},{recipes: `${recipeAdded}` })
-    .then(user=> res.send('Successfully added',user))
+    // let recipeAdded = [...req.body.recipesArray]
+    // recipeAdded.push(req.body.saveRecipe)
+    let profile=req.body
+    let userFound=false
+    console.log('req.user.id in myrecipes', profile.UserID)
+    Profile.find({UserID: profile.UserID})
+    .then(user=> {
+        userFound=true
+        console.log('user found',user)
+        res.send('Successfully found',user)})
     .catch(console.log("An error has occurred."))
+    // if (userFound){
+     profile.recipes
+    // Profile.update({UserID:`${req.user._id}`},{recipes: `${recipeAdded}` })
+    // .then(user=> res.send('Successfully added',user))
+    // .catch(console.log("An error has occurred."))}
 });
 
 // 7) delete recipes in profile. State passed needs to include recipesArray associated with user and recipeID

@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import service from '../services/service';
 import ImageUpload from './ImageUpload.js'
-import { Button, Navbar, NavDropdown, Form, FormControl, Container, Col } from 'react-bootstrap'
+import { Button, Form, Col } from 'react-bootstrap'
 
 //below gets current milliseconds elapsed and then converts it to actual date...date is value in created property//
 
@@ -359,7 +359,7 @@ handleSubmit = e => {
 
                         <Form.Group as={Col} controlId="Image">
                         <Form.Label>Image</Form.Label>
-                        <Form.Control name="image" type="text" placeholder="Add your image URL" type="file" 
+                        <Form.Control name="image" placeholder="Add your image URL" type="file" 
                     onChange={(e) => this.handleFileUpload(e)}/>
                           {/* <Button variant="secondary"  onSubmit={e => this.handleSubmit(e)} size="sm" type="submit">
                            ADD MEASUREMENT

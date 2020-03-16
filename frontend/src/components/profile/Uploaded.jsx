@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Card, ListGroup, ListGroupItem,
-    Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import { Container, Card, ListGroup, Button, ButtonGroup,  } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import InfiniteCarousel from 'react-leaf-carousel';
 

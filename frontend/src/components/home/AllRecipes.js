@@ -2,8 +2,6 @@ import actions from '../../services/index';
 import React, { Component } from 'react';
 import { Container, Card, ListGroup, Button, } from 'react-bootstrap';
 var ReactDOM = require('react-dom');
-
-
 var Coverflow = require('react-coverflow');
 
 

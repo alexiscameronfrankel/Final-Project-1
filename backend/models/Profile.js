@@ -1,3 +1,5 @@
+//Profile Model which is template for Profiles created in mongoDB database
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -7,7 +9,7 @@ const ProfileSchema = new Schema({
     firstName: { type: String}, 
     lastName: { type: String},
     image: { type: String, default:'/images/defaultAvatar.png'},
-    dietPreference: {type: String, enum: ['Vegetarian', 'Vegan', 'Gluten Free', 'Dairy Free','Pregnancy Friendly']},
+    dietPreference: {type: String, enum: ['Vegetarian', 'Vegan', 'Gluten Free', 'Dairy Free','Pregnancy Friendly','None']},
     allergies: {type: Array},//or String
     recipes: {type: Array},
     activity: {type: Array}, //will include past reviews on recipes

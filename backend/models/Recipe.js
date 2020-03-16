@@ -1,3 +1,5 @@
+//Recipe Model which is template for Recipes created in mongoDB database
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
@@ -6,7 +8,7 @@ const recipeSchema = new Schema({
     title: { type: String, required: true},
     category: { type: String, enum: ['Vegetarian', 'Vegan','Pork','Chicken','Beef','Seafood','Other'], required: true },
     dishtype: { type: String, enum: ['Breakfast', 'Dish', 'Snack', 'Drink', 'Dessert', 'Other']},
-    area: {type:String},
+    area: {type: String},
     cuisine: { type: String},
     instructions: {type: String, required: true},
     image: {type: String, default:' https://images.media-allrecipes.com/images/75131.jpg'},

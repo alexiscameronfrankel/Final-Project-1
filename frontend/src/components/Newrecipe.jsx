@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
-
+import React, { Component, Fragment } from 'react';
+import service from '../services/service';
+import ImageUpload from './ImageUpload.js'
 import { Button, Navbar, NavDropdown, Form, FormControl, Container, Col } from 'react-bootstrap'
 
 //below gets current milliseconds elapsed and then converts it to actual date...date is value in created property//
@@ -16,17 +17,16 @@ class Newrecipe extends Component {
         category: [],
         dishtype:"Breakfast",
         cuisine:"",
-        ingredient1:"",
         ingredients: [""],
-        measurement1: "",
         measurements: [""],
-        instructions: "",
+        instructions: [""],
         image: "", 
         video: "",
         tags: [],
         comments: [], 
         ProfileID: "",
-        created: date
+        created: date,
+        imageUrl: ""
       }
 
     // handleChange = e => {
@@ -76,6 +76,8 @@ class Newrecipe extends Component {
         }) 
     }
 
+//I THINK YOU CAN DELETE ALL THIS COMMENTED STUFF.....GO THROUGH IT
+
     // addIngredientColumn = (e) => {
     //     <Form.Group controlId="Measurments">
     //     <Form.Label>Measurments</Form.Label>
@@ -83,20 +85,20 @@ class Newrecipe extends Component {
     //     </Form.Group>
     // }
 
-    addIngredient = (e) => {
-        this.setState({
+    // addIngredient = (e) => {
+    //     this.setState({
             
-            dishtype: e.target.value
+    //         dishtype: e.target.value
         
-        }) 
-    }
+    //     }) 
+    // }
 
     // putCuisineInState = (e) => {
     //     console.log('putCuisineInState is being called')
     //     console.log(this.state.title)
     //     this.setState({
             
-    //         title: e.target.value
+    //         cuisine: e.target.value
         
     //     }) 
     // }
@@ -104,7 +106,7 @@ class Newrecipe extends Component {
   
 
 
-    // 'Breakfast', 'Dish', 'Snack', 'Drink', 'Dessert', 'Other'
+///HANDLE TYPING FUNCTIONALITY 
 
     handleIngredientsTyping = (e) => {
         console.log(e.target.name, e.target.value);
@@ -120,14 +122,26 @@ class Newrecipe extends Component {
         let measurementsCopy = [...this.state.measurements]
         measurementsCopy[e.target.name] = e.target.value
         this.setState({
-            ingredients: measurementsCopy,
+            measurements: measurementsCopy,
         })
      }
+
+     handleInstructionTyping = (e) => {
+        console.log(e.target.name, e.target.value);
+        let instructionsCopy = [...this.state.instructions]
+        instructionsCopy[e.target.name] = e.target.value
+        this.setState({
+            instructions: instructionsCopy,
+        })
+     }
+
+///ADDING ROW FUNCTIONALITY 
 
      addIngredientRow = () => {
          console.log("inside add this ingredient")
          let ingredientsCopy = [...this.state.ingredients]
          ingredientsCopy.push("")
+         console.log(ingredientsCopy)
          this.setState({
              ingredients: ingredientsCopy
          })
@@ -142,16 +156,119 @@ class Newrecipe extends Component {
         })
     }
 
+    addInstructionsRow = () => {
+        console.log("inside add this instructions")
+        let instructionsCopy = [...this.state.instructions]
+        instructionsCopy.push("")
+        console.log(instructionsCopy)
+        this.setState({
+            instructions: instructionsCopy
+        })
+    }
 
+// DELETING ROW FUNCTIONALITY 
+
+    deleteInstruction = () => {
+        console.log("inside delete instruction")
+        let instructionsCopy = [...this.state.instructions]
+        instructionsCopy.pop()
+        console.log(instructionsCopy)
+        this.setState({
+            instructions: instructionsCopy
+        })
+    }
+
+    //not really sure why the method below works
+
+    deleteIngredient = (e,index) => {
+        e.preventDefault()
+        console.log("inside delete ingredient")
+        let ingredientsCopy = [...this.state.ingredients]
+        ingredientsCopy.splice(index, 1);
+        console.log(ingredientsCopy)
+        this.setState({
+            ingredients: ingredientsCopy
+        })
+    }
+
+    deleteMeasurement = (e,index) => {
+        e.preventDefault()
+        console.log("inside delete measurement")
+        let measurementsCopy = [...this.state.measurements]
+        measurementsCopy.splice(index, 1);
+        console.log(measurementsCopy)
+        this.setState({
+            measurements: measurementsCopy
+        })
+    }
+
+//IMAGE AND VIDEO UPLOAD FUNCTIONALITY 
+
+    handleChange = e => {  
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+    }
+
+    // this method handles just the file upload
+    handleFileUpload = e => {
+        console.log("The file to be uploaded is: ", e.target.files[0]);
+
+        const uploadData = new FormData();
+        // imageUrl => this name has to be the same as in the model since we pass
+        // req.body to .create() method when creating a new thing in '/api/things/create' POST route
+        uploadData.append("imageUrl", e.target.files[0]);
+        
+        service.handleUpload(uploadData)
+        .then(response => {
+            // console.log('response is: ', response);
+            // after the console.log we can see that response carries 'secure_url' which we can use to update the state 
+            this.setState({ imageUrl: response.secure_url });
+        })
+        .catch(err => {
+            console.log("Error while uploading the file: ", err);
+        });
+    }
+
+// this method submits the form
+handleSubmit = e => {
+    e.preventDefault();
+    
+    service.saveNewThing(this.state)
+    .then(res => {
+        console.log('added: ', res);
+        // here you would redirect to some other page 
+    })
+    .catch(err => {
+        console.log("Error while adding the thing: ", err);
+    });
+}  
+    
     render() {
         return (
             <div>
                 <Form>
                     <Form.Row>
                         <Form.Group as={Col} controlId="Title">
-                        <Form.Label>Title</Form.Label>
+                        <Form.Label>Recipe Name</Form.Label>
                         <Form.Control name="title" type="text" placeholder="Enter title" onChange={this.handlePersonTyping} />
                         </Form.Group>
+                        
+                        <Form.Group controlId="formBasicCheckbox">
+                        <Form.Label>Category</Form.Label>
+                        <Form.Check type="checkbox" label="Vegetarian" value="Vegetarian" name="category" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Vegan" value="Vegan" name="category" onChange={this.putCategoryInState}/>
+                        </Form.Group>
+
+                        <Form.Group id="categoryGridCheckbox">
+                    <Form.Label>Category</Form.Label>
+                        <Form.Check type="checkbox" label="Vegetarian" value="Vegetarian" name="category" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Vegan" value="Vegan" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Pork" value="Pork" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Chicken" value="Chicken" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Beef" value="Beef" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Seafood" value="Seafood" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Other" value="Other" onChange={this.putCategoryInState}/>
+                    </Form.Group>
                     </Form.Row>
 
                     <Form.Group controlId="Ingredients">
@@ -159,21 +276,55 @@ class Newrecipe extends Component {
                         {/* <Form.Control name="ingredient1"  type="text" placeholder="Add your ingredients" onChange={this.handlePersonTyping}/> */}
                         {this.state.ingredients.map((eachIngredient, index) => {
                             return(
-                            <Form.Control name={index} type="text" placeholder="Add your ingredients" onChange={this.handleIngredientsTyping}/>)
+                            <Fragment>
+                            <Form.Control name={index} type="text" placeholder="Add your ingredients"  value={eachIngredient} onChange={this.handleIngredientsTyping}/>
+                            <Button variant="secondary" size="sm" onClick={(e) => this.deleteIngredient(e,index)}>
+                           DELETE INGREDIENT
+                            </Button>
+                            </Fragment>)
                         })}
                         <Button variant="secondary" size="sm" onClick={this.addIngredientRow}>
                             ADD INEGREDIENT
                         </Button>
                     </Form.Group>
+
+
                     <Form.Group controlId="Measurements">
                         <Form.Label>Measurements</Form.Label>
-                        {this.state.measurements.map((eachMeasurement, index) => {
+                        {this.state.measurements.map((eachMeasurement, index) => 
+                             {
                             return(
-                            <Form.Control name={index} type="text" placeholder="Add your measurements" onChange={this.handleMeasurementTyping}/>)
+                            <Fragment>
+                            <Form.Control name={index} type="text" placeholder="Add your measurements" value={eachMeasurement} onChange={this.handleMeasurementTyping}/>
+                            <Button variant="secondary" size="sm" onClick={(e) => this.deleteMeasurement(e,index)}>
+                           DELETE MEASUREMENT
+                            </Button>
+                            </Fragment>)
+                            
                         })}
-                        <Button variant="secondary" size="sm">
+                        <Button variant="secondary" size="sm" onClick={this.addMeasurementRow}>
                            ADD MEASUREMENT
                         </Button>
+                    </Form.Group>
+
+                    <Form.Group as={Col} controlId="Instructions">
+                        <Form.Label>Instructions</Form.Label>
+                        {this.state.instructions.map((eachInstruction, index) => {
+                            return(
+                            <Fragment>
+                            <Form.Control name={index} type="text" placeholder="Add your instructions" onChange={this.handleInstructionTyping}
+                            />
+                             <Button variant="secondary" size="sm" onClick={this.deleteInstruction}>
+                           DELETE INSTRUCTION
+                    </Button>
+                            </Fragment>)
+                        })}
+                    <Button variant="secondary" size="sm" onClick={this.addInstructionsRow}>
+                           ADD INSTRUCTION
+                    </Button>
+                    {/* <Button variant="secondary" size="sm" onClick={this.deleteInstruction}>
+                           DELETE INSTRUCTION
+                    </Button> */}
                     </Form.Group>
 
                     <Form.Group controlId="Video">
@@ -182,10 +333,6 @@ class Newrecipe extends Component {
                     </Form.Group>
 
                     <Form.Row>
-                        <Form.Group as={Col} controlId="Instructions">
-                        <Form.Label>Instructions</Form.Label>
-                        <Form.Control name="instructions" type="text" placeholder="Add your instructions" onChange={this.handlePersonTyping}/>
-                        </Form.Group>
 
                         <Form.Group as={Col} controlId="formGridState">
                         <Form.Label>Dish Type</Form.Label>
@@ -200,23 +347,27 @@ class Newrecipe extends Component {
 
                         <Form.Group as={Col} controlId="formGridCuisine">
                         <Form.Label>Cuisine</Form.Label>
-                        <Form.Control placeholder="ex: American, French, Jamaican"/>
+                        <Form.Control name="cuisine" placeholder="ex: American, French, Jamaican" onChange={this.handlePersonTyping}/>
                         </Form.Group>
                     </Form.Row>
 
                     <Form.Row>
-                        <Form.Group as={Col} controlId="Instructions">
+                        <Form.Group as={Col} controlId="ProfileID">
                         <Form.Label>Display Name</Form.Label>
                         <Form.Control name="ProfileID" type="text" placeholder="Add your display name " onChange={this.handlePersonTyping}/>
                         </Form.Group>
 
-                        <Form.Group as={Col} controlId="Instructions">
+                        <Form.Group as={Col} controlId="Image">
                         <Form.Label>Image</Form.Label>
-                        <Form.Control name="image" type="text" placeholder="Add your image URL" onChange={this.handlePersonTyping}/>
+                        <Form.Control name="image" type="text" placeholder="Add your image URL" type="file" 
+                    onChange={(e) => this.handleFileUpload(e)}/>
+                          {/* <Button variant="secondary"  onSubmit={e => this.handleSubmit(e)} size="sm" type="submit">
+                           ADD MEASUREMENT
+                        </Button> */}
                         </Form.Group>
-                    </Form.Row>.
+                    </Form.Row>
 
-                    <Form.Group id="categoryGridCheckbox">
+                    {/* <Form.Group id="categoryGridCheckbox">
                     <Form.Label>Category</Form.Label>
                         <Form.Check type="checkbox" label="Vegetarian" value="Vegetarian" name="category" onChange={this.putCategoryInState}/>
                         <Form.Check type="checkbox" label="Vegan" value="Vegan" onChange={this.putCategoryInState}/>
@@ -225,13 +376,12 @@ class Newrecipe extends Component {
                         <Form.Check type="checkbox" label="Beef" value="Beef" onChange={this.putCategoryInState}/>
                         <Form.Check type="checkbox" label="Seafood" value="Seafood" onChange={this.putCategoryInState}/>
                         <Form.Check type="checkbox" label="Other" value="Other" onChange={this.putCategoryInState}/>
-                    </Form.Group>
-
+                    </Form.Group> */}
                     <Button variant="primary" type="submit">
                         Submit
                     </Button>
                 </Form>
-                
+                <ImageUpload/>
             </div>
         );
     }

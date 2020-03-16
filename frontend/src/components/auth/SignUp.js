@@ -15,7 +15,22 @@ class SignUp extends Component {
     handleSubmit = e => {
         e.preventDefault()
             actions.signUp(this.state).then(user=> {
-                this.props.setUser({...user.data})  
+                this.props.setUser({...user.data})
+                console.log(user.data)
+                let initialProfile={
+                    UserID: user.data._id,
+                    username: '',
+                    firstName: '', 
+                    lastName: '',
+                    image: '',
+                    dietPreference: 'None',
+                    allergies: [],
+                    recipes: [],
+                    activity: []
+                } 
+                actions.newProfile(initialProfile).then(profile=>{
+                    console.log('profile success',profile)
+                }).catch(({err}) => console.log(err))
             }).catch(({ response }) => console.error(response));
     }
     render() {

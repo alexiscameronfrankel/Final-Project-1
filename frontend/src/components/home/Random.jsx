@@ -1,17 +1,51 @@
+//Can attempt to extract info from object received and if saved send info to create recipe
+
 import React, { Component } from 'react';
 import actions from '../../services/index'
 import { Container, Card, ListGroup, ListGroupItem,
 Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import Footer from '../Footer';
 import Searchbar from './Searchbar';
+import Axios from 'axios'
 
 
 
 class Random extends Component {
-  async componentDidMount() {
-    //actions.test()
+  state={
+    info:[],
+    title: String,
+    category: String,
+    instructions: String,
+    thumbnail: String,
+    youtube: String,
+    source: String,
+    ingredients: [],
+    measure: []
   }
+  async componentDidMount() {
+    Axios.get('https://www.themealdb.com/api/json/v1/1/random.php').then(res=>{
+      // console.log('frenchy working api',res)
+      let x= res.data.meals[0]
+      let mealsArray=[...this.state.info]
+      mealsArray.push(x)
+      this.setState({
+        info: mealsArray,
+        title: mealsArray[0].strMeal,
+        category: mealsArray[0].strCategory,
+        area: mealsArray[0].strArea,
+        instructions: mealsArray[0].strInstructions,
+        thumbnail: mealsArray[0].strMealThumb,
+        youtube: mealsArray[0].strYoutube,
+        source: mealsArray[0].strSource,
+        ingredients: mealsArray[0].strIngredient1,
+        measure: mealsArray[0].strMeasure1,
+      })
+    })
+  }
+  
   render() {
+    console.log(this.state.info)
+    console.log(this.state.title)
     return (
       <div>
         <Container className="home-recipe">
@@ -28,8 +62,8 @@ class Random extends Component {
           
           <Card id="main-card" style={{ width: '100%' }}>
           
-          <Card.Title className="text-center"><h1>Old Fashioned Creamy Rice Pudding</h1> </Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">by: UserName</Card.Subtitle>
+          <Card.Title className="text-center"><h1>{this.state.title}</h1> </Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">Category: {this.state.category}  | Area: {this.state.area}</Card.Subtitle>
               <Card.Img variant="top" src="https://images.media-allrecipes.com/userphotos/720x405/7715085.jpg" />
               <Card.Body>
                 
@@ -62,8 +96,8 @@ class Random extends Component {
                     <Button variant="secondary">Change</Button>
                     <Button variant="secondary">Dislike</Button>
                     <Button variant="secondary">
-                 Modify Recipe
-                </Button>
+                    Modify Recipe
+                    </Button>
                   </ButtonGroup>
                 
                 </Card.Link>

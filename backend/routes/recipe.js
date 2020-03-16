@@ -2,14 +2,19 @@
 //Recipe imported is from Recipe model file and communicates with mongoDB compass to run methods
 //req is the state object from the frontend component that gets passed through in the axios call 
 //res is the response to the front end
+// 1) Get all recipes from database
+// 2) Get specific recipe
+// 3) Update recipe if user created it
+// 4) Delete recipe if user created it
+// 5) Create new Recipe
 
 
 const router = require('express').Router();
 const Recipe = require('../models/Recipe');
 
 
-//Get all recipes from database
-router.get('/',isAuth, (req, res, next) => {
+// 1) Get all recipes from database
+router.get('/allrecipes', (req, res, next) => {   
     Recipe.find()
     .then(allRecipesFoundInDb => {
         res.send(allRecipesFoundInDb)
@@ -20,7 +25,7 @@ router.get('/',isAuth, (req, res, next) => {
 
 
 
-//get specific recipe
+// 2) get specific recipe
 router.get('/recipe/:recipeID', (req, res, next) => {
     //Example: Recipe.findById('245245234hgryh35635')
     //Example: Recipe.findOne({name:'linguine', _id:'2452', date:'yesterday', likes:10})
@@ -33,7 +38,7 @@ router.get('/recipe/:recipeID', (req, res, next) => {
 //   res.status(200).json({ msg: 'Working' });
 });
 
-//Update recipe is user created it
+// 3) Update recipe if user created it
 router.post('/update', (req, res, next) => {
     let recipeUserID=req.body.userID
     if(recipeUserID===req.user._id){
@@ -45,6 +50,7 @@ router.post('/update', (req, res, next) => {
     }
 });
 
+// 4) delete recipe if user created it
 router.post('/delete',isAuth, (req, res, next) => {
     let recipeUserID=req.body.userID
     if(recipeUserID===req.user._id){
@@ -56,6 +62,7 @@ router.post('/delete',isAuth, (req, res, next) => {
     }
 });
 
+// 5) Create new Recipe
 router.post('/new',isAuth, (req, res, next) => {
     console.log(req.body)
     let newRecipe=req.body

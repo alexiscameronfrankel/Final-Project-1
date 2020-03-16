@@ -19,7 +19,7 @@ process.env.NODE_ENV === 'production'
 const service = axios.create({ withCredentials: true, baseURL });
 
 const actions = {
-  //auth routes for user
+  //auth routes for user actions
   //Checks to see if user logged in still
   isLoggedIn: async () => {
     return await service.get('/auth/is-logged-in')
@@ -37,10 +37,10 @@ const actions = {
     return await service.get('/auth/logout')
   },
   
-  //recipe routes
+  //recipe actions
   //get all recipes
   allRecipes: async () => {
-    return await service.get('/recipe')
+    return await service.get('/recipe/allrecipes')
   },
   //create new recipe
   newRecipe: async (recipe) => {
@@ -59,7 +59,7 @@ const actions = {
     return await service.post('/recipe/delete', recipe)
   },
   
-  //comment routes
+  //comment actions
   //get all comments for a recipe
   getRecipeComments: async (recipeID) => {
     return await service.get (`/comment/comment/${recipeID}`)
@@ -80,8 +80,30 @@ const actions = {
   findComment: async (comment) => {
     return await service.get(`/comment/${comment}`)
   },
+  //update a comment 
   updateComment: async (comment) => {
     return await service.post('/comment/update', comment)
+  },
+  //profile actions
+  //get profile for user signed in
+  getProfile: async (userID) => {
+    return await service.get (`/profile/profile/${userID}`)
+  },
+  //add new Profile
+  newProfile: async (profile) => {
+    return await service.post('/profile/new', profile)
+  },
+  //delete a Profile
+  deleteProfile: async (profile) => {
+    return await service.post('/profile/delete', profile)
+  },
+  //find a comment and show details
+  findProfileComments: async (profile) => {
+    return await service.get(`/profile/activity`, profile)
+  },
+  //update a comment 
+  updateProfile: async (profile) => {
+    return await service.post('/profile/update', profile)
   },
 };
 

@@ -84,7 +84,7 @@ const comment = require('./routes/comment');
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/recipe', recipe);
-app.use('/profileInfo', profile);
+app.use('/profile', profile);
 app.use('/comment', comment);
 app.use('/api', require('./routes/file-upload-route')); //route to image upload js
 

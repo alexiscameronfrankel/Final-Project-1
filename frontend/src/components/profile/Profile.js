@@ -1,14 +1,24 @@
+//Need to make this page a class (done)
+//add axios call for profile routes
+//button onclick method to save profile changes
+//onClick of myrecipes > axios route needed for myrecipes in profile model array
+
 import React, { Component } from 'react';
 import { Container, Card, ListGroup, ListGroupItem,
     Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 
-const Profile = (props) => {
+class Profile extends Component {
     
     // if(!props.user.email){ 
     //     props.history.push('/log-in') 
+
+    componentDidMount= async () =>{
+    }
     // }   
-    return (
+    render (...props){
+        return (
         <div>
             {/* Profile
             Welcome {props.user.email} !!!  */}
@@ -29,7 +39,7 @@ const Profile = (props) => {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title"> CoolGuy84 | Dashboard {props.username}</h1>
+                <h1 className="prof-title"> CoolGuy84 | Dashboard {this.props.user.email}</h1>
             </Card.Header> 
           </Card.Title>
           <Card.Header>
@@ -42,7 +52,7 @@ const Profile = (props) => {
             <Card.Header>
             <ListGroup variant="flush">
                 <ListGroup.Item className="settings-links"><Link to="/account"><Button className="settings-button" >Account</Button></Link></ListGroup.Item>
-                <ListGroup.Item className="settings-links"><Link to="/myrecipes"><Button className="settings-button" >Recipes</Button></Link></ListGroup.Item>
+                <ListGroup.Item className="settings-links"><Link to="/myrecipes"><Button className="settings-button" >MyRecipes</Button></Link></ListGroup.Item>
                 <ListGroup.Item className="settings-links"><Link to="/myactivity"><Button className="settings-button" >Activity</Button></Link></ListGroup.Item>
             </ListGroup>
             </Card.Header>
@@ -76,7 +86,8 @@ const Profile = (props) => {
         
         </Container>
         </div>
-    );
+        )
+}
 }
 
 export default Profile;

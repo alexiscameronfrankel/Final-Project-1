@@ -1,13 +1,31 @@
 import React, { Component } from 'react';
 import { Container, Card, ListGroup, ListGroupItem,
-    Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+    Button, ButtonGroup, ButtonToolbar, Form } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
-const Account = (props) => {
+class Account extends Component {
+    state = {
+        title: "",
+        category: [],
+        dishtype:"Breakfast",
+        cuisine:"",
+        ingredients: [""],
+        measurements: [""],
+        instructions: [""],
+        image: "", 
+        video: "",
+        tags: [],
+        comments: [], 
+        ProfileID: "",
+        created: "",
+        imageUrl: ""
+      }
     
     // if(!props.user.email){ 
     //     props.history.push('/log-in') 
     // }   
+    render (){
+
     return (
         <div>
             {/* Profile
@@ -29,7 +47,7 @@ const Account = (props) => {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title">Account Preferences | CoolGuy84{props.username}</h1>
+                <h1 className="prof-title">Account Preferences | CoolGuy84{this.props.username}</h1>
             </Card.Header> 
           </Card.Title>
           <Card.Header>
@@ -42,7 +60,7 @@ const Account = (props) => {
             <Card.Header>
             <ListGroup variant="flush">
                 <ListGroup.Item className="settings-links"><Link to="/profile"><Button className="settings-button" >Profile</Button></Link></ListGroup.Item>
-                <ListGroup.Item className="settings-links"><Link to="/myrecipes"><Button className="settings-button" >Recipes</Button></Link></ListGroup.Item>
+                <ListGroup.Item className="settings-links"><Link to="/myrecipes"><Button className="settings-button" >MyRecipes</Button></Link></ListGroup.Item>
                 <ListGroup.Item className="settings-links"><Link to="/myactivity"><Button className="settings-button" >Activity</Button></Link></ListGroup.Item>
             </ListGroup>
             </Card.Header>
@@ -50,28 +68,37 @@ const Account = (props) => {
         <Card className="sm-card" id="main-card" style={{ width: '100%' }}>
             <Card.Header>Account Preferences</Card.Header>
             <Card>
-            <form>
-                <div className="form-group">
-                    <label for="exampleInputEmail1">Change User Preferences</label>
-                    <input type="username" className="form-control" id="exampleInputEmail1" aria-describedby="UserHelp" placeholder="Enter New Username" />
+            <Form>
+                <Form.Group>
+                    <Form.Label for="exampleInputEmail1">Change User Preferences </Form.Label>
+                    <Form.Control type="username" className="form-control" id="exampleInputEmail1" aria-describedby="UserHelp" placeholder="Enter New Username" />
                     <small id="emailHelp" className="form-text text-muted">Required. Username must be unique</small>
-                    <input type="firstname" className="form-control" id="exampleInputEmail1" aria-describedby="FirstNameHelp" placeholder="First Name" />
-                    <input type="lastname" className="form-control" id="exampleInputEmail1" aria-describedby="LastNameHelp" placeholder="Last Name" />
+                    <Form.Control type="firstname" className="form-control" id="exampleInputEmail1" aria-describedby="FirstNameHelp" placeholder="First Name" />
+                    <Form.Control type="lastname" className="form-control" id="exampleInputEmail1" aria-describedby="LastNameHelp" placeholder="Last Name" />
                     <small id="emailHelp" className="form-text text-muted">Required</small>
-                </div>
+                </Form.Group>
                 
-                <div className="form-group">
-                    <input type="hidden" name="MAX_FILE_SIZE" value="4194304" />
-                    <input type="file" />
+                <Form.Group>
+                    <Form.Control type="hidden" name="MAX_FILE_SIZE" value="4194304" />
+                    <Form.Control type="file" name="avatar" />
                     <small id="emailHelp" className="form-text text-muted">Avatar Upload. 4MB Maximum.</small>
 
-                </div>
+                </Form.Group>
+                <Form.Group id="categoryGridCheckbox">
+                <Form.Label>Please Select Any Dietary Restrictions Below</Form.Label>
+                    <Form.Check type="checkbox" label="Vegetarian" value="Vegetarian" name="category" onChange={this.putCategoryInState}/>
+                    <Form.Check type="checkbox" label="Vegan" value="Vegan" onChange={this.putCategoryInState}/>
+                    <Form.Check type="checkbox" label="Gluten Free" value="Pork" onChange={this.putCategoryInState}/>
+                    <Form.Check type="checkbox" label="Diary Free" value="Chicken" onChange={this.putCategoryInState}/>
+                    <Form.Check type="checkbox" label="Preganancy Friendly" value="Beef" onChange={this.putCategoryInState}/>
+                    
+                </Form.Group>
                 
                 
 
                 <Button type="submit" size="lg" className="btn btn-primary account-button" block>Submit</Button>
                 
-                </form>
+                </Form>
             </Card>
            
             
@@ -81,7 +108,8 @@ const Account = (props) => {
         
         </Container>
         </div>
+        
     );
 }
-
+}
 export default Account;

@@ -26,7 +26,7 @@ router.get('/allrecipes', (req, res, next) => {
 
 
 // 2) get specific recipe
-router.get('/recipe/:recipeID', (req, res, next) => {
+router.get('/allrecipe/:recipeID', (req, res, next) => {
     //Example: Recipe.findById('245245234hgryh35635')
     //Example: Recipe.findOne({name:'linguine', _id:'2452', date:'yesterday', likes:10})
     console.log(req.query)

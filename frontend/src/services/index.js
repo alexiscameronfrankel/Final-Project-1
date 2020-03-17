@@ -50,9 +50,10 @@ const actions = {
   updateRecipe: async (recipe) => {
     return await service.post('/recipe/update', recipe)
   },
+  
   //find a recipe and show details
   findRecipeID: async (recipe) => {
-    return await service.get(`/recipe/recipe/${recipe}`)
+    return await service.get(`/recipe/allrecipes/${recipe}`)
   },
   // //find a recipe and show details
   // findRecipeName: async (recipe) => {
@@ -119,11 +120,11 @@ const actions = {
     return await service.get('/profile/myRecipes', userID)
   },
    //add recipe to profile
-   findProfileRecipes: async (recipeID) => {
+   addProfileRecipes: async (recipeID) => {
     return await service.post('/profile/myRecipes/addRecipe', recipeID)
   },
    //delete recipe from profile
-   findProfileRecipes: async (recipeID) => {
+   deleteProfileRecipes: async (recipeID) => {
     return await service.post('/profile/myRecipes/deleteRecipe', recipeID)
   },
   

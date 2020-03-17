@@ -19,7 +19,8 @@ const Recipe = require('../models/Recipe');
 
 // 1) Find user profile
 router.get('/profile/:profileID',isAuth, (req, res, next) => {   
-    Profile.find({_id: req.params.profileID})
+    console.log('reqbodyinprofileget',req.body)
+    Profile.find({UserID: req.user._id})
     .then(profileFound => {
         res.send(profileFound)
     })
@@ -41,7 +42,7 @@ router.post('/new',isAuth, (req, res, next) => {
 router.post('/update',isAuth, (req, res, next) => {
     console.log('inside profile update route',req.body)
     Profile.updateOne({UserID:req.user._id},req.body)
-        .then(profileUpdated => res.send('profile updated',profileUpdated))
+        .then(profileUpdated => res.send(profileUpdated))
         .catch(console.log('An error occured'));
     
 });
@@ -79,7 +80,7 @@ router.get('/myRecipes',isAuth, (req, res, next) => {
 });
 
 // 6) add recipes to profile. State passed needs to include recipesArray associated with user and recipeID
-router.get('/myRecipes/addRecipe',isAuth, (req, res, next) => {
+router.post('/myRecipes/addRecipe',isAuth, (req, res, next) => {
     let myProfileUserID= req.user._id
     let addRecipe=req.body
     console.log('req.user.id in myrecipes', myProfileUserID)
@@ -94,7 +95,7 @@ router.get('/myRecipes/addRecipe',isAuth, (req, res, next) => {
 });
 
 // 7) delete recipes in profile. State passed needs to include recipesArray associated with user and recipeID
-router.get('/myRecipes/deleteRecipe',isAuth, (req, res, next) => {
+router.post('/myRecipes/deleteRecipe',isAuth, (req, res, next) => {
     let myProfileUserID= req.user._id
     let deleteRecipeID=req.body
     console.log('req.user.id in myrecipes', myProfileUserID)

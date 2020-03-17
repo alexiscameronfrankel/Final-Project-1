@@ -130,7 +130,7 @@ class App extends Component {
       
     
       <Switch>
-        <Route exact path="/" render={(props) => <Home {...props} />} />
+        <Route exact path="/" render={(props) => <Home {...props} user={this.state}/>} />
         <Route exact path="/" render={(props) => <Sidebar {...props} />} />
         <Route exact path="/profile" render={(props) => <Profile {...props} user={this.state}/>} />
         <Route exact path="/allrecipes" render={(props) => <AllRecipes {...props} user={this.state}/>} />
@@ -139,7 +139,7 @@ class App extends Component {
         <Route exact path="/sign-up" render={(props)=><SignUp {...props} setUser={this.setUser} />} />
         <Route exact path="/log-in" render={(props) => <LogIn {...props} setUser={this.setUser}/>} />
         <Route exact path="/log-out" render={(props) => <Home {...props} actionLogout= {this.logOut()}  />} />
-        <Route exact path="/account" render={(props) => <Account {...props} setUser={this.setUser}/>} />
+        <Route exact path="/account" render={(props) => <Account {...props} user={this.state}/>} />
         <Route exact path="/uploaded" render={(props) => <Uploaded {...props} setUser={this.setUser}/>} />
         <Route exact path="/liked" render={(props) => <Liked {...props} setUser={this.setUser}/>} />
         <Route exact path="/recent" render={(props) => <Recent {...props} setUser={this.setUser}/>} />

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema({
     recipeID: { type: String},
-    userID:{ type: String},
+    profileID:{ type: String},
     title: { type: String},
     rating: { type: String, required: true },
     description: {type: String, required: true},

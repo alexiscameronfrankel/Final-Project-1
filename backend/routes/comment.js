@@ -12,11 +12,12 @@
 
 const router = require('express').Router();
 const Comment = require('../models/Comment');
+const Profile = require('../models/Profile');
 
 
 // 1) Returns all comments for a recipe
-router.get('/comment/:recipeID', (req, res, next) => {
-    Comment.find({recipeID:req.params.recipeID})
+router.get('/comment/:commentID', (req, res, next) => {
+    Comment.find({commentID:req.params.commentID})
     .then(commentsFound => {
         res.send(commentsFound)
     })
@@ -25,46 +26,59 @@ router.get('/comment/:recipeID', (req, res, next) => {
 });
 
 // 2) Returns all comments for a user
-router.get('/comment/:userID',isAuth, (req, res, next) => {    
-    
-    Comment.find({userID:req.params.userID})
-    .then(commentFound => {
-        res.send(commentFound)
-    })
-    .catch(err => console.log(err))
-});
+// router.get('/comment/:userID',isAuth, (req, res, next) => {    
+//     Profile.find({UserID:req.params.userID})
+//         .then(profileFound=> {
+//             Comment.find({profileID:profileFound._id})
+//             .then(commentFound => {
+//                 res.send(commentFound)
+//             })
+//             .catch(err => console.log(err))
+//         })
+//         .catch(err => console.log('An error occured',err))
+// });
 
 // 3) Updates a comment
 router.post('/update',isAuth, (req, res, next) => {
-  let commentUserID=req.body.userID
-  if(commentUserID===req.user._id){
-    Comment.updateOne(req.body)
-    .then(commentUpdated => res.send('comment updated',commentUpdated))
-    .catch(console.log('An error occured'));
-    } else {
-        res.json({errorMessage: "Only creator of comment can edit"})
-    }
-});
+    let comment = req.body
+    Profile.find({UserID:req.user._id})
+        .then(profileFound=> {
+            if(comment.profileID===profileFound._id){
+            Comment.updateOne(req.body)
+            .then(commentUpdated => res.send('comment updated',commentUpdated))
+            .catch(console.log('An error occured'));
+            } else {
+                res.json({errorMessage: "Only creator of comment can edit"})
+            }
+        })
+        .catch(err => console.log('An error occured',err))
+    });
 
 // 4) Deletes a comment from database
 router.post('/delete',isAuth, (req, res, next) => {
-    let commentUserID=req.body.userID
-    if(commentUserID===req.user._id){
+    let comment = req.body
+    Profile.find({UserID:req.user._id}).then(profileFound=> {
+    if(comment.profileID===profileFound._id){
         Comment.deleteOne(req.body)
         .then(commentDeleted => res.send('Successfully deleted',commentDeleted))
         .catch(console.log('An error occured'));
     } else {
         res.json({errorMessage: "Only creator of comment can delete"})
     }
+    })
+    .catch(console.log('An error occured'));
 });
 
 // 5) Adds new comment
 router.post('/new',isAuth, (req, res, next) => {
     console.log(req.body)
     let comment = req.body
-    comment.userID=req.user._id
-    Comment.create(comment)
-    .then(commentCreated => res.send(commentCreated))
+    Profile.find({UserID:req.user._id}).then(profileFound=> {
+        comment.profileID=profileFound._id   
+        Comment.create(comment)
+        .then(commentCreated => res.send(commentCreated))
+        .catch(err => console.log(err))
+    })
     .catch(err => console.log(err))
 });
 

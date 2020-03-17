@@ -92,7 +92,8 @@ const actions = {
   updateComment: async (comment) => {
     return await service.post('/comment/update', comment)
   },
-  //profile actions
+  
+  //Profile actions
   //get profile for user signed in
   getProfile: async (userID) => {
     return await service.get (`/profile/profile/${userID}`)
@@ -105,17 +106,25 @@ const actions = {
   deleteProfile: async (profile) => {
     return await service.post('/profile/delete', profile)
   },
-  //find a comment and show details
+  //find a profile comments
   findProfileComments: async (profile) => {
     return await service.get(`/profile/activity`, profile)
   },
-  //update a comment 
+  //update profile
   updateProfile: async (profile) => {
     return await service.post('/profile/update', profile)
   },
-  //find a comment and show details
+  //find recipes saved to profile
   findProfileRecipes: async (userID) => {
     return await service.get('/profile/myRecipes', userID)
+  },
+   //add recipe to profile
+   findProfileRecipes: async (recipeID) => {
+    return await service.post('/profile/myRecipes/addRecipe', recipeID)
+  },
+   //delete recipe from profile
+   findProfileRecipes: async (recipeID) => {
+    return await service.post('/profile/myRecipes/deleteRecipe', recipeID)
   },
   
 };

@@ -17,9 +17,7 @@ class Profile extends Component {
         actions.findProfileRecipes(this.props.user._id).then(myRecipes => 
             console.log('myRecipesReceived', myRecipes)
         ).catch(({ response }) => 
-            
-                console.log('error loading',response)
-            
+            console.log('error loading',response)   
         )
     }
     // if(!props.user.email){ 

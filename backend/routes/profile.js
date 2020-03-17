@@ -109,6 +109,29 @@ router.post('/myRecipes/deleteRecipe',isAuth, (req, res, next) => {
     .catch(console.log("An error has occurred."))
 });
 
+// 8) Get all comments by user from database
+router.get('/myActivity',isAuth, (req, res, next) => {
+    let myProfileUserID= req.user._id
+    console.log('reqbody', req.user)
+
+    Profile.find({UserID:myProfileUserID})
+    .then(profile => {
+        console.log(profile)
+        let profileRecipes=[...profile[0].recipes]
+        // profileRecipes.forEach(recipeID => {
+            Recipe.find( { _id: { $in: profileRecipes } } )
+            .then(recipesFoundInDb => {
+                // res.send(console.log(recipeFoundInDb))   
+                // recipesFound.push(recipeFoundInDb)
+                console.log(recipesFoundInDb)
+                res.json(recipesFoundInDb)
+            })
+            .catch(err => console.log(err))
+    })
+    .catch(error=>console.log(error))
+//   res.status(200).json({ msg: 'Working' });
+});
+
 function isAuth(req, res, next) {
     req.isAuthenticated() ? next() : res.status(401).json({ msg: 'Log in first' });
 }

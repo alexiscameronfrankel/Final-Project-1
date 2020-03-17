@@ -30,6 +30,7 @@ class SignUp extends Component {
                 } 
                 actions.newProfile(initialProfile).then(profile=>{
                     console.log('profile success',profile)
+                    window.location.href = "http://localhost:3000/profile"
                 }).catch(({err}) => console.log(err))
             }).catch(({ response }) => console.error(response));
     }
@@ -52,6 +53,7 @@ class SignUp extends Component {
                             </div>
                         <div className="text-center">
                         <MDBBtn gradient="peach" onClick={this.handleSubmit}>Sign Up</MDBBtn>
+                        <MDBBtn gradient="peach" href="/log-in">Log In</MDBBtn>
                         </div>
                         </form>
                     </MDBCol>

@@ -51,6 +51,7 @@ class LogIn extends Component {
                     <div className="text-center">
                     
                     <MDBBtn gradient="peach" type="submit">Login</MDBBtn>
+                    <MDBBtn gradient="peach" href="/sign-up">Sign Up</MDBBtn>
                   
                     </div>
                     </form>

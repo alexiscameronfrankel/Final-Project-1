@@ -1,6 +1,7 @@
 import actions from '../../services/index';
 import React, { Fragment, Component } from 'react';
 import { Container, Card, } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 
 
 
@@ -28,7 +29,7 @@ class AllRecipes extends Component {
 
 
 
-    render() {
+    render(...props) {
         
         return (
             <Container className="home-recipe">
@@ -47,19 +48,26 @@ class AllRecipes extends Component {
                     
                     {this.state.allrecipes.map(eachRecipe => {
                     return (<Fragment>
-                        <Card key={eachRecipe._id}
+                        <div key={eachRecipe._id}
                     // {/* // onClick={() => fn()}
                     // // onKeyDown={() => fn()} */}
                     role="menuitem"
                     tabIndex="0"
-                    >
-                        <Card.Title className="text-center">{eachRecipe.title}</Card.Title>
+                    >   
+                        
+                        <Card.Title 
+                        className="text-center">
+                        <Link to={`/allrecipes/${eachRecipe._id}`}>
+                        {eachRecipe.title}
+                        </Link>
+                        </Card.Title>
                         <Card.Img
                             src={eachRecipe.image}
                             alt={eachRecipe.title}
                             style={{ display: 'block', width: '100%' }}
                         />
-                        </Card>
+                        
+                        </div>
                         </Fragment>)
                         })}
                         

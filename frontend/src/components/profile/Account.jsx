@@ -5,26 +5,20 @@ import {Link} from 'react-router-dom';
 import actions from '../../services/index'
 
 class Account extends Component {
-    state = {
-        // title: "",
-        // category: [],
-        // dishtype:"Breakfast",
-        // cuisine:"",
-        // ingredients: [""],
-        // measurements: [""],
-        // instructions: [""],
-        // image: "", 
-        // video: "",
-        // tags: [],
-        // comments: [], 
-        // ProfileID: "",
-        // created: "",
-        // imageUrl: ""
-      }
+
+
+      async componentDidMount(){
+         actions.getProfile(this.props.user._id).then(profileFound=>{
+            console.log(profileFound.data[0]) 
+            this.setState({...profileFound.data[0]})
+         })
+        }
 
       putCategoryInState = (e) => {
         console.log('putCategoryInState is being called')
-        let categoryArr = this.state.category;
+        let profile= actions.getProfile(this.props.user._id)
+        
+        let categoryArr = [...profile.dietPreference];
         categoryArr.push(e.target.value)
         console.log(categoryArr)
         this.setState({
@@ -81,7 +75,7 @@ class Account extends Component {
     //     props.history.push('/log-in') 
     // }   
     render (){
-
+        console.log(this.state)
     return (
         <div>
             {/* Profile
@@ -103,7 +97,7 @@ class Account extends Component {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title">Account Preferences | CoolGuy84{this.props.username}</h1>
+                <h1 className="prof-title">Account Preferences | CoolGuy84</h1>
             </Card.Header> 
           </Card.Title>
           <Card.Header>
@@ -149,6 +143,7 @@ class Account extends Component {
                     <Form.Check type="checkbox" label="Gluten Free" value="Gluten Free" onChange={this.putCategoryInState}/>
                     <Form.Check type="checkbox" label="Diary Free" value="Diary Free" onChange={this.putCategoryInState}/>
                     <Form.Check type="checkbox" label="Preganancy Friendly" value="Pregnancy Friendly" onChange={this.putCategoryInState}/>
+                    <Form.Check type="checkbox" label="None" value="None" onChange={this.putCategoryInState}/>
                     
                 </Form.Group>
                 

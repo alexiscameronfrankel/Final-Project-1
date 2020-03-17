@@ -32,6 +32,15 @@ class Home extends Component {
   async componentDidMount() {
     //actions.test()
   }
+
+  handleClick=()=>{
+    if (this.props.user.email===null){
+      window.location.href = "http://localhost:3000/sign-up"
+    } else {
+      window.location.href = "http://localhost:3000/profile"
+    }
+  }
+
   render() {
     return (
       <div>
@@ -65,7 +74,7 @@ Medium Raw: A Bloody Valentine to the World of Food and the People Who Cook <br>
     ― Wolfgang Puck</blockquote>
     <Parallax bgImage={image4}  strength={500} blur={{ min: -1, max: 3 }}>
       <div style={{ height: 500 }}>
-      <Button href="/myrecipes" className="btn-secondary" style={insideStyles}>Start Cooking</Button>
+      <Button onClick={this.handleClick} className="btn-secondary" style={insideStyles}>Start Cooking</Button>
         {/* <div style={insideStyles}>renderProp</div> */}
       </div>
     </Parallax>

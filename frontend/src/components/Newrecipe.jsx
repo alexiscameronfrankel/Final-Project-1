@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import service from '../services/service';
 import ImageUpload from './ImageUpload.js'
+import VideoUpload from './VideoUpload.js'
 import { Button, Form, Col } from 'react-bootstrap'
 
 //below gets current milliseconds elapsed and then converts it to actual date...date is value in created property//
@@ -390,6 +391,7 @@ class Newrecipe extends Component {
                             Submit
                         </Button>
                 </Form>
+                <VideoUpload/>
             </div>
         );
     }

@@ -17,12 +17,9 @@
   "bugs": {
     "url": "https://github.com/FTWD-OCT-2019/ironplate/issues"
   },
-
   "homepage": "https://github.com/FTWD-OCT-2019/ironplate#readme",
   "dependencies": {
-
     "webfontloader": "^1.6.28",
-
     "bootstrap": "^4.4.1",
     "mdbreact": "^4.25.3",
     "node-sass": "^4.13.1",
@@ -32,5 +29,4 @@
     "react-favicon": "0.0.17",
     "reactstrap": "^8.4.1"
   }
-
 }

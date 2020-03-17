@@ -581,6 +581,19 @@ Adding Random Page Styles */
   width: 50%;
 }
 
+.measurements-list {
+  display: flex;
+  flex-direction: row !important;
+  place-content: space-between;
+  font-size: 1.25rem;
+  color: #191970fc;
+  background-color: #D93810;
+
+}
+
+.list-item {
+  border: 1px solid black;
+}
 
 
 

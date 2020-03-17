@@ -65,6 +65,7 @@ class AllRecipes extends Component {
                             src={eachRecipe.image}
                             alt={eachRecipe.title}
                             style={{ display: 'block', width: '100%' }}
+                            // href={`/allrecipes/${eachRecipe._id}`}
                         />
                         
                         </div>

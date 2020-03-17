@@ -135,6 +135,7 @@ class App extends Component {
         <Route exact path="/" render={(props) => <Sidebar {...props} />} />
         <Route exact path="/profile" render={(props) => <Profile {...props} user={this.state}/>} />
         <Route exact path="/allrecipes" render={(props) => <AllRecipes {...props} user={this.state}/>} />
+        {/* <Route exact path="/allrecipes/:recipeID" render={(props) => <RecipeDetails {...props} />} /> */}
         <Route exact path="/random" render={(props) => <Random {...props} />} />
         <Route exact path="/sign-up" render={(props)=><SignUp {...props} setUser={this.setUser} />} />
         <Route exact path="/log-in" render={(props) => <LogIn {...props} setUser={this.setUser}/>} />

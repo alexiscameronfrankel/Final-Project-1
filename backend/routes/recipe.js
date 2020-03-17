@@ -26,7 +26,7 @@ router.get('/allrecipes', (req, res, next) => {
 
 
 // 2) get specific recipe
-router.get('/recipe/:recipeID', (req, res, next) => {
+router.get('/allrecipes/:recipeID', (req, res, next) => {
     //Example: Recipe.findById('245245234hgryh35635')
     //Example: Recipe.findOne({name:'linguine', _id:'2452', date:'yesterday', likes:10})
     // req.query
@@ -41,26 +41,30 @@ router.get('/recipe/:recipeID', (req, res, next) => {
 
 // 3) Update recipe if user created it
 router.post('/update', (req, res, next) => {
-    let recipeUserID=req.body.userID
-    if(recipeUserID===req.user._id){
-        Recipe.updateOne(req.body)
-        .then(recipeUpdated => res.send('Recipe updated',recipeUpdated))
-        .catch(console.log('An error occured'));
-    } else {
-        res.json({errorMessage: "Only creator of recipe can update"})
-    }
+    let recipeUserID=req.body.profileID
+    Profile.find({UserID:req.user._id})
+    .then(profile=>{
+        if(recipeUserID===profile._id){
+            Recipe.updateOne({_id: req.body._id},req.body)
+            .then(recipeUpdated => res.send('Recipe updated',recipeUpdated))
+            .catch(console.log('An error occured'));
+        }    
+    })
+    .catch(console.log('An error occured'));
 });
 
 // 4) delete recipe if user created it
 router.post('/delete',isAuth, (req, res, next) => {
-    let recipeUserID=req.body.userID
-    if(recipeUserID===req.user._id){
-        Recipe.deleteOne(req.body)
-        .then(recipeDeleted => res.send('Successfully deleted',recipeDeleted))
-        .catch(console.log('An error occured'));
-    } else {
-        res.json({errorMessage: "Only creator of recipe can delete"})
-    }
+    let recipeUserID=req.body.profileID
+    Profile.find({UserID:req.user._id})
+    .then(profile=>{
+        if(recipeUserID===profile._id){
+            Recipe.deleteOne({_id: req.body._id})
+            .then(recipeDeleted => res.send('Successfully deleted',recipeDeleted))
+            .catch(console.log('An error occured'));
+        }
+    })
+    .catch(console.log('An error occured'));
 });
 
 // 5) Create new Recipe
@@ -85,8 +89,8 @@ router.post('/new',isAuth, (req, res, next) => {
 router.get('/findRecipe', (req, res, next) => {
     //Example: Recipe.findById('245245234hgryh35635')
     //Example: Recipe.findOne({name:'linguine', _id:'2452', date:'yesterday', likes:10})
-    req.query
-    Recipe.findOne({name:req.params.recipeID})
+    console.log(req.query)
+    Recipe.findOne({title:req.body.title})
     .then(recipeFound => {
         res.send(recipeFound)
     })

@@ -2,23 +2,24 @@ import React, { Component } from 'react';
 import service from '../../services/service';
 import { Container, Card, ListGroup, Button, Form } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import actions from '../../services/index'
 
 class Account extends Component {
     state = {
-        title: "",
-        category: [],
-        dishtype:"Breakfast",
-        cuisine:"",
-        ingredients: [""],
-        measurements: [""],
-        instructions: [""],
-        image: "", 
-        video: "",
-        tags: [],
-        comments: [], 
-        ProfileID: "",
-        created: "",
-        imageUrl: ""
+        // title: "",
+        // category: [],
+        // dishtype:"Breakfast",
+        // cuisine:"",
+        // ingredients: [""],
+        // measurements: [""],
+        // instructions: [""],
+        // image: "", 
+        // video: "",
+        // tags: [],
+        // comments: [], 
+        // ProfileID: "",
+        // created: "",
+        // imageUrl: ""
       }
 
       putCategoryInState = (e) => {
@@ -28,7 +29,7 @@ class Account extends Component {
         console.log(categoryArr)
         this.setState({
             
-            category:categoryArr
+            dietPreference:categoryArr
         
         }) 
     }
@@ -50,17 +51,30 @@ class Account extends Component {
             console.log("Error while uploading the file: ", err);
         });
     }
-    handleSubmit = e => {
-        e.preventDefault();
-        
-        service.saveNewThing(this.state)
-        .then(res => {
-            console.log('added: ', res);
-            // here you would redirect to some other page 
+    handleChange=(e)=>{
+        console.log(e.target.name,e.target.value)
+        this.setState({
+            [e.target.name]:e.target.value
         })
-        .catch(err => {
-            console.log("Error while adding the thing: ", err);
-        });
+    }
+    handleSubmit = (e) => {
+        e.preventDefault();
+        actions.updateProfile(this.state)
+        .then(profileUpdated =>{ 
+
+            console.log('profileupdated',profileUpdated)
+            window.location.href = "http://localhost:3000/profile"
+        })
+        .catch(error=> console.log('error occurred',error))
+        
+        // service.saveNewThing(this.state)
+        // .then(res => {
+        //     console.log('added: ', res);
+        //     // here you would redirect to some other page 
+        // })
+        // .catch(err => {
+        //     console.log("Error while adding the thing: ", err);
+        // });
     }  
     
     // if(!props.user.email){ 
@@ -111,13 +125,13 @@ class Account extends Component {
         <Card className="sm-card" id="main-card" style={{ width: '100%' }}>
             <Card.Header>Account Preferences</Card.Header>
             <Card>
-            <Form>
+            <Form onSubmit={this.handleSubmit}>
                 <Form.Group>
                     <Form.Label for="exampleInputEmail1">Change User Preferences </Form.Label>
-                    <Form.Control type="username" className="form-control" id="exampleInputEmail1" aria-describedby="UserHelp" placeholder="Enter New Username" />
+                    <Form.Control onChange={this.handleChange} name="username" type="username" className="form-control" id="exampleInputEmail1" aria-describedby="UserHelp" placeholder="Enter New Username" />
                     <small id="emailHelp" className="form-text text-muted">Required. Username must be unique</small>
-                    <Form.Control type="firstname" className="form-control" id="exampleInputEmail1" aria-describedby="FirstNameHelp" placeholder="First Name" />
-                    <Form.Control type="lastname" className="form-control" id="exampleInputEmail1" aria-describedby="LastNameHelp" placeholder="Last Name" />
+                    <Form.Control onChange={this.handleChange} name="firstName" type="firstname" className="form-control" id="exampleInputEmail1" aria-describedby="FirstNameHelp" placeholder="First Name" />
+                    <Form.Control onChange={this.handleChange} name="lastName" type="lastname" className="form-control" id="exampleInputEmail1" aria-describedby="LastNameHelp" placeholder="Last Name" />
                     <small id="emailHelp" className="form-text text-muted">Required</small>
                 </Form.Group>
                 

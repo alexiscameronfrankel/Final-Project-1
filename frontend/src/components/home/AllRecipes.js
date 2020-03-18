@@ -62,7 +62,7 @@ class AllRecipes extends Component {
                         </Link>
                         </Card.Title>
                         <Card.Img
-                            src={eachRecipe.image}
+                            src={eachRecipe.imageUrl}
                             alt={eachRecipe.title}
                             style={{ display: 'block', width: '100%' }}
                             // href={`/allrecipes/${eachRecipe._id}`}

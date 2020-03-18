@@ -144,7 +144,7 @@ class App extends Component {
         <Route exact path="/liked" render={(props) => <Liked {...props} setUser={this.setUser}/>} />
         <Route exact path="/recent" render={(props) => <Recent {...props} setUser={this.setUser}/>} />
         <Route exact path="/commented" render={(props) => <Commented {...props} setUser={this.setUser}/>} />
-        <Route exact path="/myrecipes" render={(props) => <MyRecipes {...props} setUser={this.setUser}/>} />
+        <Route exact path="/myrecipes" render={(props) => <MyRecipes {...props} user={this.state}/>} />
         <Route exact path="/myactivity" render={(props) => <Activity {...props} setUser={this.setUser}/>} />
         <Route exact path="/new-recipe" render={(props) => <Newrecipe {...props} user={this.state}/>} />
         

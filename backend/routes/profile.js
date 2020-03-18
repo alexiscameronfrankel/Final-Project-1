@@ -22,6 +22,7 @@ router.get('/profile/:profileID',isAuth, (req, res, next) => {
     console.log('reqbodyinprofileget',req.body)
     Profile.find({UserID: req.user._id})
     .then(profileFound => {
+        console.log(profileFound, "TEST")
         res.send(profileFound)
     })
     .catch(err => console.log(err))

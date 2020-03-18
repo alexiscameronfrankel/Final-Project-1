@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import actions from '../../services/index';
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBAnimation } from 'mdbreact';
 import { MDBBtn } from "mdbreact";
+import { Link } from "react-router-dom";
 
 class SignUp extends Component {
     state = {
@@ -30,6 +31,7 @@ class SignUp extends Component {
                 } 
                 actions.newProfile(initialProfile).then(profile=>{
                     console.log('profile success',profile)
+                    // console.log(this.state.firstName, "saved")
                     window.location.href = "http://localhost:3000/profile"
                 }).catch(({err}) => console.log(err))
             }).catch(({ response }) => console.error(response));
@@ -50,11 +52,19 @@ class SignUp extends Component {
                                 <MDBInput name="email" label="Type your email" icon="envelope" group type="email" validate error="wrong"
                                 success="right" onChange={this.handleChange}/>
                                 <MDBInput name="password" label="Type your password" icon="lock" group type="password" validate onChange={this.handleChange}/>
+                                <MDBInput name="firstName" label="Type your first name" icon="user-circle"  validate onChange={this.handleChange}/>
+                                <MDBInput name="lastName" label="Type your last name" icon="user"  validate onChange={this.handleChange}/>
                             </div>
                         <div className="text-center">
                         <MDBBtn gradient="peach" onClick={this.handleSubmit}>Sign Up</MDBBtn>
-                        <MDBBtn gradient="peach" href="/log-in">Log In</MDBBtn>
                         </div>
+                        
+                      
+                    <div className="text-center">
+                    <Link to="/log-in">or login</Link>
+                    </div>
+
+
                         </form>
                     </MDBCol>
                     </MDBRow>

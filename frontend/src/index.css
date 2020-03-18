@@ -258,7 +258,7 @@ li {
 /*FORM STYLE */
 
 .auth-styles{
-  margin-top:25vh;
+  margin-top:15vh;
   background-color: #f8f8ff;
   padding:60px;
   box-shadow: 9px 11px 20px #191970fc;
@@ -399,10 +399,11 @@ button.btn-default.btn.Ripple-parent.peach-gradient {
 
 }
 
+/*
 .form-group {
   padding: 20px;
-  width: 70%;
-}
+   width: 70%; <---Alexis: I commented this out because it was messing with login and sign up forms
+}*/ 
 
 .my-avatar {
   width: 300px;

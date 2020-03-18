@@ -1,3 +1,4 @@
+//PAST ALEXIS TO FUTURE ALEXIS: Your schema wasn't POSTing to MongoDB because value types were off from the actual model
 import React, { Component, Fragment } from 'react';
 import service from '../services/service';
 import ImageUpload from './ImageUpload.js'
@@ -252,9 +253,20 @@ class Newrecipe extends Component {
         })
     }
 
+//SUBMIT FORM FUCNTIONALITY
 
-//IMAGE AND VIDEO UPLOAD FUNCTIONALITY 
-
+handleSubmit = e => {
+    e.preventDefault();
+    
+    service.saveNewThing(this.state)
+    .then(res => {
+        console.log('added: ', res);
+        // here you would redirect to some other page 
+    })
+    .catch(err => {
+        console.log("Error while adding the thing: ", err);
+    });
+}  
 
 
     
@@ -262,7 +274,8 @@ class Newrecipe extends Component {
         // console.log(this.state.category)
         return (
             <div>
-                <Form>
+            <h1>NEW RECIPE</h1>
+                <Form onSubmit={e => this.handleSubmit(e)}>
                     <Form.Row>
                         <Form.Group as={Col} controlId="Title">
                         <Form.Label>Recipe Name</Form.Label>
@@ -335,7 +348,7 @@ class Newrecipe extends Component {
 
                     <Form.Group controlId="Video">
                         <Form.Label>Video</Form.Label>
-                        <Form.Control name="video" type="text" placeholder="Add your video URL" onChange={this.handlePersonTyping}/>
+                        <VideoUpload/>
                     </Form.Group>
 
                     <Form.Row>
@@ -391,7 +404,7 @@ class Newrecipe extends Component {
                             Submit
                         </Button>
                 </Form>
-                <VideoUpload/>
+             
             </div>
         );
     }

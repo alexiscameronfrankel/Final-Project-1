@@ -16,14 +16,14 @@ class Account extends Component {
 
       putCategoryInState = (e) => {
         console.log('putCategoryInState is being called')
-        let profile= actions.getProfile(this.props.user._id)
+        // let profile= actions.getProfile(this.props.user._id)
         
-        let categoryArr = [...profile.dietPreference];
+        let categoryArr = [...this.state.dietPreference];
         categoryArr.push(e.target.value)
         console.log(categoryArr)
         this.setState({
             
-            dietPreference:categoryArr
+            dietPreference: categoryArr
         
         }) 
     }
@@ -70,12 +70,13 @@ class Account extends Component {
         //     console.log("Error while adding the thing: ", err);
         // });
     }  
-    
+   
     // if(!props.user.email){ 
     //     props.history.push('/log-in') 
     // }   
     render (){
         console.log(this.state)
+        
     return (
         <div>
             {/* Profile

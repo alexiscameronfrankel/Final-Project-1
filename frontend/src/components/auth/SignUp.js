@@ -19,9 +19,9 @@ class SignUp extends Component {
                 console.log(user.data)
                 let initialProfile={
                     UserID: user.data._id,
-                    username: '',
-                    firstName: '', 
-                    lastName: '',
+                    username: this.state.username,
+                    firstName: this.state.firstName, 
+                    lastName: this.state.lastName,
                     image: '',
                     dietPreference: 'None',
                     allergies: [],

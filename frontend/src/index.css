@@ -219,6 +219,10 @@ li {
   transition: color 0.2s;
 }
 
+.menu-item {
+  text-decoration: none !important;
+}
+
 /* Change color on hover */
 .bm-item:hover {
   color: white;
@@ -548,6 +552,7 @@ Adding Random Page Styles */
 .main-card-title {
   padding-top: 20px;
   font-size: 3rem;
+  color: #4778d9;
 }
 
 .main-card-subtitle {
@@ -623,6 +628,24 @@ Adding Random Page Styles */
   padding: 10px 20px;
 }
 
+.account-btn {
+  text-decoration: none !important;
+  color: white;
+}
+
+.all-recipes {
+  float: right;
+  color: white;
+}
+
+.recipe-header {
+  height: 90px;
+  background-color: #191970;
+}
+
+.recipe-card {
+  text-decoration: none !important;
+}
 
 
 

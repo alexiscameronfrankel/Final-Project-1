@@ -35,7 +35,7 @@ class AllRecipes extends Component {
             <Container className="home-recipe">
             <Card>
                 <Card.Title>
-                <Card.Header>Allrecipes</Card.Header>
+                <Card.Header className="recipe-header"><h1 className="all-recipes">All Recipes</h1></Card.Header>
                 </Card.Title>
                 <div>
                 <Coverflow
@@ -52,12 +52,12 @@ class AllRecipes extends Component {
                     // {/* // onClick={() => fn()}
                     // // onKeyDown={() => fn()} */}
                     role="menuitem"
-                    tabIndex="0"
+                    tabIndex="2"
                     >   
                         
                         <Card.Title 
                         className="text-center">
-                        <Link to={`/allrecipes/${eachRecipe._id}`}>
+                        <Link className="recipe-card" to={`/allrecipes/${eachRecipe._id}`}>
                         {eachRecipe.title}
                         </Link>
                         </Card.Title>

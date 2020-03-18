@@ -269,7 +269,7 @@ handleChange = e => {  //THIS IS FOR VIDEO UPLOAD TOO
     this.setState({ [name]: value });
 }
 
-handleFileUpload = e => {
+handleImageUpload = e => {
     console.log("The file to be uploaded is: ", e.target.files[0]);
 
     const uploadData = new FormData();
@@ -290,7 +290,7 @@ handleFileUpload = e => {
 
 
 //HANDLE VIDEO UPLOAD 
-handleFileUpload = e => {
+handleVideoUpload = e => {
     console.log("The file to be uploaded is: ", e.target.files[0]);
 
     const uploadData = new FormData();
@@ -405,7 +405,9 @@ handleSubmit = e => {
 
                     <Form.Group controlId="Video">
                         <Form.Label>Video</Form.Label>
-                        {/* <VideoUpload/> */}
+                        <input 
+                    type="file" 
+                    onChange={(e) => this.handleVideoUpload(e)} /> 
                     </Form.Group>
 
                     <Form.Row>
@@ -438,7 +440,7 @@ handleSubmit = e => {
                         <Form.Label>Image</Form.Label>
                         <input 
                     type="file" 
-                    onChange={(e) => this.handleFileUpload(e)} /> 
+                    onChange={(e) => this.handleImageUpload(e)} /> 
                         </Form.Group>
                     </Form.Row>
             {/* BELOW WHERE TAGS INPUT IS */}

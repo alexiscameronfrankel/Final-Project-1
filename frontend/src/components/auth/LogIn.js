@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import actions from '../../services/index';
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn,MDBAnimation } from 'mdbreact';
+import { Link } from "react-router-dom";
 
 
 class LogIn extends Component {
@@ -51,8 +52,11 @@ class LogIn extends Component {
                     <div className="text-center">
                     
                     <MDBBtn gradient="peach" type="submit">Login</MDBBtn>
-                    <MDBBtn gradient="peach" href="/sign-up">Sign Up</MDBBtn>
                   
+                  
+                    </div>
+                    <div className="text-center">
+                    <Link to="/sign-up">or sign up</Link>
                     </div>
                     </form>
                 </MDBCol>

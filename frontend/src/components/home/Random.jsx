@@ -95,7 +95,7 @@ class Random extends Component {
       area: "",
       cuisine: x.strArea,
       instructions: x.strInstructions,
-      image: x.strMealThumb,
+      imageUrl: x.strMealThumb,
       tags: mealTags,
       video: x.strYoutube,
       ingredients: mIngredients,
@@ -144,7 +144,7 @@ class Random extends Component {
           </Card.Header>
           <Card.Subtitle className="mb-2 text-muted main-card-subtitle text-center">Category: {this.state.info.category} | Dish Type: {this.state.info.dishtype}  | Area: {this.state.info.area}   |   Tags: {this.state.info.tags}</Card.Subtitle>
           <Card.Header>
-              <Card.Img className= "main-card-image" variant="top" src={this.state.info.image} />
+              <Card.Img className= "main-card-image" variant="top" src={this.state.info.imageUrl} />
           </Card.Header>
               <Card.Body>
                 <Card.Header>

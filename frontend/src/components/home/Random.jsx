@@ -115,15 +115,19 @@ class Random extends Component {
 
   }
 
-  // handleSave=()=>{
-  //     let newRecipe = actions.newRecipe(this.state )
-  //       this.setState({info: newRecipe})
-  //       console.log('finished creating newMeal',newRecipe )
-  // }
+
+
+  handleSave=()=>{
+      console.log('handlesave recipe to profile',this.state.info)
+       actions.addProfileRecipes(this.state.info).then(updateMyRecipes=>{
+         console.log(updateMyRecipes)
+       })
+       .catch(error=> console.log(error))
+  }
   
   render() {
     console.log(this.state.info)
-    console.log(this.state.title)
+    
     return (
       <div>
         <Container className="home-recipe">
@@ -178,12 +182,12 @@ class Random extends Component {
               <Card.Body>
                 <Card>
                 <Card.Header>
-                <ButtonGroup className="btn-group" aria-label="Basic example">
-                    <Button classname="main-card-source" variant="secondary" name="save-btn" size="lg"><i className="far fa-heart fa-2x"></i></Button>
-                    <Button variant="secondary" name="like-btn" size="lg"><i className="far fa-thumbs-up fa-2x"></i></Button>
-                    {/* <Button variant="secondary" name="dislike-btn" size="lg"><i className="far fa-thumbs-down"></i></Button>  */}
-                    <Button variant="secondary" name="youtube-btn" size="lg"><a  href={this.state.video} className="main-card-source"><i class="fab fa-youtube-square fa-2x"></i></a></Button>
-                    <Button variant="secondary" name="source-btn" size="lg"><a  href={this.state.source} className="main-card-source"><i  class="fas fa-external-link-alt fa-2x"></i></a></Button>
+                  <ButtonGroup className="btn-group" aria-label="Basic example">
+                    <Button onClick={this.handleSave} variant="secondary" name="save-btn" size="lg"><i className="far fa-heart"></i></Button>
+                    {/* <Button variant="secondary" name="like-btn" size="lg"><i className="far fa-thumbs-up"></i></Button> */}
+                    {/* <Button variant="secondary" name="dislike-btn" size="lg"><i className="far fa-thumbs-down"></i></Button> */}
+                    <Button variant="secondary" name="youtube-btn" size="lg"><a  href={this.state.info.video} className="main-card-source"><i class="fab fa-youtube-square"></i></a></Button>
+                    <Button variant="secondary" name="source-btn" size="lg"><a  href={this.state.info.source} className="main-card-source"><i  class="fas fa-external-link-alt"></i></a></Button>
                     <Button variant="secondary" name="edit-recipe" size="lg">Edit Recipe</Button>
                   </ButtonGroup>
                 </Card.Header>

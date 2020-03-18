@@ -70,19 +70,23 @@ router.post('/delete',isAuth, (req, res, next) => {
 // 5) Create new Recipe
 router.post('/new',isAuth, (req, res, next) => {
     console.log('inside create new recipe',req.body)
-    let duplicateRecipe=false
+    let duplicateRecipe=0
     Recipe.find({title:req.body.title})
     .then(RecipeFound=> {
-        duplicateRecipe=true
-        res.send(RecipeFound)})
+        console.log('RecipeFound',RecipeFound)
+        if (RecipeFound.length>0){duplicateRecipe=1}
+        if (duplicateRecipe<1){
+            Recipe.create(req.body)
+            .then(recipeCreated => res.send(console.log('recipe created because it dont exist',recipeCreated)))
+            .catch(err => console.log(err))
+        }
+        console.log('duplicateRecipe',duplicateRecipe)
+        res.send(RecipeFound)
+    })
     .catch(error => {
-        console.log('recipe already exist',error)})
+        console.log('recipe already exist',error)
+    })
         
-    if (!duplicateRecipe){
-        Recipe.create(req.body)
-        .then(recipeCreated => res.send(console.log('recipe created',recipeCreated)))
-        .catch(err => console.log(err))
-    }
 });
 
 // 6) find recipe by name

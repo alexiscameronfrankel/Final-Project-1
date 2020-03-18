@@ -2,13 +2,42 @@ import React, { Component } from 'react';
 import { Container, Card, ListGroup, Button, } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import InfiniteCarousel from 'react-leaf-carousel';
+import actions from '../../services/index'
+
 
 class MyRecipes extends Component {
     
+    // findMyRecipes(){
+    //     // console.log(this.props)
+    //     actions.findProfileRecipes(this.props.user._id).then(myRecipes => 
+    //         console.log('myRecipesReceived', myRecipes)
+    //     ).catch(({ response }) => {
+    //         window.location.href = "http://localhost:3000/log-in" ;
+    //         console.log('error loading',response)   
+    //     })
+    // }
+    
+    async componentDidMount (){
+        actions.findProfileRecipes(this.props.user._id)
+            .then(myRecipes => 
+                console.log('myRecipesReceived', myRecipes))
+                // this.setState({savedRecipes: myRecipes.data})
+            .catch(({ response }) => {
+             ;
+                console.log('error loading',response)   
+            })
+            actions.getProfile(this.props.user._id)
+            .then(profile =>
+                console.log('myProfile received', profile))
+                // this.setState({myProfile: profile.data})
+            .catch(({ response }) =>
+            console.log('error loading',response))
+        };
     // if(!props.user.email){ 
     //     props.history.push('/log-in') 
     // }   
     render() {
+        console.log(this.state)
         return (
         <div>
             {/* Profile

@@ -20,14 +20,20 @@ class RecipeDetails extends Component {
 
   async componentDidMount(){
       console.log(this.props)
-    actions.findRecipeID(this.props.match.params.recipeID)
-    .then(recipeFound =>
-        {console.log(recipeFound.data)
-        this.setState( {
-            ...recipeFound.data
-          
-        })})
-    .catch(err => console.log(err))
+      actions.findRecipeID(this.props.match.params.recipeID)
+      .then(recipeFound =>{
+          console.log(recipeFound.data)
+          this.setState( {
+              ...recipeFound.data
+            
+          })
+          actions.addActivityRecipes({title: this.state.title}).then(updateMyActivity=>{
+            console.log('activity random saved',updateMyActivity)
+          })
+          .catch(error=> console.log(error))
+        })
+      .catch(err => console.log(err))
+
     
  }
 

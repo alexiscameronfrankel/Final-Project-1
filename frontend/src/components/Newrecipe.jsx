@@ -51,8 +51,7 @@ class Newrecipe extends Component {
     }
 
 
-     //handle checkbox functionality 
-
+///HANDLE CHECKBOX FUNCTUNALITY
      putCategoryInState = (e) => { 
         console.log(e.target.value, e.target.checked)
         let categoryArr = [...this.state.category];

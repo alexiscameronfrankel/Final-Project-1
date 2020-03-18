@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const recipeSchema = new Schema({
     
-    title: { type: String, required: true},
+    title: { type: String, required: true, unique: true},
     category: [{ type: String, enum: ['Vegetarian', 'Vegan','Pork','Chicken','Beef','Seafood','Other'], required: true }],
     dishtype: { type: String, enum: ['Breakfast', 'Dish', 'Snack', 'Drink', 'Dessert', 'Other']},
     area: {type: String},

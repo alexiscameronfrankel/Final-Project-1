@@ -7,6 +7,18 @@ import actions from '../../services/index'
 class Account extends Component {
 
 
+    state = {
+        UserID: "",
+        username: "",
+        firstName: "",
+        lastName: "",
+        imageUrl: "",
+        dietPreference: "",
+        allergies: [],
+        recipes: [],
+        activity: [],
+    }
+
       async componentDidMount(){
          actions.getProfile(this.props.user._id).then(profileFound=>{
             console.log(profileFound.data[0]) 
@@ -97,7 +109,7 @@ class Account extends Component {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title">Account Preferences | CoolGuy84</h1>
+                <h1 className="prof-title">Account Preferences | {this.state.username}</h1>
             </Card.Header> 
           </Card.Title>
           <Card.Header>
@@ -123,19 +135,17 @@ class Account extends Component {
                 <Form.Group>
                     <Form.Label for="exampleInputEmail1">Change User Preferences </Form.Label>
                     <small id="userHelp" className="form-text text-muted">Username must be unique</small>
-                    <Form.Control onChange={this.handleChange} name="username" type="username" className="form-control" id="exampleInputEmail1" aria-describedby="UserHelp" placeholder="Enter New Username" />
-                    <small id="emailHelp" className="form-text text-muted">Email must be valid</small>
-                    <Form.Control onChange={this.handleChange} name="username" type="username" className="form-control" id="exampleInputEmail1" aria-describedby="UserHelp" placeholder="Enter New Email" />
-                    <small id="emailHelp" className="form-text text-muted">First Name (Optional)</small>
-                    <Form.Control onChange={this.handleChange} name="firstName" type="firstname" className="form-control" id="exampleInputEmail1" aria-describedby="FirstNameHelp" placeholder="First Name" />
-                    <small id="emailHelp" className="form-text text-muted">Last Name (Optional)</small>
-                    <Form.Control onChange={this.handleChange} name="lastName" type="lastname" className="form-control" id="exampleInputEmail1" aria-describedby="LastNameHelp" placeholder="Last Name" />
+                    <Form.Control onChange={this.handleChange} name="username" type="username" className="form-control" id="exampleInputEmail1" aria-describedby="UserHelp" placeholder={this.state.username} />
+                    <small id="fNameHelp" className="form-text text-muted">First Name (Optional)</small>
+                    <Form.Control onChange={this.handleChange} name="firstName" type="firstname" className="form-control" id="exampleInputEmail1" aria-describedby="FirstNameHelp" placeholder={this.state.firstName} />
+                    <small id="lNameHelp" className="form-text text-muted">Last Name (Optional)</small>
+                    <Form.Control onChange={this.handleChange} name="lastName" type="lastname" className="form-control" id="exampleInputEmail1" aria-describedby="LastNameHelp" placeholder={this.state.lastName} />
                 </Form.Group>
                 
                 <Form.Group>
                     <Form.Control type="hidden" name="MAX_FILE_SIZE" value="4194304" />
                     <Form.Control name="avatar" placeholder="Upload Avatar Image" type="file" 
-                    onChange={(e) => this.handleFileUpload(e)}/>
+                    onChange={this.handleFileUpload}/>
                     <small id="emailHelp" className="form-text text-muted">Avatar Upload. 4MB Maximum.</small>
 
                 </Form.Group>

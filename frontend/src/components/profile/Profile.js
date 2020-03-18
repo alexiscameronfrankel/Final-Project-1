@@ -13,6 +13,10 @@ import {Link} from 'react-router-dom';
 
 
 class Profile extends Component {
+
+    state = {
+        myProfile: [],
+    }
         
     async componentDidMount (){
         actions.findProfileRecipes(this.props.user._id)
@@ -24,9 +28,11 @@ class Profile extends Component {
                 console.log('error loading',response)   
             })
         actions.getProfile(this.props.user._id)
-            .then(profile =>
-                console.log('myProfile received', profile))
-                // this.setState({myProfile: profile.data})
+            .then( profile =>{
+                console.log('myProfile received', profile)
+                this.setState({myProfile: profile.data[0]})
+            })
+                
             .catch(({ response }) =>
             console.log('error loading',response))
         };
@@ -36,7 +42,7 @@ class Profile extends Component {
         // } 
 
         render (){
-            console.log(this.props)
+            console.log()
         return (
         <div>
             {/* Profile
@@ -58,7 +64,7 @@ class Profile extends Component {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title"> {this.props.user.email} | Dashboard </h1>
+                <h1 className="prof-title"> {this.state.myProfile.username || this.props.user.email} | Dashboard </h1>
             </Card.Header> 
           </Card.Title>
           <Card.Header>
@@ -86,13 +92,13 @@ class Profile extends Component {
                 </Card.Header>
                 <Card.Header className="my-avatar-header">
                 <ListGroup>
-                    <ListGroup.Item className="prof-list-item">Username: <span className="account-info"> CoolGuy84</span></ListGroup.Item>
-                    <ListGroup.Item className="prof-list-item">First Name: <span className="account-info"> Michael</span></ListGroup.Item>
-                    <ListGroup.Item className="prof-list-item">Last Name: <span className="account-info"> Cooper</span></ListGroup.Item>
+                    <ListGroup.Item className="prof-list-item">Username: <span className="account-info"> {this.state.myProfile.username}</span></ListGroup.Item>
+                    <ListGroup.Item className="prof-list-item">First Name: <span className="account-info"> {this.state.myProfile.firstName}</span></ListGroup.Item>
+                    <ListGroup.Item className="prof-list-item">Last Name: <span className="account-info"> {this.state.myProfile.lastName}</span></ListGroup.Item>
                 </ListGroup>
                 <ListGroup>
-                    <ListGroup.Item className="prof-list-item">Dietary Preferences: <span className="account-info">Vegan, Gluten Free</span></ListGroup.Item>
-                    <ListGroup.Item className="prof-list-item">Allergies: <span className="account-info">Peanut</span></ListGroup.Item>
+                    <ListGroup.Item className="prof-list-item">Dietary Preferences: <span className="account-info">{this.state.myProfile.dietPreference}</span></ListGroup.Item>
+                    <ListGroup.Item className="prof-list-item">Allergies: <span className="account-info">{this.state.myProfile.allergies}</span></ListGroup.Item>
                 </ListGroup>
                 </Card.Header>
             </div>

@@ -1,6 +1,8 @@
+//Past Alexis to Future Alexis: you had an issue with href quotes...sometimes the quotes looks SLIGHTLY different and actually have some junk attached to it...you fixed it by erasing the quotes and writing them again
+
 import React from "react";
 import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
-// import {EmailShareButton, FacebookShareButton, InstapaperShareButton, LineShareButton, LinkedinShareButton, LivejournalShareButton, MailruShareButton, OKShareButton, PinterestShareButton, PocketShareButton, RedditShareButton, TelegramShareButton, TumblrShareButton, TwitterShareButton, ViberShareButton, VKShareButton, WhatsappShareButton, WorkplaceShareButton} from 'react-share';
+import {EmailShareButton, FacebookShareButton, InstapaperShareButton, LineShareButton, LinkedinShareButton, LivejournalShareButton, MailruShareButton, OKShareButton, PinterestShareButton, PocketShareButton, RedditShareButton, TelegramShareButton, TumblrShareButton, TwitterShareButton, ViberShareButton, VKShareButton, WhatsappShareButton, WorkplaceShareButton} from 'react-share';
 
 const Footer = () => {
   return (
@@ -9,29 +11,26 @@ const Footer = () => {
       <MDBRow>
         <MDBCol md="12" className="py-5">
           <div className="mb-5 flex-center">
-            <a className="fb-ic" href="https://www.facebook.com">
+          <FacebookShareButton quote="Can't figure out what to eat? Check out this yummy recipe app." hashtag="#recipebox" url="therecipebox.netlify.com">
               <i className="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x">
               </i>
-            </a>
-            <a className="tw-ic" href="https://www.twitter.com">
+            </FacebookShareButton>
+
+            <TwitterShareButton children="therecipebox.netlify.com" url="therecipebox.netlify.com" hashtags={["recipebox"]} title="Yum yum yum this recipe app rocks! www.therecipebox.netlify.com">
               <i className="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x">
               </i>
-            </a>
-            <a className="gplus-ic" href="https://www.google.com">
-              <i className="fab fa-google-plus fa-lg white-text mr-md-5 mr-3 fa-2x">
-              </i>
-            </a>
-            <a className="li-ic" href="https://www.linkedin.com">
+              </TwitterShareButton>
+
+            <LinkedinShareButton url="therecipebox.netlify.com">
               <i className="fab fa-linkedin-in fa-lg white-text mr-md-5 mr-3 fa-2x">
               </i>
-            </a>
-            <a className="ins-ic" href="https://www.instagram.com">
-              <i className="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x">
+              </LinkedinShareButton>
+
+            <TumblrShareButton url="therecipebox.netlify.com" caption="Check out this yummy recipe app!">
+              <i className="fab fa-tumblr fa-lg white-text fa-2x"> 
               </i>
-            </a>
-            <a className="pin-ic" href="https://www.pinterest.com">
-              <i className="fab fa-pinterest fa-lg white-text fa-2x"> </i>
-            </a>
+            </TumblrShareButton>
+
           </div>
         </MDBCol>
       </MDBRow>

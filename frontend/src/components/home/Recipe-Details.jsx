@@ -1,7 +1,7 @@
 //Can attempt to extract info from object received and if saved send info to create recipe
 
 import React, { Component } from 'react';
-import { Container, Card, ListGroup, ListGroupItem,Button, ButtonGroup,  } from 'react-bootstrap';
+import { Container, Form, Card, ListGroup, ListGroupItem,Button, ButtonGroup,  } from 'react-bootstrap';
 import actions from '../../services/index'
 
 
@@ -74,28 +74,49 @@ class RecipeDetails extends Component {
               <ListGroup>
                {/* <ListGroupItem className="main-card-subtitle prep-time">  */}
                  {console.log(this.state.ingredients)}
-                {this.state.ingredients && this.state.ingredients.map((item,i) => {return <ListGroupItem className="list-item" key={i}>{item}<hr></hr></ListGroupItem>})}
+                {this.state.ingredients && this.state.ingredients.map((item,i) => {return <ListGroupItem className="list-item text-center" key={i}>Ingredient:  {item}<hr></hr></ListGroupItem>})}
                 </ListGroup>
               </Card.Header>
               <Card.Header>
               <ListGroup>
-                {this.state.measurements && this.state.measurements.map((item,i) => {return <ListGroupItem className="list-item" key={i}>{item}<hr></hr></ListGroupItem>})}
+                {this.state.measurements && this.state.measurements.map((item,i) => {return <ListGroupItem className="list-item" key={i}>Amount Needed: {item}<hr></hr></ListGroupItem>})}
                 {/* </ListGroupItem> */}
                 
               </ListGroup>
+                
               </Card.Header>
               </Card.Body>
               <Card.Body>
                 <Card>
                 <Card.Header>
-                  <ButtonGroup className="btn-group" aria-label="Basic example">
-                    <Button variant="secondary" name="save-btn" size="lg"><i className="far fa-heart"></i></Button>
-                    <Button variant="secondary" name="like-btn" size="lg"><i className="far fa-thumbs-up"></i></Button>
-                    <Button variant="secondary" name="dislike-btn" size="lg"><i className="far fa-thumbs-down"></i></Button>
-                    <Button variant="secondary" name="youtube-btn" size="lg"><a  href={this.state.video} className="main-card-source"><i class="fab fa-youtube-square"></i></a></Button>
-                    <Button variant="secondary" name="source-btn" size="lg"><a  href={this.state.source} className="main-card-source"><i  class="fas fa-external-link-alt"></i></a></Button>
+                <ButtonGroup className="btn-group" aria-label="Basic example">
+                    <Button classname="main-card-source" variant="secondary" name="save-btn" size="lg"><i className="far fa-heart fa-2x"></i></Button>
+                    <Button variant="secondary" name="like-btn" size="lg"><i className="far fa-thumbs-up fa-2x"></i></Button>
+                    {/* <Button variant="secondary" name="dislike-btn" size="lg"><i className="far fa-thumbs-down"></i></Button>  */}
+                    <Button variant="secondary" name="youtube-btn" size="lg"><a  href={this.state.video} className="main-card-source"><i class="fab fa-youtube-square fa-2x"></i></a></Button>
+                    <Button variant="secondary" name="source-btn" size="lg"><a  href={this.state.source} className="main-card-source"><i  class="fas fa-external-link-alt fa-2x"></i></a></Button>
                     <Button variant="secondary" name="edit-recipe" size="lg">Edit Recipe</Button>
                   </ButtonGroup>
+                </Card.Header>
+                <Card.Header>
+                <Form.Label>Leave a comment below</Form.Label>
+                <Form.Group className="comment-form" id="comment-form" controlId="exampleForm.ControlTextarea1">
+                
+                <Form.Control as="textarea" rows="3" />
+                <Button variant="secondary" name="save-btn" size="lg"><i className="far fa-comments fa-2x"></i></Button>
+                </Form.Group>
+                  </Card.Header>
+                  <Card.Header>
+                      <Form.Label>Previous Comments</Form.Label>
+                      <ListGroup>
+                          <ListGroupItem>
+                              
+                              <p><strong><q>This recipe my whole family loved. If I were to change one thing I would add more butter</q></strong></p>
+                              <div className="previous-comments"><img src="https://www.w3schools.com/w3images/avatar2.png" alt="Avatar" class="avatar"></img>
+                              <h4 className="pc-user">-Michael Cooper</h4>
+                              </div>
+                          </ListGroupItem>
+                      </ListGroup>
                   </Card.Header>
                 
                 </Card>

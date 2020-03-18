@@ -105,7 +105,7 @@ class Profile extends Component {
                 </Card.Header>
             </div>
             </Card.Header>
-            <Button type="submit" size="lg" className="btn btn-primary account-button" block><i class="fas fa-user-cog"></i> Account </Button>
+            <Button type="submit" size="lg" className="btn btn-primary account-button" block><i class="fas fa-user-cog fa-2x"></i> Account </Button>
             </Card>
             
         

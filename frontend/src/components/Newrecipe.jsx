@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react';
 import service from '../services/service';
 import { Button, Form, Col } from 'react-bootstrap';
 import actions from '../services/index';
+import Card from 'react-bootstrap/Card'
 // import ImageUpload from './ImageUpload.js'
 // import VideoUpload from './VideoUpload.js'
 
@@ -218,7 +219,8 @@ handleSubmit = e => {
     render() {
         return (
             <div>
-            <h1>NEW RECIPE</h1>
+                <Card className="new-recipe-form" border="warning" style={{ width: '80rem' }}>
+                <Card.Body>
                 <Form onSubmit={e => this.handleSubmit(e)}>
                     <Form.Row>
                         <Form.Group as={Col} controlId="Title">
@@ -226,24 +228,14 @@ handleSubmit = e => {
                         <Form.Control name="title" type="text" placeholder="Enter title" onChange={this.handlePersonTyping} />
                         </Form.Group>
 
-                    <Form.Group id="categoryGridCheckbox">
-                    <Form.Label>Category</Form.Label>
-                        <Form.Check type="checkbox" label="Vegetarian" value="Vegetarian" name="category"  onChange={this.putCategoryInState}/>
-                        <Form.Check type="checkbox" label="Vegan" value="Vegan" onChange={this.putCategoryInState}/>
-                        <Form.Check type="checkbox" label="Pork" value="Pork" onChange={this.putCategoryInState}/>
-                        <Form.Check type="checkbox" label="Chicken" value="Chicken" onChange={this.putCategoryInState}/>
-                        <Form.Check type="checkbox" label="Beef" value="Beef" onChange={this.putCategoryInState}/>
-                        <Form.Check type="checkbox" label="Seafood" value="Seafood" onChange={this.putCategoryInState}/>
-                        <Form.Check type="checkbox" label="Other" value="Other" onChange={this.putCategoryInState}/>
-                    </Form.Group>
                     </Form.Row>
-
-                    <Form.Group controlId="Ingredients">
+                    <Form.Row>
+                    <Form.Group as={Col} controlId="Ingredients">
                         <Form.Label>Ingredients</Form.Label>
                         {this.state.ingredients.map((eachIngredient, index) => {
                             return(
                             <Fragment>
-                            <Form.Control name={index} type="text" placeholder="Add your ingredients"  value={eachIngredient} onChange={this.handleIngredientsTyping}/>
+                            <Form.Control as={Col} name={index} type="text" placeholder="Add your ingredients"  value={eachIngredient} onChange={this.handleIngredientsTyping}/>
                             <Button variant="secondary" size="sm" onClick={(e) => this.deleteIngredient(e,index)}>
                            DELETE INGREDIENT
                             </Button>
@@ -255,7 +247,7 @@ handleSubmit = e => {
                     </Form.Group>
 
 
-                    <Form.Group controlId="Measurements">
+                    <Form.Group as={Col} controlId="Measurements">
                         <Form.Label>Measurements</Form.Label>
                         {this.state.measurements.map((eachMeasurement, index) => 
                              {
@@ -272,10 +264,11 @@ handleSubmit = e => {
                            ADD MEASUREMENT
                         </Button> */}
                     </Form.Group>
+                    </Form.Row>
 
-                    <Form.Group as={Col} controlId="Instructions">
+                    <Form.Group controlId="Instructions">
                         <Form.Label>Instructions</Form.Label>
-                        <Form.Control name="instructions" type="text" placeholder="Type your instructions" onChange={this.handlePersonTyping}/>
+                        <Form.Control as="textarea" rows="3" name="instructions" type="text" placeholder="Type your instructions" onChange={this.handlePersonTyping}/>
                         {/* {this.state.instructions.map((eachInstruction, index) => {
                             return(
                             <Fragment>
@@ -291,12 +284,6 @@ handleSubmit = e => {
                     </Button> */}
                     </Form.Group>
 
-                    <Form.Group controlId="Video">
-                        <Form.Label>Video</Form.Label>
-                        <input 
-                    type="file" 
-                    onChange={(e) => this.handleVideoUpload(e)} /> 
-                    </Form.Group>
 
                     <Form.Row>
 
@@ -319,16 +306,22 @@ handleSubmit = e => {
                     
 
                     <Form.Row>
-                        <Form.Group as={Col} controlId="ProfileID">
-                        <Form.Label>Display Name</Form.Label>
-                        <Form.Control name="ProfileID" type="text" placeholder="Add your display name " onChange={this.handlePersonTyping}/>
+                        <Form.Group controlId="Video">
+                            <Form.Label>Video</Form.Label>
+                            <Form.Text>
+                            <input 
+                        type="file" 
+                        onChange={(e) => this.handleVideoUpload(e)} /> 
+                            </Form.Text>
                         </Form.Group>
 
                         <Form.Group as={Col} controlId="Image">
                         <Form.Label>Image</Form.Label>
+                        <Form.Text>
                         <input 
                     type="file" 
                     onChange={(e) => this.handleImageUpload(e)} /> 
+                         </Form.Text>
                         </Form.Group>
                     </Form.Row>
             {/* BELOW WHERE TAGS INPUT IS */}
@@ -349,12 +342,24 @@ handleSubmit = e => {
                         <Button variant="secondary" size="sm" onClick={this.addTagRow}>
                            ADD TAG
                         </Button> */}
+                        </Form.Group>
+                        <Form.Group id="categoryGridCheckbox">
+                    <Form.Label>Category</Form.Label>
+                        <Form.Check type="checkbox" label="Vegetarian" value="Vegetarian" name="category"  onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Vegan" value="Vegan" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Pork" value="Pork" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Chicken" value="Chicken" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Beef" value="Beef" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Seafood" value="Seafood" onChange={this.putCategoryInState}/>
+                        <Form.Check type="checkbox" label="Other" value="Other" onChange={this.putCategoryInState}/>
                     </Form.Group>
+                    
                         <Button variant="primary" type="submit">
                             Submit
                         </Button>
                 </Form>
-             
+                </Card.Body>
+                </Card>
             </div>
         );
     }

@@ -1,6 +1,7 @@
 import actions from '../../services/index';
 import React, { Fragment, Component } from 'react';
 import { Container, Card, } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 
 
 
@@ -28,13 +29,13 @@ class AllRecipes extends Component {
 
 
 
-    render() {
+    render(...props) {
         
         return (
             <Container className="home-recipe">
             <Card>
                 <Card.Title>
-                <Card.Header>Allrecipes</Card.Header>
+                <Card.Header className="recipe-header"><h1 className="all-recipes">All Recipes</h1></Card.Header>
                 </Card.Title>
                 <div>
                 <Coverflow
@@ -47,20 +48,27 @@ class AllRecipes extends Component {
                     
                     {this.state.allrecipes.map(eachRecipe => {
                     return (<Fragment>
-                        <Card key={eachRecipe._id}
+                        <div key={eachRecipe._id}
                     // {/* // onClick={() => fn()}
                     // // onKeyDown={() => fn()} */}
                     role="menuitem"
-                    tabIndex="0"
-                    >
-                        <Card.Title className="text-center">{eachRecipe.title}</Card.Title>
+                    tabIndex="2"
+                    >   
+                        
+                        <Card.Title 
+                        className="text-center">
+                        <Link className="recipe-card" to={`/allrecipes/${eachRecipe._id}`}>
+                        {eachRecipe.title}
+                        </Link>
+                        </Card.Title>
                         <Card.Img
                             src={eachRecipe.image}
                             alt={eachRecipe.title}
                             style={{ display: 'block', width: '100%' }}
                             // href={`/allrecipes/${eachRecipe._id}`}
                         />
-                        </Card>
+                        
+                        </div>
                         </Fragment>)
                         })}
                         

@@ -20,6 +20,7 @@ import Uploaded from './components/profile/Uploaded';
 import Liked from './components/profile/Liked';
 import Commented from './components/profile/Commented';
 import Recent from './components/profile/Recent';
+import RecipeDetails from './components/home/Recipe-Details';
 
 
 class App extends Component {
@@ -147,6 +148,7 @@ class App extends Component {
         <Route exact path="/myrecipes" render={(props) => <MyRecipes {...props} setUser={this.setUser}/>} />
         <Route exact path="/myactivity" render={(props) => <Activity {...props} setUser={this.setUser}/>} />
         <Route exact path="/new-recipe" render={(props) => <Newrecipe {...props} user={this.state}/>} />
+        <Route exact path="/allrecipes/:recipeID" render={(props) => <RecipeDetails {...props} />} />
         
         
         <Route component={NotFound} />

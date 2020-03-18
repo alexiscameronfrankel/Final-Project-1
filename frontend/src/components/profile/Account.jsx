@@ -122,11 +122,14 @@ class Account extends Component {
             <Form onSubmit={this.handleSubmit}>
                 <Form.Group>
                     <Form.Label for="exampleInputEmail1">Change User Preferences </Form.Label>
+                    <small id="userHelp" className="form-text text-muted">Username must be unique</small>
                     <Form.Control onChange={this.handleChange} name="username" type="username" className="form-control" id="exampleInputEmail1" aria-describedby="UserHelp" placeholder="Enter New Username" />
-                    <small id="emailHelp" className="form-text text-muted">Required. Username must be unique</small>
+                    <small id="emailHelp" className="form-text text-muted">Email must be valid</small>
+                    <Form.Control onChange={this.handleChange} name="username" type="username" className="form-control" id="exampleInputEmail1" aria-describedby="UserHelp" placeholder="Enter New Email" />
+                    <small id="emailHelp" className="form-text text-muted">First Name (Optional)</small>
                     <Form.Control onChange={this.handleChange} name="firstName" type="firstname" className="form-control" id="exampleInputEmail1" aria-describedby="FirstNameHelp" placeholder="First Name" />
+                    <small id="emailHelp" className="form-text text-muted">Last Name (Optional)</small>
                     <Form.Control onChange={this.handleChange} name="lastName" type="lastname" className="form-control" id="exampleInputEmail1" aria-describedby="LastNameHelp" placeholder="Last Name" />
-                    <small id="emailHelp" className="form-text text-muted">Required</small>
                 </Form.Group>
                 
                 <Form.Group>

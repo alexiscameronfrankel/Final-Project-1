@@ -26,7 +26,7 @@ class MyRecipes extends Component {
              ;
                 console.log('error loading',response)   
             })
-            actions.getProfile(this.props.user._id)
+        actions.getProfile(this.props.user._id)
             .then(profile =>
                 console.log('myProfile received', profile))
                 // this.setState({myProfile: profile.data})

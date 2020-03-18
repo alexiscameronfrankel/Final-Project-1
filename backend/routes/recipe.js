@@ -17,6 +17,7 @@ const Recipe = require('../models/Recipe');
 router.get('/allrecipes', (req, res, next) => {   
     Recipe.find()
     .then(allRecipesFoundInDb => {
+        console.log('all recipes from backend',allRecipesFoundInDb)
         res.send(allRecipesFoundInDb)
     })
     .catch(err => console.log(err))

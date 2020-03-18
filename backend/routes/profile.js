@@ -83,13 +83,19 @@ router.get('/myRecipes',isAuth, (req, res, next) => {
 router.post('/myRecipes/addRecipe',isAuth, (req, res, next) => {
     let myProfileUserID= req.user._id
     let addRecipe=req.body
-    console.log('req.user.id in myrecipes', myProfileUserID)
-    Profile.find({UserID: myProfileUserID})
-    .then(profile => {
-        console.log(profile)
-        let profileRecipes=[...profile[0].recipes]
-        profileRecipes.push(addRecipe)
-        res.send(console.log("successfully added", addRecipe))
+    console.log('req.user.id in myrecipes', req.body)
+    Recipe.findOne({title: req.body.title}).then(recipeFound=>{
+        let saveRecipeID=recipeFound._id
+        Profile.find({UserID: myProfileUserID})
+        .then(profile => {
+            let profileRecipes=[...profile[0].recipes]
+            profileRecipes.push(saveRecipeID)
+            Profile.update({UserID:myProfileUserID},{recipes:profileRecipes}).then(savedRecicpes=>
+                res.send(console.log("successfully added", savedRecicpes))
+            .catch(err => console.log(err))
+            )
+        })
+        .catch(console.log("An error has occurred."))
     })
     .catch(console.log("An error has occurred."))
 });

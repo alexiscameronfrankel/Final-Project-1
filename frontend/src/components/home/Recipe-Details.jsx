@@ -30,9 +30,17 @@ class RecipeDetails extends Component {
     .catch(err => console.log(err))
     
  }
+
+ handleSave=()=>{
+  console.log('handlesave recipe to profile by title',{title: this.state.title})
+   actions.addProfileRecipes({title: this.state.title}).then(updateMyRecipes=>{
+     console.log(updateMyRecipes)
+   })
+   .catch(error=> console.log(error))
+}
   
   
-  render(...props) {
+  render() {
     console.log(this.state.ingredients)
     return (
       <div>
@@ -74,7 +82,8 @@ class RecipeDetails extends Component {
               <ListGroup>
                {/* <ListGroupItem className="main-card-subtitle prep-time">  */}
                  {console.log(this.state.ingredients)}
-                {this.state.ingredients && this.state.ingredients.map((item,i) => {return <ListGroupItem className="list-item text-center" key={i}>Ingredient:  {item}<hr></hr></ListGroupItem>})}
+                {this.state.ingredients && this.state.ingredients.map((item,i) => {
+                return <ListGroupItem className="list-item text-center" key={i}>Ingredient:  {item}<hr></hr></ListGroupItem>})}
                 </ListGroup>
               </Card.Header>
               <Card.Header>
@@ -90,8 +99,8 @@ class RecipeDetails extends Component {
                 <Card>
                 <Card.Header>
                 <ButtonGroup className="btn-group" aria-label="Basic example">
-                    <Button classname="main-card-source" variant="secondary" name="save-btn" size="lg"><i className="far fa-heart fa-2x"></i></Button>
-                    <Button variant="secondary" name="like-btn" size="lg"><i className="far fa-thumbs-up fa-2x"></i></Button>
+                    <Button classname="main-card-source" onClick={this.handleSave} variant="secondary" name="save-btn" size="lg"><i className="far fa-heart fa-2x"></i></Button>
+                    {/* <Button variant="secondary" name="like-btn" size="lg"><i className="far fa-thumbs-up fa-2x"></i></Button> */}
                     {/* <Button variant="secondary" name="dislike-btn" size="lg"><i className="far fa-thumbs-down"></i></Button>  */}
                     <Button variant="secondary" name="youtube-btn" size="lg"><a  href={this.state.video} className="main-card-source"><i class="fab fa-youtube-square fa-2x"></i></a></Button>
                     <Button variant="secondary" name="source-btn" size="lg"><a  href={this.state.source} className="main-card-source"><i  class="fas fa-external-link-alt fa-2x"></i></a></Button>

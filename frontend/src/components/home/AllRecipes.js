@@ -12,24 +12,24 @@ class AllRecipes extends Component {
     //still looking into more ideas
     //need state sent to be sent
    state = {
-      allrecipes:[],
-      title: String
+      allrecipes:[]
+    //   title: String
    }
 
     async componentDidMount() {
         let recipes = await actions.allRecipes()
+        console.log(recipes.data)
         this.setState({
             allrecipes: recipes.data,
-            title: recipes.data[0].title
+            // title: recipes.data[0].title
         })
-        console.log(recipes)
     }
 
   
 
 
 
-    render(...props) {
+    render() {
         
         return (
             <Container className="home-recipe">
@@ -47,6 +47,7 @@ class AllRecipes extends Component {
                 >
                     
                     {this.state.allrecipes.map(eachRecipe => {
+                    console.log(eachRecipe)
                     return (<Fragment>
                         <div key={eachRecipe._id}
                     // {/* // onClick={() => fn()}

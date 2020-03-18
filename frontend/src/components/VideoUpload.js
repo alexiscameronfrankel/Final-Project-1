@@ -39,18 +39,18 @@ class AddThing extends Component {
     }
 
     // this method submits the form
-    handleSubmit = e => {
-        e.preventDefault();
+    // handleSubmit = e => {
+    //     e.preventDefault();
         
-        service.saveNewThing(this.state)
-        .then(res => {
-            console.log('added: ', res);
-            // here you would redirect to some other page 
-        })
-        .catch(err => {
-            console.log("Error while adding the thing: ", err);
-        });
-    }  
+    //     service.saveNewThing(this.state)
+    //     .then(res => {
+    //         console.log('added: ', res);
+    //         // here you would redirect to some other page 
+    //     })
+    //     .catch(err => {
+    //         console.log("Error while adding the thing: ", err);
+    //     });
+    // }  
     
     render() {
         return (
@@ -71,7 +71,7 @@ class AddThing extends Component {
                 <input 
                     type="file" 
                     onChange={(e) => this.handleFileUpload(e)} /> 
-                <button type="submit">Save new thing</button>
+                {/* <button type="submit">Save new thing</button> */}
             </form>
           </div>
         );

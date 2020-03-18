@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import actions from '../../services/index'
-import { Container, Card, ListGroup, ListGroupItem,Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import { Container, Card, ListGroup, ListGroupItem,Button, ButtonGroup, Form } from 'react-bootstrap';
 import Footer from '../Footer';
 // import Searchbar from './Searchbar';
 import Axios from 'axios';
@@ -146,7 +146,7 @@ class Random extends Component {
           <Card.Header>
           <Card.Title className="text-center main-card-title" >{this.state.info.title}</Card.Title>
           </Card.Header>
-          <Card.Subtitle className="mb-2 text-muted main-card-subtitle text-center">Dish Type: {this.state.info.category}  | Area: {this.state.info.area}   |   Tags: {this.state.info.tags}</Card.Subtitle>
+          <Card.Subtitle className="mb-2 text-muted main-card-subtitle text-center">Category: {this.state.info.category} | Dish Type: {this.state.info.dishtype}  | Area: {this.state.info.area}   |   Tags: {this.state.info.tags}</Card.Subtitle>
           <Card.Header>
               <Card.Img className= "main-card-image" variant="top" src={this.state.info.image} />
           </Card.Header>
@@ -163,24 +163,53 @@ class Random extends Component {
                 </Card.Text>
               </Card.Header>
               </Card.Body>
+              <Card.Body className="measurements-list">
               <Card.Header>
-              <ListGroup className="list-group-flush text-center">
-                <ListGroupItem className="main-card-subtitle prep-time">Prep Time - 10 Minutes |
-                Cook Time - 20 Minutes |
-                Ready In - 30 Mintues</ListGroupItem>
+              <ListGroup>
+               {/* <ListGroupItem className="main-card-subtitle prep-time">  */}
+                 {console.log(this.state.info.ingredients)}
+                {this.state.info.ingredients && this.state.info.ingredients.map((item,i) => {return <ListGroupItem className="list-item" key={i}>Ingredient:{item}<hr></hr></ListGroupItem>})}
+                </ListGroup>
+              </Card.Header>
+              <Card.Header>
+              <ListGroup>
+                {this.state.info.measurements && this.state.info.measurements.map((item,i) => {return <ListGroupItem className="list-item" key={i}>Amount Needed: {item}<hr></hr></ListGroupItem>})}
+                {/* </ListGroupItem> */}
+                
               </ListGroup>
               </Card.Header>
+              </Card.Body>
               <Card.Body>
                 <Card>
                 <Card.Header>
                   <ButtonGroup className="btn-group" aria-label="Basic example">
                     <Button onClick={this.handleSave} variant="secondary" name="save-btn" size="lg"><i className="far fa-heart"></i></Button>
-                    <Button variant="secondary" name="like-btn" size="lg"><i className="far fa-thumbs-up"></i></Button>
-                    <Button variant="secondary" name="dislike-btn" size="lg"><i className="far fa-thumbs-down"></i></Button>
+                    {/* <Button variant="secondary" name="like-btn" size="lg"><i className="far fa-thumbs-up"></i></Button> */}
+                    {/* <Button variant="secondary" name="dislike-btn" size="lg"><i className="far fa-thumbs-down"></i></Button> */}
                     <Button variant="secondary" name="youtube-btn" size="lg"><a  href={this.state.info.video} className="main-card-source"><i class="fab fa-youtube-square"></i></a></Button>
                     <Button variant="secondary" name="source-btn" size="lg"><a  href={this.state.info.source} className="main-card-source"><i  class="fas fa-external-link-alt"></i></a></Button>
                     <Button variant="secondary" name="edit-recipe" size="lg">Edit Recipe</Button>
                   </ButtonGroup>
+                </Card.Header>
+                <Card.Header>
+                <Form.Label>Leave a comment below</Form.Label>
+                <Form.Group className="comment-form" id="comment-form" controlId="exampleForm.ControlTextarea1">
+                
+                <Form.Control as="textarea" rows="3" />
+                <Button variant="secondary" name="save-btn" size="lg"><i className="far fa-comments fa-2x"></i></Button>
+                </Form.Group>
+                  </Card.Header>
+                  <Card.Header>
+                      <Form.Label>Previous Comments</Form.Label>
+                      <ListGroup>
+                          <ListGroupItem>
+                              
+                              <p><strong><q>This recipe my whole family loved. If I were to change one thing I would add more butter</q></strong></p>
+                              <div className="previous-comments"><img src="https://www.w3schools.com/w3images/avatar2.png" alt="Avatar" class="avatar"></img>
+                              <h4 className="pc-user">-Michael Cooper</h4>
+                              </div>
+                          </ListGroupItem>
+                      </ListGroup>
                   </Card.Header>
                 
                 </Card>

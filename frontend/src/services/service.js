@@ -31,9 +31,12 @@ export default {
       .catch(errorHandler);
   },
 
-  async saveNewThing (newThing) {
-    // console.log('new thing is: ', newThing)
-    return service.post('/things/create', newThing)
+//below will save the entire recipe and POST it to MongoDB
+
+
+  async saveNewThing (recipe) {
+    console.log('new thing is: ', recipe)
+    return service.post('api/recipe/create', recipe)
       .then(res => res.data)
       .catch(errorHandler);
   }

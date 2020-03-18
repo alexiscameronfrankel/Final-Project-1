@@ -190,6 +190,7 @@ li {
 
 .btn-group {
   display: flex;
+  position: static;
 }
 
 #App {
@@ -216,6 +217,10 @@ li {
   margin-bottom: 10px;
   color: #d1d1d1;
   transition: color 0.2s;
+}
+
+.menu-item {
+  text-decoration: none !important;
 }
 
 /* Change color on hover */
@@ -547,6 +552,7 @@ Adding Random Page Styles */
 .main-card-title {
   padding-top: 20px;
   font-size: 3rem;
+  color: #4778d9;
 }
 
 .main-card-subtitle {
@@ -565,6 +571,7 @@ Adding Random Page Styles */
   font-size: 1.2rem;
   font-family: Arial, Helvetica, sans-serif;
   padding: 12px;
+  color: #191970;
 }
 
 .main-card-source {
@@ -577,8 +584,68 @@ Adding Random Page Styles */
   padding-left: 12px;
 }
 
-.btn-group {
-  width: 50%;
+
+
+.measurements-list {
+  display: flex;
+  flex-direction: row !important;
+  place-content: space-evenly;
+  font-size: 1rem;
+  color: #191970fc;
+  background-color: #191970fc;
+
+}
+
+.list-item {
+  border: 1px solid black;
+}
+
+
+.comment-form {
+  display: flex;
+  align-content: space-between;
+}
+
+#comment-form {
+  width: 100%;
+}
+.ingredients {
+  width: 100%;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.previous-comments {
+  display: flex;
+  float: right;
+}
+
+.pc-user {
+  padding: 10px 20px;
+}
+
+.account-btn {
+  text-decoration: none !important;
+  color: white;
+}
+
+.all-recipes {
+  float: right;
+  color: white;
+}
+
+.recipe-header {
+  height: 90px;
+  background-color: #191970;
+}
+
+.recipe-card {
+  text-decoration: none !important;
 }
 
 

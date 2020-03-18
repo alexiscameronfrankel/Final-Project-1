@@ -143,15 +143,13 @@ class Account extends Component {
                 </Form.Group>
                 
                 <Form.Group>
-                    <Form.Control type="hidden" name="MAX_FILE_SIZE" value="4194304" />
-                    <Form.Control name="avatar" placeholder="Upload Avatar Image" type="file" 
-                    onChange={this.handleFileUpload}/>
-                    <small id="emailHelp" className="form-text text-muted">Avatar Upload. 4MB Maximum.</small>
+                    <Form.Control name="avatar" placeholder="Input Avatar Image URL" type="link"/>
+                    <small id="emailHelp" className="form-text text-muted">Example: "www.google.com/images/imagename.jpg"</small>
 
                 </Form.Group>
                 <Form.Group id="categoryGridCheckbox">
                 <Form.Label>Please Select Any Dietary Restrictions Below</Form.Label>
-                    <Form.Check type="checkbox" label="Vegetarian" value="Vegetarian" name="category" onChange={this.putCategoryInState}/>
+                    <Form.Check type="checkbox" label="Vegetarian" value="Vegetarian" name="category" checked="true" onChange={this.putCategoryInState}/>
                     <Form.Check type="checkbox" label="Vegan" value="Vegan" onChange={this.putCategoryInState}/>
                     <Form.Check type="checkbox" label="Gluten Free" value="Gluten Free" onChange={this.putCategoryInState}/>
                     <Form.Check type="checkbox" label="Diary Free" value="Diary Free" onChange={this.putCategoryInState}/>

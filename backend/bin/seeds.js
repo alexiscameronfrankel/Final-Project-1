@@ -327,7 +327,7 @@ const data = [
         {
             title: "Banana Pancakes",
             category: "Other",
-            dishtype: "Desset",
+            dishtype: "Dessert",
             cuisine:"American",
             area: "USA",
             instructions: "In a bowl, mash the banana with a fork until it resembles a thick purée. Stir in the eggs, baking powder and vanilla. Heat a large non-stick frying pan or pancake pan over a medium heat and brush with half the oil. Using half the batter, spoon two pancakes into the pan, cook for 1-2 mins each side, then tip onto a plate. Repeat the process with the remaining oil and batter. Top the pancakes with the pecans and raspberries.",
@@ -606,7 +606,7 @@ const data = [
             },
         {
             title: "Kapsalon",
-            category: "Lamb",
+            category: "Other",
             dishtype: "Dish",
             cuisine:"Dutch",
             area: "Dutch",
@@ -1094,7 +1094,7 @@ const data = [
             {
                 title: "Spicy Arrabiata Penne",
                 category: "Vegetarian",
-                dishtype: "Dinner",
+                dishtype: "Dish",
                 cuisine:"Italian",
                 area: "Italy",
                 instructions: "Bring a large pot of water to a boil. Add kosher salt to the boiling water, then add the pasta. Cook according to the package instructions, about 9 minutes. In a large skillet over medium-high heat, add the olive oil and heat until the oil starts to shimmer. Add the garlic and cook, stirring, until fragrant, 1 to 2 minutes. Add the chopped tomatoes, red chile flakes, Italian seasoning and salt and pepper to taste. Bring to a boil and cook for 5 minutes. Remove from the heat and add the chopped basil. Drain the pasta and add it to the sauce. Garnish with Parmigiano-Reggiano flakes and more basil and serve warm.",

@@ -1,9 +1,10 @@
 //PAST ALEXIS TO FUTURE ALEXIS: Your schema wasn't POSTing to MongoDB because value types were off from the actual model
 import React, { Component, Fragment } from 'react';
 import service from '../services/service';
+import { Button, Form, Col } from 'react-bootstrap';
+import actions from '../services/index';
 // import ImageUpload from './ImageUpload.js'
 // import VideoUpload from './VideoUpload.js'
-import { Button, Form, Col } from 'react-bootstrap'
 
 
 //below gets current milliseconds elapsed and then converts it to actual date...date is value in created property//
@@ -27,35 +28,27 @@ class Newrecipe extends Component {
         video: "",
         tags: "",
         comments: [], 
-        ProfileID: "",
+        profileID: "",
         created: date,
-        imageUrl: "",
       }
 
-    // handleChange = e => {
-    //   console.log(this.state)
-    //   this.setState({[e.target.name]: e.target.value})
-    // }
 
-    // handleSubmit = e => {
-    //     e.preventDefault()
-    //         actions.newRecipe(this.state)
-    //         .then(recipe=> {
-    //             console.log(recipe) 
-    //         }).catch(({ response }) => console.error(response));
-    // }
+    //On page load will get profile ID for new recipe
+    async componentDidMount(){
+        actions.getProfile(this.props.user._id).then(profileFound=>{
+            console.log(profileFound.data[0])
+            this.setState({
+                ProfileID: profileFound.data[0]._id
+            })
+        })
+    }
+
     handlePersonTyping = (e) => {
         console.log(e.target.name, e.target.value);
-        this.setState({
-            
-            
-            
+        this.setState({   
             [e.target.name]:e.target.value,
-        
-        
         })
-       
-     }
+    }
 
 
      //handle checkbox functionality 
@@ -84,8 +77,7 @@ class Newrecipe extends Component {
         }
      }
 
-    /////////////////////////
-
+///SETS STATE PROPERTY DISHTYPE
     putDishTypeInState = (e) => {
         console.log('putDishTypeInState is being called')
         console.log(e.target.value)
@@ -95,36 +87,6 @@ class Newrecipe extends Component {
         
         }) 
     }
-
-//I THINK YOU CAN DELETE ALL THIS COMMENTED STUFF.....GO THROUGH IT
-
-    // addIngredientColumn = (e) => {
-    //     <Form.Group controlId="Measurments">
-    //     <Form.Label>Measurments</Form.Label>
-    //     <Form.Control name="measurement1" type="text" placeholder="Add your measurments" onChange={this.handlePersonTyping}/>
-    //     </Form.Group>
-    // }
-
-    // addIngredient = (e) => {
-    //     this.setState({
-            
-    //         dishtype: e.target.value
-        
-    //     }) 
-    // }
-
-    // putCuisineInState = (e) => {
-    //     console.log('putCuisineInState is being called')
-    //     console.log(this.state.title)
-    //     this.setState({
-            
-    //         cuisine: e.target.value
-        
-    //     }) 
-    // }
-  
-  
-
 
 ///HANDLE TYPING FUNCTIONALITY 
 
@@ -145,15 +107,6 @@ class Newrecipe extends Component {
             measurements: measurementsCopy,
         })
      }
-
-    //  handleInstructionTyping = (e) => {
-    //     console.log(e.target.name, e.target.value);
-    //     let instructionsCopy = [...this.state.instructions]
-    //     instructionsCopy[e.target.name] = e.target.value
-    //     this.setState({
-    //         instructions: instructionsCopy,
-    //     })
-    //  }
 
      handleTagTyping = (e) => {
         console.log(e.target.name, e.target.value);
@@ -182,49 +135,7 @@ class Newrecipe extends Component {
          })
      }
 
-    //  addMeasurementRow = () => {
-    //     console.log("inside add this measurement")
-    //     let measurementsCopy = [...this.state.measurements]
-    //     measurementsCopy.push("")
-    //     this.setState({
-    //         measurements: measurementsCopy
-    //     })
-    // }
-
-    // addInstructionsRow = () => {
-    //     console.log("inside add this instructions")
-    //     let instructionsCopy = [...this.state.instructions]
-    //     instructionsCopy.push("")
-    //     console.log(instructionsCopy)
-    //     this.setState({
-    //         instructions: instructionsCopy
-    //     })
-    // }
-
-    // addTagRow = () => {
-    //     console.log("inside add this tags")
-    //     let tagsCopy = [...this.state.tags]
-    //     tagsCopy.push("")
-    //     console.log(tagsCopy)
-    //     this.setState({
-    //         tags: tagsCopy
-    //     })
-    // }
-
-// DELETING ROW FUNCTIONALITY 
-
-    // deleteInstruction = () => {
-    //     console.log("inside delete instruction")
-    //     let instructionsCopy = [...this.state.instructions]
-    //     instructionsCopy.pop() //NOTE THAT THIS ONE POPS LAST VALUE OFF THE ARRAY 
-    //     console.log(instructionsCopy)
-    //     this.setState({
-    //         instructions: instructionsCopy
-    //     })
-    // }
-
-    //not really sure why the method below works
-
+///HANDLES DELETE INGREDIENT IN FORM
     deleteIngredient = (e,index) => {
         e.preventDefault()
         console.log("inside delete ingredient")
@@ -239,28 +150,6 @@ class Newrecipe extends Component {
             measurements: measurementsCopy
         })
     }
-
-    // deleteMeasurement = (e,index) => {
-    //     e.preventDefault()
-    //     console.log("inside delete measurement")
-    //     let measurementsCopy = [...this.state.measurements]
-    //     measurementsCopy.splice(index, 1);
-    //     console.log(measurementsCopy)
-    //     this.setState({
-    //         measurements: measurementsCopy
-    //     })
-    // }
-
-    // deleteTag = (e,index) => {
-    //     e.preventDefault()
-    //     console.log("inside delete tag")
-    //     let tagsCopy = [...this.state.tags]
-    //     tagsCopy.splice(index, 1);
-    //     console.log(tagsCopy)
-    //     this.setState({
-    //         tags: tagsCopy
-    //     })
-    // }
 
 // HANDLE IMAGE UPLOAD 
 
@@ -327,7 +216,6 @@ handleSubmit = e => {
 
     
     render() {
-        // console.log(this.state.category)
         return (
             <div>
             <h1>NEW RECIPE</h1>

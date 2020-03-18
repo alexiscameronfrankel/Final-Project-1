@@ -13,26 +13,27 @@ import {Link} from 'react-router-dom';
 
 
 class Profile extends Component {
-
-    state = {
-        myProfile: [],
+    state={
+        ready:false
     }
-        
     async componentDidMount (){
         actions.findProfileRecipes(this.props.user._id)
-            .then(myRecipes => 
-                console.log('myRecipesReceived', myRecipes))
+            .then(myRecipes => {
+                console.log('myRecipesReceived', myRecipes)
+                this.setState({...myRecipes.data})
+            })
                 // this.setState({savedRecipes: myRecipes.data})
             .catch(({ response }) => {
              ;
                 console.log('error loading',response)   
             })
         actions.getProfile(this.props.user._id)
-            .then( profile =>{
-                console.log('myProfile received', profile)
-                this.setState({myProfile: profile.data[0]})
+            .then(profile =>{
+                this.setState({...profile.data[0]})
+                this.setState({ready:true})
+                console.log('myProfile received', profile.data[0])
             })
-                
+                // this.setState({myProfile: profile.data})
             .catch(({ response }) =>
             console.log('error loading',response))
         };
@@ -42,29 +43,18 @@ class Profile extends Component {
         // } 
 
         render (){
-            console.log()
+            console.log('this is profile state', this.state)
         return (
         <div>
-            {/* Profile
-            Welcome {props.user.email} !!!  */}
-            <Container className="home-recipe">
-          {/* <img className="hero-img" src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F5446883.jpg&w=596&h=596&c=sc&poi=face&q=85"></img>
-          <div className="hero-recipe">
-          <h1 className="recipe-title">My Recipe Name</h1>
-          <ul>
-            <li>Step 1 - Boil Water at High Heat</li>
-            <li>Step 2 - Boil Meat for 30 minutes</li>
-            <li>Step 3 - Dice Vegetables into a Juliene Cut</li>
-            <li>Step 4 - Prep Appetizers and Grab a Beer</li>
-          </ul>
-          </div> */}
+        <Container className="home-recipe">
+         
           
           <Card id="main-card" 
           style={{ width: '100%' }}>
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title"> {this.state.myProfile.username || this.props.user.email} | Dashboard </h1>
+                <h1 className="prof-title"> {this.state.ready ? this.state.username : this.props.user.email} | Dashboard </h1>
             </Card.Header> 
           </Card.Title>
           <Card.Header>
@@ -86,24 +76,28 @@ class Profile extends Component {
         <Card className="sm-card" id="main-card" style={{ width: '100%' }}>
             <Card.Header>Current Profile</Card.Header>
             <Card.Header>
+            {this.state.ready ?
             <div className="prof-avatar">
             <Card.Header>
-                <Card.Img className="my-avatar" src="https://www.w3schools.com/w3images/avatar2.png"></Card.Img>
+                <Card.Img className="my-avatar" src={this.state.imageUrl}></Card.Img>
                 </Card.Header>
                 <Card.Header className="my-avatar-header">
                 <ListGroup>
-                    <ListGroup.Item className="prof-list-item">Username: <span className="account-info"> {this.state.myProfile.username}</span></ListGroup.Item>
-                    <ListGroup.Item className="prof-list-item">First Name: <span className="account-info"> {this.state.myProfile.firstName}</span></ListGroup.Item>
-                    <ListGroup.Item className="prof-list-item">Last Name: <span className="account-info"> {this.state.myProfile.lastName}</span></ListGroup.Item>
+                    <ListGroup.Item className="prof-list-item">Username: <span className="account-info"> {this.state.username} </span></ListGroup.Item>
+                    <ListGroup.Item className="prof-list-item">First Name: <span className="account-info"> {this.state.firstName}</span></ListGroup.Item>
+                    <ListGroup.Item className="prof-list-item">Last Name: <span className="account-info"> {this.state.lastName}</span></ListGroup.Item>
                 </ListGroup>
                 <ListGroup>
-                    <ListGroup.Item className="prof-list-item">Dietary Preferences: <span className="account-info">{this.state.myProfile.dietPreference}</span></ListGroup.Item>
-                    <ListGroup.Item className="prof-list-item">Allergies: <span className="account-info">{this.state.myProfile.allergies}</span></ListGroup.Item>
+                    <ListGroup.Item className="prof-list-item">Dietary Preferences: <span className="account-info">{this.state.dietPreference}</span></ListGroup.Item>
+                    <ListGroup.Item className="prof-list-item">Allergies: <span className="account-info">{this.state.allergies}</span></ListGroup.Item>
                 </ListGroup>
                 </Card.Header>
             </div>
+                : 
+                ("Loading")
+            }
             </Card.Header>
-            <Button type="submit" size="lg" className="btn btn-primary account-button block" ><Link className="account-btn" to="/account"><i className="fas fa-user-cog fa-2x"></i> Account</Link> </Button>
+            <Button type="submit" size="lg" className="btn btn-primary account-button block" ><Link className="account-btn" to="/account" ><i className="fas fa-user-cog fa-2x"></i> Account</Link> </Button>
             </Card>
             
         

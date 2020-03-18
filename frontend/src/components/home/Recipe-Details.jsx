@@ -28,6 +28,17 @@ class RecipeDetails extends Component {
           
         })})
     .catch(err => console.log(err))
+    console.log("test")
+    actions.findProfileRecipes(this.props.match.params.recipeID)
+    .then(recipeFound =>
+        {console.log(recipeFound.data)
+        this.setState( {
+            ...recipeFound.data
+          
+        })})
+    .catch(err => console.log(err))
+
+
     
  }
 

@@ -54,7 +54,7 @@ class Profile extends Component {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title"> {this.state.myProfile.username || this.props.user.email} | Dashboard </h1>
+                <h1 className="prof-title"> {this.state.username || this.props.user.email} | Dashboard </h1>
             </Card.Header> 
           </Card.Title>
           <Card.Header>

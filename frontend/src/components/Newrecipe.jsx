@@ -1,9 +1,10 @@
 //PAST ALEXIS TO FUTURE ALEXIS: Your schema wasn't POSTing to MongoDB because value types were off from the actual model
 import React, { Component, Fragment } from 'react';
 import service from '../services/service';
-import ImageUpload from './ImageUpload.js'
-import VideoUpload from './VideoUpload.js'
+// import ImageUpload from './ImageUpload.js'
+// import VideoUpload from './VideoUpload.js'
 import { Button, Form, Col } from 'react-bootstrap'
+
 
 //below gets current milliseconds elapsed and then converts it to actual date...date is value in created property//
 
@@ -21,10 +22,10 @@ class Newrecipe extends Component {
         cuisine:"",
         ingredients: [""],
         measurements: [""],
-        instructions: [""],
-        image: "", 
+        instructions: "",
+        imageUrl: "", 
         video: "",
-        tags: [""],
+        tags: "",
         comments: [], 
         ProfileID: "",
         created: date,
@@ -145,14 +146,14 @@ class Newrecipe extends Component {
         })
      }
 
-     handleInstructionTyping = (e) => {
-        console.log(e.target.name, e.target.value);
-        let instructionsCopy = [...this.state.instructions]
-        instructionsCopy[e.target.name] = e.target.value
-        this.setState({
-            instructions: instructionsCopy,
-        })
-     }
+    //  handleInstructionTyping = (e) => {
+    //     console.log(e.target.name, e.target.value);
+    //     let instructionsCopy = [...this.state.instructions]
+    //     instructionsCopy[e.target.name] = e.target.value
+    //     this.setState({
+    //         instructions: instructionsCopy,
+    //     })
+    //  }
 
      handleTagTyping = (e) => {
         console.log(e.target.name, e.target.value);
@@ -169,54 +170,58 @@ class Newrecipe extends Component {
 
      addIngredientRow = () => {
          console.log("inside add this ingredient")
+         console.log("inside add this measurement")
          let ingredientsCopy = [...this.state.ingredients]
+         let measurementsCopy = [...this.state.measurements]
          ingredientsCopy.push("")
+         measurementsCopy.push("")
          console.log(ingredientsCopy)
          this.setState({
-             ingredients: ingredientsCopy
+             ingredients: ingredientsCopy,
+             measurements: measurementsCopy
          })
      }
 
-     addMeasurementRow = () => {
-        console.log("inside add this measurement")
-        let measurementsCopy = [...this.state.measurements]
-        measurementsCopy.push("")
-        this.setState({
-            measurements: measurementsCopy
-        })
-    }
+    //  addMeasurementRow = () => {
+    //     console.log("inside add this measurement")
+    //     let measurementsCopy = [...this.state.measurements]
+    //     measurementsCopy.push("")
+    //     this.setState({
+    //         measurements: measurementsCopy
+    //     })
+    // }
 
-    addInstructionsRow = () => {
-        console.log("inside add this instructions")
-        let instructionsCopy = [...this.state.instructions]
-        instructionsCopy.push("")
-        console.log(instructionsCopy)
-        this.setState({
-            instructions: instructionsCopy
-        })
-    }
+    // addInstructionsRow = () => {
+    //     console.log("inside add this instructions")
+    //     let instructionsCopy = [...this.state.instructions]
+    //     instructionsCopy.push("")
+    //     console.log(instructionsCopy)
+    //     this.setState({
+    //         instructions: instructionsCopy
+    //     })
+    // }
 
-    addTagRow = () => {
-        console.log("inside add this tags")
-        let tagsCopy = [...this.state.tags]
-        tagsCopy.push("")
-        console.log(tagsCopy)
-        this.setState({
-            tags: tagsCopy
-        })
-    }
+    // addTagRow = () => {
+    //     console.log("inside add this tags")
+    //     let tagsCopy = [...this.state.tags]
+    //     tagsCopy.push("")
+    //     console.log(tagsCopy)
+    //     this.setState({
+    //         tags: tagsCopy
+    //     })
+    // }
 
 // DELETING ROW FUNCTIONALITY 
 
-    deleteInstruction = () => {
-        console.log("inside delete instruction")
-        let instructionsCopy = [...this.state.instructions]
-        instructionsCopy.pop() //NOTE THAT THIS ONE POPS LAST VALUE OFF THE ARRAY 
-        console.log(instructionsCopy)
-        this.setState({
-            instructions: instructionsCopy
-        })
-    }
+    // deleteInstruction = () => {
+    //     console.log("inside delete instruction")
+    //     let instructionsCopy = [...this.state.instructions]
+    //     instructionsCopy.pop() //NOTE THAT THIS ONE POPS LAST VALUE OFF THE ARRAY 
+    //     console.log(instructionsCopy)
+    //     this.setState({
+    //         instructions: instructionsCopy
+    //     })
+    // }
 
     //not really sure why the method below works
 
@@ -224,34 +229,85 @@ class Newrecipe extends Component {
         e.preventDefault()
         console.log("inside delete ingredient")
         let ingredientsCopy = [...this.state.ingredients]
-        ingredientsCopy.splice(index, 1);
-        console.log(ingredientsCopy)
-        this.setState({
-            ingredients: ingredientsCopy
-        })
-    }
-
-    deleteMeasurement = (e,index) => {
-        e.preventDefault()
-        console.log("inside delete measurement")
         let measurementsCopy = [...this.state.measurements]
+        ingredientsCopy.splice(index, 1);
         measurementsCopy.splice(index, 1);
+        console.log(ingredientsCopy)
         console.log(measurementsCopy)
         this.setState({
+            ingredients: ingredientsCopy,
             measurements: measurementsCopy
         })
     }
 
-    deleteTag = (e,index) => {
-        e.preventDefault()
-        console.log("inside delete tag")
-        let tagsCopy = [...this.state.tags]
-        tagsCopy.splice(index, 1);
-        console.log(tagsCopy)
-        this.setState({
-            tags: tagsCopy
-        })
-    }
+    // deleteMeasurement = (e,index) => {
+    //     e.preventDefault()
+    //     console.log("inside delete measurement")
+    //     let measurementsCopy = [...this.state.measurements]
+    //     measurementsCopy.splice(index, 1);
+    //     console.log(measurementsCopy)
+    //     this.setState({
+    //         measurements: measurementsCopy
+    //     })
+    // }
+
+    // deleteTag = (e,index) => {
+    //     e.preventDefault()
+    //     console.log("inside delete tag")
+    //     let tagsCopy = [...this.state.tags]
+    //     tagsCopy.splice(index, 1);
+    //     console.log(tagsCopy)
+    //     this.setState({
+    //         tags: tagsCopy
+    //     })
+    // }
+
+// HANDLE IMAGE UPLOAD 
+
+handleChange = e => {  //THIS IS FOR VIDEO UPLOAD TOO
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+}
+
+handleFileUpload = e => {
+    console.log("The file to be uploaded is: ", e.target.files[0]);
+
+    const uploadData = new FormData();
+    // imageUrl => this name has to be the same as in the model since we pass
+    // req.body to .create() method when creating a new thing in '/api/things/create' POST route
+    uploadData.append("imageUrl", e.target.files[0]);
+    
+    service.handleUpload(uploadData)
+    .then(response => {
+        console.log('response is: ', response);
+        // after the console.log we can see that response carries 'secure_url' which we can use to update the state 
+        this.setState({ imageUrl: response.secure_url });
+      })
+      .catch(err => {
+        console.log("Error while uploading the file: ", err);
+      });
+}
+
+
+//HANDLE VIDEO UPLOAD 
+handleFileUpload = e => {
+    console.log("The file to be uploaded is: ", e.target.files[0]);
+
+    const uploadData = new FormData();
+    // imageUrl => this name has to be the same as in the model since we pass
+    // req.body to .create() method when creating a new thing in '/api/things/create' POST route
+    uploadData.append("video", e.target.files[0]);
+    
+    service.handleUploadVideo(uploadData)
+    .then(response => {
+        console.log('response is: ', response);
+        // after the console.log we can see that response carries 'secure_url' which we can use to update the state 
+        this.setState({ video: response.secure_url });
+      })
+      .catch(err => {
+        console.log("Error while uploading the file: ", err);
+      });
+}
 
 //SUBMIT FORM FUCNTIONALITY
 
@@ -318,20 +374,21 @@ handleSubmit = e => {
                             return(
                             <Fragment>
                             <Form.Control name={index} type="text" placeholder="Add your measurements" value={eachMeasurement} onChange={this.handleMeasurementTyping}/>
-                            <Button variant="secondary" size="sm" onClick={(e) => this.deleteMeasurement(e,index)}>
+                            {/* <Button variant="secondary" size="sm" onClick={(e) => this.deleteMeasurement(e,index)}>
                            DELETE MEASUREMENT
-                            </Button>
+                            </Button> */}
                             </Fragment>)
                             
                         })}
-                        <Button variant="secondary" size="sm" onClick={this.addMeasurementRow}>
+                        {/* <Button variant="secondary" size="sm" onClick={this.addMeasurementRow}>
                            ADD MEASUREMENT
-                        </Button>
+                        </Button> */}
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="Instructions">
                         <Form.Label>Instructions</Form.Label>
-                        {this.state.instructions.map((eachInstruction, index) => {
+                        <Form.Control name="instructions" type="text" placeholder="Type your instructions" onChange={this.handlePersonTyping}/>
+                        {/* {this.state.instructions.map((eachInstruction, index) => {
                             return(
                             <Fragment>
                             <Form.Control name={index} type="text" placeholder="Add your instructions" onChange={this.handleInstructionTyping}
@@ -343,12 +400,12 @@ handleSubmit = e => {
                         })}
                     <Button variant="secondary" size="sm" onClick={this.addInstructionsRow}>
                            ADD INSTRUCTION
-                    </Button>
+                    </Button> */}
                     </Form.Group>
 
                     <Form.Group controlId="Video">
                         <Form.Label>Video</Form.Label>
-                        <VideoUpload/>
+                        {/* <VideoUpload/> */}
                     </Form.Group>
 
                     <Form.Row>
@@ -379,13 +436,16 @@ handleSubmit = e => {
 
                         <Form.Group as={Col} controlId="Image">
                         <Form.Label>Image</Form.Label>
-                        <ImageUpload/>
+                        <input 
+                    type="file" 
+                    onChange={(e) => this.handleFileUpload(e)} /> 
                         </Form.Group>
                     </Form.Row>
-        {/* BELOW WHERE TAGS INPUT IS */}
-        <Form.Group controlId="Tags">
-                        <Form.Label>Tags</Form.Label>
-                        {this.state.tags.map((eachTag, index) => 
+            {/* BELOW WHERE TAGS INPUT IS */}
+             <Form.Group controlId="Tags">
+                <Form.Label>Tags</Form.Label>
+                <Form.Control name="tags" type="text" placeholder="Seperate with commas" onChange={this.handlePersonTyping}/>
+                        {/* {this.state.tags.map((eachTag, index) => 
                              {
                             return(
                             <Fragment>
@@ -398,7 +458,7 @@ handleSubmit = e => {
                         })}
                         <Button variant="secondary" size="sm" onClick={this.addTagRow}>
                            ADD TAG
-                        </Button>
+                        </Button> */}
                     </Form.Group>
                         <Button variant="primary" type="submit">
                             Submit

@@ -31,12 +31,33 @@ router.post('/uploadvideo', uploadervideo.single("video"), (req, res, next) => {
 
 //the other side return service.post('/recipe/create', recipe) <--- makes this work
 
-router.post('/recipe/create', (req,res,next) => {
-  console.log('the body', req.body);
-  Recipe.create(req.body) 
-  .then(data => res.json(data)).catch(err => res.json(err)) //returns response
+// router.post('/recipe/create', (req,res,next) => {
+//   console.log('the body', req.body);
+//   Recipe.create(req.body) 
+//   .then(data => res.json(data)).catch(err => res.json(err)) //returns response
 
-})
+// })
+
+router.post('/recipe/create',isAuth, (req, res, next) => {
+  console.log('inside create new recipe',req.body)
+  let duplicateRecipe=0
+  Recipe.find({title:req.body.title})
+  .then(RecipeFound=> {
+      console.log('RecipeFound',RecipeFound)
+      if (RecipeFound.length>0){duplicateRecipe=1}
+      if (duplicateRecipe<1){
+          Recipe.create(req.body)
+          .then(recipeCreated => res.json(recipeCreated))
+          .catch(err => console.log(err))
+      }
+      console.log('duplicateRecipe',duplicateRecipe)
+      res.send(RecipeFound)
+  })
+  .catch(error => {
+      console.log('recipe already exist',error)
+  })
+      
+});
 
 function isAuth(req, res, next) {
   req.isAuthenticated() ? next() : res.status(401).json({ msg: 'Log in first' });

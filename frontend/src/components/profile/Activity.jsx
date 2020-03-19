@@ -2,7 +2,7 @@ import React, { Fragment, Component } from 'react';
 import { Container, Card, ListGroup, Button, ButtonGroup,} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import actions from '../../services/index';
-
+import InfiniteCarousel from 'react-leaf-carousel';
 var Coverflow = require('react-coverflow');
 
 class Activity extends Component {

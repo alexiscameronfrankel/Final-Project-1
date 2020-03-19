@@ -2,7 +2,7 @@
 
 import React from "react";
 import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
-import {EmailShareButton, FacebookShareButton, InstapaperShareButton, LineShareButton, LinkedinShareButton, LivejournalShareButton, MailruShareButton, OKShareButton, PinterestShareButton, PocketShareButton, RedditShareButton, TelegramShareButton, TumblrShareButton, TwitterShareButton, ViberShareButton, VKShareButton, WhatsappShareButton, WorkplaceShareButton} from 'react-share';
+import {FacebookShareButton, LinkedinShareButton, TumblrShareButton, TwitterShareButton} from 'react-share';
 
 const Footer = () => {
   return (

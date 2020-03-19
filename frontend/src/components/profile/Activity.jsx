@@ -29,8 +29,29 @@ class Activity extends Component {
         })
         .catch(error => console.log("yousuck!"))
     }
+    
+    getRecipes=()=>{
+      this.state.recentActivity.map(eachRecipe => {
+      console.log('ineachReccipe',eachRecipe,this.state.ready2)
+      return <div>FrenchyFrenchyFrenchyfrEcnhryfhlsbdj
+                {/* <Card className="past-recipe-card" style={{ width: '100%' }}>
+                  <Card.Img variant="top" src={eachRecipe.imageUrl} />
+                  <Card.Body>
+                      <Card.Title>{eachRecipe.title}</Card.Title>
+                      <Card.Text>
+                          Some quick example text to build on the card title and make up the bulk of
+                          the card's content.
+                      </Card.Text>
+                      <Button variant="secondary" className="settings-button">View Recipe</Button>
+                  </Card.Body>
+                </Card> */}
+             
+            </div>
+      })
+    }
     render(){ 
-     console.log( this.state)
+     let x=this.state.recentActivity
+     console.log(this.state.ready2,x)
     return (
         <div>
             
@@ -70,6 +91,7 @@ class Activity extends Component {
             </Card.Header>
             <Card>
             <Card.Header className="recent-views">Recently Viewed Recipes</Card.Header>
+    {this.state.ready2 ?
             <InfiniteCarousel
     breakpoints={[
       {
@@ -95,39 +117,15 @@ class Activity extends Component {
     slidesToShow={2}
     scrollOnDevice={true}
   >
+    
+  
     <div>
-      {this.state.ready2 ? 
-            (
-              
-              this.state.recentActivity.map((eachRecipe,i) => {
-            console.log(eachRecipe,this.state.ready2)
-            return <div key={i}>{eachRecipe.title}</div>
-            {/* (<Card key={i} className="past-recipe-card" style={{ width: '100%' }}>
-                      <Card.Img key={i} variant="top" src={eachRecipe.imageUrl} />
-                      <Card.Body>
-                          <Card.Title key={i}>{eachRecipe.title}</Card.Title>
-                          <Card.Text key={i}>
-                              Some quick example text to build on the card title and make up the bulk of
-                              the card's content.
-                          </Card.Text>
-                          <Button variant="secondary" className="settings-button">View Recipe</Button>
-                      </Card.Body>
-                  </Card>
-                  ) */}
-          })
-          ) 
-      :
-      ("No Recent asdf")
-      }
-    </div>
-    {/* <div>
-    <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src="https://i.ytimg.com/vi/LIubvcunMBc/hqdefault.jpg" />
+          <Card className="past-recipe-card" style={{ width: '100%' }}>            
+            <Card.Img variant="top" src={x[0].imageUrl} />
                 <Card.Body>
-                    <Card.Title>Brooklyn Style Pizza</Card.Title>
+                    <Card.Title>{x[0].title}</Card.Title>
                     <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
+                    {x[0].tags}
                     </Card.Text>
                     <Button variant="secondary" className="settings-button">View Recipe</Button>
                 </Card.Body>
@@ -135,12 +133,11 @@ class Activity extends Component {
     </div>
     <div>
     <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src="https://i.ytimg.com/vi/ZJPpMSx3eSw/hqdefault.jpg" />
+            <Card.Img variant="top" src={x[1].imageUrl} />
                 <Card.Body>
-                    <Card.Title> Tiquana Street Tacos</Card.Title>
+                    <Card.Title>{x[1].title}</Card.Title>
                     <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
+                    {x[1].tags}
                     </Card.Text>
                     <Button variant="secondary" className="settings-button">View Recipe</Button>
                 </Card.Body>
@@ -148,12 +145,11 @@ class Activity extends Component {
     </div>
     <div>
     <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src="https://i.ytimg.com/vi/ZJPpMSx3eSw/hqdefault.jpg" />
+            <Card.Img variant="top" src={x[2].imageUrl} />
                 <Card.Body>
-                    <Card.Title> Tiquana Street Tacos</Card.Title>
+                    <Card.Title> {x[2].title}</Card.Title>
                     <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
+                    {x[2].tags}
                     </Card.Text>
                     <Button variant="secondary" className="settings-button">View Recipe</Button>
                 </Card.Body>
@@ -161,18 +157,42 @@ class Activity extends Component {
     </div>
     <div>
     <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src="https://i.ytimg.com/vi/ZJPpMSx3eSw/hqdefault.jpg" />
+            <Card.Img variant="top" src={x[3].imageUrl} />
                 <Card.Body>
-                    <Card.Title> Tiquana Street Tacos</Card.Title>
+                    <Card.Title>{x[3].title}</Card.Title>
                     <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
+                    {x[3].tags}
                     </Card.Text>
                     <Button variant="secondary" className="settings-button">View Recipe</Button>
                 </Card.Body>
             </Card>
-    </div> */}
+    </div>
+    <div>
+    <Card className="past-recipe-card" style={{ width: '100%' }}>
+            <Card.Img variant="top" src={x[4].imageUrl} />
+                <Card.Body>
+                    <Card.Title> {x[4].title}</Card.Title>
+                    <Card.Text>
+                    {x[4].tags}
+                    </Card.Text>
+                    <Button variant="secondary" className="settings-button">View Recipe</Button>
+                </Card.Body>
+            </Card>
+    </div>
+    <div>
+    <Card className="past-recipe-card" style={{ width: '100%' }}>
+            <Card.Img variant="top" src={x[5].imageUrl} />
+                <Card.Body>
+                    <Card.Title> {x[5].title}</Card.Title>
+                    <Card.Text>
+                    {x[5].tags}
+                    </Card.Text>
+                    <Button variant="secondary" className="settings-button">View Recipe</Button>
+                </Card.Body>
+            </Card>
+    </div>
   </InfiniteCarousel>
+    :("Loading")}
            
             </Card>
 

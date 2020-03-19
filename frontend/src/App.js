@@ -45,7 +45,7 @@ class App extends Component {
   
   //*method logout on backend in auth.js used to logout user and null object sent to method setUser to logout frontend
   logOut = async () => {
-    let res = await actions.logOut()
+    await actions.logOut()
     this.setUser({
       email:null, 
       createdAt: null, 

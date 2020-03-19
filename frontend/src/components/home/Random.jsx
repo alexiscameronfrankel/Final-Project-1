@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import actions from '../../services/index'
 import { Container, Card, ListGroup, ListGroupItem,Button, ButtonGroup, Form } from 'react-bootstrap';
-import Footer from '../Footer';
+
 // import Searchbar from './Searchbar';
 import Axios from 'axios';
 
@@ -80,15 +80,16 @@ class Random extends Component {
      
       actions.newRecipe(newMeal).then(createRecipe=> {
           this.setState({info: newMeal})
+          actions.addActivityRecipes({title: newMeal.title})
           console.log('finished creating newMeal',createRecipe )      
         })
         .catch(error=> console.log(error))
       //does not work???
-      actions.addActivityRecipes({title: this.state.info.title})
       // .then(updateMyActivity=>
       //     console.log('activity random saved',updateMyActivity)
       // )
       // .catch(error=> console.log(error))
+      
     
     })
 
@@ -105,22 +106,11 @@ class Random extends Component {
   }
   
   render() {
-    // console.log(this.state.info)
     
     return (
       <div>
         <Container className="home-recipe">
-          {/* <img className="hero-img" src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F5446883.jpg&w=596&h=596&c=sc&poi=face&q=85"></img>
-          <div className="hero-recipe">
-          <h1 className="recipe-title">My Recipe Name</h1>
-          <ul>
-            <li>Step 1 - Boil Water at High Heat</li>
-            <li>Step 2 - Boil Meat for 30 minutes</li>
-            <li>Step 3 - Dice Vegetables into a Juliene Cut</li>
-            <li>Step 4 - Prep Appetizers and Grab a Beer</li>
-          </ul>
-          </div> */}
-          
+       
           <Card id="main-card" style={{ width: '100%' }}>
           <Card.Header>
           <Card.Title className="text-center main-card-title" >{this.state.info.title}</Card.Title>
@@ -133,8 +123,8 @@ class Random extends Component {
                 <Card.Header>
                 <Card.Text>
                 <ListGroup>
-                <ListGroupItem>
-                </ListGroupItem>
+                {/* <ListGroupItem>
+                </ListGroupItem> */}
                 <ListGroupItem className="main-card-instructions">
                 {this.state.info.instructions}
                 </ListGroupItem>
@@ -165,8 +155,8 @@ class Random extends Component {
                     <Button onClick={this.handleSave} variant="secondary" name="save-btn" size="lg"><i className="far fa-heart"></i></Button>
                     {/* <Button variant="secondary" name="like-btn" size="lg"><i className="far fa-thumbs-up"></i></Button> */}
                     {/* <Button variant="secondary" name="dislike-btn" size="lg"><i className="far fa-thumbs-down"></i></Button> */}
-                    <Button variant="secondary" name="youtube-btn" size="lg"><a  href={this.state.info.video} className="main-card-source"><i class="fab fa-youtube-square"></i></a></Button>
-                    <Button variant="secondary" name="source-btn" size="lg"><a  href={this.state.info.source} className="main-card-source"><i  class="fas fa-external-link-alt"></i></a></Button>
+                    <Button variant="secondary" name="youtube-btn" size="lg"><a  href={this.state.info.video} className="main-card-source"><i className="fab fa-youtube-square"></i></a></Button>
+                    <Button variant="secondary" name="source-btn" size="lg"><a  href={this.state.info.source} className="main-card-source"><i  className="fas fa-external-link-alt"></i></a></Button>
                     <Button variant="secondary" name="edit-recipe" size="lg">Edit Recipe</Button>
                   </ButtonGroup>
                 </Card.Header>
@@ -184,7 +174,7 @@ class Random extends Component {
                           <ListGroupItem>
                               
                               <p><strong><q>This recipe my whole family loved. If I were to change one thing I would add more butter</q></strong></p>
-                              <div className="previous-comments"><img src="https://www.w3schools.com/w3images/avatar2.png" alt="Avatar" class="avatar"></img>
+                              <div className="previous-comments"><img src="https://www.w3schools.com/w3images/avatar2.png" alt="Avatar" className="avatar"></img>
                               <h4 className="pc-user">-Michael Cooper</h4>
                               </div>
                           </ListGroupItem>

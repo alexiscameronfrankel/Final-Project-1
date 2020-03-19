@@ -34,7 +34,10 @@ class RecipeDetails extends Component {
           })
       })
       .catch(err => console.log(err))
-      
+      actions.getProfile(UserID).then(profileFound=>{
+        console.log('profileFound')
+        this.setState({profileID:profileFound.data._id})
+      })
 
 
     
@@ -66,7 +69,7 @@ handleCommentBox=(e)=>{
    e.preventDefault()
     console.log('comment',{comment: this.state.comment})
     let newComment={
-      recipeID: { type: String},
+      recipeID: this.props.params.match.recipeID,
       profileID:{ type: String},
       title: { type: String},
       rating: { type: String, required: true },

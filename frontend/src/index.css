@@ -667,9 +667,19 @@ button.react-share__ShareButton {
   outline: none;
 }
 
+/*New Recipe Styles*/
 
+.deleteButton{
+  margin: 4.3px;
+  height: calc(1.5em + .75rem + 2px);
 
+}
 
+.deleteButton-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 
 
 

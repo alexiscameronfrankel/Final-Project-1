@@ -24,6 +24,7 @@
     "node-sass": "^4.13.1",
     "react": "^16.13.0",
     "react-bootstrap": "^1.0.0-beta.17",
+    "react-coverflow": "^0.2.20",
     "react-dom": "^16.13.0",
     "react-favicon": "0.0.17",
     "react-share": "^4.1.0",

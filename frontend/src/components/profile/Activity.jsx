@@ -2,7 +2,6 @@ import React, { Fragment, Component } from 'react';
 import { Container, Card, ListGroup, Button, ButtonGroup,} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import actions from '../../services/index';
-import InfiniteCarousel from 'react-leaf-carousel';
 
 var Coverflow = require('react-coverflow');
 
@@ -24,21 +23,10 @@ class Activity extends Component {
                 console.log('recent activities found',activityFound.data)
                 let array1= [...activityFound.data]; //copy of recent recipes visits
                 console.log('array1',array1)
-                // let array2= Array.from(new Set(array1)) //new Array made with unique values
-                // console.log('array2',array2) 
-                let x=array1.length-6 
-                let array3=array1.splice(x,6) //get last 6 recipes from array1
-                console.log('array3',array3)
-                // let activityUpdate = []
-                // array2.forEach(eachRecipe=>{    //for each recipe in array2 push recipeID into activityUpdate array
-                //   activityUpdate.push(eachRecipe._id)
-                // })
-                // console.log('activitytoupdate',activityUpdate)
-                // actions.updateProfile({activity: activityUpdate})//update profile with activityUpdate
-
+                
                 this.setState({
                     // recentActivity: [...activityFound.data],
-                    recentActivity: array3, //set this state to array3 that has 6 recipes total
+                    recentActivity: array1, //set this state to array3 that has 6 recipes total
                     ready2: true
                 })
               })
@@ -92,19 +80,19 @@ class Activity extends Component {
             <Card.Header className="recent-views">Recently Viewed Recipes</Card.Header>
     {this.state.ready2 ?
 
-  <InfiniteCarousel>
+  <Coverflow>
     <div>
           <Card className="past-recipe-card" style={{ width: '100%' }}>            
-            <Card.Img variant="top" src={x[5].imageUrl} />
+            <Card.Img variant="top" src={x[0].imageUrl} />
                 <Card.Body>
-                    <Card.Title>{x[5].title}</Card.Title>
+                    <Card.Title>{x[0].title}</Card.Title>
                     <Card.Text>
-                    {x[5].tags}
+                    {x[0].tags}
                     </Card.Text>
                     <Button variant="secondary" className="settings-button">View Recipe</Button>
                 </Card.Body>
             </Card>
-    </div>
+    </div> */}
     <div>
     <Card className="past-recipe-card" style={{ width: '100%' }}>
             <Card.Img variant="top" src={x[4].imageUrl} />
@@ -165,7 +153,7 @@ class Activity extends Component {
                 </Card.Body>
             </Card>
     </div>
-  </InfiniteCarousel>
+  </Coverflow>
  
     :("Loading")}
            

@@ -168,7 +168,7 @@ class Random extends Component {
                 <Card>
                 <Card.Header>
                   <ButtonGroup className="btn-group" aria-label="Basic example">
-                    <Button onClick={this.handleSave} variant="secondary" name="save-btn" size="lg"><i className="far fa-heart fa-2x"></i></Button>
+                    <Button onClick={this.handleSave} variant="secondary" name="save-btn" size="lg"><i id="heart" className="fas fa-heart fa-2x"></i></Button>
                     <Button variant="secondary" name="youtube-btn" size="lg"><a  href={this.state.info.video} className="main-card-source"><i className="fab fa-youtube-square fa-2x"></i></a></Button>
                     <Button variant="secondary" name="source-btn" size="lg"><a  href={this.state.info.source} className="main-card-source"><i  className="fas fa-external-link-alt fa-2x"></i></a></Button>
                     <Button variant="secondary" name="edit-recipe" size="lg">Edit Recipe</Button>

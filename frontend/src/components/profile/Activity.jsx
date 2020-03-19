@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import { Container, Card, ListGroup, Button, ButtonGroup,} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import InfiniteCarousel from 'react-leaf-carousel';
 import actions from '../../services/index';
+
+var Coverflow = require('react-coverflow');
 
 class Activity extends Component {
   
@@ -93,115 +94,50 @@ class Activity extends Component {
             <Card>
             <Card.Header className="recent-views">Recently Viewed Recipes</Card.Header>
     {this.state.ready2 ?
-            <InfiniteCarousel
-    breakpoints={[
-      {
-        breakpoint: 500,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-    ]}
-    dots={false}
-    showSides={true}
-    sidesOpacity={.5}
-    sideSize={.1}
-    slidesToScroll={1}
-    slidesToShow={2}
-    scrollOnDevice={true}
-    autoplay={true}
-  >
     
-  
     <div>
-          <Card className="past-recipe-card" style={{ width: '100%' }}>            
-            <Card.Img variant="top" src={x[0].imageUrl} />
-                <Card.Body>
-                    <Card.Title>{x[0].title}</Card.Title>
-                    <Card.Text>
-                    {x[0].category}
-                    </Card.Text>
-                  <Link onClick={()=>console.log(this)} to={`/allrecipes/${x[0]._id}`}><Button variant="secondary" className="settings-button">View Recipe</Button></Link>
-                </Card.Body>
-            </Card>
-            
-    </div>
-    <div>
-    <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src={x[1].imageUrl} />
-                <Card.Body>
-                    <Card.Title>{x[1].title}</Card.Title>
-                    <Card.Text>
-                    {x[1].category}
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-    </div>
-    <div>
-    <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src={x[2].imageUrl} />
-                <Card.Body>
-                    <Card.Title> {x[2].title}</Card.Title>
-                    <Card.Text>
-                    {x[2].category}
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-    </div>
-    <div>
-    <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src={x[3].imageUrl} />
-                <Card.Body>
-                    <Card.Title>{x[3].title}</Card.Title>
-                    <Card.Text>
-                    {x[3].category}
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-    </div>
-    <div>
-    <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src={x[4].imageUrl} />
-                <Card.Body>
-                    <Card.Title> {x[4].title}</Card.Title>
-                    <Card.Text>
-                    {x[4].category}
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-    </div>
-    <div>
-    <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src={x[5].imageUrl} />
-                <Card.Body>
-                    <Card.Title> {x[5].title}</Card.Title>
-                    <Card.Text>
-                    {x[5].category}
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-            <script>
-      document.querySelectorAll("button").onclick=function(){
-        console.log("Niko Is the man")
-      }
-    </script>
-    </div>
-  </InfiniteCarousel>
-    :("Loading")}
-           
+                <Coverflow
+                    width={960}
+                    height={480}
+                    displayQuantityOfSide={2}
+                    navigation={false}
+                    enableHeading={false}
+                >
+                    
+                    {x.map(eachRecipe => {
+                    console.log(eachRecipe)
+                    return (<Fragment>
+                        <div key={eachRecipe._id}
+                    // {/* // onClick={() => fn()}
+                    // // onKeyDown={() => fn()} */}
+                    role="menuitem"
+                    tabIndex="2"
+                    >   
+                        
+                        <Card.Title 
+                        className="text-center">
+                        <Link className="recipe-card" to={`/allrecipes/${eachRecipe._id}`}>
+                        {eachRecipe.title}
+                        </Link>
+                        </Card.Title>
+                        <Card.Img
+                            src={eachRecipe.imageUrl}
+                            alt={eachRecipe.title}
+                            style={{ display: 'block', width: '100%' }}
+                            // href={`/allrecipes/${eachRecipe._id}`}
+                        />
+                        
+                        </div>
+                        
+                        </Fragment>)
+                        })}
+                        
+                    
+                    
+                </Coverflow>
+                
+                </div>
+                :("Loading")}
             </Card>
 
             

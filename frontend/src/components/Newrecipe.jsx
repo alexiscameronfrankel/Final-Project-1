@@ -234,12 +234,12 @@ handleSubmit = e => {
                         <Form.Label>Ingredients</Form.Label>
                         {this.state.ingredients.map((eachIngredient, index) => {
                             return(
-                            <Fragment>
-                            <Form.Control as={Col} name={index} type="text" placeholder="Add your ingredients"  value={eachIngredient} onChange={this.handleIngredientsTyping}/>
+                            <span>
+                            <Form.Control name={index} type="text" placeholder="Add your ingredients"  value={eachIngredient} onChange={this.handleIngredientsTyping}/>
                             <Button variant="secondary" size="sm" onClick={(e) => this.deleteIngredient(e,index)}>
                            DELETE INGREDIENT
                             </Button>
-                            </Fragment>)
+                            </span>)
                         })}
                         <Button variant="secondary" size="sm" onClick={this.addIngredientRow}>
                             ADD INEGREDIENT
@@ -252,18 +252,19 @@ handleSubmit = e => {
                         {this.state.measurements.map((eachMeasurement, index) => 
                              {
                             return(
-                            <Fragment>
+                            <span>
                             <Form.Control name={index} type="text" placeholder="Add your measurements" value={eachMeasurement} onChange={this.handleMeasurementTyping}/>
                             {/* <Button variant="secondary" size="sm" onClick={(e) => this.deleteMeasurement(e,index)}>
                            DELETE MEASUREMENT
                             </Button> */}
-                            </Fragment>)
+                            </span>)
                             
                         })}
                         {/* <Button variant="secondary" size="sm" onClick={this.addMeasurementRow}>
                            ADD MEASUREMENT
                         </Button> */}
                     </Form.Group>
+    
                     </Form.Row>
 
                     <Form.Group controlId="Instructions">

@@ -332,7 +332,7 @@ button.btn-default.btn.Ripple-parent.peach-gradient {
 
 .head-div {
   background-color: #D93810;
-  padding: 30px;
+  padding: 40px;
   display: flex;
   flex-direction: row-reverse;
   
@@ -655,7 +655,13 @@ Adding Random Page Styles */
 }
 
 
+/* SOCIAL MEDIA SHARING STYLES */
 
+button.react-share__ShareButton {
+  width: 0px;
+  margin: 0px 40px;
+  outline: none;
+}
 
 
 

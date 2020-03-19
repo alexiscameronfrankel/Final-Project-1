@@ -56,7 +56,7 @@ class LogIn extends Component {
                   
                     </div>
                     <div className="text-center">
-                    <Link to="/sign-up">or sign up</Link>
+                    or go to<Link to="/sign-up"> SIGN UP</Link>
                     </div>
                     </form>
                 </MDBCol>

@@ -42,7 +42,7 @@ const actions = {
   allRecipes: async () => {
     return await service.get('/recipe/allrecipes')
   },
-  //create new recipe
+  //create new recipe -- actually don't think this is doing anything
   newRecipe: async (recipe) => {
     return await service.post('/recipe/new', recipe)
   },

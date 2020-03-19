@@ -32,11 +32,15 @@ router.post('/uploadvideo', uploadervideo.single("video"), (req, res, next) => {
 //the other side return service.post('/recipe/create', recipe) <--- makes this work
 
 router.post('/recipe/create', (req,res,next) => {
-  console.log(req.body);
+  console.log('the body', req.body);
   Recipe.create(req.body) 
   .then(data => res.json(data)).catch(err => res.json(err)) //returns response
 
 })
+
+function isAuth(req, res, next) {
+  req.isAuthenticated() ? next() : res.status(401).json({ msg: 'Log in first' });
+}
 
 
 module.exports = router;

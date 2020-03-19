@@ -51,7 +51,7 @@ router.post('/recipe/create',isAuth, (req, res, next) => {
           .catch(err => console.log(err))
       }
       console.log('duplicateRecipe',duplicateRecipe)
-      res.send(RecipeFound)
+      // res.send(RecipeFound)
   })
   .catch(error => {
       console.log('recipe already exist',error)

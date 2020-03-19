@@ -36,7 +36,7 @@ export default {
 
   async saveNewThing (recipe) {
     console.log('new thing is: ', recipe)
-    return service.post('/api/create', recipe)
+    return service.post('/api/recipe/create', recipe)
       .then(res => res.data)
       .catch(errorHandler);
   }

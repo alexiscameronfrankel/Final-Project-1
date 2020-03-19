@@ -219,8 +219,9 @@ handleSubmit = e => {
     service.saveNewThing(this.state)
     .then(res => {
         console.log('added: ', res);
+        console.log(res._id)
         // here you would redirect to some other page 
-        // this.props.history.push('/allrecipes/'+res._id);
+        this.props.history.push('/allrecipes/'+res._id);
     })
     .catch(err => {
         console.log("Error while adding the thing: ", err);

@@ -66,6 +66,7 @@ class RecipeDetails extends Component {
     
  }
 
+
  handleSave=()=>{
   console.log('handlesave recipe to profile by title',{title: this.state.title})
    actions.addProfileRecipes({title: this.state.title}).then(updateMyRecipes=>{
@@ -145,7 +146,6 @@ class RecipeDetails extends Component {
                 <Card.Header>
                 <Form.Label>Leave a comment below</Form.Label>
                 <Form.Group className="comment-form" id="comment-form" controlId="exampleForm.ControlTextarea1">
-                
                 <Form.Control as="textarea" rows="3" />
                 <Button variant="secondary" name="save-btn" size="lg"><i className="far fa-comments fa-2x"></i></Button>
                 </Form.Group>

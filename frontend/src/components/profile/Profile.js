@@ -17,7 +17,7 @@ class Profile extends Component {
         ready:false
     }
     async componentDidMount (){
-        actions.findProfileRecipes(this.props.user._id)
+        actions.findProfileRecipes()
             .then(myRecipes => {
                 console.log('myRecipesReceived', myRecipes)
                 this.setState({...myRecipes.data})
@@ -97,7 +97,8 @@ class Profile extends Component {
                 ("Loading")
             }
             </Card.Header>
-            <Button type="submit" size="lg" className="btn btn-primary account-button block" ><Link className="account-btn" to="/account" ><i className="fas fa-user-cog fa-2x"></i> Account</Link> </Button>
+            
+            <Link className="account-btn" to="/account"><Button type="submit" size="lg" className="btn btn-primary account-button block" ><i className="fas fa-user-cog fa-2x"></i> Account </Button></Link>
             </Card>
             
         

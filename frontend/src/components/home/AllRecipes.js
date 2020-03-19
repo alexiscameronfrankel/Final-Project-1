@@ -13,15 +13,14 @@ class AllRecipes extends Component {
     //need state sent to be sent
    state = {
       allrecipes:[]
-    //   title: String
+    
    }
 
     async componentDidMount() {
         let recipes = await actions.allRecipes()
-        console.log(recipes.data)
+        // console.log(recipes.data)
         this.setState({
             allrecipes: recipes.data,
-            // title: recipes.data[0].title
         })
     }
 
@@ -47,7 +46,7 @@ class AllRecipes extends Component {
                 >
                     
                     {this.state.allrecipes.map(eachRecipe => {
-                    console.log(eachRecipe)
+                    
                     return (<Fragment>
                         <div key={eachRecipe._id}
                     // {/* // onClick={() => fn()}

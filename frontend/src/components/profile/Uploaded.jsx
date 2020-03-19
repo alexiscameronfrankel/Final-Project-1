@@ -1,14 +1,23 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import { Container, Card, ListGroup, Button, ButtonGroup,  } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import InfiniteCarousel from 'react-leaf-carousel';
+
+var Coverflow = require('react-coverflow');
 
 class Uploaded extends Component {
     
     // if(!props.user.email){ 
     //     props.history.push('/log-in') 
     // } 
+
+    state={
+      ready:false,
+      recentActivity: [],
+      ready2: false
+    }
     render(...props){  
+      let x=this.state.recentActivity
+     console.log(this.state.ready2,x)
     return (
         <div>
             {/* Profile
@@ -30,7 +39,7 @@ class Uploaded extends Component {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title">Account Activity | CoolGuy84{this.props.email}</h1>
+            <h1 className="prof-title">Account Activity | {this.props.user.email}</h1>
                 
             </Card.Header> 
           </Card.Title>
@@ -49,9 +58,9 @@ class Uploaded extends Component {
             </ListGroup>
         </Card>
         <Card className="sm-card" id="main-card" style={{ width: '100%' }}>
-            <Card.Header>Account Activity
+            <Card.Header>Recent Account Activity
             <ButtonGroup>
-                <Link to="/recent"> <Button variant="secondary" className="settings-button">Recent</Button></Link>
+                <Link to="/myactivity"> <Button variant="secondary" className="settings-button">Viewed</Button></Link>
                 <Link to="/liked"> <Button variant="secondary" className="settings-button">Liked</Button></Link>
                 <Link to="/commented">  <Button variant="secondary" className="settings-button">Commented</Button></Link>
                     <Link to="/uploaded"> <Button variant="secondary" className="settings-button">Uploaded</Button> </Link>
@@ -60,98 +69,51 @@ class Uploaded extends Component {
             </Card.Header>
             <Card>
             <Card.Header className="recent-views">Recently Uploaded Recipes</Card.Header>
-            <InfiniteCarousel style={{ width: '100%' }}
-    breakpoints={[
-      {
-        breakpoint: 500,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-    ]}
-    dots={false}
-    showSides={true}
-    sidesOpacity={.5}
-    sideSize={.1}
-    slidesToScroll={1}
-    slidesToShow={2}
-    scrollOnDevice={true}
-  >
+            {this.state.ready2 ?
+    
     <div>
-    <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src="https://i.ytimg.com/vi/CcwQeQ4VY7I/hqdefault.jpg" />
-                <Card.Body>
-                    <Card.Title>Kitchen Sink Nachos</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-      
-    </div>
-    <div>
-    <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src="https://i.ytimg.com/vi/LIubvcunMBc/hqdefault.jpg" />
-                <Card.Body>
-                    <Card.Title>Brooklyn Style Pizza</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-    </div>
-    <div>
-    <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src="https://i.ytimg.com/vi/ZJPpMSx3eSw/hqdefault.jpg" />
-                <Card.Body>
-                    <Card.Title> Tiquana Street Tacos</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-    </div>
-    <div>
-    <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src="https://i.ytimg.com/vi/ZJPpMSx3eSw/hqdefault.jpg" />
-                <Card.Body>
-                    <Card.Title> Tiquana Street Tacos</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-    </div>
-    <div>
-    <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src="https://i.ytimg.com/vi/ZJPpMSx3eSw/hqdefault.jpg" />
-                <Card.Body>
-                    <Card.Title> Tiquana Street Tacos</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-    </div>
-  </InfiniteCarousel>
+                <Coverflow
+                    width={960}
+                    height={480}
+                    displayQuantityOfSide={2}
+                    navigation={false}
+                    enableHeading={false}
+                >
+                    
+                    {x.map(eachRecipe => {
+                    console.log(eachRecipe)
+                    return (<Fragment>
+                        <div key={eachRecipe._id}
+                    // {/* // onClick={() => fn()}
+                    // // onKeyDown={() => fn()} */}
+                    role="menuitem"
+                    tabIndex="2"
+                    >   
+                        
+                        <Card.Title 
+                        className="text-center">
+                        <Link className="recipe-card" to={`/allrecipes/${eachRecipe._id}`}>
+                        {eachRecipe.title}
+                        </Link>
+                        </Card.Title>
+                        <Card.Img
+                            src={eachRecipe.imageUrl}
+                            alt={eachRecipe.title}
+                            style={{ display: 'block', width: '100%' }}
+                            // href={`/allrecipes/${eachRecipe._id}`}
+                        />
+                        
+                        </div>
+                        
+                        </Fragment>)
+                        })}
+                        
+                    
+                    
+                </Coverflow>
+                
+                </div>
+                :("Loading")}
            
             </Card>
 

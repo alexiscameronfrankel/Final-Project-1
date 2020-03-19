@@ -9,6 +9,7 @@ class Account extends Component {
 
     state = {
         UserID: "",
+        category: [],
         username: "",
         firstName: "",
         lastName: "",
@@ -160,7 +161,7 @@ class Account extends Component {
                 </Form.Group>
                 <Form.Group id="categoryGridCheckbox">
                 <Form.Label>Please Select Any Dietary Restrictions Below</Form.Label>
-                    <Form.Check type="checkbox" label="Vegetarian" value="Vegetarian" name="category" checked="true" onChange={this.putCategoryInState}/>
+                    <Form.Check type="checkbox" label="Vegetarian" value="Vegetarian" name="category" onChange={this.putCategoryInState}/>
                     <Form.Check type="checkbox" label="Vegan" value="Vegan" onChange={this.putCategoryInState}/>
                     <Form.Check type="checkbox" label="Gluten Free" value="Gluten Free" onChange={this.putCategoryInState}/>
                     <Form.Check type="checkbox" label="Diary Free" value="Diary Free" onChange={this.putCategoryInState}/>

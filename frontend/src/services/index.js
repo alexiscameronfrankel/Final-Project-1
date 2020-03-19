@@ -112,12 +112,12 @@ const actions = {
     return await service.get(`/profile/myComments`, profile)
   },
   //update profile
-  updateProfile: async (profile) => {
-    return await service.post('/profile/update', profile)
+  updateProfile: async (profileUpdate) => {
+    return await service.post('/profile/update', profileUpdate)
   },
   //find recipes saved to profile
-  findProfileRecipes: async (userID) => {
-    return await service.get('/profile/myRecipes', userID)
+  findProfileRecipes: async () => {
+    return await service.get('/profile/myRecipes')
   },
    //add recipe to profile
    addProfileRecipes: async (recipeID) => {

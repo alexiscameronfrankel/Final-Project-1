@@ -73,38 +73,54 @@ class Random extends Component {
       measurements: mMeasurements,
       source: x.strSource,
       profileID: "",
-      created: "",
+      created: new Date(),
       comments: []
       }
       
      
       actions.newRecipe(newMeal).then(createRecipe=> {
-          this.setState({info: newMeal})
-          actions.addActivityRecipes({title: newMeal.title})
-          console.log('finished creating newMeal',createRecipe )      
-        })
-        .catch(error=> console.log(error))
-      //does not work???
-      // .then(updateMyActivity=>
-      //     console.log('activity random saved',updateMyActivity)
-      // )
-      // .catch(error=> console.log(error))
-      
-    
-    })
-
+        console.log('finished creating newMeal',createRecipe)
+        document.querySelector("#heart").style["color"]='white'
+        if (createRecipe.data.length>0){
+          this.setState({
+            info: createRecipe.data[0]
+          })
+          actions.findProfileRecipes().then(myRecipes=>{
+            console.log('about to loop through array',myRecipes.data)
+            myRecipes.data.map(eachRecipe=>{
+              if (eachRecipe._id===createRecipe.data[0]._id){
+                document.querySelector("#heart").style["color"]='red'
+              }
+            })
+          })
+        }else{ 
+          console.log('setting new meal to state')    
+          this.setState({
+            info: newMeal
+          })
+        }
+        actions.addActivityRecipes({title: newMeal.title})
+      })
+      .catch(error=> console.log(error))
+    })  
   }
 
 
 
-  handleSave=()=>{
-      console.log('handlesave recipe to profile',{title: this.state.info.title})
-       actions.addProfileRecipes({title: this.state.info.title}).then(updateMyRecipes=>{
-         console.log(updateMyRecipes)
-       })
-       .catch(error=> console.log(error))
+  handleSave=(e)=>{
+    if(document.querySelector("#heart").style["color"]==='red'){
+        console.log("handleadelete")
+        document.querySelector("#heart").style["color"]='white'
+        actions.deleteProfileRecipes({title: this.state.info.title})
+    }else if(document.querySelector("#heart").style["color"]==='white'){
+      document.querySelector("#heart").style["color"]='red'
+      console.log('handleAdd new recipe to profile',{title: this.state.info.title})
+      actions.addProfileRecipes({title: this.state.info.title})
+    }
+   
   }
-  
+
+ 
   render() {
     
     return (

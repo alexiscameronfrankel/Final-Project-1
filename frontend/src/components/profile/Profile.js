@@ -17,7 +17,7 @@ class Profile extends Component {
         ready:false
     }
     async componentDidMount (){
-        actions.findProfileRecipes(this.props.user._id)
+        actions.findProfileRecipes()
             .then(myRecipes => {
                 console.log('myRecipesReceived', myRecipes)
                 this.setState({...myRecipes.data})

@@ -12,38 +12,52 @@ class RecipeDetails extends Component {
   state={
   }
 
-  // handleSave=()=>{
-  //     let newRecipe = actions.newRecipe(this.state )
-  //       this.setState({info: newRecipe})
-  //       console.log('finished creating newMeal',newRecipe )
-  // }
-
   async componentDidMount(){
       console.log(this.props)
       actions.findRecipeID(this.props.match.params.recipeID)
       .then(recipeFound =>{
-          console.log(recipeFound.data)
-          this.setState( {
+          console.log(recipeFound.data.title)
+          actions.addActivityRecipes({title: recipeFound.data.title})
+          this.setState({
               ...recipeFound.data
-            
           })
-          actions.addActivityRecipes({title: this.state.title}).then(updateMyActivity=>{
-            console.log('activity random saved',updateMyActivity)
+          document.querySelector("#heart").style["color"]='white'
+          actions.findProfileRecipes().then(myRecipes=>{
+              console.log('about to loop through array',myRecipes.data)
+              myRecipes.data.map(eachRecipe=>{
+              if (eachRecipe._id===this.state._id){
+                document.querySelector("#heart").style["color"]='red'
+              }
+              })
           })
-          .catch(error=> console.log(error))
-        })
+      })
       .catch(err => console.log(err))
+      
+
 
     
  }
 
- handleSave=()=>{
-  console.log('handlesave recipe to profile by title',{title: this.state.title})
-   actions.addProfileRecipes({title: this.state.title}).then(updateMyRecipes=>{
-     console.log(updateMyRecipes)
-   })
-   .catch(error=> console.log(error))
+ handleSave=(e)=>{
+  if(document.querySelector("#heart").style["color"]==='red'){
+      console.log("handleadelete")
+      document.querySelector("#heart").style["color"]='white'
+      actions.deleteProfileRecipes({title: this.state.title})
+  }else if(document.querySelector("#heart").style["color"]==='white'){
+    document.querySelector("#heart").style["color"]='red'
+    console.log('handleAdd new recipe to profile',{title: this.state.title})
+    actions.addProfileRecipes({title: this.state.title})
+  }
+ 
 }
+
+//  handleSave=()=>{
+//   console.log('handlesave recipe to profile by title',{title: this.state.title})
+//    actions.addProfileRecipes({title: this.state.title}).then(updateMyRecipes=>{
+//      console.log(updateMyRecipes)
+//    })
+//    .catch(error=> console.log(error))
+// }
   
   
   render() {
@@ -84,17 +98,17 @@ class RecipeDetails extends Component {
               </Card.Header>
               </Card.Body>
               <Card.Body className="measurements-list">
-              <Card.Header>
+              <Card.Header><span style={{color:'white'}}>Ingredients:</span>
               <ListGroup>
                {/* <ListGroupItem className="main-card-subtitle prep-time">  */}
                  {console.log(this.state.ingredients)}
                 {this.state.ingredients && this.state.ingredients.map((item,i) => {
-                return <ListGroupItem className="list-item text-center" key={i}>Ingredient:  {item}<hr></hr></ListGroupItem>})}
+                return <ListGroupItem className="list-item text-center" key={i}>{i+1})  <span> {item} </span><hr></hr></ListGroupItem>})}
                 </ListGroup>
               </Card.Header>
-              <Card.Header>
+              <Card.Header><span style={{color:'white'}}>Measurements:</span>
               <ListGroup>
-                {this.state.measurements && this.state.measurements.map((item,i) => {return <ListGroupItem className="list-item" key={i}>Amount Needed: {item}<hr></hr></ListGroupItem>})}
+                {this.state.measurements && this.state.measurements.map((item,i) => {return <ListGroupItem className="list-item" key={i}><span> {item} </span><hr></hr></ListGroupItem>})}
                 {/* </ListGroupItem> */}
                 
               </ListGroup>
@@ -105,7 +119,7 @@ class RecipeDetails extends Component {
                 <Card>
                 <Card.Header>
                 <ButtonGroup className="btn-group" aria-label="Basic example">
-                    <Button classname="main-card-source" onClick={this.handleSave} variant="secondary" name="save-btn" size="lg"><i className="far fa-heart fa-2x"></i></Button>
+                    <Button classname="main-card-source" onClick={this.handleSave} variant="secondary" name="save-btn" size="lg"><i id="heart" className="fas fa-heart fa-2x"></i></Button>
                     {/* <Button variant="secondary" name="like-btn" size="lg"><i className="far fa-thumbs-up fa-2x"></i></Button> */}
                     {/* <Button variant="secondary" name="dislike-btn" size="lg"><i className="far fa-thumbs-down"></i></Button>  */}
                     <Button variant="secondary" name="youtube-btn" size="lg"><a  href={this.state.video} className="main-card-source"><i class="fab fa-youtube-square fa-2x"></i></a></Button>

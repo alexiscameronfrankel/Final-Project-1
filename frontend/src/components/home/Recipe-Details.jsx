@@ -10,6 +10,8 @@ import actions from '../../services/index'
 
 class RecipeDetails extends Component {
   state={
+      recipeFound: "secondary",
+      profileID: '',
   }
 
   // handleSave=()=>{
@@ -19,7 +21,7 @@ class RecipeDetails extends Component {
   // }
 
   async componentDidMount(){
-      console.log(this.props)
+      console.log(this.props )
     actions.findRecipeID(this.props.match.params.recipeID)
     .then(recipeFound =>
         {console.log(recipeFound.data)
@@ -28,8 +30,42 @@ class RecipeDetails extends Component {
           
         })})
     .catch(err => console.log(err))
+    console.log("test")
+    
+
+    actions.getProfile(this.props.user._id)
+    .then(profileFound =>
+        {console.log(profileFound.data)
+            this.setState({
+               profileID:profileFound.data._id 
+            })
+        profileFound.data.recipes.find(
+            likedRecipe => {
+                if (likedRecipe === this.state._id){
+                    console.log("recipefound")
+                this.setState({
+                    recipeFound: true
+                })
+           } } //iterate through the profile recipes found id and find recipeFound id
+        )})
+    .catch(err => console.log(err))
+
+    actions.addActivityRecipes({title: this.state.title}).then(updateMyActivity=>{
+        console.log('activity random saved',updateMyActivity)
+      })
+      .catch(error=> console.log(error))
+    // actions.findProfileRecipes(this.props.match.params.recipeID)
+    // .then(recipeFound =>
+    //     {console.log(recipeFound.data)
+    //     this.setState( {
+    //         ...recipeFound.data
+    //     })})
+    
+
+
     
  }
+
 
  handleSave=()=>{
   console.log('handlesave recipe to profile by title',{title: this.state.title})
@@ -41,7 +77,7 @@ class RecipeDetails extends Component {
   
   
   render() {
-    console.log(this.state.ingredients)
+    console.log(this.props)
     return (
       <div>
         <Container className="home-recipe">
@@ -99,7 +135,7 @@ class RecipeDetails extends Component {
                 <Card>
                 <Card.Header>
                 <ButtonGroup className="btn-group" aria-label="Basic example">
-                    <Button classname="main-card-source" onClick={this.handleSave} variant="secondary" name="save-btn" size="lg"><i className="far fa-heart fa-2x"></i></Button>
+                    <Button classname="main-card-source" onClick={this.handleSave} variant={this.state.recipeFound} name="save-btn" size="lg"><i className="far fa-heart fa-2x"></i></Button>
                     {/* <Button variant="secondary" name="like-btn" size="lg"><i className="far fa-thumbs-up fa-2x"></i></Button> */}
                     {/* <Button variant="secondary" name="dislike-btn" size="lg"><i className="far fa-thumbs-down"></i></Button>  */}
                     <Button variant="secondary" name="youtube-btn" size="lg"><a  href={this.state.video} className="main-card-source"><i class="fab fa-youtube-square fa-2x"></i></a></Button>
@@ -110,7 +146,6 @@ class RecipeDetails extends Component {
                 <Card.Header>
                 <Form.Label>Leave a comment below</Form.Label>
                 <Form.Group className="comment-form" id="comment-form" controlId="exampleForm.ControlTextarea1">
-                
                 <Form.Control as="textarea" rows="3" />
                 <Button variant="secondary" name="save-btn" size="lg"><i className="far fa-comments fa-2x"></i></Button>
                 </Form.Group>

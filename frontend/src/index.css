@@ -655,8 +655,12 @@ Adding Random Page Styles */
 }
 
 
-/* SOCIAL MEDIA SHARING STYLES */
 
+.profile-prefs {
+  padding: 20px;
+}
+
+/* SOCIAL MEDIA SHARING STYLES */
 button.react-share__ShareButton {
   width: 0px;
   margin: 0px 40px;

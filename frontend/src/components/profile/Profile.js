@@ -5,8 +5,8 @@
 
 import React, { Component } from 'react';
 import actions from '../../services/index'
-import { Container, Card, ListGroup, ListGroupItem,
-    Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
+import { Container, Card, ListGroup,
+    Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 // import axios from 'axios';
 

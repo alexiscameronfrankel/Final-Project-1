@@ -20,9 +20,9 @@ class LogIn extends Component {
             this.props.setUser({...user.data}) 
             window.location.href = "http://localhost:3000/myRecipes" 
         }).catch(({ response }) => {
-            if (response.data==="Unauthorized"){
-                console.log('error loading')
-            }
+         
+                console.log('error loading',response)
+            
         })
     
 }
@@ -35,7 +35,7 @@ class LogIn extends Component {
             <Fragment>
             <div className="login_bg">
             <MDBAnimation type="bounce">
-                <MDBContainer>
+                <MDBContainer className="perfectCenter">
                     <MDBRow>
                     <MDBCol md="12">
                         <form className="auth-styles" onSubmit={this.handleSubmit}>

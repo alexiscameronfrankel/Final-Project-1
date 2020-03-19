@@ -68,7 +68,7 @@ router.post('/delete',isAuth, (req, res, next) => {
     .catch(console.log('An error occured'));
 });
 
-// 5) Create new Recipe
+// 5) Create new Recipe 
 router.post('/new',isAuth, (req, res, next) => {
     console.log('inside create new recipe',req.body)
     let duplicateRecipe=0

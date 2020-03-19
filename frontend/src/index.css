@@ -232,11 +232,11 @@ li {
 
 /* Position and sizing of burger button */
 .bm-burger-button {
-  position: fixed;
+  position: absolute;
   width: 36px;
   height: 30px;
   left: 36px;
-  top: 36px;
+  top: 26px;
 }
 
 /* Color/shape of burger icon bars */
@@ -262,8 +262,9 @@ li {
 
 /*AUTH FORM STYLE */
 
+
 .auth-styles{
-  margin-top:15vh;
+  /* margin-top:15vh; */
   background-color: #f8f8ff;
   padding:60px;
   box-shadow: 9px 11px 20px #191970fc;
@@ -288,12 +289,20 @@ li {
   background-image: url('/images/otherbg.jpeg') !important;
   height:100vh;
   background-size: cover;
+  display:flex; 
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .signup_bg{
   background-image: url('/images/signupbggood.jpg') !important;
   height:100vh;
   background-size: cover;
+  display:flex; 
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 

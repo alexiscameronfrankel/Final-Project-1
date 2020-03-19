@@ -4,6 +4,7 @@ import service from '../services/service';
 import { Button, Form, Col } from 'react-bootstrap';
 import actions from '../services/index';
 import Card from 'react-bootstrap/Card'
+import { Link } from "react-router-dom";
 // import ImageUpload from './ImageUpload.js'
 // import VideoUpload from './VideoUpload.js'
 
@@ -31,7 +32,19 @@ class Newrecipe extends Component {
         comments: [], 
         profileID: "",
         created: date,
+        allrecipes:[],
       }
+
+
+      async componentDidMount() {
+        let recipes = await actions.allRecipes()
+        console.log(recipes.data)
+        this.setState({
+            allrecipes: recipes.data,
+            // title: recipes.data[0].title
+        })
+    }
+
 
 
     //On page load will get profile ID for new recipe
@@ -207,15 +220,19 @@ handleSubmit = e => {
     .then(res => {
         console.log('added: ', res);
         // here you would redirect to some other page 
+        // this.props.history.push('/allrecipes/'+res._id);
     })
     .catch(err => {
         console.log("Error while adding the thing: ", err);
     });
+
+
 }  
 
 
     
 render() {
+    console.log(this.state.allrecipes)
     return (
         <div>
             <Card className="new-recipe-form" border="warning" style={{ width: '50rem', margin: '80px auto'  }}>
@@ -362,7 +379,7 @@ render() {
                     <Form.Check type="checkbox" label="Other" value="Other" onChange={this.putCategoryInState}/>
                 </Form.Group>
                 
-                    <Button variant="primary" type="submit">
+                 <Button variant="primary" type="submit">
                         Submit
                     </Button>
             </Form>

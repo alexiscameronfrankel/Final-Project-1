@@ -30,7 +30,7 @@ class Commented extends Component {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title">Account Activity | CoolGuy84{this.props.username}</h1>
+            <h1 className="prof-title">Account Activity | {this.props.user.email}</h1>
                 
             </Card.Header> 
           </Card.Title>
@@ -49,9 +49,9 @@ class Commented extends Component {
             </ListGroup>
         </Card>
         <Card className="sm-card" id="main-card" style={{ width: '100%' }}>
-            <Card.Header>Account Activity
+            <Card.Header>Recent Account Activity
             <ButtonGroup>
-                <Link to="/recent"> <Button variant="secondary" className="settings-button">Recent</Button></Link>
+                <Link to="/myactivity"> <Button variant="secondary" className="settings-button">Viewed</Button></Link>
                 <Link to="/liked"> <Button variant="secondary" className="settings-button">Liked</Button></Link>
                 <Link to="/commented">  <Button variant="secondary" className="settings-button">Commented</Button></Link>
                     <Link to="/uploaded"> <Button variant="secondary" className="settings-button">Uploaded</Button> </Link>

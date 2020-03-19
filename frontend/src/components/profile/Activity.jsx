@@ -53,6 +53,7 @@ class Activity extends Component {
      let x=this.state.recentActivity
      console.log(this.state.ready2,x)
     return (
+
         <div>
             
           <Container className="home-recipe">
@@ -61,7 +62,7 @@ class Activity extends Component {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title">{this.state.ready ? <span>Account Activity | {this.state.username}</span>:("Loading")}</h1>
+                <h1 className="prof-title">{this.state.ready ? <span>Account Activity | {this.props.user.email}</span>:("Loading")}</h1>
                 
             </Card.Header> 
           </Card.Title>
@@ -80,9 +81,9 @@ class Activity extends Component {
             </ListGroup>
         </Card>
         <Card className="sm-card" id="main-card" style={{ width: '100%' }}>
-            <Card.Header>Account Activity
+            <Card.Header>Recent Account Activity
                 <ButtonGroup>
-                <Link to="/recent"> <Button variant="secondary" className="settings-button">Recent</Button></Link>
+                <Link to="/myactivity"> <Button variant="secondary" className="settings-button">Viewed</Button></Link>
                 <Link to="/liked"> <Button variant="secondary" className="settings-button">Liked</Button></Link>
                 <Link to="/commented">  <Button variant="secondary" className="settings-button">Commented</Button></Link>
                     <Link to="/uploaded"> <Button variant="secondary" className="settings-button">Uploaded</Button> </Link>
@@ -116,6 +117,7 @@ class Activity extends Component {
     slidesToScroll={1}
     slidesToShow={2}
     scrollOnDevice={true}
+    autoplay={true}
   >
     
   
@@ -125,11 +127,12 @@ class Activity extends Component {
                 <Card.Body>
                     <Card.Title>{x[0].title}</Card.Title>
                     <Card.Text>
-                    {x[0].tags}
+                    {x[0].category}
                     </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
+                  <Link onClick={()=>console.log(this)} to={`/allrecipes/${x[0]._id}`}><Button variant="secondary" className="settings-button">View Recipe</Button></Link>
                 </Card.Body>
             </Card>
+            
     </div>
     <div>
     <Card className="past-recipe-card" style={{ width: '100%' }}>
@@ -137,7 +140,7 @@ class Activity extends Component {
                 <Card.Body>
                     <Card.Title>{x[1].title}</Card.Title>
                     <Card.Text>
-                    {x[1].tags}
+                    {x[1].category}
                     </Card.Text>
                     <Button variant="secondary" className="settings-button">View Recipe</Button>
                 </Card.Body>
@@ -149,7 +152,7 @@ class Activity extends Component {
                 <Card.Body>
                     <Card.Title> {x[2].title}</Card.Title>
                     <Card.Text>
-                    {x[2].tags}
+                    {x[2].category}
                     </Card.Text>
                     <Button variant="secondary" className="settings-button">View Recipe</Button>
                 </Card.Body>
@@ -161,7 +164,7 @@ class Activity extends Component {
                 <Card.Body>
                     <Card.Title>{x[3].title}</Card.Title>
                     <Card.Text>
-                    {x[3].tags}
+                    {x[3].category}
                     </Card.Text>
                     <Button variant="secondary" className="settings-button">View Recipe</Button>
                 </Card.Body>
@@ -173,7 +176,7 @@ class Activity extends Component {
                 <Card.Body>
                     <Card.Title> {x[4].title}</Card.Title>
                     <Card.Text>
-                    {x[4].tags}
+                    {x[4].category}
                     </Card.Text>
                     <Button variant="secondary" className="settings-button">View Recipe</Button>
                 </Card.Body>
@@ -185,11 +188,16 @@ class Activity extends Component {
                 <Card.Body>
                     <Card.Title> {x[5].title}</Card.Title>
                     <Card.Text>
-                    {x[5].tags}
+                    {x[5].category}
                     </Card.Text>
                     <Button variant="secondary" className="settings-button">View Recipe</Button>
                 </Card.Body>
             </Card>
+            <script>
+      document.querySelectorAll("button").onclick=function(){
+        console.log("Niko Is the man")
+      }
+    </script>
     </div>
   </InfiniteCarousel>
     :("Loading")}

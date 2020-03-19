@@ -1,7 +1,7 @@
 //Can attempt to extract info from object received and if saved send info to create recipe
 
 import React, { Component } from 'react';
-import { Container, Form, Card, ListGroup, ListGroupItem,Button, ButtonGroup,  } from 'react-bootstrap';
+import { ToggleButton, ToggleButtonGroup, Container, Form, Card, ListGroup, ListGroupItem,Button, ButtonGroup,  } from 'react-bootstrap';
 import actions from '../../services/index'
 
 
@@ -10,7 +10,7 @@ import actions from '../../services/index'
 
 class RecipeDetails extends Component {
   state={
-      recipeFound: "secondary",
+      className: ["secondary", "danger", "none"],
       profileID: '',
   }
 
@@ -71,6 +71,9 @@ class RecipeDetails extends Component {
   console.log('handlesave recipe to profile by title',{title: this.state.title})
    actions.addProfileRecipes({title: this.state.title}).then(updateMyRecipes=>{
      console.log(updateMyRecipes)
+     this.setState(nextState => ({
+      className: nextState.check
+    }));
    })
    .catch(error=> console.log(error))
 }
@@ -135,7 +138,9 @@ class RecipeDetails extends Component {
                 <Card>
                 <Card.Header>
                 <ButtonGroup className="btn-group" aria-label="Basic example">
-                    <Button classname="main-card-source" onClick={this.handleSave} variant={this.state.recipeFound} name="save-btn" size="lg"><i className="far fa-heart fa-2x"></i></Button>
+                <ButtonGroup toggle className="mb-2">
+                </ButtonGroup>
+                    <Button className={this.state.class} onClick={this.handleSave} variant="secondary" name="save-btn" size="lg"><i className="far fa-heart fa-2x"></i></Button>
                     {/* <Button variant="secondary" name="like-btn" size="lg"><i className="far fa-thumbs-up fa-2x"></i></Button> */}
                     {/* <Button variant="secondary" name="dislike-btn" size="lg"><i className="far fa-thumbs-down"></i></Button>  */}
                     <Button variant="secondary" name="youtube-btn" size="lg"><a  href={this.state.video} className="main-card-source"><i class="fab fa-youtube-square fa-2x"></i></a></Button>

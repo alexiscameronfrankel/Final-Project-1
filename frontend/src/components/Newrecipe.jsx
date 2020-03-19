@@ -33,7 +33,6 @@ class Newrecipe extends Component {
         profileID: "",
         created: date,
         allrecipes:[],
-        recipeFound: "secondary"
       }
 
 
@@ -221,7 +220,7 @@ handleSubmit = e => {
     .then(res => {
         console.log('added: ', res);
         // here you would redirect to some other page 
-        this.props.history.push('/allrecipes/'+res._id);
+        // this.props.history.push('/allrecipes/'+res._id);
     })
     .catch(err => {
         console.log("Error while adding the thing: ", err);

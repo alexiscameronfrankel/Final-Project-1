@@ -15,7 +15,7 @@ console.log(props)
     // Pass on our props
     <Fragment>
         <div className="head-div">
-        <Searchbar />
+        {/* <Searchbar /> */}
         </div>
     
     <Menu {...props} >

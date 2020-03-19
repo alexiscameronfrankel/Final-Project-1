@@ -18,7 +18,7 @@ class LogIn extends Component {
         e.preventDefault()
          actions.logIn(this.state).then(user => {
             this.props.setUser({...user.data}) 
-            window.location.href = "http://localhost:3000/myRecipes" 
+            this.props.history.push("/myRecipes")
         }).catch(({ response }) => {
          
                 console.log('error loading',response)

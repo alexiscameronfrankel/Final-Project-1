@@ -32,7 +32,7 @@ class SignUp extends Component {
                 actions.newProfile(initialProfile).then(profile=>{
                     console.log('profile success',profile)
                     // console.log(this.state.firstName, "saved")
-                    window.location.href = "http://localhost:3000/profile"
+                    this.props.history.push("/profile")
                 }).catch(({err}) => console.log(err))
             }).catch(({ response }) => console.error(response));
     }

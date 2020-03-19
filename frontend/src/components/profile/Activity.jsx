@@ -3,7 +3,7 @@ import { Container, Card, ListGroup, Button, ButtonGroup,} from 'react-bootstrap
 import {Link} from 'react-router-dom';
 import actions from '../../services/index';
 
-var Coverflow = require('react-coverflow');
+var Coverflow = require ('react-coverflow');
 
 class Activity extends Component {
   
@@ -79,20 +79,20 @@ class Activity extends Component {
             <Card>
             <Card.Header className="recent-views">Recently Viewed Recipes</Card.Header>
     {this.state.ready2 ?
-
-  <Coverflow>
+<div>
+  {/* <Coverflow> */}
     <div>
           <Card className="past-recipe-card" style={{ width: '100%' }}>            
-            <Card.Img variant="top" src={x[0].imageUrl} />
+            <Card.Img variant="top" src={x[5].imageUrl} />
                 <Card.Body>
-                    <Card.Title>{x[0].title}</Card.Title>
+                    <Card.Title>{x[5].title}</Card.Title>
                     <Card.Text>
-                    {x[0].tags}
+                    {x[5].tags}
                     </Card.Text>
                     <Button variant="secondary" className="settings-button">View Recipe</Button>
                 </Card.Body>
             </Card>
-    </div> */}
+    </div> 
     <div>
     <Card className="past-recipe-card" style={{ width: '100%' }}>
             <Card.Img variant="top" src={x[4].imageUrl} />
@@ -153,7 +153,8 @@ class Activity extends Component {
                 </Card.Body>
             </Card>
     </div>
-  </Coverflow>
+  {/* </Coverflow> */}
+  </div>
  
     :("Loading")}
            

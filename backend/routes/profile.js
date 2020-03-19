@@ -181,7 +181,7 @@ router.post('/myActivity/addActivity',isAuth, (req, res, next) => {
     Recipe.find(req.body).then(recipeFound=>{
         // console.log("id found",recipeFound)
         let saveRecipeID = `${recipeFound[0]._id}`
-        Profile.updateOne({UserID:myProfileUserID},{ $push: { activity: [saveRecipeID] } }).then(savedRecicpes=>{
+        Profile.updateOne({UserID:myProfileUserID},{ $push: { activity: [saveRecipeID], $position: 0 } }).then(savedRecicpes=>{
             console.log("successfully added", savedRecicpes)
             Profile.find({UserID:req.user._id}).then(profile=> console.log('profile activity updated',profile)).catch(err=> console.log(err))
             res.send(savedRecicpes)

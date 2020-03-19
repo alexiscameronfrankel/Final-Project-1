@@ -9,6 +9,7 @@ class Account extends Component {
 
     state = {
         UserID: "",
+        category: [],
         username: "",
         firstName: "",
         lastName: "",
@@ -26,19 +27,29 @@ class Account extends Component {
          })
         }
 
-      putCategoryInState = (e) => {
-        console.log('putCategoryInState is being called')
-        // let profile= actions.getProfile(this.props.user._id)
-        
-        let categoryArr = [...this.state.dietPreference];
-        categoryArr.push(e.target.value)
-        console.log(categoryArr)
-        this.setState({
+        putCategoryInState = (e) => { 
+            console.log(e.target.value, e.target.checked)
+            let categoryArr = [...this.state.category];
+            if(e.target.checked){
+                categoryArr.push(e.target.value)
+                this.setState({
+                
+                            category:categoryArr
+                        
+                    }) 
+                }
+            else {
+               categoryArr =  categoryArr.filter(cat => {
+                   return cat !== e.target.value
+                   
+               })
+               this.setState({
+                
+                category:categoryArr
             
-            dietPreference: categoryArr
-        
-        }) 
-    }
+                }) 
+            }
+         }
     handleFileUpload = e => {
         console.log("The file to be uploaded is: ", e.target.files[0]);
 
@@ -131,7 +142,7 @@ class Account extends Component {
         </Card>
         <Card className="sm-card" id="main-card" style={{ width: '100%' }}>
             <Card.Header>Account Preferences</Card.Header>
-            <Card>
+            <Card className="profile-prefs">
             <Form onSubmit={this.handleSubmit}>
                 <Form.Group>
                     <Form.Label for="exampleInputEmail1">Change User Preferences </Form.Label>
@@ -144,10 +155,8 @@ class Account extends Component {
                 </Form.Group>
                 
                 <Form.Group>
-                    <Form.Control type="hidden" name="MAX_FILE_SIZE" value="4194304" />
-                    <Form.Control name="avatar" placeholder="Upload Avatar Image" type="file" 
-                    onChange={this.handleFileUpload}/>
-                    <small id="emailHelp" className="form-text text-muted">Avatar Upload. 4MB Maximum.</small>
+                    <Form.Control onChange={this.handleChange} name="imageUrl" placeholder="Input Avatar Image URL" type="link"/>
+                    <small id="emailHelp" className="form-text text-muted">Example: "www.google.com/images/imagename.jpg"</small>
 
                 </Form.Group>
                 <Form.Group id="categoryGridCheckbox">

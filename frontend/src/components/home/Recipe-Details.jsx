@@ -1,7 +1,7 @@
 //Can attempt to extract info from object received and if saved send info to create recipe
 
 import React, { Component } from 'react';
-import { Container, Form, Card, ListGroup, ListGroupItem,Button, ButtonGroup,  } from 'react-bootstrap';
+import { ToggleButton, ToggleButtonGroup, Container, Form, Card, ListGroup, ListGroupItem,Button, ButtonGroup,  } from 'react-bootstrap';
 import actions from '../../services/index'
 
 
@@ -10,6 +10,8 @@ import actions from '../../services/index'
 
 class RecipeDetails extends Component {
   state={
+      className: ["secondary", "danger", "none"],
+      profileID: '',
   }
 
   async componentDidMount(){
@@ -61,7 +63,7 @@ class RecipeDetails extends Component {
   
   
   render() {
-    console.log(this.state.ingredients)
+    console.log(this.props)
     return (
       <div>
         <Container className="home-recipe">
@@ -130,7 +132,6 @@ class RecipeDetails extends Component {
                 <Card.Header>
                 <Form.Label>Leave a comment below</Form.Label>
                 <Form.Group className="comment-form" id="comment-form" controlId="exampleForm.ControlTextarea1">
-                
                 <Form.Control as="textarea" rows="3" />
                 <Button variant="secondary" name="save-btn" size="lg"><i className="far fa-comments fa-2x"></i></Button>
                 </Form.Group>

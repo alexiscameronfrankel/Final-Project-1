@@ -332,7 +332,7 @@ button.btn-default.btn.Ripple-parent.peach-gradient {
 
 .head-div {
   background-color: #D93810;
-  padding: 30px;
+  padding: 40px;
   display: flex;
   flex-direction: row-reverse;
   
@@ -656,10 +656,30 @@ Adding Random Page Styles */
 
 
 
+.profile-prefs {
+  padding: 20px;
+}
 
+/* SOCIAL MEDIA SHARING STYLES */
+button.react-share__ShareButton {
+  width: 0px;
+  margin: 0px 40px;
+  outline: none;
+}
 
+/*New Recipe Styles*/
 
+.deleteButton{
+  margin: 4.3px;
+  height: calc(1.5em + .75rem + 2px);
 
+}
+
+.deleteButton-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
 
 
 

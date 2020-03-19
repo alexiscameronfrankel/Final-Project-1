@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import { Container, Card, ListGroup, Button, ButtonGroup,} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import InfiniteCarousel from 'react-leaf-carousel';
 import actions from '../../services/index';
+
+var Coverflow = require('react-coverflow');
 
 class Activity extends Component {
   
@@ -49,6 +50,7 @@ class Activity extends Component {
      console.log(this.state.ready2,x)
     
     return (
+
         <div>
             
           <Container className="home-recipe">
@@ -57,7 +59,7 @@ class Activity extends Component {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title">{this.state.ready ? <span>Account Activity | {this.state.username}</span>:("Loading")}</h1>
+                <h1 className="prof-title">{this.state.ready ? <span>Account Activity | {this.props.user.email}</span>:("Loading")}</h1>
                 
             </Card.Header> 
           </Card.Title>
@@ -76,9 +78,9 @@ class Activity extends Component {
             </ListGroup>
         </Card>
         <Card className="sm-card" id="main-card" style={{ width: '100%' }}>
-            <Card.Header>Account Activity
+            <Card.Header>Recent Account Activity
                 <ButtonGroup>
-                <Link to="/recent"> <Button variant="secondary" className="settings-button">Recent</Button></Link>
+                <Link to="/myactivity"> <Button variant="secondary" className="settings-button">Viewed</Button></Link>
                 <Link to="/liked"> <Button variant="secondary" className="settings-button">Liked</Button></Link>
                 <Link to="/commented">  <Button variant="secondary" className="settings-button">Commented</Button></Link>
                     <Link to="/uploaded"> <Button variant="secondary" className="settings-button">Uploaded</Button> </Link>
@@ -88,33 +90,8 @@ class Activity extends Component {
             <Card>
             <Card.Header className="recent-views">Recently Viewed Recipes</Card.Header>
     {this.state.ready2 ?
-            <InfiniteCarousel
-    breakpoints={[
-      {
-        breakpoint: 500,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-    ]}
-    dots={false}
-    showSides={true}
-    sidesOpacity={.5}
-    sideSize={.1}
-    slidesToScroll={1}
-    slidesToShow={2}
-    scrollOnDevice={true}
-  >
-    
   
+  <InfiniteCarousel>
     <div>
           <Card className="past-recipe-card" style={{ width: '100%' }}>            
             <Card.Img variant="top" src={x[5].imageUrl} />
@@ -190,20 +167,13 @@ class Activity extends Component {
   </InfiniteCarousel>
     :("Loading")}
            
-            </Card>
-
-            
-            
-           
-            
         </Card>
-        </div>
-        
-        
-        </Container>
-        </div>
-    );
-}
+      </Card>
+      </div>
+     </Container>
+    </div>
+    )}
+
 }
 
 export default Activity;

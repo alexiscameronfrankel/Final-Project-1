@@ -148,7 +148,7 @@ class App extends Component {
         <Route exact path="/myrecipes" render={(props) => <MyRecipes {...props} user={this.state}/>} />
         <Route exact path="/myactivity" render={(props) => <Activity {...props} setUser={this.setUser}/>} />
         <Route exact path="/new-recipe" render={(props) => <Newrecipe {...props} user={this.state}/>} />
-        <Route exact path="/allrecipes/:recipeID" render={(props) => <RecipeDetails {...props} />} />
+        <Route exact path="/allrecipes/:recipeID" render={(props) => <RecipeDetails {...props} user={this.state} setUser={this.setUser} />} />
         
         
         <Route component={NotFound} />

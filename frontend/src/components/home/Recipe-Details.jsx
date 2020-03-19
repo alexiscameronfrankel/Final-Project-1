@@ -10,6 +10,8 @@ import actions from '../../services/index'
 
 class RecipeDetails extends Component {
   state={
+      recipeFound: "secondary",
+      profileID: '',
   }
 
   // handleSave=()=>{
@@ -19,7 +21,7 @@ class RecipeDetails extends Component {
   // }
 
   async componentDidMount(){
-      console.log(this.props)
+      console.log(this.props )
     actions.findRecipeID(this.props.match.params.recipeID)
     .then(recipeFound =>
         {console.log(recipeFound.data)
@@ -29,14 +31,32 @@ class RecipeDetails extends Component {
         })})
     .catch(err => console.log(err))
     console.log("test")
-    actions.findProfileRecipes(this.props.match.params.recipeID)
-    .then(recipeFound =>
-        {console.log(recipeFound.data)
-        this.setState( {
-            ...recipeFound.data
-          
-        })})
+
+    actions.getProfile(this.props.user._id)
+    .then(profileFound =>
+        {console.log(profileFound.data)
+            this.setState({
+               profileID:profileFound.data._id 
+            })
+        profileFound.data.recipes.find(
+            likedRecipe => {
+                if (likedRecipe === this.state._id){
+                    console.log("recipefound")
+                this.setState({
+                    recipeFound: true
+                })
+           } } //iterate through the profile recipes found id and find recipeFound id
+        )
+        
+        })
     .catch(err => console.log(err))
+    // actions.findProfileRecipes(this.props.match.params.recipeID)
+    // .then(recipeFound =>
+    //     {console.log(recipeFound.data)
+    //     this.setState( {
+    //         ...recipeFound.data
+    //     })})
+    
 
 
     
@@ -52,7 +72,7 @@ class RecipeDetails extends Component {
   
   
   render() {
-    console.log(this.state.ingredients)
+    console.log(this.props)
     return (
       <div>
         <Container className="home-recipe">
@@ -73,7 +93,7 @@ class RecipeDetails extends Component {
           </Card.Header>
           <Card.Subtitle className="mb-2 text-muted main-card-subtitle text-center">Category: {this.state.category} | Dish Type: {this.state.dishtype}  | Area: {this.state.area}   |   Tags: {this.state.tags}</Card.Subtitle>
           <Card.Header>
-              <Card.Img className= "main-card-image" variant="top" src={this.state.image}/>
+              <Card.Img className= "main-card-image" variant="top" src={this.state.imageUrl}/>
           </Card.Header>
               <Card.Body>
                 <Card.Header>
@@ -110,7 +130,7 @@ class RecipeDetails extends Component {
                 <Card>
                 <Card.Header>
                 <ButtonGroup className="btn-group" aria-label="Basic example">
-                    <Button classname="main-card-source" onClick={this.handleSave} variant="secondary" name="save-btn" size="lg"><i className="far fa-heart fa-2x"></i></Button>
+                    <Button classname="main-card-source" onClick={this.handleSave} variant={this.state.recipeFound} name="save-btn" size="lg"><i className="far fa-heart fa-2x"></i></Button>
                     {/* <Button variant="secondary" name="like-btn" size="lg"><i className="far fa-thumbs-up fa-2x"></i></Button> */}
                     {/* <Button variant="secondary" name="dislike-btn" size="lg"><i className="far fa-thumbs-down"></i></Button>  */}
                     <Button variant="secondary" name="youtube-btn" size="lg"><a  href={this.state.video} className="main-card-source"><i class="fab fa-youtube-square fa-2x"></i></a></Button>

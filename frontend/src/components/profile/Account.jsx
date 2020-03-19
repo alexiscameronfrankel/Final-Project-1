@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import service from '../../services/service';
 import { Container, Card, ListGroup, Button, Form } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import actions from '../../services/index'
+import actions from '../../services/index';
 
 class Account extends Component {
 

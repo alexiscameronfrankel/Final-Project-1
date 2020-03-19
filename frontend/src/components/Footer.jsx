@@ -11,12 +11,12 @@ const Footer = () => {
       <MDBRow>
         <MDBCol md="12" className="py-5">
           <div className="mb-5 flex-center">
-          <FacebookShareButton quote="Can't figure out what to eat? Check out this yummy recipe app." hashtag="#goodeats" url="therecipebox.netlify.com">
+          <FacebookShareButton quote="Can't figure out what to eat? Check out this yummy recipe app." hashtag="#recipebox" url="therecipebox.netlify.com">
               <i className="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x">
               </i>
             </FacebookShareButton>
 
-            <TwitterShareButton  url="therecipebox.netlify.com" hashtags={["#frenchy"]} via="Yum yum yum this recipe app rocks!"  title="Yum yum yum this recipe app rocks!">
+            <TwitterShareButton children="therecipebox.netlify.com" url="therecipebox.netlify.com" hashtags={["recipebox"]} title="Yum yum yum this recipe app rocks! www.therecipebox.netlify.com">
               <i className="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x">
               </i>
               </TwitterShareButton>

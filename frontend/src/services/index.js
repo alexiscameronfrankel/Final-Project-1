@@ -109,7 +109,7 @@ const actions = {
   },
   //find a profile comments
   findProfileComments: async (profile) => {
-    return await service.get(`/profile/activity`, profile)
+    return await service.get(`/profile/myComments`, profile)
   },
   //update profile
   updateProfile: async (profile) => {
@@ -126,6 +126,14 @@ const actions = {
    //delete recipe from profile
    deleteProfileRecipes: async (recipeID) => {
     return await service.post('/profile/myRecipes/deleteRecipe', recipeID)
+  },
+  //find recipes in activity for profile
+  findActivityRecipes: async (userID) => {
+    return await service.get('/profile/myActivity', userID)
+  },
+   //add recipe to profile
+  addActivityRecipes: async (recipeTitle) => {
+    return await service.post('/profile/myActivity/addActivity', recipeTitle)
   },
   
 };

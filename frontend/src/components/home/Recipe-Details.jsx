@@ -31,6 +31,7 @@ class RecipeDetails extends Component {
         })})
     .catch(err => console.log(err))
     console.log("test")
+    
 
     actions.getProfile(this.props.user._id)
     .then(profileFound =>
@@ -46,10 +47,13 @@ class RecipeDetails extends Component {
                     recipeFound: true
                 })
            } } //iterate through the profile recipes found id and find recipeFound id
-        )
-        
-        })
+        )})
     .catch(err => console.log(err))
+
+    actions.addActivityRecipes({title: this.state.title}).then(updateMyActivity=>{
+        console.log('activity random saved',updateMyActivity)
+      })
+      .catch(error=> console.log(error))
     // actions.findProfileRecipes(this.props.match.params.recipeID)
     // .then(recipeFound =>
     //     {console.log(recipeFound.data)

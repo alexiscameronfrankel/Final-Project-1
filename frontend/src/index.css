@@ -255,7 +255,12 @@ li {
   margin-top:-230px;
 } */
 
-/*FORM STYLE */
+/*NEW RECIPE FORM STYLE*/
+.card[class*='border']{
+  margin:auto;
+}
+
+/*AUTH FORM STYLE */
 
 .auth-styles{
   margin-top:15vh;

@@ -33,64 +33,21 @@ class Random extends Component {
       if (x.strCategory=== 'Beef') { mCategory='Beef'};
       if (x.strCategory=== 'Seafood') { mCategory='Seafood'};
   
-      // let mIngredients = [
-      //   x.strIngredient1,
-      //   x.strIngredient2,
-      //   x.strIngredient3,
-      //   x.strIngredient4,
-      //   x.strIngredient5,
-      //   x.strIngredient6,
-      //   x.strIngredient7,
-      //   x.strIngredient8,
-      //   x.strIngredient9,
-      //   x.strIngredient10,
-      //   x.strIngredient11,
-      //   x.strIngredient12,
-      //   x.strIngredient13,
-      //   x.strIngredient14,
-      //   x.strIngredient15,
-      //   x.strIngredient16,
-      //   x.strIngredient17,
-      //   x.strIngredient18,
-      //   x.strIngredient19,
-      //   x.strIngredient20
-      // ]
       let mIngredients=[]
       for (let i=1;i<21;i++){
         if (x["strIngredient"+i]){
           mIngredients.push(x["strIngredient"+i])
         }
       }
-      console.log(mIngredients)
-      // let mMeasurements=[
-      //   x.strMeasure1,
-      //   x.strMeasure2,
-      //   x.strMeasure3,
-      //   x.strMeasure4,
-      //   x.strMeasure5,
-      //   x.strMeasure6,
-      //   x.strMeasure7,
-      //   x.strMeasure8,
-      //   x.strMeasure9,
-      //   x.strMeasure10,
-      //   x.strMeasure11,
-      //   x.strMeasure12,
-      //   x.strMeasure13,
-      //   x.strMeasure14,
-      //   x.strMeasure15,
-      //   x.strMeasure16,
-      //   x.strMeasure17,
-      //   x.strMeasure18,
-      //   x.strMeasure19,
-      //   x.strMeasure20
-      // ]
+      
+      
       let mMeasurements=[]
-      for (let i=1;i<21;i++){
-        if (x["strMeasure"+i]){
+      for (let i=1;i<mIngredients.length+1;i++){
+        
           mMeasurements.push(x["strMeasure"+i])
-        }
+        
       }
-      console.log(mMeasurements)
+  
       
       let mealTags
       if (x.strTags===null){
@@ -121,10 +78,18 @@ class Random extends Component {
       }
       
      
-      let createRecipe = actions.newRecipe(newMeal)
-      this.setState({info: newMeal})
-      console.log('finished creating newMeal',createRecipe )
-      
+      actions.newRecipe(newMeal).then(createRecipe=> {
+          this.setState({info: newMeal})
+          console.log('finished creating newMeal',createRecipe )      
+        })
+        .catch(error=> console.log(error))
+      //does not work???
+      actions.addActivityRecipes({title: this.state.info.title})
+      // .then(updateMyActivity=>
+      //     console.log('activity random saved',updateMyActivity)
+      // )
+      // .catch(error=> console.log(error))
+    
     })
 
   }
@@ -140,7 +105,7 @@ class Random extends Component {
   }
   
   render() {
-    console.log(this.state.info)
+    // console.log(this.state.info)
     
     return (
       <div>
@@ -181,7 +146,7 @@ class Random extends Component {
               <Card.Header><span style={{color:'white'}}>Ingredients:</span>
               <ListGroup>
                {/* <ListGroupItem className="main-card-subtitle prep-time">  */}
-                 {console.log(this.state.info.ingredients)}
+                 {/* {console.log(this.state.info.ingredients)} */}
                 {this.state.info.ingredients && this.state.info.ingredients.map((item,i) => {return <ListGroupItem className="list-item" key={i}>{i+1})  <span> {item} </span><hr></hr></ListGroupItem>})}
                 </ListGroup>
               </Card.Header>

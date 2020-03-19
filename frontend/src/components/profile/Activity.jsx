@@ -2,35 +2,45 @@ import React, { Component } from 'react';
 import { Container, Card, ListGroup, Button, ButtonGroup,} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import InfiniteCarousel from 'react-leaf-carousel';
+import actions from '../../services/index';
 
 class Activity extends Component {
-    
-    // if(!props.user.email){ 
-    //     props.history.push('/log-in') 
-    // }
-    render(...props){   
+  
+  state={
+    ready:false,
+    recentActivity: [],
+    ready2: false
+  }
+    async componentDidMount(){
+        actions.getProfile(this.props.user._id).then(profileFound=>{
+          this.setState({
+              ...profileFound.data[0],
+              ready: true
+          })
+            if (profileFound.data[0].activity.length >0){
+              actions.findActivityRecipes({UserID:this.props.user._id}).then(activityFound=>{
+                console.log(activityFound.data)
+                this.setState({
+                    recentActivity: [...activityFound.data],
+                    ready2: true
+                })
+              })
+            }
+        })
+        .catch(error => console.log("yousuck!"))
+    }
+    render(){ 
+     console.log( this.state)
     return (
         <div>
-            {/* Profile
-            Welcome {props.user.email} !!!  */}
-            <Container className="home-recipe">
-          {/* <img className="hero-img" src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F5446883.jpg&w=596&h=596&c=sc&poi=face&q=85"></img>
-          <div className="hero-recipe">
-          <h1 className="recipe-title">My Recipe Name</h1>
-          <ul>
-            <li>Step 1 - Boil Water at High Heat</li>
-            <li>Step 2 - Boil Meat for 30 minutes</li>
-            <li>Step 3 - Dice Vegetables into a Juliene Cut</li>
-            <li>Step 4 - Prep Appetizers and Grab a Beer</li>
-          </ul>
-          </div> */}
-          
+            
+          <Container className="home-recipe">
           <Card id="main-card" 
           style={{ width: '100%' }}>
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title">Account Activity | CoolGuy84{this.props.email}</h1>
+                <h1 className="prof-title">{this.state.ready ? <span>Account Activity | {this.state.username}</span>:("Loading")}</h1>
                 
             </Card.Header> 
           </Card.Title>
@@ -86,20 +96,31 @@ class Activity extends Component {
     scrollOnDevice={true}
   >
     <div>
-    <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src="https://i.ytimg.com/vi/CcwQeQ4VY7I/hqdefault.jpg" />
-                <Card.Body>
-                    <Card.Title>Kitchen Sink Nachos</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-      
+      {this.state.ready2 ? 
+            (
+              
+              this.state.recentActivity.map((eachRecipe,i) => {
+            console.log(eachRecipe,this.state.ready2)
+            return <div key={i}>{eachRecipe.title}</div>
+            {/* (<Card key={i} className="past-recipe-card" style={{ width: '100%' }}>
+                      <Card.Img key={i} variant="top" src={eachRecipe.imageUrl} />
+                      <Card.Body>
+                          <Card.Title key={i}>{eachRecipe.title}</Card.Title>
+                          <Card.Text key={i}>
+                              Some quick example text to build on the card title and make up the bulk of
+                              the card's content.
+                          </Card.Text>
+                          <Button variant="secondary" className="settings-button">View Recipe</Button>
+                      </Card.Body>
+                  </Card>
+                  ) */}
+          })
+          ) 
+      :
+      ("No Recent asdf")
+      }
     </div>
-    <div>
+    {/* <div>
     <Card className="past-recipe-card" style={{ width: '100%' }}>
             <Card.Img variant="top" src="https://i.ytimg.com/vi/LIubvcunMBc/hqdefault.jpg" />
                 <Card.Body>
@@ -150,7 +171,7 @@ class Activity extends Component {
                     <Button variant="secondary" className="settings-button">View Recipe</Button>
                 </Card.Body>
             </Card>
-    </div>
+    </div> */}
   </InfiniteCarousel>
            
             </Card>

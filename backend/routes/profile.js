@@ -117,6 +117,29 @@ router.post('/myRecipes/deleteRecipe',isAuth, (req, res, next) => {
 });
 
 // 8) Get all comments by user from database
+router.get('/myComments',isAuth, (req, res, next) => {
+    let myProfileUserID= req.user._id
+    console.log('reqbody', req.user)
+
+    Profile.find({UserID:myProfileUserID})
+    .then(profile => {
+        console.log(profile)
+        let profileComments=[...profile[0].comments]
+        // profilecomments.forEach(recipeID => {
+           Comment.find( { _id: { $in: profileComments } } )
+            .then(commentsFoundInDb => {
+                // res.send(console.log(recipeFoundInDb))   
+                // commentsFound.push(recipeFoundInDb)
+                console.log(commentsFoundInDb)
+                res.json(commentsFoundInDb)
+            })
+            .catch(err => console.log(err))
+    })
+    .catch(error=>console.log(error))
+//   res.status(200).json({ msg: 'Working' });
+});
+
+// 9) Get all recipes visited by user
 router.get('/myActivity',isAuth, (req, res, next) => {
     let myProfileUserID= req.user._id
     console.log('reqbody', req.user)
@@ -124,12 +147,9 @@ router.get('/myActivity',isAuth, (req, res, next) => {
     Profile.find({UserID:myProfileUserID})
     .then(profile => {
         console.log(profile)
-        let profileRecipes=[...profile[0].recipes]
-        // profileRecipes.forEach(recipeID => {
-            Recipe.find( { _id: { $in: profileRecipes } } )
+        let profileActivity=[...profile[0].activity]
+            Recipe.find( { _id: { $in: profileActivity } })
             .then(recipesFoundInDb => {
-                // res.send(console.log(recipeFoundInDb))   
-                // recipesFound.push(recipeFoundInDb)
                 console.log(recipesFoundInDb)
                 res.json(recipesFoundInDb)
             })
@@ -137,6 +157,37 @@ router.get('/myActivity',isAuth, (req, res, next) => {
     })
     .catch(error=>console.log(error))
 //   res.status(200).json({ msg: 'Working' });
+});
+
+// 10) add activity to profile. State passed needs to include recipesArray associated with user and recipeID
+router.post('/myActivity/addActivity',isAuth, (req, res, next) => {
+    let myProfileUserID= req.user._id
+    console.log('title passed to myActivity add', req.body)
+    Recipe.findOne({title: req.body.title}).then(recipeFound=>{
+        console.log("id found",recipeFound)
+        let saveRecipeID = recipeFound._id
+        Profile.find({UserID: myProfileUserID})
+        .then(profile => {
+            let profileActivity=[...profile[0].activity]
+            console.log('activity log in profile',profile)
+            if (profileActivity.length >= 6){
+                profileActivity.pop()
+                profileActivity.unshift(saveRecipeID)
+            } 
+            if (profileActivity.length < 6){
+                console.log('in here please')
+                profileActivity.unshift(saveRecipeID)
+            }
+            console.log('activity log in profile',profileActivity)
+            Profile.updateOne({UserID:myProfileUserID},{activity: profileActivity}).then(savedRecicpes=>{
+                console.log("successfully added", savedRecicpes)
+                res.send(savedRecicpes)
+            })
+            .catch(err => console.log(err))
+        })
+        .catch(console.log("An error has occurred."))
+    })
+    .catch(console.log("An error has occurred."))
 });
 
 function isAuth(req, res, next) {

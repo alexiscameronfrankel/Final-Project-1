@@ -13,7 +13,7 @@ import Random from './components/home/Random'
 import Account from './components/profile/Account'
 import Activity from './components/profile/Activity'
 import MyRecipes from './components/profile/MyRecipes.jsx'
-
+import Searchbar from './components/home/Searchbar'
 import Sidebar from './components/home/Sidebar.jsx'
 import Newrecipe from './components/Newrecipe';
 import Uploaded from './components/profile/Uploaded';
@@ -53,7 +53,13 @@ class App extends Component {
       _id: null }) //FIX 
   }
 
-
+  redirectingTo = (e) => {
+    e.preventDefault()
+    // console.log("hi")
+    console.log(this)
+    this.props.history.push(`/allrecipes/${this.state.filteredResults[0]._id}`)
+   
+}
 
   // handleChange = e => {
   //   console.log(this.state)
@@ -116,7 +122,7 @@ class App extends Component {
             </NavDropdown>
           </Nav>
 
-          <Searchbar />
+          
 
           <Nav>
             <Nav.Link href="/log-in">Log In</Nav.Link>
@@ -127,12 +133,12 @@ class App extends Component {
         </Navbar.Collapse>
       </Navbar> */}
 
-      
+      {/* <Searchbar /> */}
       
     
       <Switch>
         <Route exact path="/" render={(props) => <Home {...props} user={this.state}/>} />
-        <Route exact path="/" render={(props) => <Sidebar {...props} />} />
+        <Route exact path="/" render={(props) => <Sidebar {...props} history= {props.history} />} />
         <Route exact path="/profile" render={(props) => <Profile {...props} user={this.state}/>} />
         <Route exact path="/allrecipes" render={(props) => <AllRecipes {...props} user={this.state}/>} />
         {/* <Route exact path="/allrecipes/:recipeID" render={(props) => <RecipeDetails {...props} />} /> */}
@@ -141,7 +147,7 @@ class App extends Component {
         <Route exact path="/log-in" render={(props) => <LogIn {...props} setUser={this.setUser}/>} />
         <Route exact path="/log-out" render={(props) => <Home {...props} actionLogout= {this.logOut()}  />} />
         <Route exact path="/account" render={(props) => <Account {...props} user={this.state}/>} />
-        <Route exact path="/uploaded" render={(props) => <Uploaded {...props} setUser={this.setUser}user={this.state} />} />
+        <Route exact path="/uploaded" render={(props) => <Uploaded {...props} user={this.state} setUser={this.setUser}/>} />
         <Route exact path="/liked" render={(props) => <Liked {...props} setUser={this.setUser} user={this.state}/>} />
         <Route exact path="/commented" render={(props) => <Commented {...props} setUser={this.setUser} user={this.state} />} />
         <Route exact path="/myrecipes" render={(props) => <MyRecipes {...props} setUser={this.setUser} user={this.state}/>} />

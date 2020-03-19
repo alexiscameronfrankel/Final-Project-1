@@ -2,8 +2,8 @@ import React, { Fragment, Component } from 'react';
 import { Container, Card, ListGroup, Button, ButtonGroup,} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import actions from '../../services/index';
-import InfiniteCarousel from 'react-leaf-carousel';
-var Coverflow = require('react-coverflow');
+
+var Coverflow = require ('react-coverflow');
 
 class Activity extends Component {
   
@@ -18,26 +18,41 @@ class Activity extends Component {
               ...profileFound.data[0],
               ready: true
           })
-             
+            if (profileFound.data[0].activity.length >0){
               actions.findActivityRecipes({UserID:this.props.user._id}).then(activityFound=>{
-                console.log('recent activities found',activityFound.data)
-                let array1= [...activityFound.data]; //copy of recent recipes visits
-                console.log('array1',array1)
-                
+                console.log(activityFound.data)
                 this.setState({
-                    // recentActivity: [...activityFound.data],
-                    recentActivity: array1, //set this state to array3 that has 6 recipes total
+                    recentActivity: [...activityFound.data],
                     ready2: true
                 })
               })
-            
+            }
         })
         .catch(error => console.log("yousuck!"))
+    }
+    
+    getRecipes=()=>{
+      this.state.recentActivity.map(eachRecipe => {
+      console.log('ineachReccipe',eachRecipe,this.state.ready2)
+      return <div>FrenchyFrenchyFrenchyfrEcnhryfhlsbdj
+                {/* <Card className="past-recipe-card" style={{ width: '100%' }}>
+                  <Card.Img variant="top" src={eachRecipe.imageUrl} />
+                  <Card.Body>
+                      <Card.Title>{eachRecipe.title}</Card.Title>
+                      <Card.Text>
+                          Some quick example text to build on the card title and make up the bulk of
+                          the card's content.
+                      </Card.Text>
+                      <Button variant="secondary" className="settings-button">View Recipe</Button>
+                  </Card.Body>
+                </Card> */}
+             
+            </div>
+      })
     }
     render(){ 
      let x=this.state.recentActivity
      console.log(this.state.ready2,x)
-    
     return (
 
         <div>
@@ -48,7 +63,7 @@ class Activity extends Component {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title">{this.state.ready ? <span>Account Activity | {this.props.user.email}</span>:("Loading")}</h1>
+                <h1 className="prof-title">{this.state.ready2 ? <span>Account Activity | {this.props.user.email}</span>:("Loading")}</h1>
                 
             </Card.Header> 
           </Card.Title>
@@ -79,91 +94,64 @@ class Activity extends Component {
             <Card>
             <Card.Header className="recent-views">Recently Viewed Recipes</Card.Header>
     {this.state.ready2 ?
+    
+    <div>
+                <Coverflow
+                    width={960}
+                    height={480}
+                    displayQuantityOfSide={2}
+                    navigation={false}
+                    enableHeading={false}
+                >
+                    
+                    {x.map(eachRecipe => {
+                    {/* console.log(eachRecipe) */}
+                    return (<Fragment>
+                        <div key={eachRecipe._id}
+                    // {/* // onClick={() => fn()}
+                    // // onKeyDown={() => fn()} */}
+                    role="menuitem"
+                    tabIndex="2"
+                    >   
+                        
+                        <Card.Title 
+                        className="text-center">
+                        <Link className="recipe-card" to={`/allrecipes/${eachRecipe._id}`}>
+                        {eachRecipe.title}
+                        </Link>
+                        </Card.Title>
+                        <Card.Img
+                            src={eachRecipe.imageUrl}
+                            alt={eachRecipe.title}
+                            style={{ display: 'block', width: '100%' }}
+                            // href={`/allrecipes/${eachRecipe._id}`}
+                        />
+                        
+                        </div>
+                        
+                        </Fragment>)
+                        })}
+                        
+                    
+                    
+                </Coverflow>
+                
+                </div>
+                :("Loading")}
+            </Card>
 
-  <Coverflow>
-    <div>
-          <Card className="past-recipe-card" style={{ width: '100%' }}>            
-            <Card.Img variant="top" src={x[0].imageUrl} />
-                <Card.Body>
-                    <Card.Title>{x[0].title}</Card.Title>
-                    <Card.Text>
-                    {x[0].tags}
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-    </div> */}
-    <div>
-    <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src={x[4].imageUrl} />
-                <Card.Body>
-                    <Card.Title>{x[4].title}</Card.Title>
-                    <Card.Text>
-                    {x[4].tags}
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-    </div>
-    <div>
-    <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src={x[3].imageUrl} />
-                <Card.Body>
-                    <Card.Title> {x[3].title}</Card.Title>
-                    <Card.Text>
-                    {x[3].tags}
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-    </div>
-    <div>
-    <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src={x[2].imageUrl} />
-                <Card.Body>
-                    <Card.Title>{x[2].title}</Card.Title>
-                    <Card.Text>
-                    {x[2].tags}
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-    </div>
-    <div>
-    <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src={x[1].imageUrl} />
-                <Card.Body>
-                    <Card.Title> {x[1].title}</Card.Title>
-                    <Card.Text>
-                    {x[1].tags}
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-    </div>
-    <div>
-    <Card className="past-recipe-card" style={{ width: '100%' }}>
-            <Card.Img variant="top" src={x[0].imageUrl} />
-                <Card.Body>
-                    <Card.Title> {x[0].title}</Card.Title>
-                    <Card.Text>
-                    {x[0].tags}
-                    </Card.Text>
-                    <Button variant="secondary" className="settings-button">View Recipe</Button>
-                </Card.Body>
-            </Card>
-    </div>
-  </Coverflow>
- 
-    :("Loading")}
+            
+            
            
+            
         </Card>
-      </Card>
-      </div>
-     </Container>
-    </div>
-    )}
-
+        </div>
+        
+        
+        </Container>
+        </div>
+    );
+}
 }
 
 export default Activity;

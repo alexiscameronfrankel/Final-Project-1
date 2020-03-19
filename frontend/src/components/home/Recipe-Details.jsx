@@ -53,17 +53,35 @@ class RecipeDetails extends Component {
  
 }
 
-//  handleSave=()=>{
-//   console.log('handlesave recipe to profile by title',{title: this.state.title})
-//    actions.addProfileRecipes({title: this.state.title}).then(updateMyRecipes=>{
-//      console.log(updateMyRecipes)
-//    })
-//    .catch(error=> console.log(error))
-// }
+handleCommentBox=(e)=>{
+  console.log( e.target.name,e.target.value)
+  this.setState({
+    [e.target.name]:e.target.value
+  })
+
+}
+
+
+ handleSubmitComment=(e)=>{
+   e.preventDefault()
+    console.log('comment',{comment: this.state.comment})
+    let newComment={
+      recipeID: { type: String},
+      profileID:{ type: String},
+      title: { type: String},
+      rating: { type: String, required: true },
+      description: {type: String, required: true},
+      image: {type: String}
+    }
+   actions.newComment({title: this.state.title}).then(updateMyRecipes=>{
+     console.log(updateMyRecipes)
+   })
+   .catch(error=> console.log(error))
+}
   
   
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <div>
         <Container className="home-recipe">
@@ -102,8 +120,8 @@ class RecipeDetails extends Component {
               <Card.Body className="measurements-list">
               <Card.Header><span style={{color:'white'}}>Ingredients:</span>
               <ListGroup>
-               {/* <ListGroupItem className="main-card-subtitle prep-time">  */}
-                 {console.log(this.state.ingredients)}
+              
+                 {/* {console.log(this.state.ingredients)} */}
                 {this.state.ingredients && this.state.ingredients.map((item,i) => {
                 return <ListGroupItem className="list-item text-center" key={i}>{i+1})  <span> {item} </span><hr></hr></ListGroupItem>})}
                 </ListGroup>
@@ -132,8 +150,22 @@ class RecipeDetails extends Component {
                 <Card.Header>
                 <Form.Label>Leave a comment below</Form.Label>
                 <Form.Group className="comment-form" id="comment-form" controlId="exampleForm.ControlTextarea1">
-                <Form.Control as="textarea" rows="3" />
-                <Button variant="secondary" name="save-btn" size="lg"><i className="far fa-comments fa-2x"></i></Button>
+                <Form.Control as="textarea" rows="3" name="comment" onChange={this.handleCommentBox}/>
+                <Button variant="secondary" name="save-btn" size="lg" onClick={this.handleSubmitComment}><i className="far fa-comments fa-2x"></i></Button>
+
+                </Form.Group>
+                <br/>
+                <div id="status"></div>
+                <Form.Group id="rating">
+                    <fieldset class="rating">
+                        <legend>Rate:</legend>
+                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
+                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
+                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
+                </fieldset>
+                    
                 </Form.Group>
                   </Card.Header>
                   <Card.Header>

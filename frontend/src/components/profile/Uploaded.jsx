@@ -39,7 +39,7 @@ class Uploaded extends Component {
           
           <Card.Title className="text-center">
             <Card.Header>
-            <h1 className="prof-title">Account Activity | {this.props.user.email}</h1>
+            <h1 className="prof-title">{this.state.ready ? <span>Account Activity | {this.props.user.email}</span>:("Loading")}</h1>
                 
             </Card.Header> 
           </Card.Title>

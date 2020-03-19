@@ -80,7 +80,7 @@ class Account extends Component {
         .then(profileUpdated =>{ 
 
             console.log('profileupdated',profileUpdated)
-            window.location.href = "http://localhost:3000/profile"
+            this.props.history.push("/profile")
         })
         .catch(error=> console.log('error occurred',error))
         

@@ -35,9 +35,9 @@ class Home extends Component {
 
   handleClick=()=>{
     if (this.props.user.email===null){
-      window.location.href = "http://localhost:3000/sign-up"
+      this.props.history.push("/sign-up")
     } else {
-      window.location.href = "http://localhost:3000/profile"
+      this.props.history.push("/profile")
     }
   }
 

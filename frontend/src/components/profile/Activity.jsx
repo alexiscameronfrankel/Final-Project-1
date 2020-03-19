@@ -63,7 +63,7 @@ class Activity extends Component {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title">{this.state.ready ? <span>Account Activity | {this.props.user.email}</span>:("Loading")}</h1>
+                <h1 className="prof-title">{this.state.ready2 ? <span>Account Activity | {this.props.user.email}</span>:("Loading")}</h1>
                 
             </Card.Header> 
           </Card.Title>
@@ -105,7 +105,7 @@ class Activity extends Component {
                 >
                     
                     {x.map(eachRecipe => {
-                    console.log(eachRecipe)
+                    {/* console.log(eachRecipe) */}
                     return (<Fragment>
                         <div key={eachRecipe._id}
                     // {/* // onClick={() => fn()}

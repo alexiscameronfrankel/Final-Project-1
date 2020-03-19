@@ -2,6 +2,7 @@ import React, { Fragment, Component } from 'react';
 import { Container, Card, ListGroup, Button, ButtonGroup,} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import actions from '../../services/index';
+import InfiniteCarousel from 'react-leaf-carousel';
 
 var Coverflow = require('react-coverflow');
 
@@ -90,7 +91,7 @@ class Activity extends Component {
             <Card>
             <Card.Header className="recent-views">Recently Viewed Recipes</Card.Header>
     {this.state.ready2 ?
-  
+
   <InfiniteCarousel>
     <div>
           <Card className="past-recipe-card" style={{ width: '100%' }}>            
@@ -165,6 +166,7 @@ class Activity extends Component {
             </Card>
     </div>
   </InfiniteCarousel>
+ 
     :("Loading")}
            
         </Card>

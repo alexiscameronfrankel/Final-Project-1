@@ -3,6 +3,7 @@
 import React from "react";
 import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 import {FacebookShareButton, LinkedinShareButton, TumblrShareButton, TwitterShareButton} from 'react-share';
+import {Link} from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -38,7 +39,7 @@ const Footer = () => {
     <div className="footer-copyright text-center py-3">
       <MDBContainer fluid>
         &copy; {new Date().getFullYear()} Copyright:{" "}
-        <a href="https://www.RecipeBox.com"> Recipe Box </a>
+        <Link to="/"> Recipe Box </Link>
       </MDBContainer>
     </div>
   </MDBFooter>

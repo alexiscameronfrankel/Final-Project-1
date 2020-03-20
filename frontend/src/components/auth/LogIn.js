@@ -43,11 +43,11 @@ class LogIn extends Component {
                         <p className="h2 text-center mb-4">Login</p>
                         
                         <div className="grey-text">
-                        <form>
+                        {/* <form> */}
                             <MDBInput name="email" label="Type your email" icon="envelope" group type="email" validate error="wrong"
                             success="right" onChange={this.handleChange} />
                             <MDBInput name="password" label="Type your password" icon="lock" group type="password" validate onChange={this.handleChange}/>
-                        </form>
+                        {/* </form> */}
                         </div>
                     <div className="text-center">
                     

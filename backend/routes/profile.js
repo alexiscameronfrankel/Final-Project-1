@@ -64,9 +64,6 @@ router.get('/myRecipes',isAuth, (req, res, next) => {
         
             Recipe.find( { _id: { $in: profileRecipes } } )
             .then(recipesFoundInDb => {
-                // res.send(console.log(recipeFoundInDb))   
-                // recipesFound.push(recipeFoundInDb)
-                // console.log(recipesFoundInDb)
                 res.json(recipesFoundInDb)
             })
             .catch(err => console.log(err))
@@ -141,7 +138,7 @@ router.get('/myActivity',isAuth, (req, res, next) => {
         console.log('meals in activity1',profileActivity.length)
        
         let arrayOfMeals=[]
-        if(profileActivity.length < 10){
+        if(profileActivity.length < 10 || profileActivity.length===0){
             let mealsNeeded= 10 - profileActivity.length
             Recipe.find().limit( mealsNeeded ).then(mealsReturned=>{
                 // console.log('meals returned to make up difference',mealsReturned)

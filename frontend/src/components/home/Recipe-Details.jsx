@@ -68,7 +68,7 @@ handleCommentBox=(e)=>{
  handleSubmitComment=(e)=>{
    e.preventDefault()
     console.log('comment',{comment: this.state.comment})
-    let newComment={
+    let newCommentObj={
       recipeID: this.props.match.params.recipeID,
       profileID:this.state.profileID,
       // title: { type: String},
@@ -76,7 +76,7 @@ handleCommentBox=(e)=>{
       description: {type: String, required: true},
       // image: {type: String}
     }
-   actions.newComment({title: this.state.title}).then(updateMyRecipes=>{
+   actions.newComment(newCommentObj).then(updateMyRecipes=>{
      console.log(updateMyRecipes)
    })
    .catch(error=> console.log(error))

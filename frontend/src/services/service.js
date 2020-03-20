@@ -4,7 +4,7 @@ let baseURL;
 
 process.env.NODE_ENV === 'production'
   //? (baseURL = 'here should be your production endpoint')
-  ? (baseURL = 'https://new-applicatio.herokuapp.com')
+  ? (baseURL = 'https://boxofrecipes.herokuapp.com')
   : (baseURL = 'http://localhost:5000');
 
 const service = axios.create({ withCredentials: true, baseURL });
@@ -27,7 +27,7 @@ export default {
   async handleUploadVideo (theFile) {
     console.log('file in service: ', theFile)
     return service.post('/api/uploadvideo', theFile)
-      .then(res => res.data)
+    .then(res => res.data)
       .catch(errorHandler);
   },
 
@@ -37,7 +37,7 @@ export default {
   async saveNewThing (recipe) {
     console.log('new thing is: ', recipe)
     return service.post('/api/recipe/create', recipe)
-      .then(res => res.data)
+    .then(res => res.data)
       .catch(errorHandler);
   }
 

@@ -58,7 +58,7 @@ class Account extends Component {
         
         service.handleUpload(uploadData)
         .then(response => {
-            // console.log('response is: ', response);
+            console.log('response is: ', response);
             // after the console.log we can see that response carries 'secure_url' which we can use to update the state 
             this.setState({ imageUrl: response.secure_url });
         })
@@ -137,11 +137,7 @@ class Account extends Component {
                     <small id="emailHelp" className="form-text text-muted">Example: "www.google.com/images/imagename.jpg"</small> */}
 
                 </Form.Group>
-                {/* <Form.Group>
-                    <Form.Control onChange={this.handleChange} name="imageUrl" placeholder="Input Avatar Image URL" type="link"/>
-                    <small id="emailHelp" className="form-text text-muted">Example: "www.google.com/images/imagename.jpg"</small>
-
-                </Form.Group> */}
+           
                 <Form.Group id="categoryGridCheckbox">
                 <Form.Label>Please Select Any Dietary Restrictions Below</Form.Label>
                     <Form.Check id="checkbox" type="checkbox" label="Vegetarian" value="Vegetarian" name="category" onChange={this.putCategoryInState}/>

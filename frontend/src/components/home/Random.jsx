@@ -170,11 +170,11 @@ class Random extends Component {
     
      actions.newComment(newCommentObj).then(addNewComment=>{
        console.log(addNewComment)
+       this.props.history.push(`/commented`)
      })
      .catch(error=> console.log(error))
     })
     .catch(error=> console.log(error))
-    this.props.history.push(`/commented`)
   
   }
 

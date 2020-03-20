@@ -11,6 +11,8 @@
 
 const router = require('express').Router();
 const Recipe = require('../models/Recipe');
+const Comment = require('../models/Comment');
+const Profile = require('../models/Profile');
 
 
 // 1) Get all recipes from database
@@ -97,6 +99,20 @@ router.get('/findRecipe', (req, res, next) => {
     console.log(req.query)
     Recipe.findOne({title:req.body.title})
     .then(recipeFound => {
+        res.send(recipeFound)
+    })
+    .catch(err => console.log(err))
+//   res.status(200).json({ msg: 'Working' });
+});
+
+// 7) find recipe comments
+router.get('/:recipeID/comments', (req, res, next) => {
+    //Example: Recipe.findById('245245234hgryh35635')
+    //Example: Recipe.findOne({name:'linguine', _id:'2452', date:'yesterday', likes:10})
+    console.log(req.query)
+    Comment.find({ recipeID: req.params.recipeID })
+    .then(recipeFound => {
+        console.log(recipeFound)
         res.send(recipeFound)
     })
     .catch(err => console.log(err))

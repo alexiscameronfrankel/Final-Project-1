@@ -71,7 +71,7 @@ const actions = {
   //comment actions
   //get all comments for a recipe
   getRecipeComments: async (recipeID) => {
-    return await service.get (`/comment/comment/${recipeID}`)
+    return await service.get (`/recipe/${recipeID}/comments`)
   },
   //get the users comments
   getUserComments: async (userID) => {

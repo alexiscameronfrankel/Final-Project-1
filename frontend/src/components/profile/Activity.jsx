@@ -20,7 +20,7 @@ class Activity extends Component {
           })
             if (profileFound.data[0].activity.length >0){
               actions.findActivityRecipes({UserID:this.props.user._id}).then(activityFound=>{
-                console.log(activityFound.data)
+                console.log('acitivites returned',activityFound.data)
                 this.setState({
                     recentActivity: [...activityFound.data],
                     ready2: true

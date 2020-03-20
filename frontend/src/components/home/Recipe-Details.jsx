@@ -11,7 +11,7 @@ import actions from '../../services/index'
 class RecipeDetails extends Component {
   state={
       className: ["secondary", "danger", "none"],
-      profileID: '',
+      profileID: {},
   }
 
   async componentDidMount(){
@@ -34,11 +34,11 @@ class RecipeDetails extends Component {
           })
       })
       .catch(err => console.log(err))
-      actions.getProfile(UserID).then(profileFound=>{
-        console.log('profileFound')
-        this.setState({profileID:profileFound.data._id})
+      actions.getProfile(this.props.user._id).then(profileFound=>{
+        console.log('profileFound',profileFound.data[0]._id)
+        this.setState({profileID:profileFound.data[0]._id})
       })
-
+      .catch(err => console.log(err))
 
     
  }
@@ -69,12 +69,12 @@ handleCommentBox=(e)=>{
    e.preventDefault()
     console.log('comment',{comment: this.state.comment})
     let newComment={
-      recipeID: this.props.params.match.recipeID,
-      profileID:{ type: String},
-      title: { type: String},
-      rating: { type: String, required: true },
+      recipeID: this.props.match.params.recipeID,
+      profileID:this.state.profileID,
+      // title: { type: String},
+      // rating: { type: String, required: true },
       description: {type: String, required: true},
-      image: {type: String}
+      // image: {type: String}
     }
    actions.newComment({title: this.state.title}).then(updateMyRecipes=>{
      console.log(updateMyRecipes)

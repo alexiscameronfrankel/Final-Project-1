@@ -142,8 +142,8 @@ router.get('/myActivity',isAuth, (req, res, next) => {
         console.log('meals in activity1',profileActivity.length)
        
         let arrayOfMeals=[]
-        if(profileActivity.length < 6){
-            let mealsNeeded= 6 - profileActivity.length
+        if(profileActivity.length < 10){
+            let mealsNeeded= 10 - profileActivity.length
             Recipe.find().limit( mealsNeeded ).then(mealsReturned=>{
                 // console.log('meals returned to make up difference',mealsReturned)
                 arrayOfMeals = [...mealsReturned]
@@ -160,7 +160,7 @@ router.get('/myActivity',isAuth, (req, res, next) => {
             })
             .catch(err => console.log(err))
         }else{
-            let a= profileActivity.slice(-6)
+            let a= profileActivity.slice(-10)
             console.log('meals in activity2',a.length)
             Recipe.find( { _id: { $in: a } })
             .then(recipesFoundInDb => {

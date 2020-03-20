@@ -17,30 +17,28 @@ class Profile extends Component {
         ready:false
     }
     async componentDidMount (){
-        actions.findProfileRecipes()
-            .then(myRecipes => {
-                console.log('myRecipesReceived', myRecipes)
-                this.setState({...myRecipes.data})
-            })
-                // this.setState({savedRecipes: myRecipes.data})
-            .catch(({ response }) => {
-             ;
-                console.log('error loading',response)   
-            })
         actions.getProfile(this.props.user._id)
             .then(profile =>{
-                this.setState({...profile.data[0]})
-                this.setState({ready:true})
+                this.setState({
+                    ...profile.data[0],
+                    ready:true
+                })
                 console.log('myProfile received', profile.data[0])
             })
-                // this.setState({myProfile: profile.data})
             .catch(({ response }) =>
             console.log('error loading',response))
+            // actions.findProfileRecipes()
+            //     .then(myRecipes => {
+            //         console.log('myRecipesReceived', myRecipes)
+            //         this.setState({...myRecipes.data})
+            //     })
+            //     .catch(({ response }) => {
+                
+            //         console.log('error loading',response)   
+            //     })
         };
 
-        // if (!this.props.user.email) { 
-        //     this.props.history.push('/log-in') 
-        // } 
+        
 
         render (){
             console.log('this is profile state', this.state)

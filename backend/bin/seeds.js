@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Recipe = require('../models/Recipe');
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/ironplate'
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://fgianoli:frenchy10@cluster0-5csts.mongodb.net/test?retryWrites=true&w=majority'
 console.log('Connecting DB to ', MONGODB_URI)
 
 mongoose

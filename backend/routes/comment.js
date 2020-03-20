@@ -72,15 +72,16 @@ router.post('/delete',isAuth, (req, res, next) => {
 // 5) Adds new comment
 router.post('/new',isAuth, (req, res, next) => {
     console.log(req.body)
-    let comment = req.body
-    Profile.find({UserID:req.user._id}).then(profileFound=> {
-        comment.profileID=profileFound._id   
+    let comment = req.body  
         Comment.create(comment)
-        .then(commentCreated => res.send(commentCreated))
+        .then(commentCreated => {
+            
+            res.send(commentCreated)
+        })
         .catch(err => console.log(err))
     })
-    .catch(err => console.log(err))
-});
+    
+
 
 function isAuth(req, res, next) {
     req.isAuthenticated() ? next() : res.status(401).json({ msg: 'Log in first' });

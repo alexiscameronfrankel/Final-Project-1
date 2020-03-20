@@ -11,20 +11,23 @@ import actions from '../../services/index'
 class RecipeDetails extends Component {
   state={
       className: ["secondary", "danger", "none"],
-      profileID: '',
+      profileID: {}
   }
 
   async componentDidMount(){
       console.log(this.props)
       actions.findRecipeID(this.props.match.params.recipeID)
-      .then(recipeFound =>{
+      .then(recipeFound => {
           console.log(recipeFound.data.title)
           actions.addActivityRecipes({title: recipeFound.data.title})
           this.setState({
               ...recipeFound.data
           })
+      })
+          .catch(err => console.log(err))
           document.querySelector("#heart").style["color"]='white'
-          actions.findProfileRecipes().then(myRecipes=>{
+          actions.findProfileRecipes()
+          .then(myRecipes=>{
               console.log('about to loop through array',myRecipes.data)
               myRecipes.data.map(eachRecipe=>{
               if (eachRecipe._id===this.state._id){
@@ -32,10 +35,15 @@ class RecipeDetails extends Component {
               }
               })
           })
+          .catch(err => console.log(err))
+      
+      
+      actions.getProfile(this.props.user._id)
+        .then(profileFound=>{
+        console.log('profileFound',profileFound.data[0]._id)
+        this.setState({profileID:profileFound.data[0]._id})
       })
       .catch(err => console.log(err))
-      
-
 
     
  }
@@ -53,22 +61,44 @@ class RecipeDetails extends Component {
  
 }
 
-//  handleSave=()=>{
 //   console.log('handlesave recipe to profile by title',{title: this.state.title})
 //    actions.addProfileRecipes({title: this.state.title}).then(updateMyRecipes=>{
 //      console.log(updateMyRecipes)
 //    })
 //    .catch(error=> console.log(error))
 // }
-handleEntailmentRequest(e) {
-  e.preventDefault();
+// handleEntailmentRequest(e) {
+//   e.preventDefault();
 
-  console.log("handle request ");
+//   console.log("handle request ");
+handleCommentBox=(e)=>{
+  this.setState({
+    [e.target.name]:e.target.value
+  })
+
 }
-  
-  render() {
+
+
+ handleSubmitComment=(e)=>{
+   e.preventDefault()
+    console.log('comment',{comment: this.state.comment})
+    let newCommentObj={
+      recipeID: this.props.match.params.recipeID,
+      profileID:this.state.profileID,
+      // title: { type: String},
+      // rating: { type: String, required: true },
+      description: {type: String, required: true},
+      // image: {type: String}
+    }
+   actions.newComment(newCommentObj).then(updateMyRecipes=>{
+     console.log(updateMyRecipes)
+   })
+   .catch(error=> console.log(error))
+}
+    render(){
     console.log(this.props)
     return (
+
       <div>
         <Container className="home-recipe">
           {/* <img className="hero-img" src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F5446883.jpg&w=596&h=596&c=sc&poi=face&q=85"></img>
@@ -136,8 +166,8 @@ handleEntailmentRequest(e) {
                 <Card.Header>
                 <Form.Label>Leave a comment below</Form.Label>
                 <Form.Group className="comment-form" id="comment-form" controlId="exampleForm.ControlTextarea1">
-                <Form.Control as="textarea" rows="3" />
-                <Button variant="secondary" name="save-btn" size="lg"><i className="far fa-comments fa-2x"></i></Button>
+                <Form.Control as="textarea" rows="3" onChange={this.handleCommentBox} />
+                <Button onClick={this.handleSubmitComment} variant="secondary" name="save-btn" size="lg"><i className="far fa-comments fa-2x"></i></Button>
                 </Form.Group>
                 <br/>
                 <div id="status"></div>

@@ -5,50 +5,48 @@ import {Link} from 'react-router-dom';
 import actions from '../../services/index';
 
 class Account extends Component {
-
-
-    state = {
-        UserID: "",
-        category: [],
-        username: "",
-        firstName: "",
-        lastName: "",
-        imageUrl: "",
-        dietPreference: "",
-        allergies: [],
-        recipes: [],
-        activity: [],
+    state={
+    UserID: this.props.user._id,
+    username: "",
+    firstName: "", 
+    lastName: "",
+    imageUrl: "",
+    dietPreference: [],
+    allergies: [],
+    recipes: [],
+    activity: []
     }
-
       async componentDidMount(){
          actions.getProfile(this.props.user._id).then(profileFound=>{
             console.log(profileFound.data[0]) 
             this.setState({...profileFound.data[0]})
+            document.querySelectorAll('#checkbox').forEach(checkbox=>{
+                if (profileFound.data[0].dietPreference.includes(checkbox.value)){
+                    checkbox.checked=true
+                }else{
+                    checkbox.checked=false
+                }
+            })
          })
         }
 
         putCategoryInState = (e) => { 
             console.log(e.target.value, e.target.checked)
-            let categoryArr = [...this.state.category];
+            let dietPreferenceArr = [...this.state.dietPreference];
             if(e.target.checked){
-                categoryArr.push(e.target.value)
-                this.setState({
-                
-                            category:categoryArr
-                        
-                    }) 
-                }
-            else {
-               categoryArr =  categoryArr.filter(cat => {
+                dietPreferenceArr.push(e.target.value)
+    
+            }else {
+               dietPreferenceArr =  dietPreferenceArr.filter(cat => {
                    return cat !== e.target.value
                    
                })
-               this.setState({
-                
-                category:categoryArr
-            
-                }) 
             }
+            this.setState({
+                
+               dietPreference:dietPreferenceArr
+            
+            }) 
          }
     handleFileUpload = e => {
         console.log("The file to be uploaded is: ", e.target.files[0]);
@@ -80,42 +78,19 @@ class Account extends Component {
         .then(profileUpdated =>{ 
 
             console.log('profileupdated',profileUpdated)
-            this.props.history.push("/profile")
         })
         .catch(error=> console.log('error occurred',error))
-        
-        // service.saveNewThing(this.state)
-        // .then(res => {
-        //     console.log('added: ', res);
-        //     // here you would redirect to some other page 
-        // })
-        // .catch(err => {
-        //     console.log("Error while adding the thing: ", err);
-        // });
+        this.props.history.push("/profile")
     }  
-   
-    // if(!props.user.email){ 
-    //     props.history.push('/log-in') 
-    // }   
+  
     render (){
         console.log(this.state)
         
     return (
         <div>
-            {/* Profile
-            Welcome {props.user.email} !!!  */}
+           
             <Container className="home-recipe">
-          {/* <img className="hero-img" src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F5446883.jpg&w=596&h=596&c=sc&poi=face&q=85"></img>
-          <div className="hero-recipe">
-          <h1 className="recipe-title">My Recipe Name</h1>
-          <ul>
-            <li>Step 1 - Boil Water at High Heat</li>
-            <li>Step 2 - Boil Meat for 30 minutes</li>
-            <li>Step 3 - Dice Vegetables into a Juliene Cut</li>
-            <li>Step 4 - Prep Appetizers and Grab a Beer</li>
-          </ul>
-          </div> */}
-          
+        
           <Card id="main-card" 
           style={{ width: '100%' }}>
           
@@ -153,20 +128,28 @@ class Account extends Component {
                     <small id="lNameHelp" className="form-text text-muted">Last Name (Optional)</small>
                     <Form.Control onChange={this.handleChange} name="lastName" type="lastname" className="form-control" id="exampleInputEmail1" aria-describedby="LastNameHelp" placeholder={this.state.lastName} />
                 </Form.Group>
-                
                 <Form.Group>
+                    <Form.Control type="hidden" name="MAX_FILE_SIZE" value="4194304" />
+                    <Form.Control name="avatar" placeholder="Upload Avatar Image" type="file" 
+                    onChange={this.handleFileUpload}/>
+                    <small id="emailHelp" className="form-text text-muted">Avatar Upload. 4MB Maximum.</small>
+                    {/* <Form.Control onChange={this.handleChange} name="imageUrl" placeholder="Input Avatar Image URL" type="link"/>
+                    <small id="emailHelp" className="form-text text-muted">Example: "www.google.com/images/imagename.jpg"</small> */}
+
+                </Form.Group>
+                {/* <Form.Group>
                     <Form.Control onChange={this.handleChange} name="imageUrl" placeholder="Input Avatar Image URL" type="link"/>
                     <small id="emailHelp" className="form-text text-muted">Example: "www.google.com/images/imagename.jpg"</small>
 
-                </Form.Group>
+                </Form.Group> */}
                 <Form.Group id="categoryGridCheckbox">
                 <Form.Label>Please Select Any Dietary Restrictions Below</Form.Label>
-                    <Form.Check type="checkbox" label="Vegetarian" value="Vegetarian" name="category" onChange={this.putCategoryInState}/>
-                    <Form.Check type="checkbox" label="Vegan" value="Vegan" onChange={this.putCategoryInState}/>
-                    <Form.Check type="checkbox" label="Gluten Free" value="Gluten Free" onChange={this.putCategoryInState}/>
-                    <Form.Check type="checkbox" label="Diary Free" value="Diary Free" onChange={this.putCategoryInState}/>
-                    <Form.Check type="checkbox" label="Preganancy Friendly" value="Pregnancy Friendly" onChange={this.putCategoryInState}/>
-                    <Form.Check type="checkbox" label="None" value="None" onChange={this.putCategoryInState}/>
+                    <Form.Check id="checkbox" type="checkbox" label="Vegetarian" value="Vegetarian" name="category" onChange={this.putCategoryInState}/>
+                    <Form.Check id="checkbox" type="checkbox" label="Vegan" value="Vegan" onChange={this.putCategoryInState}/>
+                    <Form.Check id="checkbox" type="checkbox" label="Gluten Free" value="Gluten Free" onChange={this.putCategoryInState}/>
+                    <Form.Check id="checkbox" type="checkbox" label="Diary Free" value="Diary Free" onChange={this.putCategoryInState}/>
+                    <Form.Check id="checkbox" type="checkbox" label="Preganancy Friendly" value="Pregnancy Friendly" onChange={this.putCategoryInState}/>
+                    <Form.Check id="checkbox" type="checkbox" label="None" value="None" onChange={this.putCategoryInState}/>
                     
                 </Form.Group>
                 

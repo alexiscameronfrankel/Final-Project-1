@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom'
+import {Link, useHistory, Redirect } from 'react-router-dom'
+
 
 import actions from '../../services/index';
 
@@ -35,28 +36,46 @@ class SearchBar extends Component {
         let filterResults = copyResults.filter(eachRecipe => {
             return eachRecipe.category.toString().toLowerCase() && eachRecipe.ingredients.toString().toLowerCase() && eachRecipe.title.toString().toLowerCase().includes(e.target.value.toString().toLowerCase())
         })
-
-        console.log(filterResults)
-     if(filterResults[0]){
+        if(filterResults.length != 0)
         this.setState({
-         filteredResults: filterResults[0].category
+         filteredResults: filterResults[0]
         })
+    
+    console.log(filterResults)
     }
-    }
+
+  
 
     componentDidMount= async () =>{
         await this.getSearchInfo()
     }
   
-
+    redirectingTo=(e)=>{
+      e.preventDefault();
+      let path = `/allrecipes/${this.state.filteredResults._id}`
+      // if(this.state.filteredResults.length == 0){
+      //   path = "/"
+      // }
+      // else {
+      //   path = `/allrecipes/${this.state.filteredResults._id}`
+      // }
+      console.log("about to enther function")
+      if (window.location.origin == 'http://localhost:3000'){
+        window.location.href = `http://localhost:3000${path}`}
+      if (window.location.origin == 'https://boxofrecipes.herokuapp.com'){
+        window.location.href = `https://boxofrecipes.herokuapp.com${path}`
+      }
+      
+      // useHistory.push(`/allrecipes/${this.state.filteredResults._id}`)
+    }
     
    
-    render() {
-        // console.log(this.props)
+    render(props) {
+       console.log(window.location)
       return (
         <div>
          {/* <form action={`/allrecipes/${this.state.filteredResults}`}> */}
-        <form onSubmit={this.redirectingTo}>
+        <form onSubmit={e => this.redirectingTo(e)}>
           <input
             placeholder="Search for a Recipe..."
             ref={input => this.search = input}
@@ -65,7 +84,7 @@ class SearchBar extends Component {
           />
           {/* <button onClick={this.redirectingTo} type="submit"> <i className="ti-search"></i></button> */}
           </form>
-          {/* <Link to={`/allrecipes/${this.state.filteredResults}`}>Submit</Link> */}
+          <Link {...props} to={`/allrecipes/${this.state.filteredResults._id}`}>Submit</Link>
           
           
           

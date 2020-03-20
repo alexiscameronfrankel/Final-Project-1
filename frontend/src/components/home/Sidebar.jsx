@@ -1,5 +1,6 @@
 import React from "react";
 import {Fragment} from 'react';
+import {Link} from 'react-router-dom';
 import { scaleRotate as Menu } from "react-burger-menu";
 import Searchbar from './Searchbar'
 
@@ -15,44 +16,44 @@ console.log(props)
     // Pass on our props
     <Fragment>
         <div className="head-div">
-        {/* <Searchbar /> */}
+        <Searchbar />
         </div>
     
     <Menu {...props} >
 
-      <a className="menu-item" href="/"><i className="fas fa-home"></i> Home</a>
+      <Link className="menu-item" to="/"><i className="fas fa-home"></i> Home</Link>
 
       
         {props.emailID === null ?
-             
+         
         <Fragment>
-            <a className="bm-item  menu-item" href="/sign-up"><i className="fas fa-user-plus"></i> Sign Up</a>
+            <Link className="bm-item  menu-item" to="/sign-up"><i className="fas fa-user-plus"></i> Sign Up</Link>
             <br></br>
-            <a className="bm-item menu-item" href="/log-in"><i className="fas fa-sign-in-alt"></i> Log In</a>
+            <Link className="bm-item menu-item" to="/log-in"><i className="fas fa-sign-in-alt"></i> Log In</Link>
         </Fragment>
         
         :
        
         <Fragment>
-            <a className="bm-item menu-item" href="/profile"><i className="fas fa-user-circle"></i> My Profile</a>
+            <Link className="bm-item menu-item" to="/profile"><i className="fas fa-user-circle"></i> My Profile</Link>
             <br></br>
-            <a className="bm-item menu-item" href="/log-out" onClick={props.actionLogout}><i className="fas fa-sign-out-alt"></i> Log Out</a>
+            <Link className="bm-item menu-item" to="/log-out" onClick={props.actionLogout}><i className="fas fa-sign-out-alt"></i> Log Out</Link>
         </Fragment>
       
         }
-      <a className="menu-item" href="/random">
+      <Link className="menu-item" to="/random">
       <i className="fas fa-random"></i> Random
-      </a>
+      </Link>
 
-      <a className="menu-item" href="/new-recipe"> <i className="fas fa-plus-square"></i> New Recipe
-      </a>
+      <Link className="menu-item" to="/new-recipe"> <i className="fas fa-plus-square"></i> New Recipe
+      </Link>
       
-      <a className="menu-item" href="/allrecipes"><i className="fas fa-globe-americas"></i> All Recipes
-      </a>
+      <Link className="menu-item" to="/allrecipes"><i className="fas fa-globe-americas"></i> All Recipes
+      </Link>
       
       <br></br>
       
-      {/* <Searchbar /> */}
+      <Searchbar />
       
     </Menu>
     </Fragment>

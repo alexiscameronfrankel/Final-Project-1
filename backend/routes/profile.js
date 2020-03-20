@@ -30,9 +30,8 @@ router.get('/profile/:profileID',isAuth, (req, res, next) => {
 });
 
 // 2) Create profile
-router.post('/new',isAuth, (req, res, next) => {
+router.post('/new', (req, res, next) => {
     let profile=req.body
-    profile.UserID = req.user._id
     Profile.create(profile)
     .then(profileCreated => res.send(profileCreated))
     .catch(err => console.log(err))

@@ -51,9 +51,7 @@ class RecipeDetails extends Component {
         this.setState({profileID:profileFound.data[0]._id,profileUser:profileFound.data[0].username,profileAvatar:profileFound.data[0].imageUrl})
       })
       .catch(err => console.log(err))
-
-    
- }
+    }
 
  handleSave=(e)=>{
   if(document.querySelector("#heart").style["color"]==='red'){
@@ -65,7 +63,6 @@ class RecipeDetails extends Component {
     console.log('handleAdd new recipe to profile',{title: this.state.title})
     actions.addProfileRecipes({title: this.state.title})
   }
- 
 }
 
 //   console.log('handlesave recipe to profile by title',{title: this.state.title})
@@ -105,13 +102,13 @@ handleSubmitComment=(e)=>{
       description: this.state.commentbox,
       avatar: this.state.profileAvatar
     }
-   actions.newComment(newCommentObj).then(updateMyRecipes=>{
-     console.log(updateMyRecipes)
+   actions.newComment(newCommentObj).then(addNewComment=>{
+     console.log(addNewComment)
    })
    .catch(error=> console.log(error))
-   window.location.reload()
-}
+   this.props.history.push(`/commented`)
 
+}
   
   render() {
     console.log(this.state.rating)

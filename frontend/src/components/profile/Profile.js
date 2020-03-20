@@ -27,15 +27,15 @@ class Profile extends Component {
             })
             .catch(({ response }) =>
             console.log('error loading',response))
-            // actions.findProfileRecipes()
-            //     .then(myRecipes => {
-            //         console.log('myRecipesReceived', myRecipes)
-            //         this.setState({...myRecipes.data})
-            //     })
-            //     .catch(({ response }) => {
+            actions.findProfileRecipes()
+                .then(myRecipes => {
+                    console.log('myRecipesReceived', myRecipes)
+                    this.setState({...myRecipes.data})
+                })
+                .catch(({ response }) => {
                 
-            //         console.log('error loading',response)   
-            //     })
+                    console.log('error loading',response)   
+                })
         };
 
         

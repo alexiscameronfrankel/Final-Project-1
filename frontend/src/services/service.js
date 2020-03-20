@@ -20,14 +20,14 @@ export default {
   async handleUpload (theFile) {
     // console.log('file in service: ', theFile)
     return service.post('/api/upload', theFile)
-      .then(res => res.data)
+      .then(res => console.log(res.data))
       .catch(errorHandler);
   },
 
   async handleUploadVideo (theFile) {
     console.log('file in service: ', theFile)
     return service.post('/api/uploadvideo', theFile)
-      .then(res => res.data)
+    .then(res => console.log(res.data))
       .catch(errorHandler);
   },
 
@@ -37,7 +37,7 @@ export default {
   async saveNewThing (recipe) {
     console.log('new thing is: ', recipe)
     return service.post('/api/recipe/create', recipe)
-      .then(res => res.data)
+    .then(res => console.log(res.data))
       .catch(errorHandler);
   }
 

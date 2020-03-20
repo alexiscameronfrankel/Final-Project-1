@@ -31,25 +31,7 @@ class Activity extends Component {
         .catch(error => console.log("yousuck!"))
     }
     
-    getRecipes=()=>{
-      this.state.recentActivity.map(eachRecipe => {
-      console.log('ineachReccipe',eachRecipe,this.state.ready2)
-      return <div>FrenchyFrenchyFrenchyfrEcnhryfhlsbdj
-                {/* <Card className="past-recipe-card" style={{ width: '100%' }}>
-                  <Card.Img variant="top" src={eachRecipe.imageUrl} />
-                  <Card.Body>
-                      <Card.Title>{eachRecipe.title}</Card.Title>
-                      <Card.Text>
-                          Some quick example text to build on the card title and make up the bulk of
-                          the card's content.
-                      </Card.Text>
-                      <Button variant="secondary" className="settings-button">View Recipe</Button>
-                  </Card.Body>
-                </Card> */}
-             
-            </div>
-      })
-    }
+    
     render(){ 
      let x=this.state.recentActivity
      console.log(this.state.ready2,x)

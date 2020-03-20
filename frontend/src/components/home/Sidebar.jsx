@@ -1,7 +1,8 @@
 import React from "react";
 import {Fragment} from 'react';
 import { scaleRotate as Menu } from "react-burger-menu";
-import Searchbar from './Searchbar'
+import Searchbar from './Searchbar';
+import {Link} from 'react-router-dom';
 
 export default props => {
 // class Sidebar extends Component {

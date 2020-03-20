@@ -96,10 +96,10 @@ router.post('/new',isAuth, (req, res, next) => {
 router.get('/findRecipe', (req, res, next) => {
     //Example: Recipe.findById('245245234hgryh35635')
     //Example: Recipe.findOne({name:'linguine', _id:'2452', date:'yesterday', likes:10})
-    console.log(req.query)
+    
     Recipe.findOne({title:req.body.title})
     .then(recipeFound => {
-        res.send(recipeFound)
+        res.json(recipeFound)
     })
     .catch(err => console.log(err))
 //   res.status(200).json({ msg: 'Working' });

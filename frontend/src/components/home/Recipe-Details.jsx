@@ -211,7 +211,7 @@ handleSubmitComment=(e)=>{
                       {this.state.ready ?
                         (this.state.recipeComments.map(eachComment=>{
                           return <ListGroupItem>
-                              <p><strong><q>{eachComment.description} Rating:{eachComment.rating}</q></strong></p>
+                              <p><strong><q>{eachComment.description}<br/><br/> Rating:{eachComment.rating}</q></strong></p>
                               <div className="previous-comments"><img src={eachComment.avatar} alt="Avatar" class="avatar"></img>
                               <h4 className="pc-user">{eachComment.username}</h4>
                               </div>

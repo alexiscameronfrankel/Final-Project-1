@@ -19,29 +19,33 @@ class RecipeDetails extends Component {
   async componentDidMount(){
       console.log(this.props)
       actions.findRecipeID(this.props.match.params.recipeID)
-      .then(recipeFound =>{
+      .then(recipeFound => {
           console.log(recipeFound.data.title)
           actions.addActivityRecipes({title: recipeFound.data.title})
           this.setState({
               ...recipeFound.data
           })
+      })
+          .catch(err => console.log(err))
           document.querySelector("#heart").style["color"]='white'
-          actions.findProfileRecipes().then(myRecipes=>{
+          actions.findProfileRecipes()
+          .then(myRecipes=>{
               console.log('about to loop through array',myRecipes.data)
               myRecipes.data.map(eachRecipe=>{
               if (eachRecipe._id===this.state._id){
                 document.querySelector("#heart").style["color"]='red'
               }
               })
-          })
-          actions.getRecipeComments(this.props.match.params.recipeID).then(recipeComments=>{
-            this.setState({recipeComments:recipeComments.data, ready:true})
-            console.log('recipecomments',recipeComments.data)
             })
-            .catch(err=>console.log(err))
-        })
+          .catch(err => console.log(err))
+          
+      actions.getRecipeComments(this.props.match.params.recipeID).then(recipeComments=>{
+      this.setState({recipeComments:recipeComments.data, ready:true})
+      console.log('recipecomments',recipeComments.data)
+      })
+      .catch(err=>console.log(err))
+       
       
-      .catch(err => console.log(err))
       actions.getProfile(this.props.user._id).then(profileFound=>{
         console.log('profileFound',profileFound.data[0]._id)
         this.setState({profileID:profileFound.data[0]._id,profileUser:profileFound.data[0].username,profileAvatar:profileFound.data[0].imageUrl})
@@ -64,8 +68,17 @@ class RecipeDetails extends Component {
  
 }
 
+//   console.log('handlesave recipe to profile by title',{title: this.state.title})
+//    actions.addProfileRecipes({title: this.state.title}).then(updateMyRecipes=>{
+//      console.log(updateMyRecipes)
+//    })
+//    .catch(error=> console.log(error))
+// }
+// handleEntailmentRequest(e) {
+//   e.preventDefault();
+
+//   console.log("handle request ");
 handleCommentBox=(e)=>{
-  console.log( e.target.name,e.target.value)
   this.setState({
     [e.target.name]:e.target.value
   })
@@ -98,11 +111,12 @@ handleSubmitComment=(e)=>{
    .catch(error=> console.log(error))
    window.location.reload()
 }
-  
+
   
   render() {
     console.log(this.state.rating)
     return (
+
       <div>
         <Container className="home-recipe">
           {/* <img className="hero-img" src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F5446883.jpg&w=596&h=596&c=sc&poi=face&q=85"></img>
@@ -140,8 +154,8 @@ handleSubmitComment=(e)=>{
               <Card.Body className="measurements-list">
               <Card.Header><span style={{color:'white'}}>Ingredients:</span>
               <ListGroup>
-              
-                 {/* {console.log(this.state.ingredients)} */}
+               {/* <ListGroupItem className="main-card-subtitle prep-time">  */}
+                 {console.log(this.state.ingredients)}
                 {this.state.ingredients && this.state.ingredients.map((item,i) => {
                 return <ListGroupItem className="list-item text-center" key={i}>{i+1})  <span> {item} </span><hr></hr></ListGroupItem>})}
                 </ListGroup>
@@ -177,17 +191,23 @@ handleSubmitComment=(e)=>{
                 <br/>
                 <div id="status"></div>
                 <Form.Group id="rating">
-                    <fieldset class="rating">
+                    <fieldset className="rating">
                         <legend>Rate:</legend>
                         <input type="radio" id="star5" name="rating" value="5" onChange={this.handleRate}/><label for="star5" title="Rocks!">5 stars</label>
                         <input type="radio" id="star4" name="rating" value="4" onChange={this.handleRate}/><label for="star4" title="Pretty good">4 stars</label>
                         <input type="radio" id="star3" name="rating" value="3" onChange={this.handleRate}/><label for="star3" title="Meh">3 stars</label>
                         <input type="radio" id="star2" name="rating" value="2" onChange={this.handleRate}/><label for="star2" title="Kinda bad">2 stars</label>
                         <input type="radio" id="star1" name="rating" value="1" onChange={this.handleRate}/><label for="star1" title="Sucks big time">1 star</label>
+                        {/* <input type="radio" onClick={(e) => {this.handleEntailmentRequest(e)}} id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+                        <input type="radio" onClick={(e) => {this.handleEntailmentRequest(e)}} id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
+                        <input type="radio" onClick={(e) => {this.handleEntailmentRequest(e)}} id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
+                        <input type="button"  id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label> */}
                 </fieldset>
                     
                 </Form.Group>
                   </Card.Header>
+                  
                   <Card.Header>
                       <Form.Label>Previous Comments</Form.Label>
                       <ListGroup>
@@ -218,9 +238,11 @@ handleSubmitComment=(e)=>{
               </Card.Body>
             </Card>
             
+            
         </Container>
         
       </div>
+      
     );
   }
 }

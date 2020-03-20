@@ -1,8 +1,8 @@
 import React from "react";
 import {Fragment} from 'react';
-import { scaleRotate as Menu } from "react-burger-menu";
-import Searchbar from './Searchbar';
 import {Link} from 'react-router-dom';
+import { scaleRotate as Menu } from "react-burger-menu";
+import Searchbar from './Searchbar'
 
 export default props => {
 // class Sidebar extends Component {
@@ -16,7 +16,7 @@ console.log(props)
     // Pass on our props
     <Fragment>
         <div className="head-div">
-        {/* <Searchbar /> */}
+        <Searchbar />
         </div>
     
     <Menu {...props} >
@@ -25,7 +25,7 @@ console.log(props)
 
       
         {props.emailID === null ?
-             
+         
         <Fragment>
             <Link className="bm-item  menu-item" to="/sign-up"><i className="fas fa-user-plus"></i> Sign Up</Link>
             <br></br>
@@ -45,15 +45,15 @@ console.log(props)
       <i className="fas fa-random"></i> Random
       </Link>
 
-      <Link className="menu-item" to="/new-recipe"> <i className="fas fa-plus-square"></i> New ReciLinke
+      <Link className="menu-item" to="/new-recipe"> <i className="fas fa-plus-square"></i> New Recipe
       </Link>
       
-      <Link className="menu-item" to="/allrecipes"><i className="fas fa-globe-americas"></i> All RecipLinks
+      <Link className="menu-item" to="/allrecipes"><i className="fas fa-globe-americas"></i> All Recipes
       </Link>
       
       <br></br>
       
-      {/* <Searchbar /> */}
+      <Searchbar />
       
     </Menu>
     </Fragment>

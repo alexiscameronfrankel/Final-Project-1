@@ -155,7 +155,7 @@ class Random extends Component {
   }
   
   handleSubmitComment=(e)=>{
-    console.log('inside random handle commet')
+    console.log('inside random handle commet',this.state.title)
      e.preventDefault()
      actions.findRecipeName({title:this.state.title}).then(recipeFound=>{
       console.log('recipeFound for comment',recipeFound)

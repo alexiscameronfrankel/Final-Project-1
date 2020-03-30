@@ -54,13 +54,11 @@ class App extends Component {
   }
 
   redirectingTo = (e) => {
-    e.preventDefault()
     // console.log("hi")
     console.log(this)
     this.props.history.push(`/allrecipes/${this.state.filteredResults[0]._id}`)
    
 }
-
   // handleChange = e => {
   //   console.log(this.state)
   //   this.setState({[e.target.name]: e.target.value})

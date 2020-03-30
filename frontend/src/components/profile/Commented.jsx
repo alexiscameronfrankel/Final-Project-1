@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { Container, Card, ListGroup, Button, ButtonGroup } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import actions from '../../services';
 
 
 
@@ -9,31 +10,35 @@ class Commented extends Component {
 
   state={
     ready:false,
-    recentActivity: [],
-    ready2: false
-  }
     
-    // if(!props.user.email){ 
-    //     props.history.push('/log-in') 
-    // }  
-    render(...props){ 
-      let x=this.state.recentActivity
-      console.log(this.state.ready2,x)
+  }
+    async componentDidMount(){
+      let commentArray=[]
+      console.log('inside did mount')
+      let commentsReturned= await actions.findProfileComments(this.props.user._id)
+      // .then(commentsReturned=>{
+        console.log('inside find comments for profile',commentsReturned)
+        commentsReturned.data.forEach(eachComment=>{
+          console.log(eachComment)  
+            actions.findRecipeID(eachComment.recipeID).then(eachRecipe=>{
+              eachComment.recipeImage = eachRecipe.data.imageUrl
+              eachComment.recipeTitle = eachRecipe.data.title
+              commentArray.push(eachComment)
+              this.setState({ allComments: commentArray, ready:true})
+            })
+            .catch(err=> console.log(err))
+        })
+    
+    }
+     
+    render(){ 
+      let x=this.state.allComments
+      console.log(this.state.ready,x)
     return (
         <div>
-            {/* Profile
-            Welcome {props.user.email} !!!  */}
+           
             <Container className="home-recipe">
-          {/* <img className="hero-img" src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F5446883.jpg&w=596&h=596&c=sc&poi=face&q=85"></img>
-          <div className="hero-recipe">
-          <h1 className="recipe-title">My Recipe Name</h1>
-          <ul>
-            <li>Step 1 - Boil Water at High Heat</li>
-            <li>Step 2 - Boil Meat for 30 minutes</li>
-            <li>Step 3 - Dice Vegetables into a Juliene Cut</li>
-            <li>Step 4 - Prep Appetizers and Grab a Beer</li>
-          </ul>
-          </div> */}
+          
           
           <Card id="main-card" 
           style={{ width: '100%' }}>
@@ -70,9 +75,9 @@ class Commented extends Component {
             </Card.Header>
             <Card>
             <Card.Header className="recent-views">Recently Commented Recipes</Card.Header>
-            {this.state.ready2 ?
+            {this.state.ready ?
     
-    <div>
+    
                 <Coverflow
                     width={960}
                     height={480}
@@ -81,10 +86,10 @@ class Commented extends Component {
                     enableHeading={false}
                 >
                     
-                    {x.map(eachRecipe => {
-                    console.log(eachRecipe)
+                    {x.map(eachComment => {
+                    console.log(eachComment)
                     return (<Fragment>
-                        <div key={eachRecipe._id}
+                        <div key={eachComment._id}
                     // {/* // onClick={() => fn()}
                     // // onKeyDown={() => fn()} */}
                     role="menuitem"
@@ -93,28 +98,26 @@ class Commented extends Component {
                         
                         <Card.Title 
                         className="text-center">
-                        <Link className="recipe-card" to={`/allrecipes/${eachRecipe._id}`}>
-                        {eachRecipe.title}
+                        <Link className="recipe-card" to={`/allrecipes/${eachComment.recipeID}`}>
+                        {eachComment.recipeTitle}<br/>
+                        Rating: {eachComment.rating}
                         </Link>
                         </Card.Title>
                         <Card.Img
-                            src={eachRecipe.imageUrl}
-                            alt={eachRecipe.title}
+                            src={eachComment.recipeImage}
+                            alt={eachComment.recipeTitle}
                             style={{ display: 'block', width: '100%' }}
                             // href={`/allrecipes/${eachRecipe._id}`}
                         />
+                        {/* <Card.Text>{eachComment.description}<br/>{eachComment.rating}</Card.Text> */}
                         
                         </div>
                         
                         </Fragment>)
                         })}
-                        
-                    
-                    
-                </Coverflow>
+               </Coverflow>
                 
-                </div>
-                :("Loading")}
+              :("Loading")}
            
             </Card>
 

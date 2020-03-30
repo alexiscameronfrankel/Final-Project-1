@@ -55,14 +55,12 @@ const actions = {
   findRecipeID: async (recipe) => {
     return await service.get(`/recipe/allrecipes/${recipe}`)
   },
-  // //find a recipe and show details
-  // findRecipeName: async (recipe) => {
-  //   console.log(recipe)
-  //   await service.get('/recipe/findRecipe',recipe)
-    
-  //   return await service.post('/recipe/new',recipe)
-
-  // },
+  //find a recipe and show details
+  findRecipeName: async (recipeTitle) => {
+    console.log(recipeTitle)
+    await service.get('/recipe/findRecipe',recipeTitle)
+  },
+  
   //delete a recipe
   deleteRecipe: async (recipe) => {
     return await service.post('/recipe/delete', recipe)
@@ -71,7 +69,7 @@ const actions = {
   //comment actions
   //get all comments for a recipe
   getRecipeComments: async (recipeID) => {
-    return await service.get (`/comment/comment/${recipeID}`)
+    return await service.get (`/recipe/${recipeID}/comments`)
   },
   //get the users comments
   getUserComments: async (userID) => {

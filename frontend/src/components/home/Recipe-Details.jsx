@@ -11,7 +11,9 @@ import actions from '../../services/index'
 class RecipeDetails extends Component {
   state={
       className: ["secondary", "danger", "none"],
-      profileID: {}
+      profileID: {},
+      ready:false,
+      recipeComments: []
   }
 
   async componentDidMount(){
@@ -34,19 +36,22 @@ class RecipeDetails extends Component {
                 document.querySelector("#heart").style["color"]='red'
               }
               })
-          })
+            })
           .catch(err => console.log(err))
+          
+      actions.getRecipeComments(this.props.match.params.recipeID).then(recipeComments=>{
+      this.setState({recipeComments:recipeComments.data, ready:true})
+      console.log('recipecomments',recipeComments.data)
+      })
+      .catch(err=>console.log(err))
+       
       
-      
-      actions.getProfile(this.props.user._id)
-        .then(profileFound=>{
+      actions.getProfile(this.props.user._id).then(profileFound=>{
         console.log('profileFound',profileFound.data[0]._id)
-        this.setState({profileID:profileFound.data[0]._id})
+        this.setState({profileID:profileFound.data[0]._id,profileUser:profileFound.data[0].username,profileAvatar:profileFound.data[0].imageUrl})
       })
       .catch(err => console.log(err))
-
-    
- }
+    }
 
  handleSave=(e)=>{
   if(document.querySelector("#heart").style["color"]==='red'){
@@ -58,7 +63,6 @@ class RecipeDetails extends Component {
     console.log('handleAdd new recipe to profile',{title: this.state.title})
     actions.addProfileRecipes({title: this.state.title})
   }
- 
 }
 
 //   console.log('handlesave recipe to profile by title',{title: this.state.title})
@@ -78,25 +82,36 @@ handleCommentBox=(e)=>{
 
 }
 
+handleRate=(e)=>{
+    console.log(e.target.checked)
+    if (e.target.checked){
+      this.setState({
+        [e.target.name]:e.target.value
+      })
+    }
+}
 
- handleSubmitComment=(e)=>{
+handleSubmitComment=(e)=>{
    e.preventDefault()
-    console.log('comment',{comment: this.state.comment})
+    console.log('comment rating',this.state.rating)
     let newCommentObj={
       recipeID: this.props.match.params.recipeID,
       profileID:this.state.profileID,
-      // title: { type: String},
-      // rating: { type: String, required: true },
-      description: {type: String, required: true},
-      // image: {type: String}
+      username: this.state.profileUser,
+      rating: this.state.rating,
+      description: this.state.commentbox,
+      avatar: this.state.profileAvatar
     }
-   actions.newComment(newCommentObj).then(updateMyRecipes=>{
-     console.log(updateMyRecipes)
+   actions.newComment(newCommentObj).then(addNewComment=>{
+     console.log(addNewComment)
    })
    .catch(error=> console.log(error))
+   this.props.history.push(`/commented`)
+
 }
-    render(){
-    console.log(this.props)
+  
+  render() {
+    console.log(this.state.rating)
     return (
 
       <div>
@@ -166,19 +181,25 @@ handleCommentBox=(e)=>{
                 <Card.Header>
                 <Form.Label>Leave a comment below</Form.Label>
                 <Form.Group className="comment-form" id="comment-form" controlId="exampleForm.ControlTextarea1">
-                <Form.Control as="textarea" rows="3" onChange={this.handleCommentBox} />
-                <Button onClick={this.handleSubmitComment} variant="secondary" name="save-btn" size="lg"><i className="far fa-comments fa-2x"></i></Button>
+                <Form.Control as="textarea" rows="3" name="commentbox" onChange={this.handleCommentBox}/>
+                <Button variant="secondary" name="save-btn" size="lg" onClick={this.handleSubmitComment}><i className="far fa-comments fa-2x"></i></Button>
+
                 </Form.Group>
                 <br/>
                 <div id="status"></div>
                 <Form.Group id="rating">
                     <fieldset className="rating">
                         <legend>Rate:</legend>
-                        <input type="radio" onClick={(e) => {this.handleEntailmentRequest(e)}} id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
+                        <input type="radio" id="star5" name="rating" value="5" onChange={this.handleRate}/><label for="star5" title="Rocks!">5 stars</label>
+                        <input type="radio" id="star4" name="rating" value="4" onChange={this.handleRate}/><label for="star4" title="Pretty good">4 stars</label>
+                        <input type="radio" id="star3" name="rating" value="3" onChange={this.handleRate}/><label for="star3" title="Meh">3 stars</label>
+                        <input type="radio" id="star2" name="rating" value="2" onChange={this.handleRate}/><label for="star2" title="Kinda bad">2 stars</label>
+                        <input type="radio" id="star1" name="rating" value="1" onChange={this.handleRate}/><label for="star1" title="Sucks big time">1 star</label>
+                        {/* <input type="radio" onClick={(e) => {this.handleEntailmentRequest(e)}} id="star5" name="rating" value="5" /><label for="star5" title="Rocks!">5 stars</label>
                         <input type="radio" onClick={(e) => {this.handleEntailmentRequest(e)}} id="star4" name="rating" value="4" /><label for="star4" title="Pretty good">4 stars</label>
                         <input type="radio" onClick={(e) => {this.handleEntailmentRequest(e)}} id="star3" name="rating" value="3" /><label for="star3" title="Meh">3 stars</label>
                         <input type="button"  id="star2" name="rating" value="2" /><label for="star2" title="Kinda bad">2 stars</label>
-                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Sucks big time">1 star</label> */}
                 </fieldset>
                     
                 </Form.Group>
@@ -187,14 +208,27 @@ handleCommentBox=(e)=>{
                   <Card.Header>
                       <Form.Label>Previous Comments</Form.Label>
                       <ListGroup>
-                          <ListGroupItem>
+                      {this.state.ready ?
+                        (this.state.recipeComments.map(eachComment=>{
+                          return <ListGroupItem>
+                              <p><strong><q>{eachComment.description}<br/><br/> Rating:{eachComment.rating}</q></strong></p>
+                              <div className="previous-comments"><img src={eachComment.avatar} alt="Avatar" class="avatar"></img>
+                              <h4 className="pc-user">{eachComment.username}</h4>
+                              </div>
+                          </ListGroupItem>
+                        }))
+                      : 
+                      ("Loading")
+                      }
+                          {/* <ListGroupItem>
                               
                               <p><strong><q>This recipe my whole family loved. If I were to change one thing I would add more butter</q></strong></p>
                               <div className="previous-comments"><img src="https://www.w3schools.com/w3images/avatar2.png" alt="Avatar" class="avatar"></img>
                               <h4 className="pc-user">-Michael Cooper</h4>
                               </div>
-                          </ListGroupItem>
+                          </ListGroupItem> */}
                       </ListGroup>
+                      
                   </Card.Header>
                 
                 </Card>

@@ -16,6 +16,7 @@
 const router = require('express').Router();
 const Profile = require('../models/Profile');
 const Recipe = require('../models/Recipe');
+const Comment = require('../models/Comment');
 
 // 1) Find user profile
 router.get('/profile/:profileID',isAuth, (req, res, next) => {   
@@ -107,18 +108,13 @@ router.post('/myRecipes/deleteRecipe',isAuth, (req, res, next) => {
 
 // 8) Get all comments by user from database
 router.get('/myComments',isAuth, (req, res, next) => {
-    let myProfileUserID= req.user._id
+    let myUserID= req.user._id
     console.log('reqbody', req.user)
 
-    Profile.find({UserID:myProfileUserID})
+    Profile.find({UserID:myUserID})
     .then(profile => {
-        console.log(profile)
-        let profileComments=[...profile[0].comments]
-        // profilecomments.forEach(recipeID => {
-           Comment.find( { _id: { $in: profileComments } } )
+           Comment.find( { profileID: profile[0]._id } )
             .then(commentsFoundInDb => {
-                // res.send(console.log(recipeFoundInDb))   
-                // commentsFound.push(recipeFoundInDb)
                 console.log(commentsFoundInDb)
                 res.json(commentsFoundInDb)
             })

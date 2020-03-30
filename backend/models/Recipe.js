@@ -11,7 +11,7 @@ const recipeSchema = new Schema({
     area: {type: String},
     cuisine: { type: String},
     instructions: {type: String, required: true},
-    imageUrl: {type: String, default:' https://images.media-allrecipes.com/images/75131.jpg'},
+    imageUrl: {type: String, default:'https://images.media-allrecipes.com/images/75131.jpg'},
     tags: {type: Array},
     video: {type: String},
     ingredients: {type: Array, required: true},

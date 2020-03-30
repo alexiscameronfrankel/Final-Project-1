@@ -556,7 +556,7 @@ label:hover:before {
 }
 
 div.card-body {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   align-items: center;
 }
@@ -747,3 +747,7 @@ button.react-share__ShareButton {
 }
 
 
+.btn.btn-lg {
+  padding: 1rem;
+  font-size: 0.94rem;
+}

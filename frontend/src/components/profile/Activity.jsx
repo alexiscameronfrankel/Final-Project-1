@@ -3,6 +3,7 @@ import { Container, Card, ListGroup, Button, ButtonGroup,} from 'react-bootstrap
 import {Link} from 'react-router-dom';
 import actions from '../../services/index';
 
+
 var Coverflow = require ('react-coverflow');
 
 class Activity extends Component {

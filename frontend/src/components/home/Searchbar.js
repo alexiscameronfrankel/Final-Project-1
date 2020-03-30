@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 import {Link, useHistory, Redirect } from 'react-router-dom'
 
 
@@ -34,7 +35,7 @@ class SearchBar extends Component {
         let copyResults = [...this.state.results]
         // console.log(copyResults)
         let filterResults = copyResults.filter(eachRecipe => {
-            return eachRecipe.category.toString().toLowerCase() && eachRecipe.ingredients.toString().toLowerCase() && eachRecipe.title.toString().toLowerCase().includes(e.target.value.toString().toLowerCase())
+            return eachRecipe.cuisine.toString().toLowerCase() && eachRecipe.ingredients.toString().toLowerCase() && eachRecipe.title.toString().toLowerCase().includes(e.target.value.toString().toLowerCase())
         })
         if(filterResults.length != 0)
         this.setState({
@@ -52,13 +53,14 @@ class SearchBar extends Component {
   
     redirectingTo=(e)=>{
       e.preventDefault();
+      
       let path = `/allrecipes/${this.state.filteredResults._id}`
-      // if(this.state.filteredResults.length == 0){
-      //   path = "/"
-      // }
-      // else {
-      //   path = `/allrecipes/${this.state.filteredResults._id}`
-      // }
+      if(this.state.filteredResults.length == 0){
+        path = "/"
+      }
+      else {
+        path = `/allrecipes/${this.state.filteredResults._id}`
+      }
       console.log("about to enther function")
       if (window.location.origin == 'http://localhost:3000'){
         window.location.href = `http://localhost:3000${path}`}
@@ -66,16 +68,16 @@ class SearchBar extends Component {
         window.location.href = `https://boxofrecipes.herokuapp.com${path}`
       }
       
-      // useHistory.push(`/allrecipes/${this.state.filteredResults._id}`)
+      this.props.history.push(`/allrecipes/${this.state.filteredResults._id}`)
     }
     
    
     render(props) {
-       console.log(window.location)
+       
       return (
         <div>
          {/* <form action={`/allrecipes/${this.state.filteredResults}`}> */}
-        <form onSubmit={e => this.redirectingTo(e)}>
+        <form onSubmit={e => this.redirectingTo(e) }>
           <input
             placeholder="Search for a Recipe..."
             ref={input => this.search = input}
@@ -98,4 +100,4 @@ class SearchBar extends Component {
    
 
 
-export default SearchBar;
+export default withRouter(SearchBar)

@@ -25,8 +25,10 @@ class Profile extends Component {
                 })
                 console.log('myProfile received', profile.data[0])
             })
-            .catch(({ response }) =>
-            console.log('error loading',response))
+            .catch(({ response }) =>{
+            console.log('error loading',response)
+            this.props.history.push("/log-in")
+            })
             actions.findProfileRecipes()
                 .then(myRecipes => {
                     console.log('myRecipesReceived', myRecipes)
@@ -34,7 +36,8 @@ class Profile extends Component {
                 })
                 .catch(({ response }) => {
                 
-                    console.log('error loading',response)   
+                    console.log('error loading',response) 
+                    this.props.history.push("/log-in")  
                 })
         };
 

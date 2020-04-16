@@ -1,6 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import { Container, Card, ListGroup, Button, ButtonGroup } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import actions from '../../services/index';
 
 var Coverflow = require('react-coverflow');
 
@@ -11,13 +12,28 @@ class Liked extends Component {
     // }   
     state={
       ready:false,
-      recentActivity: [],
       ready2: false
+    }
+
+    async componentDidMount (){
+        actions.findProfileRecipes(this.props.user._id)
+            .then(myRecipes => {
+                console.log('myRecipesReceived', myRecipes)
+                this.setState({
+                    savedRecipes: myRecipes.data,
+                    ready2: true
+                })})
+            .catch(({ response }) => {
+             ;
+                console.log('error loading',response) 
+                this.props.history.push("/log-in")
+                   
+            })
     }
     
     render (){
-      let x=this.state.recentActivity
-     console.log(this.state.ready2,x)
+      let x=this.state.savedRecipes
+     console.log('liked recent acitivites',x)
       console.log(this.props.user.email)
     return (
         <div>
@@ -81,7 +97,7 @@ class Liked extends Component {
                     enableHeading={false}
                 >
                     
-                    {x.map(eachRecipe => {
+                    {x.map((eachRecipe,i) => {
                     console.log(eachRecipe)
                     return (<Fragment>
                         <div key={eachRecipe._id}

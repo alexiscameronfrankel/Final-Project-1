@@ -87,7 +87,7 @@ class Activity extends Component {
                     enableHeading={false}
                 >
                     
-                    {x.map(eachRecipe => {
+                    {x.map((eachRecipe,i) => {
                     {/* console.log(eachRecipe) */}
                     return (<Fragment>
                         <div key={eachRecipe._id}

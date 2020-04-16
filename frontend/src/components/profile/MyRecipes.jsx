@@ -36,7 +36,9 @@ class MyRecipes extends Component {
                 })})
             .catch(({ response }) => {
              ;
-                console.log('error loading',response)   
+                console.log('error loading',response) 
+                this.props.history.push("/log-in")
+                   
             })
         actions.getProfile(this.props.user._id)
             .then(profile => {
@@ -45,16 +47,18 @@ class MyRecipes extends Component {
                     myProfile: profile.data[0],
                     ready2: true
                 })})
-            .catch(({ response }) =>
-            console.log('error loading',response))
+            .catch(({ response }) =>{
+            console.log('error loading',response)
+            this.props.history.push("/log-in")
+        })
         };
     // if(!props.user.email){ 
     //     props.history.push('/log-in') 
     // }   
     render() {
         let x=this.state.savedRecipes
-        // console.log(this.state.ready2,x)
-        console.log(this.state.savedRecipes)
+        console.log(this.props)
+        console.log('these are my saved recipes',this.state.savedRecipes)
         return (
         <div>
             {/* Profile
@@ -76,7 +80,7 @@ class MyRecipes extends Component {
           
           <Card.Title className="text-center">
             <Card.Header>
-                <h1 className="prof-title">Let's Get Cooking, {console.log(this.state.myProfile.recipes)}!</h1>
+                <h1 className="prof-title">Let's Get Cooking, {this.state.myProfile.username}!</h1>
             </Card.Header> 
           </Card.Title>
           <Card.Header>
@@ -94,7 +98,7 @@ class MyRecipes extends Component {
             </ListGroup>
         </Card>
         <Card className="sm-card" id="main-card" style={{ width: '100%' }}>
-            <Card.Header>Featured Recipes</Card.Header>
+            <Card.Header>My Recipes Saved</Card.Header>
             {this.state.ready2 ?
     
     <div>

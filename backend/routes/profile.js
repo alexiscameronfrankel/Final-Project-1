@@ -58,9 +58,8 @@ router.post('/delete',isAuth, (req, res, next) => {
 
 // 5) Get all recipes saved by user from database
 router.get('/myRecipes',isAuth, (req, res, next) => {
-    // let myProfileUserID= req.user._id
-    console.log(req.body,req.body._id)
-    let myProfileUserID= req.body._id
+    console.log('get profile recipes for user',req.user_id)
+    let myProfileUserID= req.user._id
     Profile.find({UserID:myProfileUserID})
     .then(profile => {
         let profileRecipes=[...profile[0].recipes]
@@ -191,3 +190,4 @@ function isAuth(req, res, next) {
 }
   
 module.exports = router;
+

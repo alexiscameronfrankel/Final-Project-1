@@ -37,16 +37,20 @@ console.log(props)
         <Fragment>
             <Link className="bm-item menu-item" to="/profile"><i className="fas fa-user-circle"></i> My Profile</Link>
             <br></br>
+            <Link className="bm-item menu-item" to="/random"><i className="fas fa-random"></i> Random</Link>
+            <br></br>
+            <Link className="bm-item menu-item" to="/new-recipe"> <i className="fas fa-plus-square"></i> New Recipe</Link>
+            <br></br>
             <Link className="bm-item menu-item" to="/log-out" onClick={props.actionLogout}><i className="fas fa-sign-out-alt"></i> Log Out</Link>
         </Fragment>
       
         }
-      <Link className="menu-item" to="/random">
+      {/* <Link className="menu-item" to="/random">
       <i className="fas fa-random"></i> Random
       </Link>
 
       <Link className="menu-item" to="/new-recipe"> <i className="fas fa-plus-square"></i> New Recipe
-      </Link>
+      </Link> */}
       
       <Link className="menu-item" to="/allrecipes"><i className="fas fa-globe-americas"></i> All Recipes
       </Link>

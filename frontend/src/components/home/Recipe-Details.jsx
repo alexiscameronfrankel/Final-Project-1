@@ -50,7 +50,10 @@ class RecipeDetails extends Component {
         console.log('profileFound',profileFound.data[0]._id)
         this.setState({profileID:profileFound.data[0]._id,profileUser:profileFound.data[0].username,profileAvatar:profileFound.data[0].imageUrl})
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        console.log(err)
+        this.props.history.push("/log-in")
+      })
     }
 
  handleSave=(e)=>{

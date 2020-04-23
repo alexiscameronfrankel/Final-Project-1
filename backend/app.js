@@ -39,7 +39,7 @@ app.use(
   //CORS is used for authencation of an app making rquest to other APIs/backends
   cors({
     credentials: true,
-    origin: ["http://localhost:3000", "https://yumyumyum.netlify.app","https://boxofrecipes.herokuapp.com"] //Swap this with the client url 
+    origin: ["http://localhost:3000", "https://therecipebox.netlify.com","https://boxofrecipes.herokuapp.com"] //Swap this with the client url 
   })
 );
 
